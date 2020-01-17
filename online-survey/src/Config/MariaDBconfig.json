@@ -1,0 +1,7 @@
+{
+    "host":"localhost",
+    "user":"root",
+    "password":"YourRootPassword",
+    "database": "LoginDB",
+    "ConnectionLimit":5
+}
