@@ -1,7 +1,7 @@
 {
     "host":"localhost",
     "user":"root",
-    "password":"YourRootPassword",
-    "database": "LoginDB",
+    "password":"DBOnlineSurvey123&",
+    "database":"LoginDB",
     "ConnectionLimit":5
 }

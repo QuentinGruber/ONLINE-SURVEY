@@ -1,13 +1,16 @@
 
 const express = require('express');  // To create the "app"
-var cors = require('cors');  // For security issue
+const cors = require('cors');  // For security issue
 const mysql = require('mysql'); // to access the database 
+const Sjs = require('@quentingruber/simple-json'); // for json reading
+
+MariaDB_config = Sjs.extract("./src/config/MariaDBconfig.json");
 
 const connection = mysql.createPool({
-    host     : 'localhost', // Your connection adress (localhost).
-    user     : 'root',     // Your database's username.
-    password : 'toor',        // Your database's password.
-    // not used "database" argument
+    host     : MariaDB_config.host, // Your connection adress (localhost).
+    user     : MariaDB_config.user,     // Your database's username.
+    password : MariaDB_config.password,        // Your database's password.
+    database : MariaDB_config.database
   });
 
 
