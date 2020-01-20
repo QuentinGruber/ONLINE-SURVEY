@@ -2,7 +2,15 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 
+
+function testConnection (){  // TODO : remove test feature
+  fetch('http://localhost:3001/usersdb')
+    .then(response => response.json())
+    .then(users => console.log(users))
+}
+
 function App() {
+  testConnection() // TODO : remove test feature
   return (
     <div className="App">
       <header className="App-header">
