@@ -12,8 +12,11 @@ function testConnection (){  // TODO : remove test feature
   }
   j'ai trouvé ça interéssant qu'on puisse modifier si facilement les hearders
   */
-  var data = {
-    "test": "génial",
+  var data = { // test data pour enregistrer un user
+    "Pseudo": "maxon",
+    "Name": "maxon",
+    "Email": "maxon@surf.com",
+    "Password": "maxon"
   }
   fetch('http://localhost:3001/usersdb',{ method: 'POST', body: data}) // use POST method to push data
     .then(response => response.json())
