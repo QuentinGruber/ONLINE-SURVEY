@@ -4,7 +4,18 @@ import './App.css';
 
 
 function testConnection (){  // TODO : remove test feature
-  fetch('http://localhost:3001/usersdb')
+  /*
+  var headers = {
+    "Content-Type": "application/json",
+    "client_id": "1001125",
+    "client_secret": "876JHG76UKFJYGVHf867rFUTFGHCJ8JHV"
+  }
+  j'ai trouvé ça interéssant qu'on puisse modifier si facilement les hearders
+  */
+  var data = {
+    "test": "génial",
+  }
+  fetch('http://localhost:3001/usersdb',{ method: 'POST', body: data}) // use POST method to push data
     .then(response => response.json())
     .then(users => console.log(users))
 }

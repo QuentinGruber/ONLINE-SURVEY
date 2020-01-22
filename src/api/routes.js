@@ -3,6 +3,7 @@ const express = require('express');  // To create the "app"
 const cors = require('cors');  // For security issue
 const mysql = require('mysql'); // to access the database 
 const Sjs = require('@quentingruber/simple-json'); // for json reading
+var bodyParser = require('body-parser');  // for POST method
 
 MariaDB_config = Sjs.extract("src/Config/MariaDBconfig.json");
 
@@ -16,18 +17,23 @@ const connection = mysql.createPool({
 
 const app = express();
 
-app.use(cors({
+
+app.use(
+  bodyParser.urlencoded({ extended: true }),
+  cors({
     origin: 'http://localhost:3000' // only our webapp has access to the database
   }));
 
 
-// Creating a GET route to our database ! We can have multiple one ! 
-app.get('/usersdb', function (req, res) {
+// Creating a POST route to our database ! We can have multiple one ! 
+app.post('/usersdb', function (req, res) {
+
+  var test=req.body.test;
     // Connecting to the database.
     connection.getConnection(function (err, connection) {
 
     // Executing SQL query
-    connection.query('SHOW DATABASES', function (error, results, fields) {
+    connection.query('show databases', function (error, results, fields) {
       // If some error occurs, we throw an error.
       if (error) throw error;
 
