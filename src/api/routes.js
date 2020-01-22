@@ -4,7 +4,7 @@ const cors = require('cors');  // For security issue
 const mysql = require('mysql'); // to access the database 
 const Sjs = require('@quentingruber/simple-json'); // for json reading
 
-MariaDB_config = Sjs.extract("./src/config/MariaDBconfig.json");
+MariaDB_config = Sjs.extract("src/Config/MariaDBconfig.json");
 
 const connection = mysql.createPool({
     host     : MariaDB_config.host, // Your connection adress (localhost).
