@@ -19,21 +19,29 @@ const app = express();
 
 
 app.use(
-  bodyParser.urlencoded({ extended: true }),
   cors({
     origin: 'http://localhost:3000' // only our webapp has access to the database
   }));
+  
 
+  var urlencodedParser = bodyParser.urlencoded({ extended: false }) // use to read Encoded http query
 
 // Creating a POST route to our database ! We can have multiple one ! 
-app.post('/usersdb', function (req, res) {
+app.post('/sign_up',urlencodedParser ,function(req,res){ 
+  var name = req.query.name; 
+  var email = req.query.email; 
+  var pass = req.query.password; 
 
-  var test=req.body.test;
-    // Connecting to the database.
+  var data = { 
+      "Pseudo": name, 
+      "Email":email, 
+      "Password":pass 
+  } 
+
     connection.getConnection(function (err, connection) {
 
     // Executing SQL query
-    connection.query('show databases', function (error, results, fields) {
+    connection.query("TODO", function (error, results, fields) {
       // If some error occurs, we throw an error.
       if (error) throw error;
 
