@@ -4,21 +4,9 @@ import './App.css';
 
 
 function testConnection (){  // TODO : remove test feature
-  /*
-  var headers = {
-    "Content-Type": "application/json",
-    "client_id": "1001125",
-    "client_secret": "876JHG76UKFJYGVHf867rFUTFGHCJ8JHV"
-  }
-  j'ai trouvé ça interéssant qu'on puisse modifier si facilement les hearders
-  */
-  var data = { // test data pour enregistrer un user
-    "Pseudo": "maxon",
-    "Name": "maxon",
-    "Email": "maxon@surf.com",
-    "Password": "maxon"
-  }
-  fetch('http://localhost:3001/usersdb',{ method: 'POST', body: data}) // use POST method to push data
+  
+
+  fetch('http://localhost:3001/sign_up/?name=pd&email=maxon@surf.pute&password=123',{ method: 'POST'}) // use POST method to push data
     .then(response => response.json())
     .then(users => console.log(users))
 }
