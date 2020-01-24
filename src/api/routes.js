@@ -5,6 +5,8 @@ const cors = require('cors');  // For security issue
 const mysql = require('mysql'); // to access the database 
 const Sjs = require('@quentingruber/simple-json'); // for json reading
 var bodyParser = require('body-parser');  // for POST method
+var aes256 = require('aes256'); // for Aes encryption
+var sha1 = require('sha1'); // for sha cipher
 
 // get MariaDB config
 MariaDB_config = Sjs.extract("src/Config/MariaDBconfig.json");
@@ -55,15 +57,9 @@ app.post('/sign_up', urlencodedParser, function (req, res) {
     }
 
     // Password encryption
-    connection.query(
-      "SELECT AES_ENCRYPT(sha(" + data.Password + "),'testing');"
-      , function (error, results, fields) {
-        // If some error occurs, we throw an error.
-        if (error) throw error;
-        data.Password = (Object.values(results[0])[0]) // Change password by his encrypted version
-        console.log(data.Password) // TODO : remove 
+      data.Password = sha1(data.Password);
+      data.Password = aes256.encrypt("maxon", data.Password)
         WriteUserInfo(connection)
-      });
 
   });
 });
