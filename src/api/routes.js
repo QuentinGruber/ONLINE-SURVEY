@@ -1,3 +1,4 @@
+// init package needed
 
 const express = require('express');  // To create the "app"
 const cors = require('cors');  // For security issue
@@ -5,6 +6,7 @@ const mysql = require('mysql'); // to access the database
 const Sjs = require('@quentingruber/simple-json'); // for json reading
 var bodyParser = require('body-parser');  // for POST method
 
+// get MariaDB config
 MariaDB_config = Sjs.extract("src/Config/MariaDBconfig.json");
 
 const connection = mysql.createPool({
@@ -28,22 +30,18 @@ var urlencodedParser = bodyParser.urlencoded({ extended: false }) // use to read
 
 // Creating a POST route to our database ! We can have multiple one ! 
 app.post('/sign_up', urlencodedParser, function (req, res) {
-  var name = req.query.name;
-  var email = req.query.email;
-  var pass = req.query.password;
-  var token = req.query.token;
 
-  data = {
-    "Pseudo": name,
-    "Email": email,
-    "Password": pass,
-    "Token": token,
+  data = { // Fetch data from POST request
+    "Pseudo": req.query.name,
+    "Email": req.query.email,
+    "Password": req.query.password,
+    "Token": req.query.token,
   }
 
   connection.getConnection(function (err, connection) {
 
     function WriteUserInfo(connection) {
-      // Creation du user
+      // user creation
       connection.query(
         "INSERT INTO USER VALUES (" + "'" + data.Pseudo + "'" + "," + "'" + data.Email + "'" + "," + "'" + data.Token + "'" + "," + "'" + data.Password + "'" + ");"
         , function (error, results, fields) {
@@ -56,14 +54,14 @@ app.post('/sign_up', urlencodedParser, function (req, res) {
 
     }
 
-    // Creation du user
+    // Password encryption
     connection.query(
       "SELECT AES_ENCRYPT(sha(" + data.Password + "),'testing');"
       , function (error, results, fields) {
         // If some error occurs, we throw an error.
         if (error) throw error;
-        data.Password = (Object.values(results[0])[0])
-        console.log(data.Password)
+        data.Password = (Object.values(results[0])[0]) // Change password by his encrypted version
+        console.log(data.Password) // TODO : remove 
         WriteUserInfo(connection)
       });
 
@@ -73,5 +71,5 @@ app.post('/sign_up', urlencodedParser, function (req, res) {
 
 // Starting our server.
 app.listen(3001, () => {
-  console.log('Go to http://localhost:3001/usersdb so you can see the data.');
+  console.log('http://localhost:3001/sign_up running !');
 });
