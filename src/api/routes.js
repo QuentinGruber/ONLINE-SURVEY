@@ -40,32 +40,33 @@ app.post('/sign_up', urlencodedParser, function (req, res) {
     "Token": token,
   }
 
-  connection.getConnection(async function (err, connection) {
+  connection.getConnection(function (err, connection) {
+
+    function WriteUserInfo(connection) {
+      // Creation du user
+      connection.query(
+        "INSERT INTO USER VALUES (" + "'" + data.Pseudo + "'" + "," + "'" + data.Email + "'" + "," + "'" + data.Token + "'" + "," + "'" + data.Password + "'" + ");"
+        , function (error, results, fields) {
+          // If some error occurs, we throw an error.
+          if (error) throw error;
+
+          // Getting the 'response' from the database and sending it to our route. This is were the data is.
+          res.send(results)
+        });
+
+    }
 
     // Creation du user
-    await connection.query(
+    connection.query(
       "SELECT AES_ENCRYPT(sha(" + data.Password + "),'testing');"
       , function (error, results, fields) {
         // If some error occurs, we throw an error.
         if (error) throw error;
-        zizi = (Object.values(results[0])[0])
-        console.log(zizi)
-        data.Password = zizi
+        data.Password = (Object.values(results[0])[0])
         console.log(data.Password)
-        // Getting the 'response' from the database and sending it to our route. This is were the data is.
-        // res.send(results)
+        WriteUserInfo(connection)
       });
 
-          // Creation du user
-    connection.query(
-      "INSERT INTO USER VALUES (" + "'" + data.Pseudo + "'" + "," + "'" + data.Email + "'" + "," + "'" + data.Token + "'" + "," + "'" + data.Password + "'" + ");"
-      , function (error, results, fields) {
-        // If some error occurs, we throw an error.
-        if (error) throw error;
-
-        // Getting the 'response' from the database and sending it to our route. This is were the data is.
-        res.send(results)
-      });
   });
 });
 
