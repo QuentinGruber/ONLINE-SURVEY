@@ -33,11 +33,15 @@ var urlencodedParser = bodyParser.urlencoded({ extended: false }) // use to read
 // Creating a POST route to our database ! We can have multiple one ! 
 app.post('/sign_up', urlencodedParser, function (req, res) {
 
+  try{
   data = { // Fetch data from POST request
     "Pseudo": req.query.name,
     "Email": req.query.email,
     "Password": req.query.password,
     "Token": req.query.token,
+  }}
+  catch(e){
+    throw error ("The POST request is missing Data to register the user")
   }
 
   connection.getConnection(function (err, connection) {
