@@ -4,7 +4,9 @@ import './App.css';
 
 
 function testConnection (){  // TODO : remove test feature
-  fetch('http://localhost:3001/usersdb')
+  
+  // TEST FEATURE TODO : REMOVE IT FOR v0.1
+  fetch('http://localhost:3001/sign_up/?name=pd&email=maxon@surf.pute&password=123&token=zizipupute',{ method: 'POST'}) // use POST method to push data
     .then(response => response.json())
     .then(users => console.log(users))
 }
