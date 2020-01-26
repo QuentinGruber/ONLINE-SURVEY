@@ -47,7 +47,7 @@ app.post('/sign_up', urlencodedParser, function (req, res) {
     }
   }
   catch (e) {
-    console.error("The POST request is missing Data to register the user : "+e.message )
+    console.error("The POST request is missing Data to register the user : " + e.message)
   }
 
   connection.getConnection(function (err, connection) {
@@ -72,7 +72,7 @@ app.post('/sign_up', urlencodedParser, function (req, res) {
       data.Password = aes256.encrypt(PUB_key, data.Password)
     }
     catch (e) {
-      console.error("Password fail to encrypt : "+e.message)
+      console.error("Password fail to encrypt : " + e.message)
     }
     WriteUserInfo(connection)
 
@@ -91,44 +91,39 @@ app.post('/sign_in', urlencodedParser, function (req, res) {
     }
   }
   catch (e) {
-    console.error("The POST request is missing Data to login the user : "+e.message)
+    console.error("The POST request is missing Data to login the user : " + e.message)
   }
 
   connection.getConnection(async function (err, connection) {
 
-    function GetUserPassword(connection) {
-      // user creation
-      connection.query(
-        "SELECT Password FROM USER WHERE Pseudo='"+data.Pseudo+"';"
-        , function (sql_error, results, fields) {
-          // If some error occurs, we throw an error.
-          if (sql_error) res.send(false);
-          console.log("c")
-          return results;
+    // user creation
+    connection.query(
+      "SELECT Password FROM USER WHERE Pseudo='" + data.Pseudo + "';"
+      , function (sql_error, results, fields) {
+        // If some error occurs, we throw an error.
+        if (sql_error) res.send(false);
+        var Stored_pass = results[0].Password
+        // Stored Password Decryption
+        try {
+          Stored_pass = aes256.decrypt(PUB_key, Stored_pass)
+        }
+        catch (e) {
+          console.error("Stored password fail to decrypt : " + e.message)
+        }
 
-        });
+        // Submit Password Hasing
+        try {
+          data.Password = sha1(data.Password);
+        }
+        catch (e) {
+          console.error("Submit password fail to be hashed : " + e.message)
+        }
 
-    }
-    var Stored_pass = await GetUserPassword(connection)
-    // Stored Password Decryption
-    try {
-      Stored_pass = aes256.decrypt(PUB_key, Stored_pass)
-    }
-    catch (e) {
-      console.error("Stored password fail to decrypt : "+e.message)
-    }
+        if (Stored_pass == data.Password) {
+          res.send(true);
+        }
 
-    // Submit Password Hasing
-    try {
-      data.Password = sha1(data.Password);
-    }
-    catch (e) {
-      console.error("Submit password fail to be hashed : "+e.message)
-    }
-    
-    if(Stored_pass == data.Password){
-      res.send(true);
-    }
+      });
 
   });
 });
