@@ -19,6 +19,8 @@ const connection = mysql.createPool({
 });
 
 
+PUB_key = "maxon"  // Aucune id de où mettre ça mais je le met la pour pouvoir le move facile après 
+
 const app = express();
 
 
@@ -29,6 +31,9 @@ app.use(
 
 
 var urlencodedParser = bodyParser.urlencoded({ extended: false }) // use to read Encoded http query
+
+
+/*  REGISTER  */
 
 // Creating a POST route to our database ! We can have multiple one ! 
 app.post('/sign_up', urlencodedParser, function (req, res) {
@@ -64,7 +69,7 @@ app.post('/sign_up', urlencodedParser, function (req, res) {
     // Password encryption
     try {
       data.Password = sha1(data.Password);
-      data.Password = aes256.encrypt("maxon", data.Password)
+      data.Password = aes256.encrypt(PUB_key, data.Password)
     }
     catch (e) {
       throw new error("Password fail to encrypt")
