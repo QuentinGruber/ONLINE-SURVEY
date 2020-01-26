@@ -47,7 +47,7 @@ app.post('/sign_up', urlencodedParser, function (req, res) {
     }
   }
   catch (e) {
-    throw new error("The POST request is missing Data to register the user")
+    console.error("The POST request is missing Data to register the user : "+e.message )
   }
 
   connection.getConnection(function (err, connection) {
@@ -56,9 +56,9 @@ app.post('/sign_up', urlencodedParser, function (req, res) {
       // user creation
       connection.query(
         "INSERT INTO USER VALUES (" + "'" + data.Pseudo + "'" + "," + "'" + data.Email + "'" + "," + "'" + data.Token + "'" + "," + "'" + data.Password + "'" + ");"
-        , function (error, results, fields) {
+        , function (sql_error, results, fields) {
           // If some error occurs, we throw an error.
-          if (error) throw error;
+          if (sql_error) throw sql_error;
 
           // Getting the 'response' from the database and sending it to our route. This is were the data is.
           res.send(results)
@@ -72,7 +72,7 @@ app.post('/sign_up', urlencodedParser, function (req, res) {
       data.Password = aes256.encrypt(PUB_key, data.Password)
     }
     catch (e) {
-      throw new error("Password fail to encrypt")
+      console.error("Password fail to encrypt : "+e.message)
     }
     WriteUserInfo(connection)
 
@@ -91,7 +91,7 @@ app.post('/sign_in', urlencodedParser, function (req, res) {
     }
   }
   catch (e) {
-    throw error("The POST request is missing Data to login the user")
+    console.error("The POST request is missing Data to login the user : "+e.message)
   }
 
   connection.getConnection(async function (err, connection) {
@@ -100,9 +100,9 @@ app.post('/sign_in', urlencodedParser, function (req, res) {
       // user creation
       connection.query(
         "SELECT Password FROM USER WHERE Pseudo='"+data.Pseudo+"';"
-        , function (error, results, fields) {
+        , function (sql_error, results, fields) {
           // If some error occurs, we throw an error.
-          if (error) res.send(false);
+          if (sql_error) res.send(false);
           console.log("c")
           return results;
 
@@ -115,7 +115,7 @@ app.post('/sign_in', urlencodedParser, function (req, res) {
       Stored_pass = aes256.decrypt(PUB_key, Stored_pass)
     }
     catch (e) {
-      throw error("Stored password fail to decrypt")
+      console.error("Stored password fail to decrypt : "+e.message)
     }
 
     // Submit Password Hasing
@@ -123,7 +123,7 @@ app.post('/sign_in', urlencodedParser, function (req, res) {
       data.Password = sha1(data.Password);
     }
     catch (e) {
-      throw error("Submit password fail to be hashed")
+      console.error("Submit password fail to be hashed : "+e.message)
     }
     
     if(Stored_pass == data.Password){
