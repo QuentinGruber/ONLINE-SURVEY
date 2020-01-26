@@ -35,7 +35,7 @@ var urlencodedParser = bodyParser.urlencoded({ extended: false }) // use to read
 
 /*  REGISTER  */
 
-// Creating a POST route to our database ! We can have multiple one ! 
+// Creating a POST route to our database !
 app.post('/sign_up', urlencodedParser, function (req, res) {
 
   try {
@@ -81,7 +81,7 @@ app.post('/sign_up', urlencodedParser, function (req, res) {
 
 /*  LOGIN  */
 
-// Creating a POST route to our database ! We can have multiple one ! 
+// Creating a POST route to our database !  
 app.post('/sign_in', urlencodedParser, function (req, res) {
 
   try {
@@ -119,8 +119,11 @@ app.post('/sign_in', urlencodedParser, function (req, res) {
           console.error("Submit password fail to be hashed : " + e.message)
         }
 
-        if (Stored_pass == data.Password) {
-          res.send(true);
+        if (Stored_pass == data.Password) { // if the Submit pass is the same as storage pass
+          res.send(true); // send True as a response
+        }
+        else{
+          res.send(false);
         }
 
       });
