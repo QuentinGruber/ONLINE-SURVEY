@@ -24,8 +24,6 @@ function add_question(){
     delete_button.setAttribute("type","button")
     delete_button.setAttribute("id", "delete_button"+nb_question);
     delete_button.addEventListener("click", delete_question, false);
-
-
     delete_button.innerHTML = "-"
 
     /* affichages */
@@ -37,19 +35,11 @@ function add_question(){
 }
 
 function delete_question(){
-    button_nb = this.id.charAt(this.id.length - 1)
-    console.log(button_nb)
+    button_nb = this.id.replace( /^\D+/g, ''); /* keep only the number */
 
     var element = document.getElementById("div_question"+button_nb);
     element.parentNode.removeChild(element);
-
-
-
 }
-
-
-
-
 
 function Test() {
     return (
@@ -62,6 +52,11 @@ function Test() {
 
             <br></br>
             <input placeholder="Password"></input>
+            <br></br>
+
+            <br></br>
+            <input type="checkbox" id="check_login" name="checkbox rester connecté"></input>
+            <label htmlFor="check_login">Rester connecté</label>
             <br></br>
 
             <br></br>
@@ -85,8 +80,8 @@ function Test() {
             <br></br>
             
             <br></br>
-            <input type="checkbox" id="check" name="checkbox inscription"></input>
-            <label htmlFor="check">J'accepte les conditions d'utilisations de Online Survey</label>
+            <input type="checkbox" id="check_register" name="checkbox inscription"></input>
+            <label htmlFor="check_register">J'accepte les conditions d'utilisations de Online Survey</label>
             <br></br>
 
             <br></br>
