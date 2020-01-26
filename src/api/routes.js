@@ -79,6 +79,61 @@ app.post('/sign_up', urlencodedParser, function (req, res) {
   });
 });
 
+/*  LOGIN  */
+
+// Creating a POST route to our database ! We can have multiple one ! 
+app.post('/sign_in', urlencodedParser, function (req, res) {
+
+  try {
+    data = { // Fetch data from POST request
+      "Pseudo": req.query.name,
+      "Password": req.query.password,
+    }
+  }
+  catch (e) {
+    throw error("The POST request is missing Data to login the user")
+  }
+
+  connection.getConnection(async function (err, connection) {
+
+    function GetUserPassword(connection) {
+      // user creation
+      connection.query(
+        "SELECT Password FROM USER WHERE Pseudo='"+data.Pseudo+"';"
+        , function (error, results, fields) {
+          // If some error occurs, we throw an error.
+          if (error) res.send(false);
+          console.log("c")
+          return results;
+
+        });
+
+    }
+    var Stored_pass = await GetUserPassword(connection)
+    // Stored Password Decryption
+    try {
+      Stored_pass = aes256.decrypt(PUB_key, Stored_pass)
+    }
+    catch (e) {
+      throw error("Stored password fail to decrypt")
+    }
+
+    // Submit Password Hasing
+    try {
+      data.Password = sha1(data.Password);
+    }
+    catch (e) {
+      throw error("Submit password fail to be hashed")
+    }
+    
+    if(Stored_pass == data.Password){
+      res.send(true);
+    }
+
+  });
+});
+
+
 
 // Starting our server.
 app.listen(3001, () => {
