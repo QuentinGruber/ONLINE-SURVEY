@@ -42,7 +42,7 @@ app.post('/sign_up', urlencodedParser, function (req, res) {
     }
   }
   catch (e) {
-    throw error("The POST request is missing Data to register the user")
+    throw new error("The POST request is missing Data to register the user")
   }
 
   connection.getConnection(function (err, connection) {
@@ -67,7 +67,7 @@ app.post('/sign_up', urlencodedParser, function (req, res) {
       data.Password = aes256.encrypt("maxon", data.Password)
     }
     catch (e) {
-      throw error("Password fail to encrypt")
+      throw new error("Password fail to encrypt")
     }
     WriteUserInfo(connection)
 
