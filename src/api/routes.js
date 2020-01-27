@@ -40,10 +40,10 @@ app.post('/sign_up', urlencodedParser, function (req, res) {
 
   try {
     data = { // Fetch data from POST request
-      "Pseudo": req.query.name,
-      "Email": req.query.email,
-      "Password": req.query.password,
-      "Token": req.query.token,
+      "Pseudo": req.body.name,
+      "Email": req.body.email,
+      "Password": req.body.password,
+      "Token": req.body.token,
     }
   }
   catch (e) {

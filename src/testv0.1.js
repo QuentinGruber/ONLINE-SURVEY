@@ -64,18 +64,21 @@ function Test() {
         
         <br></br>  
 
-        <form id="registerBox">
+        
+
+
+        <form action="http://localhost:3001/sign_up" method="POST" id="registerBox" target="frame">
             REGISTER SECTION
             
-            <input placeholder="Username"></input>
+            <input name ="name" placeholder="Username"></input>
             
 
             
-            <input placeholder="email"></input>
+            <input name ="email" placeholder="email"></input>
             
 
             
-            <input placeholder="Password"></input>
+            <input name ="password" placeholder="Password"></input>
             
             
             
@@ -102,7 +105,7 @@ function Test() {
             
             <button type="submit" id="submitForm">SUBMIT</button>
         </form>
-
+        <iframe name="frame"></iframe> {/* solution temporaire pour empecher le reload de la page au lancement d'une requête post*/}
       </div>
     );
   }
