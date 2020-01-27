@@ -86,8 +86,8 @@ app.post('/sign_in', urlencodedParser, function (req, res) {
 
   try {
     data = { // Fetch data from POST request
-      "Pseudo": req.query.name,
-      "Password": req.query.password,
+      "Pseudo": req.body.name,
+      "Password": req.body.password,
     }
   }
   catch (e) {

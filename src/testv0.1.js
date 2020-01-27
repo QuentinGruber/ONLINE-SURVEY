@@ -42,14 +42,14 @@ function delete_question(){
 function Test() {
     return (
       <div className="Test">
-        <form id="loginBox">
+        <form action="http://localhost:3001/sign_in" method="POST" id="loginBox" target="frame">
             LOGIN SECTION
             
-            <input placeholder="email/Username"></input>
+            <input name ="name" placeholder="Username"></input>
             
 
             
-            <input placeholder="Password"></input>
+            <input name="password" placeholder="Password"></input>
             
 
             
