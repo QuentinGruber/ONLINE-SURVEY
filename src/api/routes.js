@@ -7,6 +7,8 @@ const Sjs = require('@quentingruber/simple-json'); // for json reading
 var bodyParser = require('body-parser');  // for POST method
 var aes256 = require('aes256'); // for Aes encryption
 var sha1 = require('sha1'); // for sha cipher
+var randtoken = require('rand-token'); // for random token generation
+
 
 // get MariaDB config
 MariaDB_config = Sjs.extract("src/Config/MariaDBconfig.json");
@@ -40,10 +42,10 @@ app.post('/sign_up', urlencodedParser, function (req, res) {
 
   try {
     data = { // Fetch data from POST request
-      "Pseudo": req.query.name,
-      "Email": req.query.email,
-      "Password": req.query.password,
-      "Token": req.query.token,
+      "Pseudo": req.body.name,
+      "Email": req.body.email,
+      "Password": req.body.password,
+      "Token": randtoken.generate(16),
     }
   }
   catch (e) {
@@ -86,8 +88,8 @@ app.post('/sign_in', urlencodedParser, function (req, res) {
 
   try {
     data = { // Fetch data from POST request
-      "Pseudo": req.query.name,
-      "Password": req.query.password,
+      "Pseudo": req.body.name,
+      "Password": req.body.password,
     }
   }
   catch (e) {
