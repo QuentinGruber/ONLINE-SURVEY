@@ -3,16 +3,9 @@ import logo from './logo.svg';
 import './App.css';
 
 
-function testConnection (){  // TODO : remove test feature
-  
-  // TEST FEATURE TODO : REMOVE IT FOR v0.1
-  fetch('http://localhost:3001/sign_in/?name=oue&&password=123',{ method: 'POST'}) // use POST method to push data
-    .then(response => response.json())
-    .then(users => console.log(users))
-}
+
 
 function App() {
-  testConnection() // TODO : remove test feature
   return (
     <div className="App">
       <header className="App-header">
