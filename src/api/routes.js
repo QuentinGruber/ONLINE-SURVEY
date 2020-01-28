@@ -35,6 +35,12 @@ app.use(
 var urlencodedParser = bodyParser.urlencoded({ extended: false }) // use to read Encoded http query
 
 
+
+app.post('/test', urlencodedParser, function (req, res) {
+  console.log(req.body)
+  res.send(true)
+});
+
 /*  REGISTER  */
 
 // Creating a POST route to our database !
