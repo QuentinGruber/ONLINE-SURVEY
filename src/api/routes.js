@@ -145,7 +145,6 @@ app.post('/GET_Token', urlencodedParser, function (req, res) {  // ROUTENAME est
     if (error) throw error;
   
     // Getting the 'response' from the database and sending it to our route. This is were the data is.
-    console.log(results)
     res.send(results)
   });
   });

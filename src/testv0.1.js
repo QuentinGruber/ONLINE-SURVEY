@@ -4,10 +4,13 @@ import React from 'react';
 var nb_question = 0;
 var button_nb = 0;
 
-async function tg(){
-    var salo = fetch('http://localhost:3001/GET_Token?Pseudo=omegatest',{ method: 'POST'})
-    var pd = await salo.then(moula => moula.json())
-    console.log(pd);
+async function Get_Admin_token(username = 'omega'){ // j'arrive pas a faire marché l'argument
+    username = 'omega' // so fuck
+    console.log(username)
+    var Promise_Admin_token = fetch('http://localhost:3001/GET_Token?Pseudo='+username+'',{ method: 'POST'})
+    var Admin_token = await Promise_Admin_token.then(response => response.json())
+    console.log(Admin_token)
+    return Admin_token;
 }
 
 function add_question(){
@@ -94,7 +97,7 @@ function Test() {
 
             
             <button>SUBMIT</button>
-            <button onClick={tg}>fuck</button>
+            <button onClick={Get_Admin_token} type="button">fuck</button>
         </form>
 
         {/* TODO: supprimer br */}
