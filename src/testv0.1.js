@@ -4,6 +4,12 @@ import React from 'react';
 var nb_question = 0;
 var button_nb = 0;
 
+async function tg(){
+    var salo = fetch('http://localhost:3001/GET_Token?Pseudo=omegatest',{ method: 'POST'})
+    var pd = await salo.then(moula => moula.json())
+    console.log(pd);
+}
+
 function add_question(){
     /* variables */
     nb_question += 1
@@ -88,6 +94,7 @@ function Test() {
 
             
             <button>SUBMIT</button>
+            <button onClick={tg}>fuck</button>
         </form>
 
         {/* TODO: supprimer br */}
