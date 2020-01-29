@@ -4,13 +4,29 @@ import React from 'react';
 var nb_question = 0;
 var button_nb = 0;
 
-async function Get_Admin_token(username = 'omega'){ // j'arrive pas a faire marché l'argument
-    username = 'omega' // so fuck
-    console.log(username)
+async function Find_from_token(){
+    if (localStorage.getItem("Admin_token")!=null){ // if an Admin_token is defined in the localstorage
+        var Promise_pseudo = fetch('http://localhost:3001/GET_Username?Token='+localStorage.getItem("Admin_token")+'',{ method: 'POST'})
+        var Pseudo = await Promise_pseudo.then(response => response.json())
+        return Pseudo; // retourne le pseudo correspondant
+    }
+    else if (sessionStorage.getItem("Admin_token")!=null){ // if an Admin_token is defined in the sessionStorage
+        var Promise_pseudo = fetch('http://localhost:3001/GET_Username?Token='+sessionStorage.getItem("Admin_token")+'',{ method: 'POST'})
+        var Pseudo = await Promise_pseudo.then(response => response.json())
+        return Pseudo; // retourne le pseudo correspondant
+    }
+    else{
+        return undefined;
+    }  
+}
+
+var username = Find_from_token();
+
+async function Get_Admin_token(){
     var Promise_Admin_token = fetch('http://localhost:3001/GET_Token?Pseudo='+username+'',{ method: 'POST'})
     var Admin_token = await Promise_Admin_token.then(response => response.json())
     console.log(Admin_token)
-    return Admin_token;
+    return Admin_token.Admin_token;
 }
 
 function add_question(){
