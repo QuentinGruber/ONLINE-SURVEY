@@ -133,7 +133,22 @@ app.post('/sign_in', urlencodedParser, function (req, res) {
   });
 });
 
+// TOKEN
+app.post('/GET_Token', urlencodedParser, function (req, res) {  // ROUTENAME est un exemple
 
+  // Connecting to the database.
+  connection.getConnection(function (err, connection) {
+  
+  // Executing SQL query
+  connection.query("SELECT Token FROM USER WHERE Pseudo='" + req.query.Pseudo + "';", function (error, results, fields) {
+    // If some error occurs, we throw an error.
+    if (error) throw error;
+  
+    // Getting the 'response' from the database and sending it to our route. This is were the data is.
+    res.send(results)
+  });
+  });
+  });
 
 // Starting our server.
 app.listen(3001, () => {
