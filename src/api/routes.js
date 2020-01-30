@@ -41,8 +41,8 @@ app.post('/new_form', urlencodedParser, function (req, res) {
 
 var data = {
     AdminToken:req.query.Admin_token,
-    From_name:req.query.Form_name,
-    Content: req.query.Content
+    Form_name:req.query.Form_name,
+    Content: [req.query.Content]
 };
 
 (async () => {

@@ -135,9 +135,11 @@ function Get_AdminToken(){
 function Organize_Content(Content){
     console.log(Content) // test
     var Og_Content = []
+    var nb_question = 0;
     Object.values(Content).forEach(element => {
+        nb_question++;
         var Question = {
-            QuestionID:[{
+            ['Question'+nb_question]:[{
             value:element.value,
             required:element.required,
         }]
@@ -145,7 +147,12 @@ function Organize_Content(Content){
        Og_Content.push(Question)
     });
     console.log(Og_Content)
-    return JSON.stringify(Og_Content)
+    const stringifyObject = require('stringify-object');
+    Og_Content = stringifyObject(Og_Content, {
+        indent: '',
+        singleQuotes: true
+    });
+    return Og_Content
 }
 
 async function Submit_new_form(){
