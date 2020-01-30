@@ -165,7 +165,7 @@ app.post('/GET_Username', urlencodedParser, function (req, res) {  // ROUTENAME 
   connection.query("SELECT Pseudo FROM USER WHERE Token='" + req.query.Token + "';", function (error, results, fields) {
     // If some error occurs, we throw an error.
     if (error) throw error;
-    console.log(results) // TODO: remove
+    console.log(results) // TODO: remove (not now)
     // Getting the 'response' from the database and sending it to our route. This is were the data is.
     res.send(results)
   });

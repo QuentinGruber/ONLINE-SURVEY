@@ -22,13 +22,6 @@ async function Find_from_token(){ // can be used for displaying the name of the 
 
 var username = Find_from_token();
 
-async function Get_Admin_token(){
-    var Promise_Admin_token = fetch('http://localhost:3001/GET_Token?Pseudo='+username+'',{ method: 'POST'})
-    var Admin_token = await Promise_Admin_token.then(response => response.json())
-    console.log(Admin_token)
-    return Admin_token.Admin_token;
-}
-
 function add_question(){
     /* variables */
     nb_question += 1
@@ -69,7 +62,6 @@ function Login(){
     var name = document.getElementById("Login_name").value;
     var password = document.getElementById("Login_pass").value;
     var Keep_logged = document.getElementById("check_login").checked;
-    console.log(Keep_logged)
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() { // handle request response
         if (this.readyState == 4 && this.status == 200) {
@@ -102,7 +94,6 @@ function Register(){
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() { // handle request response
         if (this.readyState == 4 && this.status == 200) {
-            console.log(this.responseText)
             if(this.responseText){
                 alert("Registered succesfully!") 
             }
