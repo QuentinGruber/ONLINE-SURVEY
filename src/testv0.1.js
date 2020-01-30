@@ -4,7 +4,7 @@ import React from 'react';
 var nb_question = 0;
 var button_nb = 0;
 
-async function Find_from_token(){
+async function Find_from_token(){ // can be used for displaying the name of the user logged in
     if (localStorage.getItem("Admin_token")!=null){ // if an Admin_token is defined in the localstorage
         var Promise_pseudo = fetch('http://localhost:3001/GET_Username?Token='+localStorage.getItem("Admin_token")+'',{ method: 'POST'})
         var Pseudo = await Promise_pseudo.then(response => response.json())
@@ -65,19 +65,27 @@ function delete_question(){
 }
 
 function Login(){
+    // get our input values
+    var name = document.getElementById("Login_name").value;
+    var password = document.getElementById("Login_pass").value;
+    var Keep_logged = document.getElementById("check_login").value;
+    console.log(Keep_logged)
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() { // handle request response
         if (this.readyState == 4 && this.status == 200) {
             if(this.responseText != false){
                 localStorage.clear()
-                localStorage.setItem("Admin_token",this.responseText) // store user's Admin_token in his local storage 
+                sessionStorage.clear()
+                if(Keep_logged){
+                    localStorage.setItem("Admin_token",this.responseText) // store user's Admin_token in his local storage 
+                }
+                else{
+                    sessionStorage.setItem("Admin_token",this.responseText) // store user's Admin_token in his session storage 
+                }
                 // Reload page ?
             }
        }
     };
-    // get our input values
-    var name = document.getElementById("Login_name").value;
-    var password = document.getElementById("Login_pass").value;
     // Send a post request
     xhttp.open("POST", "http://localhost:3001/sign_in?name="+name+"&password="+password+"", true);
     xhttp.send(); 
