@@ -104,7 +104,7 @@ function Register(){
         if (this.readyState == 4 && this.status == 200) {
             console.log(this.responseText)
             if(this.responseText){
-                alert("Registered succesfully!") // not working idk why
+                alert("Registered succesfully!") 
             }
             else{
                 alert("Fail to register...sorry")
