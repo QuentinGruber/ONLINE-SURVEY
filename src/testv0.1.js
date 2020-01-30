@@ -4,6 +4,24 @@ import React from 'react';
 var nb_question = 0;
 var button_nb = 0;
 
+async function Find_from_token(){ // can be used for displaying the name of the user logged in
+    if (localStorage.getItem("Admin_token")!=null){ // if an Admin_token is defined in the localstorage
+        var Promise_pseudo = fetch('http://localhost:3001/GET_Username?Token='+localStorage.getItem("Admin_token")+'',{ method: 'POST'})
+        var Pseudo = await Promise_pseudo.then(response => response.json())
+        return Pseudo; // retourne le pseudo correspondant
+    }
+    else if (sessionStorage.getItem("Admin_token")!=null){ // if an Admin_token is defined in the sessionStorage
+        var Promise_pseudo = fetch('http://localhost:3001/GET_Username?Token='+sessionStorage.getItem("Admin_token")+'',{ method: 'POST'})
+        var Pseudo = await Promise_pseudo.then(response => response.json())
+        return Pseudo; // retourne le pseudo correspondant
+    }
+    else{
+        return undefined;
+    }  
+}
+
+var username = Find_from_token();
+
 function add_question(){
     /* variables */
     nb_question += 1
@@ -39,17 +57,79 @@ function delete_question(){
     element.parentNode.removeChild(element);
 }
 
+function Login(){
+    // get our input values
+    var name = document.getElementById("Login_name").value;
+    var password = document.getElementById("Login_pass").value;
+    var Keep_logged = document.getElementById("check_login").checked;
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() { // handle request response
+        if (this.readyState == 4 && this.status == 200) {
+            if(this.responseText != false){
+                localStorage.clear()
+                sessionStorage.clear()
+                if(Keep_logged){
+                    localStorage.setItem("Admin_token",this.responseText) // store user's Admin_token in his local storage 
+                }
+                else{
+                    sessionStorage.setItem("Admin_token",this.responseText) // store user's Admin_token in his session storage 
+                }
+                // Reload page ?
+            }
+       }
+    };
+    // Send a post request
+    xhttp.open("POST", "http://localhost:3001/sign_in?name="+name+"&password="+password+"", true);
+    xhttp.send(); 
+
+}
+
+function Register(){
+    var check_register = document.getElementById("check_register").checked;
+    if (check_register){
+    // get our input values
+    var name = document.getElementById("Register_name").value;
+    var password = document.getElementById("Register_pass").value;
+    var email = document.getElementById("Register_email").value;
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() { // handle request response
+        if (this.readyState == 4 && this.status == 200) {
+            if(this.responseText){
+                alert("Registered succesfully!") 
+            }
+            else{
+                alert("Fail to register...sorry")
+            }
+       }
+    };
+    // Send a post request
+    xhttp.open("POST", "http://localhost:3001/sign_up?name="+name+"&password="+password+"&email="+email+"", true);
+    xhttp.send(); 
+}
+else{
+    alert("Vous devez accepter les conditions d'utilisations de Online Survey ! ") // TODO: to change 
+}
+
+}
+
+
+
+function Disconnect(){ // not used right now
+    // TODO: reload page
+    localStorage.clear() // delete admin token
+}
+
 function Test() {
     return (
       <div className="Test">
-        <form action="http://localhost:3001/sign_in" method="POST" id="loginBox" target="frame">
+        <form id="loginBox">
             LOGIN SECTION
             
-            <input name ="name" placeholder="Username"></input>
+            <input id = "Login_name" name ="name" placeholder="Username"></input>
             
 
             
-            <input name="password" placeholder="Password"></input>
+            <input id ="Login_pass" name="password" placeholder="Password"></input>
             
 
             
@@ -57,7 +137,7 @@ function Test() {
             <label htmlFor="check_login">Rester connecté</label>
 
             
-            <button>SUBMIT</button>
+            <button onClick = {Login} type="button">SUBMIT</button>
         </form>
         
         {/* TODO: supprimer br */}
@@ -67,18 +147,18 @@ function Test() {
         
 
 
-        <form action="http://localhost:3001/sign_up" method="POST" id="registerBox" target="frame">
+        <form id="registerBox">
             REGISTER SECTION
             
-            <input name ="name" placeholder="Username"></input>
+            <input id = "Register_name" name ="name" placeholder="Username"></input>
             
 
             
-            <input name ="email" placeholder="email"></input>
+            <input id = "Register_email" name ="email" placeholder="email"></input>
             
 
             
-            <input name ="password" placeholder="Password"></input>
+            <input id = "Register_pass" name ="password" placeholder="Password"></input>
             
             
             
@@ -87,7 +167,7 @@ function Test() {
             
 
             
-            <button>SUBMIT</button>
+            <button onClick={Register} >SUBMIT</button>
         </form>
 
         {/* TODO: supprimer br */}
@@ -105,7 +185,6 @@ function Test() {
             
             <button type="submit" id="submitForm">SUBMIT</button>
         </form>
-        <iframe name="frame"></iframe> {/* solution temporaire pour empecher le reload de la page au lancement d'une requête post*/}
       </div>
     );
   }

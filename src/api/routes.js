@@ -42,9 +42,9 @@ app.post('/sign_up', urlencodedParser, function (req, res) {
 
   try {
     data = { // Fetch data from POST request
-      "Pseudo": req.body.name,
-      "Email": req.body.email,
-      "Password": req.body.password,
+      "Pseudo": req.query.name,
+      "Email": req.query.email,
+      "Password": req.query.password,
       "Token": randtoken.generate(16),
     }
   }
@@ -60,10 +60,10 @@ app.post('/sign_up', urlencodedParser, function (req, res) {
         "INSERT INTO USER VALUES (" + "'" + data.Pseudo + "'" + "," + "'" + data.Email + "'" + "," + "'" + data.Token + "'" + "," + "'" + data.Password + "'" + ");"
         , function (sql_error, results, fields) {
           // If some error occurs, we throw an error.
-          if (sql_error) throw sql_error;
+          if (sql_error) throw res.send(false);
 
           // Getting the 'response' from the database and sending it to our route. This is were the data is.
-          res.send(results)
+          res.send(true)
         });
 
     }
@@ -88,8 +88,8 @@ app.post('/sign_in', urlencodedParser, function (req, res) {
 
   try {
     data = { // Fetch data from POST request
-      "Pseudo": req.body.name,
-      "Password": req.body.password,
+      "Pseudo": req.query.name,
+      "Password": req.query.password,
     }
   }
   catch (e) {
@@ -122,7 +122,12 @@ app.post('/sign_in', urlencodedParser, function (req, res) {
         }
 
         if (Stored_pass == data.Password) { // if the Submit pass is the same as storage pass
-          res.send(true); // send True as a response
+          connection.query( // get the Token of the logged user
+            "SELECT Token FROM USER WHERE Pseudo='" + data.Pseudo + "';"
+            , function (sql_error, results, fields) {
+              res.send(results[0].Token) // return it
+            })
+          
         }
         else{
           res.send(false);
@@ -133,9 +138,41 @@ app.post('/sign_in', urlencodedParser, function (req, res) {
   });
 });
 
+// TOKEN
+app.post('/GET_Token', urlencodedParser, function (req, res) {  // ROUTENAME est un exemple
 
+  // Connecting to the database.
+  connection.getConnection(function (err, connection) {
+  
+  // Executing SQL query
+  connection.query("SELECT Token FROM USER WHERE Pseudo='" + req.query.Pseudo + "';", function (error, results, fields) {
+    // If some error occurs, we throw an error.
+    if (error) throw error;
+  
+    // Getting the 'response' from the database and sending it to our route. This is were the data is.
+    res.send(results)
+  });
+  });
+  });
+
+  // Username
+app.post('/GET_Username', urlencodedParser, function (req, res) {  // ROUTENAME est un exemple
+
+  // Connecting to the database.
+  connection.getConnection(function (err, connection) {
+  
+  // Executing SQL query
+  connection.query("SELECT Pseudo FROM USER WHERE Token='" + req.query.Token + "';", function (error, results, fields) {
+    // If some error occurs, we throw an error.
+    if (error) throw error;
+    console.log(results) // TODO: remove (not now)
+    // Getting the 'response' from the database and sending it to our route. This is were the data is.
+    res.send(results)
+  });
+  });
+  });
 
 // Starting our server.
 app.listen(3001, () => {
-  console.log('http://localhost:3001/sign_up running !');
+  console.log('Routes.js running !');
 });
