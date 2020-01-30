@@ -112,6 +112,30 @@ else{
 
 }
 
+async function Submit_new_form(){
+     // get our input values
+     var Admin_token =  Get_AdminToken();
+     var Form_name = document.getElementById("input_name_form").value;
+     var Content = document.forms["formBox"].getElementsByTagName("input");
+     var xhttp = new XMLHttpRequest();
+     xhttp.onreadystatechange = function() { // handle request response
+         if (this.readyState == 4 && this.status == 200) {
+             
+                if(this.responseText == "true"){
+                    alert("Succesfully create a new form !")
+                }
+                else{
+                    alert("Error when creating new form !")
+                }
+         }
+     };
+     // Send a post request
+     xhttp.open("POST", "http://localhost:3001/new_form?Admin_token="+Admin_token+"&Form_name="+Form_name+"&Content="+Content+"", true);
+     xhttp.send(); 
+ 
+
+}
+
 
 
 function Disconnect(){ // not used right now
