@@ -35,10 +35,10 @@ app.use(
 var urlencodedParser = bodyParser.urlencoded({ extended: false }) // use to read Encoded http query
 
 
-
-app.post('/test', urlencodedParser, function (req, res) {
-  console.log(req.body)
-  res.send(true)
+/*  NEW FORM  */
+app.post('/new_form', urlencodedParser, function (req, res) {
+  console.log(req.query)
+  res.send("true")
 });
 
 /*  REGISTER  */
