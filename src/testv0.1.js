@@ -35,7 +35,8 @@ function add_question(){
 
     new_input.setAttribute("placeholder", "Nouvelle question");
     new_input.setAttribute("name","question"+nb_question)
-
+    new_input.setAttribute("class","question")
+    new_input.setAttribute("required","true")
     delete_button.setAttribute("type","button")
     delete_button.setAttribute("id", "delete_button"+nb_question);
     delete_button.addEventListener("click", delete_question, false);
@@ -131,11 +132,28 @@ function Get_AdminToken(){
     }  
 }
 
+function Organize_Content(Content){
+    console.log(Content) // test
+    var Og_Content = []
+    Object.values(Content).forEach(element => {
+        var Question = {
+            QuestionID:[{
+            value:element.value,
+            required:element.required,
+        }]
+        }
+       Og_Content.push(Question)
+    });
+    console.log(Og_Content)
+    return JSON.stringify(Og_Content)
+}
+
 async function Submit_new_form(){
      // get our input values
      var Admin_token =  Get_AdminToken();
      var Form_name = document.getElementById("input_name_form").value;
-     var Content = document.forms["formBox"].getElementsByTagName("input");
+     var Content = document.forms["formBox"].getElementsByClassName("question");
+     Content = Organize_Content(Content)
      var xhttp = new XMLHttpRequest();
      xhttp.onreadystatechange = function() { // handle request response
          if (this.readyState == 4 && this.status == 200) {
