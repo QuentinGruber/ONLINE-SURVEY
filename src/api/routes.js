@@ -37,7 +37,25 @@ var urlencodedParser = bodyParser.urlencoded({ extended: false }) // use to read
 
 /*  NEW FORM  */
 app.post('/new_form', urlencodedParser, function (req, res) {
-  console.log(req.query)
+  const writeJsonFile = require('write-json-file');
+
+var data = {
+    AdminToken:req.query.Admin_token,
+    From_name:req.query.Form_name,
+    Content: [{
+        QuestionID:[{
+            Question_text:"",
+            Require:"",
+            types:"",
+            PM_answer:""
+        }]
+    }]
+};
+
+(async () => {
+    await writeJsonFile('testFORM.json', data  );
+})();
+  //console.log(req.query)
   res.send("true")
 });
 
