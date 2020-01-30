@@ -194,7 +194,6 @@ function Test() {
             
             <button type="submit" id="submitForm">SUBMIT</button>
         </form>
-        <iframe name="frame"></iframe> {/* solution temporaire pour empecher le reload de la page au lancement d'une requête post*/}
       </div>
     );
   }
