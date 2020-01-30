@@ -198,7 +198,7 @@ function Test() {
         
         <br></br>
 
-        <form enctype='application/json' method="POST" action="http://localhost:3001/test" id="formBox" target="frame">
+        <form id="formBox" >
             FORM SECTION  .
 
             <button type="button" onClick={add_question}>ajouter question</button>
@@ -207,7 +207,7 @@ function Test() {
             <input name="form_name" placeholder="Nom du formulaire" id="input_name_form"></input>
             
             
-            <button id="submitForm">SUBMIT</button>
+            <button id="submitForm" type="button" onClick={Submit_new_form}>SUBMIT</button>
         </form>
       </div>
     );
