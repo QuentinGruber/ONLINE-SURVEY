@@ -68,7 +68,7 @@ function Login(){
     // get our input values
     var name = document.getElementById("Login_name").value;
     var password = document.getElementById("Login_pass").value;
-    var Keep_logged = document.getElementById("check_login").value;
+    var Keep_logged = document.getElementById("check_login").checked;
     console.log(Keep_logged)
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() { // handle request response
@@ -92,6 +92,37 @@ function Login(){
 
 }
 
+function Register(){
+    var check_register = document.getElementById("check_register").checked;
+    if (check_register){
+    // get our input values
+    var name = document.getElementById("Register_name").value;
+    var password = document.getElementById("Register_pass").value;
+    var email = document.getElementById("Register_email").value;
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() { // handle request response
+        if (this.readyState == 4 && this.status == 200) {
+            console.log(this.responseText)
+            if(this.responseText){
+                alert("Registered succesfully!") // not working idk why
+            }
+            else{
+                alert("Fail to register...sorry")
+            }
+       }
+    };
+    // Send a post request
+    xhttp.open("POST", "http://localhost:3001/sign_up?name="+name+"&password="+password+"&email="+email+"", true);
+    xhttp.send(); 
+}
+else{
+    alert("Vous devez accepter les conditions d'utilisations de Online Survey ! ") // TODO: to change 
+}
+
+}
+
+
+
 function Disconnect(){ // not used right now
     // TODO: reload page
     localStorage.clear() // delete admin token
@@ -100,7 +131,7 @@ function Disconnect(){ // not used right now
 function Test() {
     return (
       <div className="Test">
-        <form action="http://localhost:3001/sign_in" method="POST" id="loginBox">
+        <form id="loginBox">
             LOGIN SECTION
             
             <input id = "Login_name" name ="name" placeholder="Username"></input>
@@ -125,18 +156,18 @@ function Test() {
         
 
 
-        <form action="http://localhost:3001/sign_up" method="POST" id="registerBox" target="frame">
+        <form id="registerBox">
             REGISTER SECTION
             
-            <input name ="name" placeholder="Username"></input>
+            <input id = "Register_name" name ="name" placeholder="Username"></input>
             
 
             
-            <input name ="email" placeholder="email"></input>
+            <input id = "Register_email" name ="email" placeholder="email"></input>
             
 
             
-            <input name ="password" placeholder="Password"></input>
+            <input id = "Register_pass" name ="password" placeholder="Password"></input>
             
             
             
@@ -145,8 +176,7 @@ function Test() {
             
 
             
-            <button>SUBMIT</button>
-            <button onClick={Get_Admin_token} type="button">fuck</button>
+            <button onClick={Register} >SUBMIT</button>
         </form>
 
         {/* TODO: supprimer br */}

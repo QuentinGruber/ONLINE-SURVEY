@@ -42,9 +42,9 @@ app.post('/sign_up', urlencodedParser, function (req, res) {
 
   try {
     data = { // Fetch data from POST request
-      "Pseudo": req.body.name,
-      "Email": req.body.email,
-      "Password": req.body.password,
+      "Pseudo": req.query.name,
+      "Email": req.query.email,
+      "Password": req.query.password,
       "Token": randtoken.generate(16),
     }
   }
@@ -60,10 +60,10 @@ app.post('/sign_up', urlencodedParser, function (req, res) {
         "INSERT INTO USER VALUES (" + "'" + data.Pseudo + "'" + "," + "'" + data.Email + "'" + "," + "'" + data.Token + "'" + "," + "'" + data.Password + "'" + ");"
         , function (sql_error, results, fields) {
           // If some error occurs, we throw an error.
-          if (sql_error) throw sql_error;
+          if (sql_error) throw res.send(false);
 
           // Getting the 'response' from the database and sending it to our route. This is were the data is.
-          res.send(results)
+          res.send(true)
         });
 
     }
