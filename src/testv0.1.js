@@ -112,6 +112,25 @@ else{
 
 }
 
+function Get_AdminToken(){
+    // Check if user has an admin token
+    var Admin_token
+    if (localStorage.getItem("Admin_token")!=null){ // if an Admin_token is defined in the localstorage
+        Admin_token = localStorage.getItem("Admin_token")
+        return Admin_token; 
+    }
+    else if (sessionStorage.getItem("Admin_token")!=null){ // if an Admin_token is defined in the sessionStorage
+        Admin_token = sessionStorage.getItem("Admin_token")
+        return Admin_token; 
+    }
+    else{ // If not create one
+        var randtoken = require('rand-token'); // for random token generation
+        Admin_token = randtoken.generate(16)
+        localStorage.setItem("Admin_token",Admin_token) // save it 
+        return Admin_token; 
+    }  
+}
+
 async function Submit_new_form(){
      // get our input values
      var Admin_token =  Get_AdminToken();
