@@ -64,17 +64,42 @@ function delete_question(){
     element.parentNode.removeChild(element);
 }
 
+function Login(){
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() { // handle request response
+        if (this.readyState == 4 && this.status == 200) {
+            if(this.responseText != false){
+                localStorage.clear()
+                localStorage.setItem("Admin_token",this.responseText) // store user's Admin_token in his local storage 
+                // Reload page ?
+            }
+       }
+    };
+    // get our input values
+    var name = document.getElementById("Login_name").value;
+    var password = document.getElementById("Login_pass").value;
+    // Send a post request
+    xhttp.open("POST", "http://localhost:3001/sign_in?name="+name+"&password="+password+"", true);
+    xhttp.send(); 
+
+}
+
+function Disconnect(){ // not used right now
+    // TODO: reload page
+    localStorage.clear() // delete admin token
+}
+
 function Test() {
     return (
       <div className="Test">
-        <form action="http://localhost:3001/sign_in" method="POST" id="loginBox" target="frame">
+        <form action="http://localhost:3001/sign_in" method="POST" id="loginBox">
             LOGIN SECTION
             
-            <input name ="name" placeholder="Username"></input>
+            <input id = "Login_name" name ="name" placeholder="Username"></input>
             
 
             
-            <input name="password" placeholder="Password"></input>
+            <input id ="Login_pass" name="password" placeholder="Password"></input>
             
 
             
@@ -82,7 +107,7 @@ function Test() {
             <label htmlFor="check_login">Rester connecté</label>
 
             
-            <button>SUBMIT</button>
+            <button onClick = {Login} type="button">SUBMIT</button>
         </form>
         
         {/* TODO: supprimer br */}
