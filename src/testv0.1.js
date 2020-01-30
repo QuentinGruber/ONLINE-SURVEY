@@ -94,7 +94,7 @@ function Register(){
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() { // handle request response
         if (this.readyState == 4 && this.status == 200) {
-            if(this.responseText){
+            if(this.responseText == "true"){
                 alert("Registered succesfully!") 
             }
             else{

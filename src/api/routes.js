@@ -66,10 +66,10 @@ app.post('/sign_up', urlencodedParser, function (req, res) {
         "INSERT INTO USER VALUES (" + "'" + data.Pseudo + "'" + "," + "'" + data.Email + "'" + "," + "'" + data.Token + "'" + "," + "'" + data.Password + "'" + ");"
         , function (sql_error, results, fields) {
           // If some error occurs, we throw an error.
-          if (sql_error) throw res.send(false);
+          if (sql_error) throw res.send("false");
 
           // Getting the 'response' from the database and sending it to our route. This is were the data is.
-          res.send(true)
+          res.send("true")
         });
 
     }
