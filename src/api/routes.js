@@ -88,8 +88,8 @@ app.post('/sign_in', urlencodedParser, function (req, res) {
 
   try {
     data = { // Fetch data from POST request
-      "Pseudo": req.body.name,
-      "Password": req.body.password,
+      "Pseudo": req.query.name,
+      "Password": req.query.password,
     }
   }
   catch (e) {
@@ -122,7 +122,12 @@ app.post('/sign_in', urlencodedParser, function (req, res) {
         }
 
         if (Stored_pass == data.Password) { // if the Submit pass is the same as storage pass
-          res.send(true); // send True as a response
+          connection.query( // get the Token of the logged user
+            "SELECT Token FROM USER WHERE Pseudo='" + data.Pseudo + "';"
+            , function (sql_error, results, fields) {
+              res.send(results[0].Token) // return it
+            })
+          
         }
         else{
           res.send(false);
