@@ -14,7 +14,7 @@ var randtoken = require('rand-token'); // for random token generation
 MariaDB_config = Sjs.extract("src/Config/MariaDBconfig.json");
 
 const connection = mysql.createPool({
-  host: MariaDB_config.host, // Your connection adress (localhost).
+  host: MariaDB_config.host, // Your connection adress (127.0.0.1).
   user: MariaDB_config.user,     // Your database's username.
   password: MariaDB_config.password,        // Your database's password.
   database: MariaDB_config.database
@@ -28,7 +28,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: 'http://localhost:3000' // only our webapp has access to the database
+    origin: 'http://127.0.0.1:3000' // only our webapp has access to the database
   }));
 
 

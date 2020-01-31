@@ -6,12 +6,12 @@ var button_nb = 0;
 
 async function Find_from_token(){ // can be used for displaying the name of the user logged in
     if (localStorage.getItem("Admin_token")!=null){ // if an Admin_token is defined in the localstorage
-        var Promise_pseudo = fetch('http://localhost:3001/GET_Username?Token='+localStorage.getItem("Admin_token")+'',{ method: 'POST'})
+        var Promise_pseudo = fetch('http://127.0.0.1:3001/GET_Username?Token='+localStorage.getItem("Admin_token")+'',{ method: 'POST'})
         var Pseudo = await Promise_pseudo.then(response => response.json())
         return Pseudo; // retourne le pseudo correspondant
     }
     else if (sessionStorage.getItem("Admin_token")!=null){ // if an Admin_token is defined in the sessionStorage
-        var Promise_pseudo = fetch('http://localhost:3001/GET_Username?Token='+sessionStorage.getItem("Admin_token")+'',{ method: 'POST'})
+        var Promise_pseudo = fetch('http://127.0.0.1:3001/GET_Username?Token='+sessionStorage.getItem("Admin_token")+'',{ method: 'POST'})
         var Pseudo = await Promise_pseudo.then(response => response.json())
         return Pseudo; // retourne le pseudo correspondant
     }
@@ -80,7 +80,7 @@ function Login(){
        }
     };
     // Send a post request
-    xhttp.open("POST", "http://localhost:3001/sign_in?name="+name+"&password="+password+"", true);
+    xhttp.open("POST", "http://127.0.0.1:3001/sign_in?name="+name+"&password="+password+"", true);
     xhttp.send(); 
 
 }
@@ -104,7 +104,7 @@ function Register(){
        }
     };
     // Send a post request
-    xhttp.open("POST", "http://localhost:3001/sign_up?name="+name+"&password="+password+"&email="+email+"", true);
+    xhttp.open("POST", "http://127.0.0.1:3001/sign_up?name="+name+"&password="+password+"&email="+email+"", true);
     xhttp.send(); 
 }
 else{
@@ -172,7 +172,7 @@ async function Submit_new_form(){
          }
      };
      // Send a post request
-     xhttp.open("POST", "http://localhost:3001/new_form?Admin_token="+Admin_token+"&Form_name="+Form_name+"&Content="+Content+"", true);
+     xhttp.open("POST", "http://127.0.0.1:3001/new_form?Admin_token="+Admin_token+"&Form_name="+Form_name+"&Content="+Content+"", true);
      xhttp.send(); 
  
 
