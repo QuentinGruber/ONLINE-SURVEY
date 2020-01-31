@@ -28,7 +28,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: 'http://127.0.0.1:3000' // only our webapp has access to the database
+    origin: 'https://online-survey.app' // only our webapp has access to the database
   }));
 
 
