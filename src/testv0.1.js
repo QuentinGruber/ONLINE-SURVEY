@@ -35,7 +35,8 @@ function add_question(){
 
     new_input.setAttribute("placeholder", "Nouvelle question");
     new_input.setAttribute("name","question"+nb_question)
-
+    new_input.setAttribute("class","question")
+    new_input.setAttribute("required","true")
     delete_button.setAttribute("type","button")
     delete_button.setAttribute("id", "delete_button"+nb_question);
     delete_button.addEventListener("click", delete_question, false);
@@ -94,7 +95,7 @@ function Register(){
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() { // handle request response
         if (this.readyState == 4 && this.status == 200) {
-            if(this.responseText){
+            if(this.responseText == "true"){
                 alert("Registered succesfully!") 
             }
             else{
@@ -109,6 +110,71 @@ function Register(){
 else{
     alert("Vous devez accepter les conditions d'utilisations de Online Survey ! ") // TODO: to change 
 }
+
+}
+
+function Get_AdminToken(){
+    // Check if user has an admin token
+    var Admin_token
+    if (localStorage.getItem("Admin_token")!=null){ // if an Admin_token is defined in the localstorage
+        Admin_token = localStorage.getItem("Admin_token")
+        return Admin_token; 
+    }
+    else if (sessionStorage.getItem("Admin_token")!=null){ // if an Admin_token is defined in the sessionStorage
+        Admin_token = sessionStorage.getItem("Admin_token")
+        return Admin_token; 
+    }
+    else{ // If not create one
+        var randtoken = require('rand-token'); // for random token generation
+        Admin_token = randtoken.generate(16)
+        localStorage.setItem("Admin_token",Admin_token) // save it 
+        return Admin_token; 
+    }  
+}
+
+function Organize_Content(Content){
+    const stringifyObject = require('stringify-object'); // used for stringify object
+    var Og_Content = [] // create our content list
+    var nb_question = 0;
+    Object.values(Content).forEach(element => { // for each question
+        nb_question++;
+        var Question = { // get info needed
+            ['Question'+nb_question]:[{
+            value:element.value,
+            required:element.required,
+        }]
+        }
+        Question = stringifyObject(Question, { // stringify our info
+            indent: '',
+            singleQuotes: true
+        });
+       Og_Content.push(Question) // add the question to our content list
+    });
+    return Og_Content
+}
+
+async function Submit_new_form(){
+     // get our input values
+     var Admin_token =  Get_AdminToken();
+     var Form_name = document.getElementById("input_name_form").value;
+     var Content = document.forms["formBox"].getElementsByClassName("question");
+     Content = Organize_Content(Content)
+     var xhttp = new XMLHttpRequest();
+     xhttp.onreadystatechange = function() { // handle request response
+         if (this.readyState == 4 && this.status == 200) {
+             
+                if(this.responseText == "true"){
+                    alert("Succesfully create a new form !")
+                }
+                else{
+                    alert("Error when creating new form !")
+                }
+         }
+     };
+     // Send a post request
+     xhttp.open("POST", "http://localhost:3001/new_form?Admin_token="+Admin_token+"&Form_name="+Form_name+"&Content="+Content+"", true);
+     xhttp.send(); 
+ 
 
 }
 
@@ -174,16 +240,16 @@ function Test() {
         
         <br></br>
 
-        <form id="formBox">
+        <form id="formBox" >
             FORM SECTION  .
 
             <button type="button" onClick={add_question}>ajouter question</button>
 
             
-            <input placeholder="Nom du formulaire" id="input_name_form"></input>
+            <input name="form_name" placeholder="Nom du formulaire" id="input_name_form"></input>
             
             
-            <button type="submit" id="submitForm">SUBMIT</button>
+            <button id="submitForm" type="button" onClick={Submit_new_form}>SUBMIT</button>
         </form>
       </div>
     );
