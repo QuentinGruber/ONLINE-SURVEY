@@ -1,5 +1,6 @@
 // init package needed
-
+var fs = require('fs') // reading file
+var https = require('https') // for https connection
 const express = require('express');  // To create the "app"
 const cors = require('cors');  // For security issue
 const mysql = require('mysql'); // to access the database 
@@ -188,7 +189,10 @@ app.post('/GET_Username', urlencodedParser, function (req, res) {  // ROUTENAME 
   });
   });
 
-// Starting our server.
-app.listen(3001, () => {
+
+  https.createServer({
+    key: fs.readFileSync('certificate/key.pem'),
+    cert: fs.readFileSync('certificate/cert.pem')
+  }, app).listen(3001);
+
   console.log('Routes.js running !');
-});
