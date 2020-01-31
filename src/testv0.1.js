@@ -133,24 +133,22 @@ function Get_AdminToken(){
 }
 
 function Organize_Content(Content){
-    console.log(Content) // test
-    var Og_Content = []
+    const stringifyObject = require('stringify-object'); // used for stringify object
+    var Og_Content = [] // create our content list
     var nb_question = 0;
-    Object.values(Content).forEach(element => {
+    Object.values(Content).forEach(element => { // for each question
         nb_question++;
-        var Question = {
+        var Question = { // get info needed
             ['Question'+nb_question]:[{
             value:element.value,
             required:element.required,
         }]
         }
-       Og_Content.push(Question)
-    });
-    console.log(Og_Content)
-    const stringifyObject = require('stringify-object');
-    Og_Content = stringifyObject(Og_Content, {
-        indent: '',
-        singleQuotes: true
+        Question = stringifyObject(Question, { // stringify our info
+            indent: '',
+            singleQuotes: true
+        });
+       Og_Content.push(Question) // add the question to our content list
     });
     return Og_Content
 }
