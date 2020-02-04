@@ -123,7 +123,12 @@ app.post('/sign_in', urlencodedParser, function (req, res) {
       , function (sql_error, results, fields) {
         // If some error occurs, we throw an error.
         if (sql_error) res.send(false);
-        var Stored_pass = results[0].Password
+        if(results.length > 0) var Stored_pass = results[0].Password; // if provided username is in our database
+        else{
+          res.send(false); // if not send false
+          return; // and stop the connection.query
+        }
+        
         // Stored Password Decryption
         try {
           Stored_pass = aes256.decrypt(PUB_key, Stored_pass)
