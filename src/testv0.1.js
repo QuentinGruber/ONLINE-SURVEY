@@ -4,6 +4,7 @@ import React from 'react';
 var nb_question = 0;
 var button_nb = 0;
 
+/* CURRENTLY NOT USED
 async function Find_from_token(){ // can be used for displaying the name of the user logged in
     if (localStorage.getItem("Admin_token")!=null){ // if an Admin_token is defined in the localstorage
         var Promise_pseudo = fetch('http://localhost:3001/GET_Username?Token='+localStorage.getItem("Admin_token")+'',{ method: 'POST'})
@@ -20,7 +21,7 @@ async function Find_from_token(){ // can be used for displaying the name of the 
     }  
 }
 
-var username = Find_from_token();
+var username = Find_from_token();*/
 
 function add_question(){
     /* variables */
@@ -65,8 +66,8 @@ function Login(){
     var Keep_logged = document.getElementById("check_login").checked;
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() { // handle request response
-        if (this.readyState == 4 && this.status == 200) {
-            if(this.responseText != "false"){
+        if (this.readyState === 4 && this.status === 200) {
+            if(this.responseText !== "false"){
                 localStorage.clear()
                 sessionStorage.clear()
                 if(Keep_logged){
@@ -99,8 +100,8 @@ function Register(){
     var token = Get_AdminToken(); // get admin_token if user has one
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() { // handle request response
-        if (this.readyState == 4 && this.status == 200) {
-            if(this.responseText == "true"){
+        if (this.readyState === 4 && this.status === 200) {
+            if(this.responseText === "true"){
                 alert("Registered succesfully!") 
             }
             else{
@@ -166,9 +167,9 @@ async function Submit_new_form(){
      Content = Organize_Content(Content)
      var xhttp = new XMLHttpRequest();
      xhttp.onreadystatechange = function() { // handle request response
-         if (this.readyState == 4 && this.status == 200) {
+         if (this.readyState === 4 && this.status === 200) {
              
-                if(this.responseText == "true"){
+                if(this.responseText === "true"){
                     alert("Succesfully create a new form !")
                 }
                 else{
@@ -184,11 +185,13 @@ async function Submit_new_form(){
 }
 
 
-
+/*
 function Disconnect(){ // not used right now
     // TODO: reload page
-    localStorage.clear() // delete admin token
-}
+     // delete admin token
+    localStorage.clear()
+    sessionStorage.clear()
+}*/
 
 function Test() {
     return (
