@@ -3,5 +3,6 @@
     "user":"root",
     "password":"DBOnlineSurvey123&",
     "database":"LoginDB",
-    "ConnectionLimit":5
+    "ConnectionLimit":5,
+    "PUB_key":"maxon"
 }

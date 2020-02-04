@@ -21,7 +21,7 @@ const connection = mysql.createPool({
 });
 
 
-PUB_key = "maxon"  // Aucune id de où mettre ça mais je le met la pour pouvoir le move facile après 
+
 
 const app = express();
 
@@ -90,7 +90,7 @@ app.post('/sign_up', urlencodedParser, function (req, res) {
     // Password encryption
     try {
       data.Password = sha1(data.Password);
-      data.Password = aes256.encrypt(PUB_key, data.Password)
+      data.Password = aes256.encrypt(MariaDB_config.PUB_key, data.Password)
     }
     catch (e) {
       console.error("Password fail to encrypt : " + e.message)
@@ -131,7 +131,7 @@ app.post('/sign_in', urlencodedParser, function (req, res) {
         
         // Stored Password Decryption
         try {
-          Stored_pass = aes256.decrypt(PUB_key, Stored_pass)
+          Stored_pass = aes256.decrypt(MariaDB_config.PUB_key, Stored_pass)
         }
         catch (e) {
           console.error("Stored password fail to decrypt : " + e.message)
