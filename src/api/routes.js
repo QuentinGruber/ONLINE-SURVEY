@@ -61,7 +61,7 @@ app.post('/sign_up', urlencodedParser, function (req, res) {
       "Pseudo": req.query.name,
       "Email": req.query.email,
       "Password": req.query.password,
-      "Token": randtoken.generate(16),
+      "Token": req.query.token,
     }
   }
   catch (e) {
@@ -71,6 +71,9 @@ app.post('/sign_up', urlencodedParser, function (req, res) {
   connection.getConnection(function (err, connection) {
 
     function WriteUserInfo(connection) {
+      if(data.token == undefined){ // if user doesn't already have an admin token then create one
+        data.token = randtoken.generate(16);
+      }
       // user creation
       connection.query(
         "INSERT INTO USER VALUES (" + "'" + data.Pseudo + "'" + "," + "'" + data.Email + "'" + "," + "'" + data.Token + "'" + "," + "'" + data.Password + "'" + ");"
