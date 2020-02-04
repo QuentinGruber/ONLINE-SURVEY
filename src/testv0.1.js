@@ -66,7 +66,7 @@ function Login(){
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() { // handle request response
         if (this.readyState == 4 && this.status == 200) {
-            if(this.responseText != false){
+            if(this.responseText != "false"){
                 localStorage.clear()
                 sessionStorage.clear()
                 if(Keep_logged){
@@ -77,7 +77,9 @@ function Login(){
                     sessionStorage.setItem("Admin_token",this.responseText) // store user's Admin_token in his session storage 
                     alert("Logged in !");
                 }
-                // Reload page ?
+            }
+            else{
+                alert("Wrong username/password !");
             }
        }
     };
