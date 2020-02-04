@@ -71,9 +71,11 @@ function Login(){
                 sessionStorage.clear()
                 if(Keep_logged){
                     localStorage.setItem("Admin_token",this.responseText) // store user's Admin_token in his local storage 
+                    alert("Logged in !");
                 }
                 else{
                     sessionStorage.setItem("Admin_token",this.responseText) // store user's Admin_token in his session storage 
+                    alert("Logged in !");
                 }
                 // Reload page ?
             }
@@ -92,6 +94,7 @@ function Register(){
     var name = document.getElementById("Register_name").value;
     var password = document.getElementById("Register_pass").value;
     var email = document.getElementById("Register_email").value;
+    var token = Get_AdminToken(); // get admin_token if user has one
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() { // handle request response
         if (this.readyState == 4 && this.status == 200) {
@@ -104,7 +107,7 @@ function Register(){
        }
     };
     // Send a post request
-    xhttp.open("POST", "http://localhost:3001/sign_up?name="+name+"&password="+password+"&email="+email+"", true);
+    xhttp.open("POST", "http://localhost:3001/sign_up?name="+name+"&password="+password+"&email="+email+"&token="+token+"", true);
     xhttp.send(); 
 }
 else{
