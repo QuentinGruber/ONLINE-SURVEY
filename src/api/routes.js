@@ -58,7 +58,7 @@ app.post('/sign_up', urlencodedParser, function (req, res) {
 
   try {
     data = { // Fetch data from POST request
-      "Pseudo": req.query.name,
+      "Username": req.query.username,
       "Email": req.query.email,
       "Password": req.query.password,
       "Token": req.query.token,
@@ -76,7 +76,7 @@ app.post('/sign_up', urlencodedParser, function (req, res) {
       }
       // user creation
       connection.query(
-        "INSERT INTO USER VALUES (" + "'" + data.Pseudo + "'" + "," + "'" + data.Email + "'" + "," + "'" + data.Token + "'" + "," + "'" + data.Password + "'" + ");"
+        "INSERT INTO USER VALUES (" + "'" + data.Username + "'" + "," + "'" + data.Email + "'" + "," + "'" + data.Token + "'" + "," + "'" + data.Password + "'" + ");"
         , function (sql_error, results, fields) {
           // If some error occurs, we throw an error.
           if (sql_error) throw res.send("false");
@@ -107,7 +107,7 @@ app.post('/sign_in', urlencodedParser, function (req, res) {
 
   try {
     data = { // Fetch data from POST request
-      "Pseudo": req.query.name,
+      "Username": req.query.username,
       "Password": req.query.password,
     }
   }
@@ -119,7 +119,7 @@ app.post('/sign_in', urlencodedParser, function (req, res) {
 
     // user creation
     connection.query(
-      "SELECT Password FROM USER WHERE Pseudo='" + data.Pseudo + "';"
+      "SELECT Password FROM USER WHERE Username='" + data.Username + "';"
       , function (sql_error, results, fields) {
         // If some error occurs, we throw an error.
         if (sql_error) res.send(false);
@@ -147,7 +147,7 @@ app.post('/sign_in', urlencodedParser, function (req, res) {
 
         if (Stored_pass == data.Password) { // if the Submit pass is the same as storage pass
           connection.query( // get the Token of the logged user
-            "SELECT Token FROM USER WHERE Pseudo='" + data.Pseudo + "';"
+            "SELECT Token FROM USER WHERE Username='" + data.Username + "';"
             , function (sql_error, results, fields) {
               res.send(results[0].Token) // return it
             })
@@ -169,7 +169,7 @@ app.post('/GET_Token', urlencodedParser, function (req, res) {  // ROUTENAME est
   connection.getConnection(function (err, connection) {
   
   // Executing SQL query
-  connection.query("SELECT Token FROM USER WHERE Pseudo='" + req.query.Pseudo + "';", function (error, results, fields) {
+  connection.query("SELECT Token FROM USER WHERE Username='" + req.query.Username + "';", function (error, results, fields) {
     // If some error occurs, we throw an error.
     if (error) throw error;
   
@@ -186,7 +186,7 @@ app.post('/GET_Username', urlencodedParser, function (req, res) {  // ROUTENAME 
   connection.getConnection(function (err, connection) {
   
   // Executing SQL query
-  connection.query("SELECT Pseudo FROM USER WHERE Token='" + req.query.Token + "';", function (error, results, fields) {
+  connection.query("SELECT Username FROM USER WHERE Token='" + req.query.Token + "';", function (error, results, fields) {
     // If some error occurs, we throw an error.
     if (error) throw error;
     console.log(results) // TODO: remove (not now)
