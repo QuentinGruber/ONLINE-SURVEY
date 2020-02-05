@@ -17,7 +17,8 @@ const connection = mysql.createPool({
   host: MariaDB_config.host, // Your connection adress (localhost).
   user: MariaDB_config.user,     // Your database's username.
   password: MariaDB_config.password,        // Your database's password.
-  database: MariaDB_config.database
+  database: MariaDB_config.database,
+  connectionLimit: MariaDB_config.ConnectionLimit
 });
 
 
@@ -79,10 +80,14 @@ app.post('/sign_up', urlencodedParser, function (req, res) {
         "INSERT INTO USER VALUES (" + "'" + data.Username + "'" + "," + "'" + data.Email + "'" + "," + "'" + data.Token + "'" + "," + "'" + data.Password + "'" + ");"
         , function (sql_error, results, fields) {
           // If some error occurs, we throw an error.
-          if (sql_error) throw res.send("false");
+          if (sql_error) {
+            res.send("false");
+            connection.release();
+          }
 
           // Getting the 'response' from the database and sending it to our route. This is were the data is.
           res.send("true")
+          connection.release()
         });
 
     }
@@ -126,6 +131,7 @@ app.post('/sign_in', urlencodedParser, function (req, res) {
         if(results.length > 0) var Stored_pass = results[0].Password; // if provided username is in our database
         else{
           res.send(false); // if not send false
+          connection.release()
           return; // and stop the connection.query
         }
         
@@ -150,11 +156,13 @@ app.post('/sign_in', urlencodedParser, function (req, res) {
             "SELECT Token FROM USER WHERE Username='" + data.Username + "';"
             , function (sql_error, results, fields) {
               res.send(results[0].Token) // return it
+              connection.release()
             })
           
         }
         else{
           res.send(false);
+          connection.release()
         }
 
       });
@@ -175,6 +183,7 @@ app.post('/GET_Token', urlencodedParser, function (req, res) {  // ROUTENAME est
   
     // Getting the 'response' from the database and sending it to our route. This is were the data is.
     res.send(results)
+    connection.release()
   });
   });
   });
@@ -188,10 +197,14 @@ app.post('/GET_Username', urlencodedParser, function (req, res) {  // ROUTENAME 
   // Executing SQL query
   connection.query("SELECT Username FROM USER WHERE Token='" + req.query.Token + "';", function (error, results, fields) {
     // If some error occurs, we throw an error.
-    if (error) throw error;
+    if (error) {
+      console.error(error);
+      connection.release()
+    }
     console.log(results) // TODO: remove (not now)
     // Getting the 'response' from the database and sending it to our route. This is were the data is.
     res.send(results)
+    connection.release()
   });
   });
   });
