@@ -7,14 +7,14 @@ var button_nb = 0;
 /* CURRENTLY NOT USED
 async function Find_from_token(){ // can be used for displaying the name of the user logged in
     if (localStorage.getItem("Admin_token")!=null){ // if an Admin_token is defined in the localstorage
-        var Promise_pseudo = fetch('http://localhost:3001/GET_Username?Token='+localStorage.getItem("Admin_token")+'',{ method: 'POST'})
-        var Pseudo = await Promise_pseudo.then(response => response.json())
-        return Pseudo; // retourne le pseudo correspondant
+        var Promise_Username = fetch('http://localhost:3001/GET_Username?Token='+localStorage.getItem("Admin_token")+'',{ method: 'POST'})
+        var Username = await Promise_Username.then(response => response.json())
+        return Username; // retourne le Username correspondant
     }
     else if (sessionStorage.getItem("Admin_token")!=null){ // if an Admin_token is defined in the sessionStorage
-        var Promise_pseudo = fetch('http://localhost:3001/GET_Username?Token='+sessionStorage.getItem("Admin_token")+'',{ method: 'POST'})
-        var Pseudo = await Promise_pseudo.then(response => response.json())
-        return Pseudo; // retourne le pseudo correspondant
+        var Promise_Username = fetch('http://localhost:3001/GET_Username?Token='+sessionStorage.getItem("Admin_token")+'',{ method: 'POST'})
+        var Username = await Promise_Username.then(response => response.json())
+        return Username; // retourne le Username correspondant
     }
     else{
         return undefined;
@@ -35,7 +35,7 @@ function add_question(){
     /* attributs */ 
 
     new_input.setAttribute("placeholder", "Nouvelle question");
-    new_input.setAttribute("name","question"+nb_question)
+    new_input.setAttribute("username","question"+nb_question)
     new_input.setAttribute("class","question")
     new_input.setAttribute("required","true")
     delete_button.setAttribute("type","button")
@@ -61,7 +61,7 @@ function delete_question(){
 
 function Login(){
     // get our input values
-    var name = document.getElementById("Login_name").value;
+    var username = document.getElementById("Login_name").value;
     var password = document.getElementById("Login_pass").value;
     var Keep_logged = document.getElementById("check_login").checked;
     var xhttp = new XMLHttpRequest();
@@ -85,7 +85,7 @@ function Login(){
        }
     };
     // Send a post request
-    xhttp.open("POST", "http://localhost:3001/sign_in?name="+name+"&password="+password+"", true);
+    xhttp.open("POST", "http://localhost:3001/sign_in?username="+username+"&password="+password+"", true);
     xhttp.send(); 
 
 }
@@ -94,7 +94,7 @@ function Register(){
     var check_register = document.getElementById("check_register").checked;
     if (check_register){
     // get our input values
-    var name = document.getElementById("Register_name").value;
+    var username = document.getElementById("Register_name").value;
     var password = document.getElementById("Register_pass").value;
     var email = document.getElementById("Register_email").value;
     var token = Get_AdminToken(); // get admin_token if user has one
@@ -110,7 +110,7 @@ function Register(){
        }
     };
     // Send a post request
-    xhttp.open("POST", "http://localhost:3001/sign_up?name="+name+"&password="+password+"&email="+email+"&token="+token+"", true);
+    xhttp.open("POST", "http://localhost:3001/sign_up?username="+username+"&password="+password+"&email="+email+"&token="+token+"", true);
     xhttp.send(); 
 }
 else{
@@ -199,7 +199,7 @@ function Test() {
         <form id="loginBox">
             LOGIN SECTION
             
-            <input id = "Login_name" name ="name" placeholder="Username"></input>
+            <input id = "Login_name" name ="username" placeholder="Username"></input>
             
 
             
@@ -224,7 +224,7 @@ function Test() {
         <form id="registerBox">
             REGISTER SECTION
             
-            <input id = "Register_name" name ="name" placeholder="Username"></input>
+            <input id = "Register_name" name ="username" placeholder="Username"></input>
             
 
             
