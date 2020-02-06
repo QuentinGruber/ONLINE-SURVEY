@@ -1,9 +1,5 @@
 import React from 'react';
 
-
-var nb_question = 0;
-var button_nb = 0;
-
 /* CURRENTLY NOT USED
 async function Find_from_token(){ // can be used for displaying the name of the user logged in
     if (localStorage.getItem("Admin_token")!=null){ // if an Admin_token is defined in the localstorage
@@ -23,40 +19,66 @@ async function Find_from_token(){ // can be used for displaying the name of the 
 
 var username = Find_from_token();*/
 
-function add_question(){
-    /* variables */
-    nb_question += 1
-    var new_div
+function count_questions() {
+    var liste_question = document.forms["formBox"].getElementsByClassName("question");
+    var nb_questions = liste_question.length
+    return nb_questions
+}
 
+
+function add_question(){
+    //variables
+    var nb_new_question = count_questions()+1 // number of the new question created in the following function
+
+    var new_div
     var new_input = document.createElement('input');
     var delete_button = document.createElement('button');
     
+    //attributs
 
-    /* attributs */ 
-
-    new_input.setAttribute("placeholder", "Nouvelle question");
-    new_input.setAttribute("username","question"+nb_question)
+    new_input.setAttribute("placeholder", "Nouvelle question"); // attributes for the <input> element
+    new_input.setAttribute("name","question"+nb_new_question)
+    new_input.setAttribute("id","question"+nb_new_question)
     new_input.setAttribute("class","question")
     new_input.setAttribute("required","true")
+
     delete_button.setAttribute("type","button")
-    delete_button.setAttribute("id", "delete_button"+nb_question);
+    delete_button.setAttribute("id", "delete_button"+nb_new_question); // attributes for the  delete <button> element
     delete_button.addEventListener("click", delete_question, false);
     delete_button.innerHTML = "-"
 
-    /* affichages */
-    document.getElementById("submitForm").insertAdjacentHTML("beforebegin",`<div id='div_question${nb_question}'></div>`);
-    new_div = document.getElementById("div_question"+nb_question)
+    //affichages
+    document.getElementById("submitForm").insertAdjacentHTML("beforebegin",`<div id='div_question${nb_new_question}'></div>`); // insert div before submit button
+    new_div = document.getElementById("div_question"+nb_new_question)
     new_div.appendChild(new_input);
-    new_div.appendChild(delete_button);
-
+    new_div.appendChild(delete_button); //insert everything in the div
 
 }
 
 function delete_question(){     
-    button_nb = this.id.replace( /^\D+/g, ''); /* keep only the number */
+    var nb_questions = count_questions()
+    var button_nb = 0;
+    var div_to_rename = 0;
+    var question_to_rename = 0;
+    var button_to_rename = 0;
+
+    button_nb = this.id.replace( /^\D+/g, ''); // keep only the number 
+
+    for(var id_to_replace = parseInt(button_nb)+1; id_to_replace <= nb_questions; id_to_replace++) { //for each line after the deleted one
+        div_to_rename = document.getElementById("div_question"+id_to_replace);
+        div_to_rename.id = ("div_question"+(id_to_replace-1))   //replace the div id
+        
+        button_to_rename = document.getElementById("delete_button"+id_to_replace);
+        button_to_rename.id = ("delete_button"+(id_to_replace-1))   //replace the button id
+
+        question_to_rename = document.getElementById("question"+id_to_replace);
+        question_to_rename.id = ("question"+(id_to_replace-1))
+        question_to_rename.name = ("question"+(id_to_replace-1)) //replace the question name and id
+    }
 
     var element = document.getElementById("div_question"+button_nb);
     element.parentNode.removeChild(element);
+
 }
 
 function Login(){
