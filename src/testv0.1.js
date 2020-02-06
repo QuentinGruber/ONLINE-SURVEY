@@ -36,10 +36,9 @@ function add_question(){
     
     //attributs
 
-    /* attributs */ 
-
-    new_input.setAttribute("placeholder", "Nouvelle question");
-    new_input.setAttribute("username","question"+nb_question)
+    new_input.setAttribute("placeholder", "Nouvelle question"); // attributes for the <input> element
+    new_input.setAttribute("name","question"+nb_new_question)
+    new_input.setAttribute("id","question"+nb_new_question)
     new_input.setAttribute("class","question")
     new_input.setAttribute("required","true")
 
