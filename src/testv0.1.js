@@ -113,8 +113,6 @@ function Login(){
 }
 
 function Register(){
-    var check_register = document.getElementById("check_register").checked;
-    if (check_register){
     // get our input values
     var username = document.getElementById("Register_name").value;
     var password = document.getElementById("Register_pass").value;
@@ -129,16 +127,11 @@ function Register(){
             else{
                 alert("Fail to register...sorry")
             }
-       }
+    }
     };
     // Send a post request
     xhttp.open("POST", "http://localhost:3001/sign_up?username="+username+"&password="+password+"&email="+email+"&token="+token+"", true);
     xhttp.send(); 
-}
-else{
-    alert("Vous devez accepter les conditions d'utilisations de Online Survey ! ") // TODO: to change 
-}
-
 }
 
 function Get_AdminToken(){
@@ -215,6 +208,37 @@ function Disconnect(){ // not used right now
     sessionStorage.clear()
 }*/
 
+
+/*
+
+----------------Déjà fait depuis le formulaire-----------
+
+function validateEmail() {
+
+    var valid_email = false
+    var input_email = document.getElementById("Register_email")
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    
+    if (re.test(String(input_email.value).toLowerCase())) {
+        input_email.style.borderColor = "#00DD00"
+        valid_email = true
+        return valid_email
+    }
+    else {
+        input_email.style.borderColor = "#FF0000"
+        valid_email = false
+        return valid_email
+    }
+}
+
+function validateRegister() {
+    if (validateEmail()) {
+        document.getElementById("Register_email").style.borderColor = "green";
+    }
+}
+*/
+
+
 function Test() {
     return (
       <div className="Test">
@@ -225,7 +249,7 @@ function Test() {
             
 
             
-            <input id ="Login_pass" name="password" placeholder="Password"></input>
+            <input type="password" id ="Login_pass" name="password" placeholder="Password"></input>
             
 
             
@@ -246,19 +270,19 @@ function Test() {
         <form id="registerBox">
             REGISTER SECTION
             
-            <input id = "Register_name" name ="username" placeholder="Username"></input>
+            <input id = "Register_name" name ="username" placeholder="Username" required></input>
             
 
             
-            <input id = "Register_email" name ="email" placeholder="email"></input>
+            <input type = "text" id = "Register_email" name ="email" placeholder = "email" pattern = '^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$' title = "Doit respecter le format d'un email" required></input>
             
 
             
-            <input id = "Register_pass" name ="password" placeholder="Password"></input>
+            <input type = "password" id = "Register_pass" name = "password" placeholder = "Password" pattern = "(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title = "Doit contenir au moins un chiffre, une minuscule, une majuscule, et 8 caractères" required></input>
             
             
             
-            <input type="checkbox" id="check_register" name="checkbox inscription"></input>
+            <input type="checkbox" id="check_register" name="checkbox inscription" required></input>
             <label htmlFor="check_register">J'accepte les conditions d'utilisations de Online Survey</label>
             
 
