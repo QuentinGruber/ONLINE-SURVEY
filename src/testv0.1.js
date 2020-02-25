@@ -113,26 +113,38 @@ function Login(){
 }
 
 function Register(){
-    // get our input values
-    var username = document.getElementById("Register_name").value;
-    var password = document.getElementById("Register_pass").value;
-    var email = document.getElementById("Register_email").value;
-    var token = Get_AdminToken(); // get admin_token if user has one
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() { // handle request response
-        if (this.readyState === 4 && this.status === 200) {
-            if(this.responseText === "true"){
-                alert("Registered succesfully!") 
+
+    var isValidUsername = document.getElementById("Register_name").checkValidity();
+    var isValidEmail = document.getElementById("Register_email").checkValidity();
+    var isValidPassword = document.getElementById("Register_pass").checkValidity();
+    var isValidCheckbox = document.getElementById("check_register").checkValidity();
+
+    // vérifier l'unicité du pseudo et de l'adresse mail ici
+
+    if ( isValidUsername && isValidEmail && isValidPassword && isValidCheckbox ) {
+        // get our input values
+        var username = document.getElementById("Register_name").value;
+        var password = document.getElementById("Register_pass").value;
+        var email = document.getElementById("Register_email").value;
+        var token = Get_AdminToken(); // get admin_token if user has one
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() { // handle request response
+            if (this.readyState === 4 && this.status === 200) {
+                if(this.responseText === "true"){
+                    alert("Registered succesfully!") 
+                }
+                else{
+                    alert("Fail to register...sorry")
+                }
             }
-            else{
-                alert("Fail to register...sorry")
-            }
-    }
-    };
+        };
     // Send a post request
     xhttp.open("POST", "http://localhost:3001/sign_up?username="+username+"&password="+password+"&email="+email+"&token="+token+"", true);
     xhttp.send(); 
+    }
 }
+
+
 
 function Get_AdminToken(){
     // Check if user has an admin token
@@ -236,11 +248,13 @@ function validateRegister() {
         document.getElementById("Register_email").style.borderColor = "green";
     }
 }
+
 */
 
 
+
 function Test() {
-    return (
+    return (    
       <div className="Test">
         <form id="loginBox">
             LOGIN SECTION
@@ -270,11 +284,11 @@ function Test() {
         <form id="registerBox">
             REGISTER SECTION
             
-            <input id = "Register_name" name ="username" placeholder="Username" required></input>
+            <input type = "text" id = "Register_name" name ="username" placeholder="Username" pattern = '.{3,16}' required></input>
             
 
             
-            <input type = "text" id = "Register_email" name ="email" placeholder = "email" pattern = '^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$' title = "Doit respecter le format d'un email" required></input>
+            <input type = "text" id = "Register_email" name ="email" placeholder = "email"  pattern = '^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$' title = "Doit respecter le format d'un email" required></input>
             
 
             
@@ -287,7 +301,7 @@ function Test() {
             
 
             
-            <button onClick={Register} >SUBMIT</button>
+            <button onClick={Register} id="registerSubmitButton" >SUBMIT</button>
         </form>
 
         {/* TODO: supprimer br */}
