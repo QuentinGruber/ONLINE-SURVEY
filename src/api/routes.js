@@ -14,7 +14,7 @@ var randtoken = require('rand-token'); // for random token generation
 MariaDB_config = Sjs.extract("src/Config/MariaDBconfig.json");
 
 const connection = mysql.createPool({
-  host: MariaDB_config.host, // Your connection adress (localhost).
+  host: MariaDB_config.host, // Your connection address (localhost).
   user: MariaDB_config.user,     // Your database's username.
   password: MariaDB_config.password,        // Your database's password.
   database: MariaDB_config.database,

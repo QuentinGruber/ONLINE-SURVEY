@@ -157,7 +157,7 @@ function Check_Username(){
                 // information has been checked now we can register the user
                 Register();
            else
-               alert("An account already use this email adress ! ");
+               alert("An account already use this email address ! ");
    }};
    // Send a post request
    xhttp.open("POST", "http://localhost:3001/Check_Email?email="+document.getElementById("Register_email").value+"", true);
