@@ -187,7 +187,6 @@ app.post('/GET_Token', urlencodedParser, function (req, res) {  // ROUTENAME est
   });
   });
   });
-
   // Check if a username exist in our db
   app.post('/Check_Username', urlencodedParser, function (req, res) {
     connection.getConnection(function (err, connection) {
@@ -205,11 +204,29 @@ app.post('/GET_Token', urlencodedParser, function (req, res) {  // ROUTENAME est
         connection.release()
       });
       });
+  });
 
+  // Check if an email exist in our db
+  app.post('/Check_Email', urlencodedParser, function (req, res) {
+    connection.getConnection(function (err, connection) {
+  
+      // Executing SQL query
+      connection.query("SELECT EXISTS(SELECT * FROM USER WHERE Email='" + req.query.email + "');", function (error, results, fields) {
+        // If some error occurs, we throw an error.
+        if (error) {
+          console.error(error);
+          connection.release()
+        }
+        console.log(results) // TODO: remove (not now)
+        // Getting the 'response' from the database and sending it to our route. This is were the data is.
+        res.send(results)
+        connection.release()
+      });
+      });
   });
 
 
-  // Username used ?
+  // Username // used ?
 app.post('/GET_Username', urlencodedParser, function (req, res) {  // ROUTENAME est un exemple
 
   // Connecting to the database.

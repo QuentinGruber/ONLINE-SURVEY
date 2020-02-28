@@ -115,13 +115,16 @@ function Login(){
 
 
 function Verify_register_info(){
+    // Display an error if an required input is not good filled
     var form = document.getElementById("registerBox")
     form.reportValidity()
+
     var isValidUsername = document.getElementById("Register_name").checkValidity();
     var isValidEmail = document.getElementById("Register_email").checkValidity();
     var isValidPassword = document.getElementById("Register_pass").checkValidity();
     var isValidCheckbox = document.getElementById("check_register").checkValidity();
-
+    // If all required input are correctly filled we check if
+    // username is already in our DB or not
     if ( isValidUsername && isValidEmail && isValidPassword && isValidCheckbox) {
         Check_Username()
     }
@@ -134,12 +137,30 @@ function Check_Username(){
        if (this.readyState === 4 && this.status === 200) {
            // response format is a rowdatapacket so it was needed to do like that.
            if(Object.values(this.response[Object.values(this.response).length - 3])[0] === "0")
-                Register();
+                // next step check if provided email isn't already in our database
+                Check_Email();
            else
-               alert("Username already taken !");
+                alert("Username already taken !");
    }};
    // Send a post request
    xhttp.open("POST", "http://localhost:3001/Check_Username?username="+document.getElementById("Register_name").value+"", true);
+   xhttp.send(); 
+   }
+
+   function Check_Email(){
+    // Check if provided email is not already in our database
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() { // handle request response
+       if (this.readyState === 4 && this.status === 200) {
+           // response format is a rowdatapacket so it was needed to do like that.
+           if(Object.values(this.response[Object.values(this.response).length - 3])[0] === "0")
+                // information has been checked now we can register the user
+                Register();
+           else
+               alert("An account already use this email adress ! ");
+   }};
+   // Send a post request
+   xhttp.open("POST", "http://localhost:3001/Check_Email?email="+document.getElementById("Register_email").value+"", true);
    xhttp.send(); 
    }
 
