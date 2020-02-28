@@ -115,6 +115,8 @@ function Login(){
 
 
 function Verify_register_info(){
+    var form = document.getElementById("registerBox")
+    form.reportValidity()
     var isValidUsername = document.getElementById("Register_name").checkValidity();
     var isValidEmail = document.getElementById("Register_email").checkValidity();
     var isValidPassword = document.getElementById("Register_pass").checkValidity();
@@ -152,6 +154,7 @@ function Register(){
             if (this.readyState === 4 && this.status === 200) {
                 if(this.responseText === "true"){
                     alert("Registered succesfully!") 
+                    window.location.reload();
                 }
                 else{
                     alert("Fail to register...sorry")
@@ -291,7 +294,7 @@ function Test() {
             
 
             
-            <button onClick={Verify_register_info} id="registerSubmitButton" >SUBMIT</button>
+            <input value="SUBMIT" type="button" onClick={Verify_register_info} id="registerSubmitButton" ></input>
         </form>
 
         {/* TODO: supprimer br */}
