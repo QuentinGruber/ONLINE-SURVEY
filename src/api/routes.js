@@ -14,7 +14,7 @@ var randtoken = require('rand-token'); // for random token generation
 MariaDB_config = Sjs.extract("src/Config/MariaDBconfig.json");
 
 const connection = mysql.createPool({
-  host: MariaDB_config.host, // Your connection adress (localhost).
+  host: MariaDB_config.host, // Your connection address (localhost).
   user: MariaDB_config.user,     // Your database's username.
   password: MariaDB_config.password,        // Your database's password.
   database: MariaDB_config.database,
@@ -187,8 +187,46 @@ app.post('/GET_Token', urlencodedParser, function (req, res) {  // ROUTENAME est
   });
   });
   });
+  // Check if a username exist in our db
+  app.post('/Check_Username', urlencodedParser, function (req, res) {
+    connection.getConnection(function (err, connection) {
+  
+      // Executing SQL query
+      connection.query("SELECT EXISTS(SELECT * FROM USER WHERE Username='" + req.query.username + "');", function (error, results, fields) {
+        // If some error occurs, we throw an error.
+        if (error) {
+          console.error(error);
+          connection.release()
+        }
+        console.log(results) // TODO: remove (not now)
+        // Getting the 'response' from the database and sending it to our route. This is were the data is.
+        res.send(results)
+        connection.release()
+      });
+      });
+  });
 
-  // Username
+  // Check if an email exist in our db
+  app.post('/Check_Email', urlencodedParser, function (req, res) {
+    connection.getConnection(function (err, connection) {
+  
+      // Executing SQL query
+      connection.query("SELECT EXISTS(SELECT * FROM USER WHERE Email='" + req.query.email + "');", function (error, results, fields) {
+        // If some error occurs, we throw an error.
+        if (error) {
+          console.error(error);
+          connection.release()
+        }
+        console.log(results) // TODO: remove (not now)
+        // Getting the 'response' from the database and sending it to our route. This is were the data is.
+        res.send(results)
+        connection.release()
+      });
+      });
+  });
+
+
+  // Username // used ?
 app.post('/GET_Username', urlencodedParser, function (req, res) {  // ROUTENAME est un exemple
 
   // Connecting to the database.
