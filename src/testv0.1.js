@@ -112,16 +112,36 @@ function Login(){
 
 }
 
-function Register(){
 
+
+function Verify_register_info(){
     var isValidUsername = document.getElementById("Register_name").checkValidity();
     var isValidEmail = document.getElementById("Register_email").checkValidity();
     var isValidPassword = document.getElementById("Register_pass").checkValidity();
     var isValidCheckbox = document.getElementById("check_register").checkValidity();
 
-    // vérifier l'unicité du pseudo et de l'adresse mail ici
+    if ( isValidUsername && isValidEmail && isValidPassword && isValidCheckbox) {
+        Check_Username()
+    }
+}
 
-    if ( isValidUsername && isValidEmail && isValidPassword && isValidCheckbox ) {
+function Check_Username(){
+    // Check if Username is not already taken
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() { // handle request response
+       if (this.readyState === 4 && this.status === 200) {
+           // response format is a rowdatapacket so it was needed to do like that.
+           if(Object.values(this.response[Object.values(this.response).length - 3])[0] === "0")
+                Register();
+           else
+               alert("Username already taken !");
+   }};
+   // Send a post request
+   xhttp.open("POST", "http://localhost:3001/Check_Username?username="+document.getElementById("Register_name").value+"", true);
+   xhttp.send(); 
+   }
+
+function Register(){
         // get our input values
         var username = document.getElementById("Register_name").value;
         var password = document.getElementById("Register_pass").value;
@@ -141,7 +161,6 @@ function Register(){
     // Send a post request
     xhttp.open("POST", "http://localhost:3001/sign_up?username="+username+"&password="+password+"&email="+email+"&token="+token+"", true);
     xhttp.send(); 
-    }
 }
 
 
@@ -221,35 +240,6 @@ function Disconnect(){ // not used right now
 }*/
 
 
-/*
-
-----------------Déjà fait depuis le formulaire-----------
-
-function validateEmail() {
-
-    var valid_email = false
-    var input_email = document.getElementById("Register_email")
-    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    
-    if (re.test(String(input_email.value).toLowerCase())) {
-        input_email.style.borderColor = "#00DD00"
-        valid_email = true
-        return valid_email
-    }
-    else {
-        input_email.style.borderColor = "#FF0000"
-        valid_email = false
-        return valid_email
-    }
-}
-
-function validateRegister() {
-    if (validateEmail()) {
-        document.getElementById("Register_email").style.borderColor = "green";
-    }
-}
-
-*/
 
 
 
@@ -301,7 +291,7 @@ function Test() {
             
 
             
-            <button onClick={Register} id="registerSubmitButton" >SUBMIT</button>
+            <button onClick={Verify_register_info} id="registerSubmitButton" >SUBMIT</button>
         </form>
 
         {/* TODO: supprimer br */}
