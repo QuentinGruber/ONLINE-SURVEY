@@ -37,7 +37,7 @@ var urlencodedParser = bodyParser.urlencoded({ extended: false }) // use to read
 
 
 /*  NEW FORM  */
-app.post('/new_form', urlencodedParser, function (req, res) {
+app.post('/api/new_form', urlencodedParser, function (req, res) {
   const writeJsonFile = require('write-json-file');
 
 var data = {
@@ -55,7 +55,7 @@ var data = {
 /*  REGISTER  */
 
 // Creating a POST route to our database !
-app.post('/sign_up', urlencodedParser, function (req, res) {
+app.post('/api/sign_up', urlencodedParser, function (req, res) {
 
   try {
     data = { // Fetch data from POST request
@@ -108,7 +108,7 @@ app.post('/sign_up', urlencodedParser, function (req, res) {
 /*  LOGIN  */
 
 // Creating a POST route to our database !  
-app.post('/sign_in', urlencodedParser, function (req, res) {
+app.post('/api/sign_in', urlencodedParser, function (req, res) {
 
   try {
     data = { // Fetch data from POST request
@@ -171,7 +171,7 @@ app.post('/sign_in', urlencodedParser, function (req, res) {
 });
 
 // TOKEN
-app.post('/GET_Token', urlencodedParser, function (req, res) {  // ROUTENAME est un exemple
+app.post('/api/GET_Token', urlencodedParser, function (req, res) {  // ROUTENAME est un exemple
 
   // Connecting to the database.
   connection.getConnection(function (err, connection) {
@@ -188,7 +188,7 @@ app.post('/GET_Token', urlencodedParser, function (req, res) {  // ROUTENAME est
   });
   });
   // Check if a username exist in our db
-  app.post('/Check_Username', urlencodedParser, function (req, res) {
+  app.post('/api/Check_Username', urlencodedParser, function (req, res) {
     connection.getConnection(function (err, connection) {
   
       // Executing SQL query
@@ -198,7 +198,6 @@ app.post('/GET_Token', urlencodedParser, function (req, res) {  // ROUTENAME est
           console.error(error);
           connection.release()
         }
-        console.log(results) // TODO: remove (not now)
         // Getting the 'response' from the database and sending it to our route. This is were the data is.
         res.send(results)
         connection.release()
@@ -207,7 +206,7 @@ app.post('/GET_Token', urlencodedParser, function (req, res) {  // ROUTENAME est
   });
 
   // Check if an email exist in our db
-  app.post('/Check_Email', urlencodedParser, function (req, res) {
+  app.post('/api/Check_Email', urlencodedParser, function (req, res) {
     connection.getConnection(function (err, connection) {
   
       // Executing SQL query
@@ -217,7 +216,6 @@ app.post('/GET_Token', urlencodedParser, function (req, res) {  // ROUTENAME est
           console.error(error);
           connection.release()
         }
-        console.log(results) // TODO: remove (not now)
         // Getting the 'response' from the database and sending it to our route. This is were the data is.
         res.send(results)
         connection.release()
@@ -227,7 +225,7 @@ app.post('/GET_Token', urlencodedParser, function (req, res) {  // ROUTENAME est
 
 
   // Username // used ?
-app.post('/GET_Username', urlencodedParser, function (req, res) {  // ROUTENAME est un exemple
+app.post('/api/GET_Username', urlencodedParser, function (req, res) {  // ROUTENAME est un exemple
 
   // Connecting to the database.
   connection.getConnection(function (err, connection) {
@@ -239,7 +237,6 @@ app.post('/GET_Username', urlencodedParser, function (req, res) {  // ROUTENAME 
       console.error(error);
       connection.release()
     }
-    console.log(results) // TODO: remove (not now)
     // Getting the 'response' from the database and sending it to our route. This is were the data is.
     res.send(results)
     connection.release()

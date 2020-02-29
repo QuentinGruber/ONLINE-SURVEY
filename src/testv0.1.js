@@ -107,7 +107,7 @@ function Login(){
        }
     };
     // Send a post request
-    xhttp.open("POST", "http://localhost:3001/sign_in?username="+username+"&password="+password+"", true);
+    xhttp.open("POST", "http://localhost:3001/api/sign_in?username="+username+"&password="+password+"", true);
     xhttp.send(); 
 
 }
@@ -143,7 +143,7 @@ function Check_Username(){
                 alert("Username already taken !");
    }};
    // Send a post request
-   xhttp.open("POST", "http://localhost:3001/Check_Username?username="+document.getElementById("Register_name").value+"", true);
+   xhttp.open("POST", "http://localhost:3001/api/Check_Username?username="+document.getElementById("Register_name").value+"", true);
    xhttp.send(); 
    }
 
@@ -160,7 +160,7 @@ function Check_Username(){
                alert("An account already use this email address ! ");
    }};
    // Send a post request
-   xhttp.open("POST", "http://localhost:3001/Check_Email?email="+document.getElementById("Register_email").value+"", true);
+   xhttp.open("POST", "http://localhost:3001/api/Check_Email?email="+document.getElementById("Register_email").value+"", true);
    xhttp.send(); 
    }
 
@@ -183,7 +183,7 @@ function Register(){
             }
         };
     // Send a post request
-    xhttp.open("POST", "http://localhost:3001/sign_up?username="+username+"&password="+password+"&email="+email+"&token="+token+"", true);
+    xhttp.open("POST", "http://localhost:3001/api/sign_up?username="+username+"&password="+password+"&email="+email+"&token="+token+"", true);
     xhttp.send(); 
 }
 
@@ -248,7 +248,7 @@ async function Submit_new_form(){
          }
      };
      // Send a post request
-     xhttp.open("POST", "http://localhost:3001/new_form?Admin_token="+Admin_token+"&Form_name="+Form_name+"&Content="+Content+"", true);
+     xhttp.open("POST", "http://localhost:3001/api/new_form?Admin_token="+Admin_token+"&Form_name="+Form_name+"&Content="+Content+"", true);
      xhttp.send(); 
  
 
