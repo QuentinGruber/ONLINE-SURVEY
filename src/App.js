@@ -1,7 +1,7 @@
 import React from 'react';
 import Login from './component/Login';
 import Register from './component/Register'
-
+import FormCreator from './component/FormCreator'
 
 
 
@@ -10,6 +10,7 @@ function App() {
     <div className="App">
       <Login />
       <Register />
+      <FormCreator />
     </div>
   );
 }
