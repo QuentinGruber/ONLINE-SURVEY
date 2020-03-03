@@ -102,7 +102,6 @@ app.post('/api/sign_up', urlencodedParser, function (req, res) {
     }
 
     function WriteUserInfo(connection, token_check_result) {
-      console.log((Object.values(token_check_result[0])[0]))
       // Check if token is already registered in our database
       if ((Object.values(token_check_result[0])[0]) === 0)
           token_check_result = true; // if that the case 
