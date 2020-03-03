@@ -104,30 +104,29 @@ app.post('/api/sign_up', urlencodedParser, function (req, res) {
     function WriteUserInfo(connection, token_check_result) {
       // Check if token is already registered in our database
       if ((Object.values(token_check_result[0])[0]) === 0)
-          token_check_result = true; // if that the case 
+        token_check_result = true; // if that the case 
       else
-          token_check_result = false;
+        token_check_result = false;
 
-        if (data.Token == undefined || !token_check_result) { // if user doesn't already have an admin token then create one
-          data.Token = randtoken.generate(16);
-        }
-        // user creation
-        connection.query(
-          "INSERT INTO USER VALUES (" + "'" + data.Username + "'" + "," + "'" + data.Email + "'" + "," + "'" + data.Token + "'" + "," + "'" + data.Password + "'" + ");"
-          , function (sql_error, results, fields) {
-            // If some error occurs, we throw an error.
-            if (sql_error) {
-              res.send("false");
-              connection.release();
-            }
+      if (data.Token == undefined || !token_check_result) { // if user doesn't already have an admin token then create one
+        data.Token = randtoken.generate(16);
+      }
+      // user creation
+      connection.query(
+        "INSERT INTO USER VALUES (" + "'" + data.Username + "'" + "," + "'" + data.Email + "'" + "," + "'" + data.Token + "'" + "," + "'" + data.Password + "'" + ");"
+        , function (sql_error, results, fields) {
+          // If some error occurs, we throw an error.
+          if (sql_error) {
+            res.send("false");
+            connection.release();
+          }
 
-            // Getting the 'response' from the database and sending it to our route. This is were the data is.
-            res.send("true")
-            connection.release()
-          });
+          // Getting the 'response' from the database and sending it to our route. This is were the data is.
+          res.send("true")
+          connection.release()
+        });
 
     }
-
     // start by encrypt password
     encrypt_password()
   });
