@@ -40,15 +40,15 @@ var urlencodedParser = bodyParser.urlencoded({ extended: false }) // use to read
 app.post('/api/new_form', urlencodedParser, function (req, res) {
   const writeJsonFile = require('write-json-file');
 
-var data = {
-    AdminToken:req.query.Admin_token,
-    Form_name:req.query.Form_name,
+  var data = {
+    AdminToken: req.query.Admin_token,
+    Form_name: req.query.Form_name,
     Content: [req.query.Content]
-};
+  };
 
-(async () => {
-    await writeJsonFile('testFORM.json', data  );
-})();
+  (async () => {
+    await writeJsonFile('testFORM.json', data);
+  })();
   res.send("true")
 });
 
@@ -71,9 +71,45 @@ app.post('/api/sign_up', urlencodedParser, function (req, res) {
 
   connection.getConnection(function (err, connection) {
 
-    function WriteUserInfo(connection) {
-      if(data.token == undefined){ // if user doesn't already have an admin token then create one
-        data.token = randtoken.generate(16);
+    function encrypt_password() {
+      // Password encryption
+      try {
+        data.Password = sha1(data.Password);
+        data.Password = aes256.encrypt(MariaDB_config.PUB_key, data.Password)
+        // Check if token isn't already in our database
+        Check_token(connection)
+      }
+      catch (e) {
+        console.error("Password fail to encrypt : " + e.message)
+        res.send("false");
+      }
+    }
+
+    function Check_token(connection) { // Check if token already exist in our database
+
+      // Executing SQL query
+      connection.query("SELECT EXISTS(SELECT * FROM USER WHERE Token='" + data.Token + "');", function (error, results, fields) {
+        // If some error occurs, we throw an error.
+        if (error) {
+          console.error(error);
+          res.send("false");
+          connection.release()
+        }
+        // Getting the 'response' from the database and sending it to our route. This is were the data is.
+        WriteUserInfo(connection, results)
+
+      });
+    }
+
+    function WriteUserInfo(connection, token_check_result) {
+      // Check if token is already registered in our database
+      if ((Object.values(token_check_result[0])[0]) === 0)
+        token_check_result = true; // if that the case 
+      else
+        token_check_result = false;
+
+      if (data.Token == undefined || !token_check_result) { // if user doesn't already have an admin token then create one
+        data.Token = randtoken.generate(16);
       }
       // user creation
       connection.query(
@@ -91,17 +127,8 @@ app.post('/api/sign_up', urlencodedParser, function (req, res) {
         });
 
     }
-
-    // Password encryption
-    try {
-      data.Password = sha1(data.Password);
-      data.Password = aes256.encrypt(MariaDB_config.PUB_key, data.Password)
-    }
-    catch (e) {
-      console.error("Password fail to encrypt : " + e.message)
-    }
-    WriteUserInfo(connection)
-
+    // start by encrypt password
+    encrypt_password()
   });
 });
 
@@ -128,13 +155,13 @@ app.post('/api/sign_in', urlencodedParser, function (req, res) {
       , function (sql_error, results, fields) {
         // If some error occurs, we throw an error.
         if (sql_error) res.send(false);
-        if(results.length > 0) var Stored_pass = results[0].Password; // if provided username is in our database
-        else{
+        if (results.length > 0) var Stored_pass = results[0].Password; // if provided username is in our database
+        else {
           res.send(false); // if not send false
           connection.release()
           return; // and stop the connection.query
         }
-        
+
         // Stored Password Decryption
         try {
           Stored_pass = aes256.decrypt(MariaDB_config.PUB_key, Stored_pass)
@@ -158,9 +185,9 @@ app.post('/api/sign_in', urlencodedParser, function (req, res) {
               res.send(results[0].Token) // return it
               connection.release()
             })
-          
+
         }
-        else{
+        else {
           res.send(false);
           connection.release()
         }
@@ -175,74 +202,74 @@ app.post('/api/GET_Token', urlencodedParser, function (req, res) {  // ROUTENAME
 
   // Connecting to the database.
   connection.getConnection(function (err, connection) {
-  
-  // Executing SQL query
-  connection.query("SELECT Token FROM USER WHERE Username='" + req.query.Username + "';", function (error, results, fields) {
-    // If some error occurs, we throw an error.
-    if (error) throw error;
-  
-    // Getting the 'response' from the database and sending it to our route. This is were the data is.
-    res.send(results)
-    connection.release()
+
+    // Executing SQL query
+    connection.query("SELECT Token FROM USER WHERE Username='" + req.query.Username + "';", function (error, results, fields) {
+      // If some error occurs, we throw an error.
+      if (error) throw error;
+
+      // Getting the 'response' from the database and sending it to our route. This is were the data is.
+      res.send(results)
+      connection.release()
+    });
   });
-  });
-  });
-  // Check if a username exist in our db
-  app.post('/api/Check_Username', urlencodedParser, function (req, res) {
-    connection.getConnection(function (err, connection) {
-  
-      // Executing SQL query
-      connection.query("SELECT EXISTS(SELECT * FROM USER WHERE Username='" + req.query.username + "');", function (error, results, fields) {
-        // If some error occurs, we throw an error.
-        if (error) {
-          console.error(error);
-          connection.release()
-        }
-        // Getting the 'response' from the database and sending it to our route. This is were the data is.
-        res.send(results)
+});
+// Check if a username exist in our db
+app.post('/api/Check_Username', urlencodedParser, function (req, res) {
+  connection.getConnection(function (err, connection) {
+
+    // Executing SQL query
+    connection.query("SELECT EXISTS(SELECT * FROM USER WHERE Username='" + req.query.username + "');", function (error, results, fields) {
+      // If some error occurs, we throw an error.
+      if (error) {
+        console.error(error);
         connection.release()
-      });
-      });
+      }
+      // Getting the 'response' from the database and sending it to our route. This is were the data is.
+      res.send(results)
+      connection.release()
+    });
   });
+});
 
-  // Check if an email exist in our db
-  app.post('/api/Check_Email', urlencodedParser, function (req, res) {
-    connection.getConnection(function (err, connection) {
-  
-      // Executing SQL query
-      connection.query("SELECT EXISTS(SELECT * FROM USER WHERE Email='" + req.query.email + "');", function (error, results, fields) {
-        // If some error occurs, we throw an error.
-        if (error) {
-          console.error(error);
-          connection.release()
-        }
-        // Getting the 'response' from the database and sending it to our route. This is were the data is.
-        res.send(results)
+// Check if an email exist in our db
+app.post('/api/Check_Email', urlencodedParser, function (req, res) {
+  connection.getConnection(function (err, connection) {
+
+    // Executing SQL query
+    connection.query("SELECT EXISTS(SELECT * FROM USER WHERE Email='" + req.query.email + "');", function (error, results, fields) {
+      // If some error occurs, we throw an error.
+      if (error) {
+        console.error(error);
         connection.release()
-      });
-      });
+      }
+      // Getting the 'response' from the database and sending it to our route. This is were the data is.
+      res.send(results)
+      connection.release()
+    });
   });
+});
 
 
-  // Username // used ?
+// Username // used ?
 app.post('/api/GET_Username', urlencodedParser, function (req, res) {  // ROUTENAME est un exemple
 
   // Connecting to the database.
   connection.getConnection(function (err, connection) {
-  
-  // Executing SQL query
-  connection.query("SELECT Username FROM USER WHERE Token='" + req.query.Token + "';", function (error, results, fields) {
-    // If some error occurs, we throw an error.
-    if (error) {
-      console.error(error);
+
+    // Executing SQL query
+    connection.query("SELECT Username FROM USER WHERE Token='" + req.query.Token + "';", function (error, results, fields) {
+      // If some error occurs, we throw an error.
+      if (error) {
+        console.error(error);
+        connection.release()
+      }
+      // Getting the 'response' from the database and sending it to our route. This is were the data is.
+      res.send(results)
       connection.release()
-    }
-    // Getting the 'response' from the database and sending it to our route. This is were the data is.
-    res.send(results)
-    connection.release()
+    });
   });
-  });
-  });
+});
 
 // Starting our server.
 app.listen(3001, () => {
