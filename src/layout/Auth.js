@@ -38,7 +38,7 @@ class Auth extends React.Component {
 
         <Switch>
           {this.getRoutes(routes)}
-          <Redirect from="*" to="/auth/testos" />
+          <Redirect from="*" to="/auth/login" />
         </Switch>
 
       </>
