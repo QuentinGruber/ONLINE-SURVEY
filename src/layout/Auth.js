@@ -3,11 +3,11 @@ import { Route, Switch, Redirect } from "react-router-dom";
 
 import routes from "../routes.js";
 
-class Template extends React.Component {
+class Auth extends React.Component {
   // Get layout's routes
   getRoutes = routes => {
     return routes.map((prop, key) => {
-      if (prop.layout === "/template") {
+      if (prop.layout === "/auth") {
         return (
           <Route
             path={prop.layout + prop.path}
@@ -38,7 +38,7 @@ class Template extends React.Component {
 
         <Switch>
           {this.getRoutes(routes)}
-          <Redirect from="*" to="/template/testos" />
+          <Redirect from="*" to="/auth/testos" />
         </Switch>
 
       </>
@@ -46,4 +46,4 @@ class Template extends React.Component {
   }
 }
 
-export default Template;
+export default Auth;
