@@ -1,5 +1,5 @@
 // init package needed
-
+require("dotenv").config();
 const express = require('express');  // To create the "app"
 const cors = require('cors');  // For security issue
 const mysql = require('mysql'); // to access the database 
@@ -37,35 +37,35 @@ app.get('/', function (req, res) { // test
 });
 
 /*  NEW FORM  */
-app.post('/api/new_form', urlencodedParser, function (req, res) {
+app.post(process.env.REACT_APP_API_ROUTE + 'new_form', urlencodedParser, function (req, res) {
   Forms.create_new_form(req, res);
 });
 
 /*  REGISTER  */
 
-app.post('/api/sign_up', urlencodedParser, function (req, res) {
+app.post(process.env.REACT_APP_API_ROUTE + 'sign_up', urlencodedParser, function (req, res) {
   Login_Register.register(req, res, connection);
 
 });
 
 /*  LOGIN  */
 
-app.post('/api/sign_in', urlencodedParser, function (req, res) {
+app.post(process.env.REACT_APP_API_ROUTE + 'sign_in', urlencodedParser, function (req, res) {
   Login_Register.login(req, res, connection);
 
 });
 
 // Check if a username exist in our db
-app.post('/api/Check_Username', urlencodedParser, function (req, res) {
+app.post(process.env.REACT_APP_API_ROUTE + 'Check_Username', urlencodedParser, function (req, res) {
   Login_Register.Check_Username(req, res, connection)
 });
 
 // Check if an email exist in our db
-app.post('/api/Check_Email', urlencodedParser, function (req, res) {
+app.post(process.env.REACT_APP_API_ROUTE + 'Check_Email', urlencodedParser, function (req, res) {
   Login_Register.Check_Email(req, res, connection)
 });
 
 // Starting our server.
 app.listen(3001, () => {
-  console.log('Routes.js running !');
+  console.log('Routes.js running !' + process.env.NODE_ENV);
 });

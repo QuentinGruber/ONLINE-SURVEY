@@ -123,7 +123,7 @@ class FormCreator extends React.Component {
         }
       };
       // Send a post request
-      xhttp.open("POST", "http://localhost:3001/api/new_form?Admin_token=" + Admin_token + "&Form_name=" + Form_name + "&Content=" + Content + "", true);
+      xhttp.open("POST", process.env.REACT_APP_API_URL + "/new_form?Admin_token=" + Admin_token + "&Form_name=" + Form_name + "&Content=" + Content + "", true);
       xhttp.send();
 
 

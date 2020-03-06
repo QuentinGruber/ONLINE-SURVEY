@@ -44,7 +44,7 @@ class Login extends React.Component {
                }
             };
             // Send a post request
-            xhttp.open("POST", "http://localhost:3001/api/sign_in?username="+username+"&password="+password+"", true);
+            xhttp.open("POST", process.env.REACT_APP_API_URL + "/sign_in?username="+username+"&password="+password+"", true);
             xhttp.send(); 
         
         }
