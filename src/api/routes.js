@@ -44,31 +44,31 @@ app.get('/test', function (req, res) {   // TODO : remove
 
 
 /*  NEW FORM  */
-app.post(process.env.REACT_APP_API_ROUTE + 'new_form', urlencodedParser, function (req, res) {
+app.post('/new_form', urlencodedParser, function (req, res) {
   Forms.create_new_form(req, res);
 });
 
 /*  REGISTER  */
 
-app.post(process.env.REACT_APP_API_ROUTE + 'sign_up', urlencodedParser, function (req, res) {
+app.post('/sign_up', urlencodedParser, function (req, res) {
   Login_Register.register(req, res, connection);
 
 });
 
 /*  LOGIN  */
 
-app.post(process.env.REACT_APP_API_ROUTE + 'sign_in', urlencodedParser, function (req, res) {
+app.post('/sign_in', urlencodedParser, function (req, res) {
   Login_Register.login(req, res, connection);
 
 });
 
 // Check if a username exist in our db
-app.post(process.env.REACT_APP_API_ROUTE + 'Check_Username', urlencodedParser, function (req, res) {
+app.post('/Check_Username', urlencodedParser, function (req, res) {
   Login_Register.Check_Username(req, res, connection)
 });
 
 // Check if an email exist in our db
-app.post(process.env.REACT_APP_API_ROUTE + 'Check_Email', urlencodedParser, function (req, res) {
+app.post('/Check_Email', urlencodedParser, function (req, res) {
   Login_Register.Check_Email(req, res, connection)
 });
 
