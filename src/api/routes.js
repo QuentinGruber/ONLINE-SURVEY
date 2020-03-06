@@ -26,15 +26,22 @@ const app = express();
 
 app.use(
   cors({
-    origin: 'http://localhost:3000' // only our webapp has access to the database
-  }));
+    origin: 'http://www.online-survey.app' // only our webapp has access to the database
+  })
+  );
+
 
 
 var urlencodedParser = bodyParser.urlencoded({ extended: false }) // use to read Encoded http query
 
-app.get('/', function (req, res) { // test 
-  res.send("coucou");
+app.get('/', function (req, res) {  
+  res.send("Api server connected !");
 });
+
+app.get('/test', function (req, res) {   // TODO : remove
+  res.send("test work !");
+});
+
 
 /*  NEW FORM  */
 app.post(process.env.REACT_APP_API_ROUTE + 'new_form', urlencodedParser, function (req, res) {
@@ -67,5 +74,5 @@ app.post(process.env.REACT_APP_API_ROUTE + 'Check_Email', urlencodedParser, func
 
 // Starting our server.
 app.listen(3001, () => {
-  console.log('Routes.js running !' + process.env.NODE_ENV);
+  console.log('Routes.js running !');
 });
