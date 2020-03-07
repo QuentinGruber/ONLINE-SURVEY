@@ -1,10 +1,11 @@
 import React from 'react';
-
+import { Link } from "react-router-dom";
 import {
     Button,
     Card,
     CardHeader,
     CardBody,
+    NavLink,
     FormGroup,
     Form,
     Input,
@@ -135,12 +136,12 @@ class Login extends React.Component {
                   </a>
                 </Col>
                 <Col className="text-right" xs="6">
-                  <a
-                    className="text-light"
-                    href="register"
+                  <NavLink
+                    to="/auth/register"
+                    tag={Link}
                   >
-                    <small>Create new account</small>
-                  </a>
+                    <span className="text-light">Create new account</span>
+                  </NavLink>
                 </Col>
               </Row>
             </CardBody>
