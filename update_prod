@@ -1,0 +1,15 @@
+git pull
+wait
+npm i
+wait
+npm run-script build
+wait
+sudo rm -rf ../../../var/www/html/
+wait
+sudo mkdir ../../../var/www/html/
+wait
+sudo cp build/* ../../../var/www/html/
+wait
+pm2 restart routes
+wait
+echo " Server updated ! "
