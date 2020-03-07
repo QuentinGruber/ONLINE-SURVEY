@@ -8,7 +8,7 @@ sudo rm -rf ../../../var/www/html/
 wait
 sudo mkdir ../../../var/www/html/
 wait
-sudo cp build/* ../../../var/www/html/
+sudo cp -r build/* ../../../var/www/html/
 wait
 pm2 restart routes
 wait
