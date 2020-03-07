@@ -202,6 +202,26 @@ class Register extends React.Component {
                     S'inscrire
                   </Button>
                 </div>
+
+                <Row className="mt-3">
+                <Col xs="6">
+                  <a
+                    className="text-light"
+                    href="#pablo"
+                    onClick={e => e.preventDefault()}
+                  >
+                    <small>Forgot password?</small>
+                  </a>
+                </Col>
+                <Col className="text-right" xs="6">
+                  <a
+                    className="text-light"
+                    href="login"
+                  >
+                    <small>Log in to an existing account</small>
+                  </a>
+                </Col>
+              </Row>
               </Form>
             </CardBody>
           </Card>
