@@ -4,9 +4,9 @@ import Register from "./component/Register"
 
 var routes = [
   {
-    path: "/testos",
+    path: "/all_component",
     component: App,
-    layout: "/template"
+    layout: "/dev"
   },
   {
     path: "/login",

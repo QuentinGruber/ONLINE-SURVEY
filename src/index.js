@@ -2,15 +2,15 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import * as serviceWorker from './serviceWorker';
-import TemplateLayout from "./layout/Template.js";
+import DevLayout from "./layout/Dev.js";
 import AuthLayout from "./layout/Auth.js";
 
 ReactDOM.render(
     <BrowserRouter>
         <Switch>
-            <Route path="/template" render={props => <TemplateLayout {...props} />} />
+            <Route path="/dev" render={props => <DevLayout {...props} />} />
             <Route path="/auth" render={props => <AuthLayout {...props} />} />
-            <Redirect from="/" to="/template" />
+            <Redirect from="/" to="/dev" />
         </Switch>
     </BrowserRouter>,
     document.getElementById("root")
