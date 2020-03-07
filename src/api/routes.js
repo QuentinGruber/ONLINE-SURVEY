@@ -1,5 +1,5 @@
 // init package needed
-
+require("dotenv").config();
 const express = require('express');  // To create the "app"
 const cors = require('cors');  // For security issue
 const mysql = require('mysql'); // to access the database 
@@ -23,45 +23,52 @@ const connection = mysql.createPool({
 
 const app = express();
 
-
 app.use(
   cors({
-    origin: 'http://localhost:3000' // only our webapp has access to the database
-  }));
+    allowedHeaders:"Origin, X-Requested-With, Content-Type, Accept",
+    origin: ['http://www.online-survey.app','http://localhost:3000'] // only our webapp has access to the database
+  })
+  );
+
 
 
 var urlencodedParser = bodyParser.urlencoded({ extended: false }) // use to read Encoded http query
 
-app.get('/', function (req, res) { // test 
-  res.send("coucou");
+app.get('/', function (req, res) {  
+  res.send("Api server connected !");
 });
 
+app.get('/test', function (req, res) {   // TODO : remove
+  res.send("test work !");
+});
+
+
 /*  NEW FORM  */
-app.post('/api/new_form', urlencodedParser, function (req, res) {
+app.post('/new_form', urlencodedParser, function (req, res) {
   Forms.create_new_form(req, res);
 });
 
 /*  REGISTER  */
 
-app.post('/api/sign_up', urlencodedParser, function (req, res) {
+app.post('/sign_up', urlencodedParser, function (req, res) {
   Login_Register.register(req, res, connection);
 
 });
 
 /*  LOGIN  */
 
-app.post('/api/sign_in', urlencodedParser, function (req, res) {
+app.post('/sign_in', urlencodedParser, function (req, res) {
   Login_Register.login(req, res, connection);
 
 });
 
 // Check if a username exist in our db
-app.post('/api/Check_Username', urlencodedParser, function (req, res) {
+app.post('/Check_Username', urlencodedParser, function (req, res) {
   Login_Register.Check_Username(req, res, connection)
 });
 
 // Check if an email exist in our db
-app.post('/api/Check_Email', urlencodedParser, function (req, res) {
+app.post('/Check_Email', urlencodedParser, function (req, res) {
   Login_Register.Check_Email(req, res, connection)
 });
 

@@ -65,7 +65,7 @@ class Register extends React.Component {
         }
       };
       // Send a post request
-      xhttp.open("POST", "http://localhost:3001/api/Check_Username?username=" + document.getElementById("Register_name").value + "", true);
+      xhttp.open("POST", process.env.REACT_APP_API_URL + "/Check_Username?username=" + document.getElementById("Register_name").value + "", true);
       xhttp.send();
     }
 
@@ -83,7 +83,7 @@ class Register extends React.Component {
         }
       };
       // Send a post request
-      xhttp.open("POST", "http://localhost:3001/api/Check_Email?email=" + document.getElementById("Register_email").value + "", true);
+      xhttp.open("POST", process.env.REACT_APP_API_URL + "/Check_Email?email=" + document.getElementById("Register_email").value + "", true);
       xhttp.send();
     }
 
@@ -106,7 +106,7 @@ class Register extends React.Component {
         }
       };
       // Send a post request
-      xhttp.open("POST", "http://localhost:3001/api/sign_up?username=" + username + "&password=" + password + "&email=" + email + "&token=" + token + "", true);
+      xhttp.open("POST", process.env.REACT_APP_API_URL + "/sign_up?username=" + username + "&password=" + password + "&email=" + email + "&token=" + token + "", true);
       xhttp.send();
     }
 
