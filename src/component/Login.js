@@ -15,10 +15,14 @@ import {
     Row,
     Col
   } from "reactstrap";
+import GoogleLogin from 'react-google-login';
   
 class Login extends React.Component {
     
     render() {
+      const responseGoogle = (response) => {
+        console.log(response);
+      }
       const PUB_key = "maxon"; // TODO: need to read PUB_key from json
         function Login(){
             // get our input values
@@ -72,15 +76,17 @@ class Login extends React.Component {
 
                   <span className="btn-inner--text">Github</span>
                 </Button>
-                <Button
-                  className="btn-neutral btn-icon"
-                  color="default"
-                  href="#pablo"
-                  onClick={e => e.preventDefault()}
-                >
-
-                  <span className="btn-inner--text">Google</span>
-                </Button>
+                <GoogleLogin
+                  clientId="367335034854-8kolqq461bk29p1fl7umg0n0m2c8tacc.apps.googleusercontent.com"
+                  render={renderProps => (
+                    <Button className="btn-neutral btn-icon" color="default" onClick={renderProps.onClick} disabled={renderProps.disabled}>
+                      <span className="btn-inner--text">Google</span>
+                    </Button>
+                  )}
+                  onSuccess={responseGoogle}
+                  onFailure={responseGoogle}
+                  cookiePolicy={'single_host_origin'}
+                />
               </div>
             </CardHeader>
             <CardBody className="px-lg-5 py-lg-5">
