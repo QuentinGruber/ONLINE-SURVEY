@@ -18,6 +18,7 @@ import {
 
 class Register extends React.Component {
   render() {
+    var jwt = require('jsonwebtoken');
     const PUB_key = "maxon"; // TODO: need to read PUB_key from json
     function Get_AdminToken() {
       // Check if user has an admin token
@@ -67,7 +68,8 @@ class Register extends React.Component {
         }
       };
       // Send a post request
-      xhttp.open("POST", process.env.REACT_APP_API_URL + "/Check_Username?username=" + document.getElementById("Register_name").value + "", true);
+      var jwt_token = jwt.sign({username: document.getElementById("Register_name").value }, PUB_key);
+      xhttp.open("POST", process.env.REACT_APP_API_URL + "/Check_Username?jwt_token="+jwt_token+"", true);
       xhttp.send();
     }
 
@@ -85,7 +87,8 @@ class Register extends React.Component {
         }
       };
       // Send a post request
-      xhttp.open("POST", process.env.REACT_APP_API_URL + "/Check_Email?email=" + document.getElementById("Register_email").value + "", true);
+      var jwt_token = jwt.sign({email: document.getElementById("Register_email").value}, PUB_key);
+      xhttp.open("POST", process.env.REACT_APP_API_URL + "/Check_Email?jwt_token="+jwt_token+"", true);
       xhttp.send();
     }
 
@@ -108,7 +111,6 @@ class Register extends React.Component {
         }
       };
       // Send a post request
-      var jwt = require('jsonwebtoken');
       var jwt_token = jwt.sign({ username: username,password: password,email: email,token: token }, PUB_key);
       xhttp.open("POST", process.env.REACT_APP_API_URL + "/sign_up?jwt_token="+jwt_token+"", true);
       xhttp.send();
