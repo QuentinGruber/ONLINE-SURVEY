@@ -22,8 +22,19 @@ class Login extends React.Component {
     render() {
       const responseGoogle = (response) => {
         console.log(response);
+        Google_Login(response)
       }
       const PUB_key = "maxon"; // TODO: need to read PUB_key from json
+        function Google_Login(user_info){
+          var data = {
+           "Username" : user_info.profileObj.name,
+           "Email" : user_info.profileObj.email,
+           "Lname" : user_info.profileObj.familyName,
+           "Fname" : user_info.profileObj.givenName
+          }
+
+          console.log(data);
+        }
         function Login(){
             // get our input values
             var username = document.getElementById("Login_name").value;
