@@ -4,11 +4,13 @@ var randtoken = require('rand-token'); // for random token generation
 
 exports.register = function (req, res, connection) {
     try {
+        var jwt = require('jsonwebtoken');
+        var decoded = jwt.verify(req.query.jwt_token, MariaDB_config.PUB_key);
         data = { // Fetch data from POST request
-            "Username": req.query.username,
-            "Email": req.query.email,
-            "Password": req.query.password,
-            "Token": req.query.token,
+            "Username": decoded.username,
+            "Email": decoded.email,
+            "Password": decoded.password,
+            "Token": decoded.token,
         }
     }
     catch (e) {
@@ -80,9 +82,11 @@ exports.register = function (req, res, connection) {
 
 exports.login = function (req, res, connection) {
     try {
+        var jwt = require('jsonwebtoken');
+        var decoded = jwt.verify(req.query.jwt_token, MariaDB_config.PUB_key);
         data = { // Fetch data from POST request
-            "Username": req.query.username,
-            "Password": req.query.password,
+            "Username": decoded.username,
+            "Password": decoded.password,
         }
     }
     catch (e) {

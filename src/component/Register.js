@@ -18,6 +18,7 @@ import {
 
 class Register extends React.Component {
   render() {
+    const PUB_key = "maxon"; // TODO: need to read PUB_key from json
     function Get_AdminToken() {
       // Check if user has an admin token
       var Admin_token
@@ -107,7 +108,9 @@ class Register extends React.Component {
         }
       };
       // Send a post request
-      xhttp.open("POST", process.env.REACT_APP_API_URL + "/sign_up?username=" + username + "&password=" + password + "&email=" + email + "&token=" + token + "", true);
+      var jwt = require('jsonwebtoken');
+      var jwt_token = jwt.sign({ username: username,password: password,email: email,token: token }, PUB_key);
+      xhttp.open("POST", process.env.REACT_APP_API_URL + "/sign_up?jwt_token="+jwt_token+"", true);
       xhttp.send();
     }
 
