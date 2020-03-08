@@ -1,14 +1,16 @@
 var aes256 = require('aes256'); // for Aes encryption
 var sha1 = require('sha1'); // for sha cipher
 var randtoken = require('rand-token'); // for random token generation
+var jwt = require('jsonwebtoken');
 
 exports.register = function (req, res, connection) {
     try {
+        var decoded = jwt.verify(req.query.jwt_token, MariaDB_config.PUB_key);
         data = { // Fetch data from POST request
-            "Username": req.query.username,
-            "Email": req.query.email,
-            "Password": req.query.password,
-            "Token": req.query.token,
+            "Username": decoded.username,
+            "Email": decoded.email,
+            "Password": decoded.password,
+            "Token": decoded.token,
         }
     }
     catch (e) {
@@ -80,9 +82,10 @@ exports.register = function (req, res, connection) {
 
 exports.login = function (req, res, connection) {
     try {
+        var decoded = jwt.verify(req.query.jwt_token, MariaDB_config.PUB_key);
         data = { // Fetch data from POST request
-            "Username": req.query.username,
-            "Password": req.query.password,
+            "Username": decoded.username,
+            "Password": decoded.password,
         }
     }
     catch (e) {
@@ -142,10 +145,11 @@ exports.login = function (req, res, connection) {
 // Checks
 
 exports.Check_Username = function (req, res, connection) {
+    var decoded = jwt.verify(req.query.jwt_token, MariaDB_config.PUB_key);
     connection.getConnection(function (err, connection) {
 
         // Executing SQL query
-        connection.query("SELECT EXISTS(SELECT * FROM USER WHERE Username='" + req.query.username + "');", function (error, results, fields) {
+        connection.query("SELECT EXISTS(SELECT * FROM USER WHERE Username='" + decoded.username + "');", function (error, results, fields) {
             // If some error occurs, we throw an error.
             if (error) {
                 console.error(error);
@@ -160,9 +164,9 @@ exports.Check_Username = function (req, res, connection) {
 
 exports.Check_Email = function (req, res, connection) {
     connection.getConnection(function (err, connection) {
-
+        var decoded = jwt.verify(req.query.jwt_token, MariaDB_config.PUB_key);
         // Executing SQL query
-        connection.query("SELECT EXISTS(SELECT * FROM USER WHERE Email='" + req.query.email + "');", function (error, results, fields) {
+        connection.query("SELECT EXISTS(SELECT * FROM USER WHERE Email='" + decoded.email + "');", function (error, results, fields) {
             // If some error occurs, we throw an error.
             if (error) {
                 console.error(error);

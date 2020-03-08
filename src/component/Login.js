@@ -19,6 +19,7 @@ import {
 class Login extends React.Component {
     
     render() {
+      const PUB_key = "maxon"; // TODO: need to read PUB_key from json
         function Login(){
             // get our input values
             var username = document.getElementById("Login_name").value;
@@ -45,7 +46,9 @@ class Login extends React.Component {
                }
             };
             // Send a post request
-            xhttp.open("POST", process.env.REACT_APP_API_URL + "/sign_in?username="+username+"&password="+password+"", true);
+            var jwt = require('jsonwebtoken');
+            var jwt_token = jwt.sign({ username: username,password: password }, PUB_key);
+            xhttp.open("POST", process.env.REACT_APP_API_URL + "/sign_in?jwt_token="+jwt_token+"", true);
             xhttp.send(); 
         
         }
