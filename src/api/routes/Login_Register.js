@@ -34,7 +34,7 @@ exports.register = function (req, res, connection) {
             // user creation
             connection.query(
                 "INSERT INTO users (username,mail,pass,registration_type) VALUES (" + "'" + data.Username + "'" + "," + "'" + data.Email +
-                 "'" + "," + "'" + data.Password + "'" + "'" + 0 + "'" + ");"
+                 "'" + "," + "'" + data.Password + "'" + "," + "'" + '0' + "'" + ");"
                 , function (sql_error, results, fields) {
                     // If some error occurs, we throw an error.
                     if (sql_error) {
@@ -73,7 +73,7 @@ exports.login = function (req, res, connection) {
             , function (sql_error, results, fields) {
                 // If some error occurs, we throw an error.
                 if (sql_error) res.send(false);
-                if (results.length > 0) var Stored_pass = results[0].Password; // if provided username is in our database
+                if (results.length > 0) var Stored_pass = results[0].pass; // if provided username is in our database
                 else {
                     res.send(false); // if not send false
                     connection.release()
