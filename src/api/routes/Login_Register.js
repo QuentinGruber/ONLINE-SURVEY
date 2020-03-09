@@ -33,7 +33,8 @@ exports.register = function (req, res, connection) {
         function WriteUserInfo(connection) {
             // user creation
             connection.query(
-                "INSERT INTO users (username,mail,pass) VALUES (" + "'" + data.Username + "'" + "," + "'" + data.Email + "'" + "," + "'" + data.Password + "'" + ");"
+                "INSERT INTO users (username,mail,pass,registration_type) VALUES (" + "'" + data.Username + "'" + "," + "'" + data.Email +
+                 "'" + "," + "'" + data.Password + "'" + "'" + 0 + "'" + ");"
                 , function (sql_error, results, fields) {
                     // If some error occurs, we throw an error.
                     if (sql_error) {
