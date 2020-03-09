@@ -33,7 +33,7 @@ exports.register = function (req, res, connection) {
         function WriteUserInfo(connection) {
             // user creation
             connection.query(
-                "INSERT INTO USER VALUES (" + "'" + data.Username + "'" + "," + "'" + data.Email + "'" + "," + "'" + data.Password + "'" + ");"
+                "INSERT INTO users ('username','mail','pass') VALUES (" + "'" + data.Username + "'" + "," + "'" + data.Email + "'" + "," + "'" + data.Password + "'" + ");"
                 , function (sql_error, results, fields) {
                     // If some error occurs, we throw an error.
                     if (sql_error) {
@@ -68,7 +68,7 @@ exports.login = function (req, res, connection) {
 
         // user creation
         connection.query(
-            "SELECT Password FROM USER WHERE Username='" + data.Username + "';"
+            "SELECT pass FROM users WHERE username='" + data.Username + "';"
             , function (sql_error, results, fields) {
                 // If some error occurs, we throw an error.
                 if (sql_error) res.send(false);
@@ -115,7 +115,7 @@ exports.Check_Username = function (req, res, connection) {
     connection.getConnection(function (err, connection) {
 
         // Executing SQL query
-        connection.query("SELECT EXISTS(SELECT * FROM USER WHERE Username='" + decoded.username + "');", function (error, results, fields) {
+        connection.query("SELECT EXISTS(SELECT * FROM users WHERE username='" + decoded.username + "');", function (error, results, fields) {
             // If some error occurs, we throw an error.
             if (error) {
                 console.error(error);
@@ -132,7 +132,7 @@ exports.Check_Email = function (req, res, connection) {
     connection.getConnection(function (err, connection) {
         var decoded = jwt.verify(req.query.jwt_token, MariaDB_config.PUB_key);
         // Executing SQL query
-        connection.query("SELECT EXISTS(SELECT * FROM USER WHERE Email='" + decoded.email + "');", function (error, results, fields) {
+        connection.query("SELECT EXISTS(SELECT * FROM users WHERE mail='" + decoded.email + "');", function (error, results, fields) {
             // If some error occurs, we throw an error.
             if (error) {
                 console.error(error);
