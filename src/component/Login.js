@@ -20,11 +20,14 @@ import GoogleLogin from 'react-google-login';
 class Login extends React.Component {
 
   render() {
+
     const responseGoogle = (response) => {
       console.log(response);
       Google_Login(response)
     }
+
     const PUB_key = "maxon"; // TODO: need to read PUB_key from json
+
     function Google_Login(user_info) {
       var data = {
         "Username": user_info.profileObj.name,
@@ -44,21 +47,21 @@ class Login extends React.Component {
               xhttp.onreadystatechange = function () { // handle request response
                 if (this.readyState === 4 && this.status === 200) {
                   if (this.responseText === "true") {
-                    alert("Registered succesfully!")
+                    alert("Login succesfull!")
                     window.location.reload();
                   }
                   else {
-                    alert("Fail to register...sorry")
+                    alert("Fail to Login via google...sorry")
                   }
                 }
               };
               // Send a post request
-              var jwt_token = jwt.sign({ username: data.Username, password: "", email: data.Email}, PUB_key);
+              var jwt_token = jwt.sign({ username: data.Username, password: null, email: data.Email}, PUB_key);
               xhttp.open("POST", process.env.REACT_APP_API_URL + "/sign_up?jwt_token=" + jwt_token + "", true);
               xhttp.send();
             }
             else {
-              alert("Logged in !");
+              alert("Login succesfull!");
             }
 
           }
@@ -74,6 +77,7 @@ class Login extends React.Component {
       xhttp.send();
 
     }
+
     function Login() {
       // get our input values
       var username = document.getElementById("Login_name").value;
