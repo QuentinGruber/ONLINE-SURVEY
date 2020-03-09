@@ -15,7 +15,7 @@ import {
   Row,
   Col
 } from "reactstrap";
-
+import GoogleLogin from './sub_component/Google_login'
 class Register extends React.Component {
   render() {
     var jwt = require('jsonwebtoken');
@@ -51,8 +51,8 @@ class Register extends React.Component {
         }
       };
       // Send a post request
-      var jwt_token = jwt.sign({username: document.getElementById("Register_name").value }, PUB_key);
-      xhttp.open("POST", process.env.REACT_APP_API_URL + "/Check_Username?jwt_token="+jwt_token+"", true);
+      var jwt_token = jwt.sign({ username: document.getElementById("Register_name").value }, PUB_key);
+      xhttp.open("POST", process.env.REACT_APP_API_URL + "/Check_Username?jwt_token=" + jwt_token + "", true);
       xhttp.send();
     }
 
@@ -62,7 +62,7 @@ class Register extends React.Component {
       xhttp.onreadystatechange = function () { // handle request response
         if (this.readyState === 4 && this.status === 200) {
           // response format is a rowdatapacket so it was needed to do like that.
-          if (Object.values(this.response[Object.values(this.response).length - 3])[0] === "0"){
+          if (Object.values(this.response[Object.values(this.response).length - 3])[0] === "0") {
             // information has been checked now we can register the user
             Register();
           }
@@ -71,8 +71,8 @@ class Register extends React.Component {
         }
       };
       // Send a post request
-      var jwt_token = jwt.sign({email: document.getElementById("Register_email").value}, PUB_key);
-      xhttp.open("POST", process.env.REACT_APP_API_URL + "/Check_Email?jwt_token="+jwt_token+"", true);
+      var jwt_token = jwt.sign({ email: document.getElementById("Register_email").value }, PUB_key);
+      xhttp.open("POST", process.env.REACT_APP_API_URL + "/Check_Email?jwt_token=" + jwt_token + "", true);
       xhttp.send();
     }
 
@@ -94,8 +94,8 @@ class Register extends React.Component {
         }
       };
       // Send a post request
-      var jwt_token = jwt.sign({ username: username,password: password,email: email}, PUB_key);
-      xhttp.open("POST", process.env.REACT_APP_API_URL + "/sign_up?jwt_token="+jwt_token+"", true);
+      var jwt_token = jwt.sign({ username: username, password: password, email: email, registration_type: "0" }, PUB_key);
+      xhttp.open("POST", process.env.REACT_APP_API_URL + "/sign_up?jwt_token=" + jwt_token + "", true);
       xhttp.send();
     }
 
@@ -116,14 +116,7 @@ class Register extends React.Component {
                 >
                   <span className="btn-inner--text">Github</span>
                 </Button>
-                <Button
-                  className="btn-neutral btn-icon"
-                  color="default"
-                  href="#pablo"
-                  onClick={e => e.preventDefault()}
-                >
-                  <span className="btn-inner--text">Google</span>
-                </Button>
+                <GoogleLogin />
               </div>
             </CardHeader>
             <CardBody className="px-lg-5 py-lg-5">
@@ -193,24 +186,24 @@ class Register extends React.Component {
                 </div>
 
                 <Row className="mt-3">
-                <Col xs="6">
-                  <a
-                    className="text-light"
-                    href="#pablo"
-                    onClick={e => e.preventDefault()}
-                  >
-                    <small>Forgot password?</small>
-                  </a>
-                </Col>
-                <Col className="text-right" xs="6">
-                <NavLink
-                    to="/auth/login"
-                    tag={Link}
-                  >
-                    <span className="text-light">Log in to an existing account</span>
-                  </NavLink>
-                </Col>
-              </Row>
+                  <Col xs="6">
+                    <a
+                      className="text-light"
+                      href="#pablo"
+                      onClick={e => e.preventDefault()}
+                    >
+                      <small>Forgot password?</small>
+                    </a>
+                  </Col>
+                  <Col className="text-right" xs="6">
+                    <NavLink
+                      to="/auth/login"
+                      tag={Link}
+                    >
+                      <span className="text-light">Log in to an existing account</span>
+                    </NavLink>
+                  </Col>
+                </Row>
               </Form>
             </CardBody>
           </Card>
