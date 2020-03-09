@@ -20,24 +20,7 @@ class Register extends React.Component {
   render() {
     var jwt = require('jsonwebtoken');
     const PUB_key = "maxon"; // TODO: need to read PUB_key from json
-    function Get_AdminToken() {
-      // Check if user has an admin token
-      var Admin_token
-      if (localStorage.getItem("Admin_token") != null) { // if an Admin_token is defined in the localstorage
-        Admin_token = localStorage.getItem("Admin_token")
-        return Admin_token;
-      }
-      else if (sessionStorage.getItem("Admin_token") != null) { // if an Admin_token is defined in the sessionStorage
-        Admin_token = sessionStorage.getItem("Admin_token")
-        return Admin_token;
-      }
-      else { // If not create one
-        var randtoken = require('rand-token'); // for random token generation
-        Admin_token = randtoken.generate(16)
-        localStorage.setItem("Admin_token", Admin_token) // save it 
-        return Admin_token;
-      }
-    }
+
     function Verify_register_info() {
       // Display an error if an required input is not good filled
       var form = document.getElementById("registerBox")
@@ -79,9 +62,10 @@ class Register extends React.Component {
       xhttp.onreadystatechange = function () { // handle request response
         if (this.readyState === 4 && this.status === 200) {
           // response format is a rowdatapacket so it was needed to do like that.
-          if (Object.values(this.response[Object.values(this.response).length - 3])[0] === "0")
+          if (Object.values(this.response[Object.values(this.response).length - 3])[0] === "0"){
             // information has been checked now we can register the user
             Register();
+          }
           else
             alert("An account already use this email address ! ");
         }
@@ -97,7 +81,6 @@ class Register extends React.Component {
       var username = document.getElementById("Register_name").value;
       var password = document.getElementById("Register_pass").value;
       var email = document.getElementById("Register_email").value;
-      var token = Get_AdminToken(); // get admin_token if user has one
       var xhttp = new XMLHttpRequest();
       xhttp.onreadystatechange = function () { // handle request response
         if (this.readyState === 4 && this.status === 200) {
@@ -111,7 +94,7 @@ class Register extends React.Component {
         }
       };
       // Send a post request
-      var jwt_token = jwt.sign({ username: username,password: password,email: email,token: token }, PUB_key);
+      var jwt_token = jwt.sign({ username: username,password: password,email: email}, PUB_key);
       xhttp.open("POST", process.env.REACT_APP_API_URL + "/sign_up?jwt_token="+jwt_token+"", true);
       xhttp.send();
     }

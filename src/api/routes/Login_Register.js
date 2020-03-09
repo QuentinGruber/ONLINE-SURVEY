@@ -1,6 +1,5 @@
 var aes256 = require('aes256'); // for Aes encryption
 var sha1 = require('sha1'); // for sha cipher
-var randtoken = require('rand-token'); // for random token generation
 var jwt = require('jsonwebtoken');
 
 exports.register = function (req, res, connection) {
@@ -10,7 +9,6 @@ exports.register = function (req, res, connection) {
             "Username": decoded.username,
             "Email": decoded.email,
             "Password": decoded.password,
-            "Token": decoded.token,
         }
     }
     catch (e) {
@@ -24,8 +22,7 @@ exports.register = function (req, res, connection) {
             try {
                 data.Password = sha1(data.Password);
                 data.Password = aes256.encrypt(MariaDB_config.PUB_key, data.Password)
-                // Check if token isn't already in our database
-                Check_token(connection)
+                WriteUserInfo(connection)
             }
             catch (e) {
                 console.error("Password fail to encrypt : " + e.message)
@@ -33,35 +30,11 @@ exports.register = function (req, res, connection) {
             }
         }
 
-        function Check_token(connection) { // Check if token already exist in our database
-
-            // Executing SQL query
-            connection.query("SELECT EXISTS(SELECT * FROM USER WHERE Token='" + data.Token + "');", function (error, results, fields) {
-                // If some error occurs, we throw an error.
-                if (error) {
-                    console.error(error);
-                    res.send("false");
-                    connection.release()
-                }
-                // Getting the 'response' from the database and sending it to our route. This is were the data is.
-                WriteUserInfo(connection, results)
-
-            });
-        }
-
-        function WriteUserInfo(connection, token_check_result) {
-            // Check if token is already registered in our database
-            if ((Object.values(token_check_result[0])[0]) === 0)
-                token_check_result = true; // if that the case 
-            else
-                token_check_result = false;
-
-            if (data.Token == undefined || !token_check_result) { // if user doesn't already have an admin token then create one
-                data.Token = randtoken.generate(16);
-            }
+        function WriteUserInfo(connection) {
             // user creation
             connection.query(
-                "INSERT INTO USER VALUES (" + "'" + data.Username + "'" + "," + "'" + data.Email + "'" + "," + "'" + data.Token + "'" + "," + "'" + data.Password + "'" + ");"
+                "INSERT INTO users (username,mail,pass,registration_type) VALUES (" + "'" + data.Username + "'" + "," + "'" + data.Email +
+                 "'" + "," + "'" + data.Password + "'" + "," + "'" + '0' + "'" + ");"
                 , function (sql_error, results, fields) {
                     // If some error occurs, we throw an error.
                     if (sql_error) {
@@ -96,11 +69,11 @@ exports.login = function (req, res, connection) {
 
         // user creation
         connection.query(
-            "SELECT Password FROM USER WHERE Username='" + data.Username + "';"
+            "SELECT pass FROM users WHERE username='" + data.Username + "';"
             , function (sql_error, results, fields) {
                 // If some error occurs, we throw an error.
                 if (sql_error) res.send(false);
-                if (results.length > 0) var Stored_pass = results[0].Password; // if provided username is in our database
+                if (results.length > 0) var Stored_pass = results[0].pass; // if provided username is in our database
                 else {
                     res.send(false); // if not send false
                     connection.release()
@@ -124,13 +97,7 @@ exports.login = function (req, res, connection) {
                 }
 
                 if (Stored_pass == data.Password) { // if the Submit pass is the same as storage pass
-                    connection.query( // get the Token of the logged user
-                        "SELECT Token FROM USER WHERE Username='" + data.Username + "';"
-                        , function (sql_error, results, fields) {
-                            res.send(results[0].Token) // return it
-                            connection.release()
-                        })
-
+                    res.send(true)
                 }
                 else {
                     res.send(false);
@@ -149,7 +116,7 @@ exports.Check_Username = function (req, res, connection) {
     connection.getConnection(function (err, connection) {
 
         // Executing SQL query
-        connection.query("SELECT EXISTS(SELECT * FROM USER WHERE Username='" + decoded.username + "');", function (error, results, fields) {
+        connection.query("SELECT EXISTS(SELECT * FROM users WHERE username='" + decoded.username + "');", function (error, results, fields) {
             // If some error occurs, we throw an error.
             if (error) {
                 console.error(error);
@@ -166,7 +133,7 @@ exports.Check_Email = function (req, res, connection) {
     connection.getConnection(function (err, connection) {
         var decoded = jwt.verify(req.query.jwt_token, MariaDB_config.PUB_key);
         // Executing SQL query
-        connection.query("SELECT EXISTS(SELECT * FROM USER WHERE Email='" + decoded.email + "');", function (error, results, fields) {
+        connection.query("SELECT EXISTS(SELECT * FROM users WHERE mail='" + decoded.email + "');", function (error, results, fields) {
             // If some error occurs, we throw an error.
             if (error) {
                 console.error(error);
