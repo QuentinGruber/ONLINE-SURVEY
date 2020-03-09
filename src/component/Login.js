@@ -1,76 +1,115 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 import {
-    Button,
-    Card,
-    CardHeader,
-    CardBody,
-    NavLink,
-    FormGroup,
-    Form,
-    Input,
-    InputGroupAddon,
-    InputGroupText,
-    InputGroup,
-    Row,
-    Col
-  } from "reactstrap";
+  Button,
+  Card,
+  CardHeader,
+  CardBody,
+  NavLink,
+  FormGroup,
+  Form,
+  Input,
+  InputGroupAddon,
+  InputGroupText,
+  InputGroup,
+  Row,
+  Col
+} from "reactstrap";
 import GoogleLogin from 'react-google-login';
-  
+
 class Login extends React.Component {
-    
-    render() {
-      const responseGoogle = (response) => {
-        console.log(response);
-        Google_Login(response)
+
+  render() {
+    const responseGoogle = (response) => {
+      console.log(response);
+      Google_Login(response)
+    }
+    const PUB_key = "maxon"; // TODO: need to read PUB_key from json
+    function Google_Login(user_info) {
+      var data = {
+        "Username": user_info.profileObj.name,
+        "Email": user_info.profileObj.email,
+        "Lname": user_info.profileObj.familyName,
+        "Fname": user_info.profileObj.givenName
       }
-      const PUB_key = "maxon"; // TODO: need to read PUB_key from json
-        function Google_Login(user_info){
-          var data = {
-           "Username" : user_info.profileObj.name,
-           "Email" : user_info.profileObj.email,
-           "Lname" : user_info.profileObj.familyName,
-           "Fname" : user_info.profileObj.givenName
-          }
 
-          console.log(data);
-        }
-        function Login(){
-            // get our input values
-            var username = document.getElementById("Login_name").value;
-            var password = document.getElementById("Login_pass").value;
-            var Keep_logged = document.getElementById("check_login").checked;
-            var xhttp = new XMLHttpRequest();
-            xhttp.onreadystatechange = function() { // handle request response
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function () { // handle request response
+        if (this.readyState === 4 && this.status === 200) {
+          if (this.responseText !== "false") {
+
+            if (Object.values(this.response[Object.values(this.response).length - 3])[0] === "0") {
+              // next step check if provided email isn't already in our database
+              var xhttp = new XMLHttpRequest();
+              xhttp.onreadystatechange = function () { // handle request response
                 if (this.readyState === 4 && this.status === 200) {
-                    if(this.responseText !== "false"){
-                        localStorage.clear()
-                        sessionStorage.clear()
-                        if(Keep_logged){
-                            localStorage.setItem("Admin_token",this.responseText) // store user's Admin_token in his local storage 
-                            alert("Logged in !");
-                        }
-                        else{
-                            sessionStorage.setItem("Admin_token",this.responseText) // store user's Admin_token in his session storage 
-                            alert("Logged in !");
-                        }
-                    }
-                    else{
-                        alert("Wrong username/password !");
-                    }
-               }
-            };
-            // Send a post request
-            var jwt = require('jsonwebtoken');
-            var jwt_token = jwt.sign({ username: username,password: password }, PUB_key);
-            xhttp.open("POST", process.env.REACT_APP_API_URL + "/sign_in?jwt_token="+jwt_token+"", true);
-            xhttp.send(); 
-        
+                  if (this.responseText === "true") {
+                    alert("Registered succesfully!")
+                    window.location.reload();
+                  }
+                  else {
+                    alert("Fail to register...sorry")
+                  }
+                }
+              };
+              // Send a post request
+              var jwt_token = jwt.sign({ username: data.Username, password: "", email: data.Email}, PUB_key);
+              xhttp.open("POST", process.env.REACT_APP_API_URL + "/sign_up?jwt_token=" + jwt_token + "", true);
+              xhttp.send();
+            }
+            else {
+              alert("Logged in !");
+            }
+
+          }
+          else {
+            alert("Wrong username/password !");
+          }
         }
-      return(
+      };
+      // Send a post request
+      var jwt = require('jsonwebtoken');
+      var jwt_token = jwt.sign({ email: data.Email }, PUB_key);
+      xhttp.open("POST", process.env.REACT_APP_API_URL + "/Check_Email?jwt_token=" + jwt_token + "", true);
+      xhttp.send();
+
+    }
+    function Login() {
+      // get our input values
+      var username = document.getElementById("Login_name").value;
+      var password = document.getElementById("Login_pass").value;
+      var Keep_logged = document.getElementById("check_login").checked;
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function () { // handle request response
+        if (this.readyState === 4 && this.status === 200) {
+          if (this.responseText !== "false") {
+            localStorage.clear()
+            sessionStorage.clear()
+            if (Keep_logged) {
+              localStorage.setItem("Admin_token", this.responseText) // store user's Admin_token in his local storage 
+              alert("Logged in !");
+            }
+            else {
+              sessionStorage.setItem("Admin_token", this.responseText) // store user's Admin_token in his session storage 
+              alert("Logged in !");
+            }
+          }
+          else {
+            alert("Wrong username/password !");
+          }
+        }
+      };
+      // Send a post request
+      var jwt = require('jsonwebtoken');
+      var jwt_token = jwt.sign({ username: username, password: password }, PUB_key);
+      xhttp.open("POST", process.env.REACT_APP_API_URL + "/sign_in?jwt_token=" + jwt_token + "", true);
+      xhttp.send();
+
+    }
+    return (
 
 
-<>
+      <>
         <Col lg="5" md="7">
           <Card className="bg-secondary shadow border-0">
             <CardHeader className="bg-transparent pb-5">
@@ -112,7 +151,7 @@ class Login extends React.Component {
                         <i className="ni ni-email-83" />
                       </InputGroupText>
                     </InputGroupAddon>
-                    <Input id="Login_name" name="username" placeholder="Username"/>
+                    <Input id="Login_name" name="username" placeholder="Username" />
                   </InputGroup>
                 </FormGroup>
                 <FormGroup>
@@ -122,7 +161,7 @@ class Login extends React.Component {
                         <i className="ni ni-lock-circle-open" />
                       </InputGroupText>
                     </InputGroupAddon>
-                    <Input id="Login_pass" name="password" placeholder="Password" type="password"/>
+                    <Input id="Login_pass" name="password" placeholder="Password" type="password" />
                   </InputGroup>
                 </FormGroup>
                 <div className="custom-control custom-control-alternative custom-checkbox">
@@ -140,7 +179,7 @@ class Login extends React.Component {
                   </label>
                 </div>
                 <div className="text-center">
-                  <Button onClick = {Login} className="my-4" color="primary" type="button">
+                  <Button onClick={Login} className="my-4" color="primary" type="button">
                     Sign in
                   </Button>
                 </div>
@@ -168,7 +207,7 @@ class Login extends React.Component {
           </Card>
         </Col>
       </>
-      );
-    }
+    );
   }
-  export default Login;
+}
+export default Login;
