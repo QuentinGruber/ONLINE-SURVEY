@@ -22,7 +22,6 @@ class Login extends React.Component {
   render() {
 
     const responseGoogle = (response) => {
-      console.log(response);
       Google_Login(response)
     }
 
@@ -30,10 +29,10 @@ class Login extends React.Component {
 
     function Google_Login(user_info) {
       var data = {
-        "Username": user_info.profileObj.name,
-        "Email": user_info.profileObj.email,
-        "Lname": user_info.profileObj.familyName,
-        "Fname": user_info.profileObj.givenName
+        "username": user_info.profileObj.name,
+        "email": user_info.profileObj.email,
+        "lname": user_info.profileObj.familyName,
+        "fname": user_info.profileObj.givenName
       }
 
       var xhttp = new XMLHttpRequest();
@@ -47,7 +46,7 @@ class Login extends React.Component {
               xhttp.onreadystatechange = function () { // handle request response
                 if (this.readyState === 4 && this.status === 200) {
                   if (this.responseText === "true") {
-                    alert("Login succesfull!")
+                    alert("register via google succesfull!")
                     window.location.reload();
                   }
                   else {
@@ -56,7 +55,7 @@ class Login extends React.Component {
                 }
               };
               // Send a post request
-              var jwt_token = jwt.sign({ username: data.Username, password: null, email: data.Email}, PUB_key);
+              var jwt_token = jwt.sign({ username: data.username,lname: data.lname,fname: data.fname, email: data.email,registration_type: "1"}, PUB_key);
               xhttp.open("POST", process.env.REACT_APP_API_URL + "/sign_up?jwt_token=" + jwt_token + "", true);
               xhttp.send();
             }
@@ -72,7 +71,7 @@ class Login extends React.Component {
       };
       // Send a post request
       var jwt = require('jsonwebtoken');
-      var jwt_token = jwt.sign({ email: data.Email }, PUB_key);
+      var jwt_token = jwt.sign({ email: data.email }, PUB_key);
       xhttp.open("POST", process.env.REACT_APP_API_URL + "/Check_Email?jwt_token=" + jwt_token + "", true);
       xhttp.send();
 

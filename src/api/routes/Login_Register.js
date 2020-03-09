@@ -9,6 +9,9 @@ exports.register = function (req, res, connection) {
             "Username": decoded.username,
             "Email": decoded.email,
             "Password": decoded.password,
+            "Registration_type": decoded.registration_type,
+            "Lname": decoded.lname,
+            "Fname": decoded.fname,
         }
     }
     catch (e) {
@@ -32,9 +35,10 @@ exports.register = function (req, res, connection) {
 
         function WriteUserInfo(connection) {
             // user creation
+            if (data.Registration_type == "0"){
             connection.query(
                 "INSERT INTO users (username,mail,pass,registration_type) VALUES (" + "'" + data.Username + "'" + "," + "'" + data.Email +
-                 "'" + "," + "'" + data.Password + "'" + "," + "'" + '0' + "'" + ");"
+                "'" + "," + "'" + data.Password + "'" + "," + "'" + data.Registration_type + "'" + ");"
                 , function (sql_error, results, fields) {
                     // If some error occurs, we throw an error.
                     if (sql_error) {
@@ -46,10 +50,35 @@ exports.register = function (req, res, connection) {
                     res.send("true")
                     connection.release()
                 });
+            }
+            if (data.Registration_type == "1") {
+                connection.query(
+                    "INSERT INTO users (username,first_name,last_name,mail,registration_type) VALUES (" + "'" + data.Username + "'" + ","
+                     + "'" + data.Fname +"'" + ","
+                     + "'" + data.Lname +"'" + ","
+                     + "'" + data.Email +"'" + ","
+                     + "'" + data.Registration_type + "'" + ");"
+                    , function (sql_error, results, fields) {
+                        // If some error occurs, we throw an error.
+                        if (sql_error) {
+                            res.send("false");
+                            connection.release();
+                        }
+    
+                        // Getting the 'response' from the database and sending it to our route. This is were the data is.
+                        res.send("true")
+                        connection.release()
+                    });
+            }
 
         }
-        // start by encrypt password
-        encrypt_password()
+        // start by encrypt password if standard register
+        if (data.Registration_type == "0") {
+            encrypt_password()
+        }
+        else {
+            WriteUserInfo(connection)
+        }
     });
 }
 

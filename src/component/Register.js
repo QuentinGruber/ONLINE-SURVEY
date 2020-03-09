@@ -94,7 +94,7 @@ class Register extends React.Component {
         }
       };
       // Send a post request
-      var jwt_token = jwt.sign({ username: username,password: password,email: email}, PUB_key);
+      var jwt_token = jwt.sign({ username: username,password: password,email: email,registration_type: "0"}, PUB_key);
       xhttp.open("POST", process.env.REACT_APP_API_URL + "/sign_up?jwt_token="+jwt_token+"", true);
       xhttp.send();
     }
