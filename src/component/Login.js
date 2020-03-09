@@ -24,21 +24,11 @@ class Login extends React.Component {
             // get our input values
             var username = document.getElementById("Login_name").value;
             var password = document.getElementById("Login_pass").value;
-            var Keep_logged = document.getElementById("check_login").checked;
             var xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function() { // handle request response
                 if (this.readyState === 4 && this.status === 200) {
-                    if(this.responseText !== "false"){
-                        localStorage.clear()
-                        sessionStorage.clear()
-                        if(Keep_logged){
-                            localStorage.setItem("Admin_token",this.responseText) // store user's Admin_token in his local storage 
-                            alert("Logged in !");
-                        }
-                        else{
-                            sessionStorage.setItem("Admin_token",this.responseText) // store user's Admin_token in his session storage 
-                            alert("Logged in !");
-                        }
+                    if(this.responseText === "true"){
+                      alert("Logged in !");
                     }
                     else{
                         alert("Wrong username/password !");
