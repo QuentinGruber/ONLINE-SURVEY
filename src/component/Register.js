@@ -62,9 +62,10 @@ class Register extends React.Component {
       xhttp.onreadystatechange = function () { // handle request response
         if (this.readyState === 4 && this.status === 200) {
           // response format is a rowdatapacket so it was needed to do like that.
-          if (Object.values(this.response[Object.values(this.response).length - 3])[0] === "0")
+          if (Object.values(this.response[Object.values(this.response).length - 3])[0] === "0"){
             // information has been checked now we can register the user
             Register();
+          }
           else
             alert("An account already use this email address ! ");
         }
