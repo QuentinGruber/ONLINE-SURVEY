@@ -4,7 +4,8 @@ const express = require('express');  // To create the "app"
 const cors = require('cors');  // For security issue
 const mysql = require('mysql'); // to access the database 
 const Sjs = require('@quentingruber/simple-json'); // for json reading
-var bodyParser = require('body-parser');  // for POST method
+const session = require('express-session')
+const bodyParser = require('body-parser');  // for POST method
 
 // Export func
 const Forms = require('./routes/Forms');
@@ -24,22 +25,28 @@ const connection = mysql.createPool({
 const app = express();
 
 app.use(
+  session({secret: 'maxon'}),
   cors({
     allowedHeaders:"Origin, X-Requested-With, Content-Type, Accept",
     origin: ['https://www.online-survey.app','https://online-survey.app','http://localhost:3000'] // only our webapp has access to the database
   })
-  );
+);
 
 
 
 var urlencodedParser = bodyParser.urlencoded({ extended: false }) // use to read Encoded http query
 
-app.get('/', function (req, res) {  
+app.get('/', function (req, res) { 
   res.send("Api server connected !");
 });
 
-app.get('/test', function (req, res) {   // TODO : remove
-  res.send("test work !");
+app.get('/testsession', function (req, res) {   // TODO : remove
+  res.send(req.session.pd);
+});
+
+app.get('/maxon', function (req, res) {   // TODO : remove
+  req.session.maxon = "pd";
+  res.send("");
 });
 
 
