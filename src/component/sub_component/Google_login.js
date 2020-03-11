@@ -43,6 +43,7 @@ class Google_Login extends React.Component {
                             // Send a post request
                             var jwt_token = jwt.sign({ username: data.username, lname: data.lname, fname: data.fname, email: data.email, registration_type: "1" }, PUB_key);
                             xhttp.open("POST", process.env.REACT_APP_API_URL + "/sign_up?jwt_token=" + jwt_token + "", true);
+                            xhttp.withCredentials = true;
                             xhttp.send();
                         }
                         else {
@@ -59,6 +60,7 @@ class Google_Login extends React.Component {
             var jwt = require('jsonwebtoken');
             var jwt_token = jwt.sign({ email: data.email }, PUB_key);
             xhttp.open("POST", process.env.REACT_APP_API_URL + "/Check_Email?jwt_token=" + jwt_token + "", true);
+            xhttp.withCredentials = true;
             xhttp.send();
 
         }

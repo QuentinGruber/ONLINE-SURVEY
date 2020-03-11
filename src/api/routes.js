@@ -24,12 +24,16 @@ const connection = mysql.createPool({
 
 const app = express();
 
+
 app.use(
-  session({secret: 'maxon'}),
-  cors({
-    allowedHeaders:"Origin, X-Requested-With, Content-Type, Accept",
+
+  session({resave: true,
+  saveUninitialized: false ,name: "SessionID",secret: 'maxon'}),
+
+  cors({credentials: true,
     origin: ['https://www.online-survey.app','https://online-survey.app','http://localhost:3000'] // only our webapp has access to the database
   })
+
 );
 
 
@@ -40,15 +44,11 @@ app.get('/', function (req, res) {
   res.send("Api server connected !");
 });
 
-app.get('/testsession', function (req, res) {   // TODO : remove
-  res.send(req.session.pd);
-});
 
-app.get('/maxon', function (req, res) {   // TODO : remove
-  req.session.maxon = "pd";
-  res.send("");
+app.get('/welcome', function (req, res) {   // get name of a logged user
+  console.log("SessionID: " + req.sessionID);
+  res.send(req.session.name);
 });
-
 
 /*  NEW FORM  */
 app.post('/new_form', urlencodedParser, function (req, res) {

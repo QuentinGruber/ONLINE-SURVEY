@@ -53,6 +53,7 @@ class Register extends React.Component {
       // Send a post request
       var jwt_token = jwt.sign({ username: document.getElementById("Register_name").value }, PUB_key);
       xhttp.open("POST", process.env.REACT_APP_API_URL + "/Check_Username?jwt_token=" + jwt_token + "", true);
+      xhttp.withCredentials = true;
       xhttp.send();
     }
 
@@ -73,6 +74,7 @@ class Register extends React.Component {
       // Send a post request
       var jwt_token = jwt.sign({ email: document.getElementById("Register_email").value }, PUB_key);
       xhttp.open("POST", process.env.REACT_APP_API_URL + "/Check_Email?jwt_token=" + jwt_token + "", true);
+      xhttp.withCredentials = true;
       xhttp.send();
     }
 
@@ -96,6 +98,7 @@ class Register extends React.Component {
       // Send a post request
       var jwt_token = jwt.sign({ username: username, password: password, email: email, registration_type: "0" }, PUB_key);
       xhttp.open("POST", process.env.REACT_APP_API_URL + "/sign_up?jwt_token=" + jwt_token + "", true);
+      xhttp.withCredentials = true;
       xhttp.send();
     }
 

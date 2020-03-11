@@ -47,6 +47,7 @@ exports.register = function (req, res, connection) {
                     }
 
                     // Getting the 'response' from the database and sending it to our route. This is were the data is.
+                    req.session.name = data.Username
                     req.session.email = data.Email
                     res.send("true")
                     connection.release()
@@ -67,6 +68,7 @@ exports.register = function (req, res, connection) {
                         }
     
                         // Getting the 'response' from the database and sending it to our route. This is were the data is.
+                        req.session.name = data.Fname
                         req.session.email = data.Email
                         res.send("true")
                         connection.release()
@@ -128,7 +130,7 @@ exports.login = function (req, res, connection) {
                 }
 
                 if (Stored_pass == data.Password) { // if the Submit pass is the same as storage pass
-                    req.session.email = data.Username
+                    req.session.name = data.Username
                     res.send(true)
                 }
                 else {
