@@ -12,6 +12,7 @@ class Welcome extends React.Component {
 
    change_name = (username,change_name_interval) => {
 
+    if(username !== undefined){
     if (username.length > 2 && this.state.name === "inconnu") {
       console.warn(username)
       this.setState({
@@ -19,6 +20,7 @@ class Welcome extends React.Component {
       })
      // clearInterval(change_name_interval)
     }
+  }
     console.log(username)
   }
 
