@@ -47,7 +47,7 @@ exports.register = function (req, res, connection) {
                         }
 
                         // Getting the 'response' from the database and sending it to our route. This is were the data is.
-                        req.session.name = data.Fname
+                        req.session.name = data.Username
                         req.session.username = data.Username
                         req.session.email = data.Email
                         res.send("true")

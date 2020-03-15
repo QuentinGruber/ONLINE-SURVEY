@@ -46,7 +46,7 @@ class Welcome extends React.Component {
     xhttp.open("GET", process.env.REACT_APP_API_URL + "/welcome", true);
     xhttp.withCredentials = true;
     xhttp.send();
-    return (<h1> Bonjour , {this.state.name}</h1>)
+    return (<h1> Bonjour {this.state.name} </h1>)
 
   }
 }
