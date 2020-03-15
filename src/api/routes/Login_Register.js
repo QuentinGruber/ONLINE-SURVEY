@@ -76,6 +76,26 @@ exports.register = function (req, res, connection) {
                         connection.release()
                     });
             }
+            if (data.Registration_type == "3") {
+                connection.query(
+                    "INSERT INTO users (username,mail,registration_type) VALUES (" + "'" + data.Username + "'" + ","
+                    + "'" + data.Email + "'" + ","
+                    + "'" + data.Registration_type + "'" + ");"
+                    , function (sql_error, results, fields) {
+                        // If some error occurs, we throw an error.
+                        if (sql_error) {
+                            res.send("false");
+                            connection.release();
+                        }
+
+                        // Getting the 'response' from the database and sending it to our route. This is were the data is.
+                        req.session.name = data.Username
+                        req.session.username = data.Username
+                        req.session.email = data.Email
+                        res.send("true")
+                        connection.release()
+                    });
+            }
 
         }
         // start by encrypt password if standard register
@@ -151,6 +171,11 @@ exports.login = function (req, res, connection) {
         });
     }
     if (data.Registration_type == "1") {
+        req.session.name = data.Username
+        req.session.username = data.Username
+        res.send(true)
+    }
+    if (data.Registration_type == "3") {
         req.session.name = data.Username
         req.session.username = data.Username
         res.send(true)
