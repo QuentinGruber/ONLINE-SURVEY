@@ -46,7 +46,6 @@ app.get('/', function (req, res) {
 
 
 app.get('/welcome', function (req, res) {   // get name of a logged user
-  console.log("SessionID: " + req.sessionID);
   res.send(req.session.name);
 });
 
