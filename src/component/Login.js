@@ -16,14 +16,10 @@ import {
   Col
 } from "reactstrap";
 import GoogleLogin from './sub_component/Google_login'
-import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
-
+import FacebookLogin from './sub_component/Facebook_login'
 class Login extends React.Component {
 
   render() {
-    const responseFacebook = (response) => {
-      console.log(response);
-    }
     const PUB_key = "maxon"; // TODO: need to read PUB_key from json
     function Login() {
       // get our input values
@@ -69,15 +65,7 @@ class Login extends React.Component {
                 <small>Se connecter avec</small>
               </div>
               <div className="btn-wrapper text-center">
-                <FacebookLogin
-                  appId="645670846005275"
-                  fields="name,email"
-                  callback={responseFacebook}
-                  render={renderProps => (
-                    <Button onClick={renderProps.onClick}>
-                      <span>Facebook</span>
-                    </Button>
-                  )} />
+                <FacebookLogin />
                 <GoogleLogin />
               </div>
             </CardHeader>
