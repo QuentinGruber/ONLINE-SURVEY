@@ -1,3 +1,8 @@
+/*
+
+TEST COMPONENT TO REMOVE OR TO CHANGE AT LEAST
+
+*/
 import React from 'react';
 
 class Welcome extends React.Component {
