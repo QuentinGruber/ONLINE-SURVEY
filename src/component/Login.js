@@ -49,6 +49,7 @@ class Login extends React.Component {
       var jwt = require('jsonwebtoken');
       var jwt_token = jwt.sign({ username: username, password: password }, PUB_key);
       xhttp.open("POST", process.env.REACT_APP_API_URL + "/sign_in?jwt_token=" + jwt_token + "", true);
+      xhttp.withCredentials = true;
       xhttp.send();
 
     }

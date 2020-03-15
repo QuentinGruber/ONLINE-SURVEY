@@ -35,37 +35,43 @@ exports.register = function (req, res, connection) {
 
         function WriteUserInfo(connection) {
             // user creation
-            if (data.Registration_type == "0"){
-            connection.query(
-                "INSERT INTO users (username,mail,pass,registration_type) VALUES (" + "'" + data.Username + "'" + "," + "'" + data.Email +
-                "'" + "," + "'" + data.Password + "'" + "," + "'" + data.Registration_type + "'" + ");"
-                , function (sql_error, results, fields) {
-                    // If some error occurs, we throw an error.
-                    if (sql_error) {
-                        res.send("false");
-                        connection.release();
-                    }
-
-                    // Getting the 'response' from the database and sending it to our route. This is were the data is.
-                    res.send("true")
-                    connection.release()
-                });
-            }
-            if (data.Registration_type == "1") {
+            if (data.Registration_type == "0") {
                 connection.query(
-                    "INSERT INTO users (username,first_name,last_name,mail,registration_type) VALUES (" + "'" + data.Username + "'" + ","
-                     + "'" + data.Fname +"'" + ","
-                     + "'" + data.Lname +"'" + ","
-                     + "'" + data.Email +"'" + ","
-                     + "'" + data.Registration_type + "'" + ");"
+                    "INSERT INTO users (username,mail,pass,registration_type) VALUES (" + "'" + data.Username + "'" + "," + "'" + data.Email +
+                    "'" + "," + "'" + data.Password + "'" + "," + "'" + data.Registration_type + "'" + ");"
                     , function (sql_error, results, fields) {
                         // If some error occurs, we throw an error.
                         if (sql_error) {
                             res.send("false");
                             connection.release();
                         }
-    
+
                         // Getting the 'response' from the database and sending it to our route. This is were the data is.
+                        req.session.name = data.Username
+                        req.session.username = data.Username
+                        req.session.email = data.Email
+                        res.send("true")
+                        connection.release()
+                    });
+            }
+            if (data.Registration_type == "1") {
+                connection.query(
+                    "INSERT INTO users (username,first_name,last_name,mail,registration_type) VALUES (" + "'" + data.Username + "'" + ","
+                    + "'" + data.Fname + "'" + ","
+                    + "'" + data.Lname + "'" + ","
+                    + "'" + data.Email + "'" + ","
+                    + "'" + data.Registration_type + "'" + ");"
+                    , function (sql_error, results, fields) {
+                        // If some error occurs, we throw an error.
+                        if (sql_error) {
+                            res.send("false");
+                            connection.release();
+                        }
+
+                        // Getting the 'response' from the database and sending it to our route. This is were the data is.
+                        req.session.name = data.Fname
+                        req.session.username = data.Username
+                        req.session.email = data.Email
                         res.send("true")
                         connection.release()
                     });
@@ -88,54 +94,67 @@ exports.login = function (req, res, connection) {
         data = { // Fetch data from POST request
             "Username": decoded.username,
             "Password": decoded.password,
+            "Registration_type": decoded.registration_type
+        }
+        if (data.Registration_type === undefined) {
+            data.Registration_type = "0";
         }
     }
     catch (e) {
         console.error("The POST request is missing Data to login the user : " + e.message)
     }
 
-    connection.getConnection(async function (err, connection) {
+    if (data.Registration_type == "0") {
+        connection.getConnection(async function (err, connection) {
 
-        // user creation
-        connection.query(
-            "SELECT pass FROM users WHERE username='" + data.Username + "';"
-            , function (sql_error, results, fields) {
-                // If some error occurs, we throw an error.
-                if (sql_error) res.send(false);
-                if (results.length > 0) var Stored_pass = results[0].pass; // if provided username is in our database
-                else {
-                    res.send(false); // if not send false
-                    connection.release()
-                    return; // and stop the connection.query
-                }
+            // user creation
+            connection.query(
+                "SELECT pass FROM users WHERE username='" + data.Username + "';"
+                , function (sql_error, results, fields) {
+                    // If some error occurs, we throw an error.
+                    if (sql_error) res.send(false);
+                    if (results.length > 0) var Stored_pass = results[0].pass; // if provided username is in our database
+                    else {
+                        res.send(false); // if not send false
+                        connection.release()
+                        return; // and stop the connection.query
+                    }
 
-                // Stored Password Decryption
-                try {
-                    Stored_pass = aes256.decrypt(MariaDB_config.PUB_key, Stored_pass)
-                }
-                catch (e) {
-                    console.error("Stored password fail to decrypt : " + e.message)
-                }
+                    // Stored Password Decryption
+                    try {
+                        Stored_pass = aes256.decrypt(MariaDB_config.PUB_key, Stored_pass)
+                    }
+                    catch (e) {
+                        console.error("Stored password fail to decrypt : " + e.message)
+                    }
 
-                // Submit Password Hasing
-                try {
-                    data.Password = sha1(data.Password);
-                }
-                catch (e) {
-                    console.error("Submit password fail to be hashed : " + e.message)
-                }
+                    // Submit Password Hasing
+                    try {
+                        data.Password = sha1(data.Password);
+                    }
+                    catch (e) {
+                        console.error("Submit password fail to be hashed : " + e.message)
+                    }
 
-                if (Stored_pass == data.Password) { // if the Submit pass is the same as storage pass
-                    res.send(true)
-                }
-                else {
-                    res.send(false);
-                    connection.release()
-                }
+                    if (Stored_pass == data.Password) { // if the Submit pass is the same as storage pass
+                        req.session.name = data.Username
+                        req.session.username = data.Username
+                        res.send(true)
+                    }
+                    else {
+                        res.send(false);
+                        connection.release()
+                    }
 
-            });
+                });
 
-    });
+        });
+    }
+    if (data.Registration_type == "1") {
+        req.session.name = data.Username
+        req.session.username = data.Username
+        res.send(true)
+    }
 }
 
 // Checks

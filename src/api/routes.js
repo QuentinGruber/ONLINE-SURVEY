@@ -4,7 +4,8 @@ const express = require('express');  // To create the "app"
 const cors = require('cors');  // For security issue
 const mysql = require('mysql'); // to access the database 
 const Sjs = require('@quentingruber/simple-json'); // for json reading
-var bodyParser = require('body-parser');  // for POST method
+const session = require('express-session')
+const bodyParser = require('body-parser');  // for POST method
 
 // Export func
 const Forms = require('./routes/Forms');
@@ -23,25 +24,30 @@ const connection = mysql.createPool({
 
 const app = express();
 
+
 app.use(
-  cors({
-    allowedHeaders:"Origin, X-Requested-With, Content-Type, Accept",
+
+  session({resave: true,
+  saveUninitialized: false ,name: "SessionID",secret: 'maxon'}),
+
+  cors({credentials: true,
     origin: ['https://www.online-survey.app','https://online-survey.app','http://localhost:3000'] // only our webapp has access to the database
   })
-  );
+
+);
 
 
 
 var urlencodedParser = bodyParser.urlencoded({ extended: false }) // use to read Encoded http query
 
-app.get('/', function (req, res) {  
+app.get('/', function (req, res) { 
   res.send("Api server connected !");
 });
 
-app.get('/test', function (req, res) {   // TODO : remove
-  res.send("test work !");
-});
 
+app.get('/welcome', function (req, res) {   // get name of a logged user
+  res.send(req.session.name);
+});
 
 /*  NEW FORM  */
 app.post('/new_form', urlencodedParser, function (req, res) {
@@ -70,6 +76,17 @@ app.post('/Check_Username', urlencodedParser, function (req, res) {
 // Check if an email exist in our db
 app.post('/Check_Email', urlencodedParser, function (req, res) {
   Login_Register.Check_Email(req, res, connection)
+});
+
+app.delete('/Disconnect', urlencodedParser, function (req, res) {
+  try{
+  req.session.destroy();
+  res.send(true)
+  }
+  catch(e){
+    console.log("Error while disconnecting : "+ e)
+    res.send(false)
+  }
 });
 
 // Starting our server.
