@@ -79,6 +79,17 @@ app.post('/Check_Email', urlencodedParser, function (req, res) {
   Login_Register.Check_Email(req, res, connection)
 });
 
+app.delete('/Disconnect', urlencodedParser, function (req, res) {
+  try{
+  req.session.destroy();
+  res.send(true)
+  }
+  catch(e){
+    console.log("Error while disconnecting : "+ e)
+    res.send(false)
+  }
+});
+
 // Starting our server.
 app.listen(3001, () => {
   console.log('Routes.js running !');
