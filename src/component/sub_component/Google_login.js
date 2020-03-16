@@ -5,13 +5,13 @@ import GoogleLogin from 'react-google-login';
 
 
 class Google_Login extends React.Component {
-    
+
 
     render() {
         var jwt = require('jsonwebtoken');
         const responseGoogle = (response) => {
             var user_data = {
-                "username": response.profileObj.givenName+"."+response.profileObj.familyName,
+                "username": response.profileObj.givenName + "." + response.profileObj.familyName,
                 "email": response.profileObj.email,
                 "lname": response.profileObj.familyName,
                 "fname": response.profileObj.givenName
@@ -31,7 +31,7 @@ class Google_Login extends React.Component {
                         // next step check if provided username isn't already in our database
                         Register_google_user(user_data)
 
-                    else{ // if already exist 
+                    else { // if already exist 
                         user_data.username = user_data.username + "1"
                         Check_Username(user_data) // retry with the new username
                     }
@@ -44,25 +44,25 @@ class Google_Login extends React.Component {
             xhttp.send();
         }
 
-        function Register_google_user(user_data){
+        function Register_google_user(user_data) {
             var xhttp = new XMLHttpRequest();
-                            xhttp.onreadystatechange = function () { // handle request response
-                                if (this.readyState === 4 && this.status === 200) {
-                                    if (this.responseText === "true") {
-                                        alert("register via google succesfull!")
-                                        window.location.reload();
-                                    }
-                                    else {
-                                        alert("Fail to Login via google...sorry")
-                                    }
-                                }
-                            };
-                            // Send a post request
+            xhttp.onreadystatechange = function () { // handle request response
+                if (this.readyState === 4 && this.status === 200) {
+                    if (this.responseText === "true") {
+                        alert("register via google succesfull!")
+                        window.location.reload();
+                    }
+                    else {
+                        alert("Fail to register via google...sorry")
+                    }
+                }
+            };
+            // Send a post request
 
-                            var jwt_token = jwt.sign({ username: user_data.username, lname: user_data.lname, fname: user_data.fname, email: user_data.email, registration_type: "1" }, PUB_key);
-                            xhttp.open("POST", process.env.REACT_APP_API_URL + "/sign_up?jwt_token=" + jwt_token + "", true);
-                            xhttp.withCredentials = true;
-                            xhttp.send();
+            var jwt_token = jwt.sign({ username: user_data.username, lname: user_data.lname, fname: user_data.fname, email: user_data.email, registration_type: "1" }, PUB_key);
+            xhttp.open("POST", process.env.REACT_APP_API_URL + "/sign_up?jwt_token=" + jwt_token + "", true);
+            xhttp.withCredentials = true;
+            xhttp.send();
         }
 
         function Google_Login(user_data) {
@@ -76,22 +76,35 @@ class Google_Login extends React.Component {
                             Check_Username(user_data)
                         }
                         else {
-                            var xhttp = new XMLHttpRequest();
                             xhttp.onreadystatechange = function () { // handle request response
                                 if (this.readyState === 4 && this.status === 200) {
-                                    if (this.responseText !== "false") {
+                                    if (Object.values(this.response[Object.values(this.response).length - 3])[0] === "1") {
+                                        var xhttp = new XMLHttpRequest();
+                                        xhttp.onreadystatechange = function () { // handle request response
+                                            if (this.readyState === 4 && this.status === 200) {
+                                                if (this.responseText !== "false") {
+                                                    alert("Login with Google succeed !");
+                                                }
+                                                else {
+                                                    alert("Error happend when trying to log in with Google!");
+                                                }
+                                            }
+                                        };
+                                        // Send a post request
+                                        var jwt = require('jsonwebtoken');
+                                        var jwt_token = jwt.sign({ username: user_data.username, password: user_data.password,registration_type: "1"}, PUB_key);
+                                        xhttp.open("POST", process.env.REACT_APP_API_URL + "/sign_in?jwt_token=" + jwt_token + "", true);
+                                        xhttp.withCredentials = true;
+                                        xhttp.send();
 
-                                        alert("Logged in !");
                                     }
                                     else {
-                                        alert("Error while login with Google !");
+                                        alert("The email adress linked to this Google account is already registered !");
                                     }
                                 }
-                            };
-                            // Send a post request
-
-                            var jwt_token = jwt.sign({ username: user_data.username, registration_type: "1" }, PUB_key);
-                            xhttp.open("POST", process.env.REACT_APP_API_URL + "/sign_in?jwt_token=" + jwt_token + "", true);
+                            }
+                            var jwt_token = jwt.sign({ email: user_data.email }, PUB_key);
+                            xhttp.open("POST", process.env.REACT_APP_API_URL + "/Check_RegistrationType?jwt_token=" + jwt_token + "", true);
                             xhttp.withCredentials = true;
                             xhttp.send();
                         }
@@ -103,7 +116,7 @@ class Google_Login extends React.Component {
                 }
             };
             // Send a post request
-            
+
             var jwt_token = jwt.sign({ email: user_data.email }, PUB_key);
             xhttp.open("POST", process.env.REACT_APP_API_URL + "/Check_Email?jwt_token=" + jwt_token + "", true);
             xhttp.withCredentials = true;

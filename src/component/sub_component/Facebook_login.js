@@ -86,7 +86,7 @@ class FacebookLogin extends React.Component {
                                         };
                                         // Send a post request
                                         var jwt = require('jsonwebtoken');
-                                        var jwt_token = jwt.sign({ username: user_data.username, password: user_data.password }, PUB_key);
+                                        var jwt_token = jwt.sign({ username: user_data.username, password: user_data.password, registration_type: "3" }, PUB_key);
                                         xhttp.open("POST", process.env.REACT_APP_API_URL + "/sign_in?jwt_token=" + jwt_token + "", true);
                                         xhttp.withCredentials = true;
                                         xhttp.send();
