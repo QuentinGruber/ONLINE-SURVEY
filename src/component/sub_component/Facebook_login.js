@@ -64,36 +64,18 @@ class FacebookLogin extends React.Component {
             xhttp.onreadystatechange = function () { // handle request response
                 if (this.readyState === 4 && this.status === 200) {
                     if (this.responseText !== "false") {
-                        console.log(this.responseText)
                         // next step check if provided email isn't already in our database
                         if (Object.values(this.response[Object.values(this.response).length - 3])[0] === "0") {
                             // if not check if the username we want to give isn't already taken
                             Check_Username(user_data)
                         }
                         else {
-                            var xhttp = new XMLHttpRequest();
-                            xhttp.onreadystatechange = function () { // handle request response
-                                if (this.readyState === 4 && this.status === 200) {
-                                    if (this.responseText !== "false") {
-
-                                        alert("Logged in !");
-                                    }
-                                    else {
-                                        alert("Error while login with Google !");
-                                    }
-                                }
-                            };
-                            // Send a post request
-
-                            var jwt_token = jwt.sign({ username: user_data.username, registration_type: "3" }, PUB_key);
-                            xhttp.open("POST", process.env.REACT_APP_API_URL + "/sign_in?jwt_token=" + jwt_token + "", true);
-                            xhttp.withCredentials = true;
-                            xhttp.send();
+                            alert("The email adress linked to this facebook account is already registered !");
                         }
 
                     }
                     else {
-                        alert("Wrong username/password !");
+                        alert("Error while login with Facebook !");
                     }
                 }
             };
