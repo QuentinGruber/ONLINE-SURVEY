@@ -43,17 +43,17 @@ class FacebookLogin extends React.Component {
             xhttp.onreadystatechange = function () { // handle request response
                 if (this.readyState === 4 && this.status === 200) {
                     if (this.responseText === "true") {
-                        alert("register via google succesfull!")
+                        alert("register via Facebook succesfull!")
                         window.location.reload();
                     }
                     else {
-                        alert("Fail to Login via google...sorry")
+                        alert("Fail to Login via Facebook...sorry")
                     }
                 }
             };
             // Send a post request
 
-            var jwt_token = jwt.sign({ username: user_data.username, email: user_data.email, registration_type: "3"}, PUB_key);
+            var jwt_token = jwt.sign({ username: user_data.username, email: user_data.email, registration_type: "3" }, PUB_key);
             xhttp.open("POST", process.env.REACT_APP_API_URL + "/sign_up?jwt_token=" + jwt_token + "", true);
             xhttp.withCredentials = true;
             xhttp.send();
@@ -70,7 +70,37 @@ class FacebookLogin extends React.Component {
                             Check_Username(user_data)
                         }
                         else {
-                            alert("The email adress linked to this facebook account is already registered !");
+                            xhttp.onreadystatechange = function () { // handle request response
+                                if (this.readyState === 4 && this.status === 200) {
+                                    if (Object.values(this.response[Object.values(this.response).length - 3])[0] === "3") {
+                                        var xhttp = new XMLHttpRequest();
+                                        xhttp.onreadystatechange = function () { // handle request response
+                                            if (this.readyState === 4 && this.status === 200) {
+                                                if (this.responseText !== "false") {
+                                                    alert("Login with Facebook succeed !");
+                                                }
+                                                else {
+                                                    alert("Error happend when trying to log in with Facebook!");
+                                                }
+                                            }
+                                        };
+                                        // Send a post request
+                                        var jwt = require('jsonwebtoken');
+                                        var jwt_token = jwt.sign({ username: user_data.username, password: user_data.password }, PUB_key);
+                                        xhttp.open("POST", process.env.REACT_APP_API_URL + "/sign_in?jwt_token=" + jwt_token + "", true);
+                                        xhttp.withCredentials = true;
+                                        xhttp.send();
+                                        
+                                    }
+                                    else {
+                                        alert("The email adress linked to this Facebook account is already registered !");
+                                    }
+                                }
+                            }
+                            var jwt_token = jwt.sign({ email: user_data.email }, PUB_key);
+                            xhttp.open("POST", process.env.REACT_APP_API_URL + "/Check_RegistrationType?jwt_token=" + jwt_token + "", true);
+                            xhttp.withCredentials = true;
+                            xhttp.send();
                         }
 
                     }
