@@ -16,6 +16,7 @@ import {
   Col
 } from "reactstrap";
 import GoogleLogin from './sub_component/Google_login'
+import FacebookLogin from './sub_component/Facebook_login'
 class Login extends React.Component {
 
   render() {
@@ -64,15 +65,7 @@ class Login extends React.Component {
                 <small>Se connecter avec</small>
               </div>
               <div className="btn-wrapper text-center">
-                <Button
-                  className="btn-neutral btn-icon"
-                  color="default"
-                  href="#pablo"
-                  onClick={e => e.preventDefault()}
-                >
-
-                  <span className="btn-inner--text">Github</span>
-                </Button>
+                <FacebookLogin />
                 <GoogleLogin />
               </div>
             </CardHeader>

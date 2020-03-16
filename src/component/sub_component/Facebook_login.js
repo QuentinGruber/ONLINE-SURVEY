@@ -1,23 +1,17 @@
 import React from 'react';
 import { Button } from "reactstrap";
+import FacebookLoginAPI from 'react-facebook-login/dist/facebook-login-render-props'
 
-import GoogleLogin from 'react-google-login';
-
-
-class Google_Login extends React.Component {
-
-
+class FacebookLogin extends React.Component {
     render() {
-        var jwt = require('jsonwebtoken');
-        const responseGoogle = (response) => {
+        const responseFacebook = (response) => {
             var user_data = {
-                "username": response.profileObj.givenName + "." + response.profileObj.familyName,
-                "email": response.profileObj.email,
-                "lname": response.profileObj.familyName,
-                "fname": response.profileObj.givenName
+                "username": response.name,
+                "email": response.email
             }
-            Google_Login(user_data)
+            Facebook_Login(user_data)
         }
+        var jwt = require('jsonwebtoken');
 
         const PUB_key = "maxon"; // TODO: need to read PUB_key from json
 
@@ -29,7 +23,7 @@ class Google_Login extends React.Component {
                     // response format is a rowdatapacket so it was needed to do like that.
                     if (Object.values(this.response[Object.values(this.response).length - 3])[0] === "0")
                         // next step check if provided username isn't already in our database
-                        Register_google_user(user_data)
+                        Register_facebook_user(user_data)
 
                     else { // if already exist 
                         user_data.username = user_data.username + "1"
@@ -44,28 +38,28 @@ class Google_Login extends React.Component {
             xhttp.send();
         }
 
-        function Register_google_user(user_data) {
+        function Register_facebook_user(user_data) {
             var xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function () { // handle request response
                 if (this.readyState === 4 && this.status === 200) {
                     if (this.responseText === "true") {
-                        alert("register via google succesfull!")
+                        alert("register via Facebook succesfull!")
                         window.location.reload();
                     }
                     else {
-                        alert("Fail to register via google...sorry")
+                        alert("Fail to Login via Facebook...sorry")
                     }
                 }
             };
             // Send a post request
 
-            var jwt_token = jwt.sign({ username: user_data.username, lname: user_data.lname, fname: user_data.fname, email: user_data.email, registration_type: "1" }, PUB_key);
+            var jwt_token = jwt.sign({ username: user_data.username, email: user_data.email, registration_type: "3" }, PUB_key);
             xhttp.open("POST", process.env.REACT_APP_API_URL + "/sign_up?jwt_token=" + jwt_token + "", true);
             xhttp.withCredentials = true;
             xhttp.send();
         }
 
-        function Google_Login(user_data) {
+        function Facebook_Login(user_data) {
             var xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function () { // handle request response
                 if (this.readyState === 4 && this.status === 200) {
@@ -78,28 +72,28 @@ class Google_Login extends React.Component {
                         else {
                             xhttp.onreadystatechange = function () { // handle request response
                                 if (this.readyState === 4 && this.status === 200) {
-                                    if (Object.values(this.response[Object.values(this.response).length - 3])[0] === "1") {
+                                    if (Object.values(this.response[Object.values(this.response).length - 3])[0] === "3") {
                                         var xhttp = new XMLHttpRequest();
                                         xhttp.onreadystatechange = function () { // handle request response
                                             if (this.readyState === 4 && this.status === 200) {
                                                 if (this.responseText !== "false") {
-                                                    alert("Login with Google succeed !");
+                                                    alert("Login with Facebook succeed !");
                                                 }
                                                 else {
-                                                    alert("Error happend when trying to log in with Google!");
+                                                    alert("Error happend when trying to log in with Facebook!");
                                                 }
                                             }
                                         };
                                         // Send a post request
                                         var jwt = require('jsonwebtoken');
-                                        var jwt_token = jwt.sign({ username: user_data.username, password: user_data.password,registration_type: "1"}, PUB_key);
+                                        var jwt_token = jwt.sign({ username: user_data.username, password: user_data.password, registration_type: "3" }, PUB_key);
                                         xhttp.open("POST", process.env.REACT_APP_API_URL + "/sign_in?jwt_token=" + jwt_token + "", true);
                                         xhttp.withCredentials = true;
                                         xhttp.send();
-
+                                        
                                     }
                                     else {
-                                        alert("The email adress linked to this Google account is already registered !");
+                                        alert("The email adress linked to this Facebook account is already registered !");
                                     }
                                 }
                             }
@@ -111,7 +105,7 @@ class Google_Login extends React.Component {
 
                     }
                     else {
-                        alert("Wrong username/password !");
+                        alert("Error while login with Facebook !");
                     }
                 }
             };
@@ -123,21 +117,19 @@ class Google_Login extends React.Component {
             xhttp.send();
 
         }
-
         return (
-            <GoogleLogin
-                clientId="367335034854-8kolqq461bk29p1fl7umg0n0m2c8tacc.apps.googleusercontent.com"
+            <FacebookLoginAPI
+                appId="645670846005275"
+                fields="name,email"
+                callback={responseFacebook}
                 render={renderProps => (
-                    <Button className="btn-neutral btn-icon" color="default" onClick={renderProps.onClick} disabled={renderProps.disabled}>
-                        <span className="btn-inner--text">Google</span>
+                    <Button style={{color: '#5e72e4',backgroundColor:'#ffff'}} onClick={renderProps.onClick}>
+                        <span>Facebook</span>
                     </Button>
-                )}
-                onSuccess={responseGoogle}
-                onFailure={responseGoogle}
-                cookiePolicy={'single_host_origin'}
-            />
+                )} />
+
         )
     }
 }
 
-export default Google_Login;
+export default FacebookLogin;

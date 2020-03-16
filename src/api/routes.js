@@ -78,6 +78,11 @@ app.post('/Check_Email', urlencodedParser, function (req, res) {
   Login_Register.Check_Email(req, res, connection)
 });
 
+// Check registration type to allow api login
+app.post('/Check_RegistrationType', urlencodedParser, function (req, res) {
+  Login_Register.Check_RegistrationType(req, res, connection)
+});
+
 app.delete('/Disconnect', urlencodedParser, function (req, res) {
   try{
   req.session.destroy();
