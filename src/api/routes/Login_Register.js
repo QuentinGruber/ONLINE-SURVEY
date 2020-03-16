@@ -2,6 +2,8 @@ var aes256 = require('aes256'); // for Aes encryption
 var sha1 = require('sha1'); // for sha cipher
 var jwt = require('jsonwebtoken');
 
+
+
 exports.register = function (req, res, connection) {
     try {
         var decoded = jwt.verify(req.query.jwt_token, MariaDB_config.PUB_key);
@@ -207,6 +209,23 @@ exports.Check_Email = function (req, res, connection) {
         var decoded = jwt.verify(req.query.jwt_token, MariaDB_config.PUB_key);
         // Executing SQL query
         connection.query("SELECT EXISTS(SELECT * FROM users WHERE mail='" + decoded.email + "');", function (error, results, fields) {
+            // If some error occurs, we throw an error.
+            if (error) {
+                console.error(error);
+                connection.release()
+            }
+            // Getting the 'response' from the database and sending it to our route. This is were the data is.
+            res.send(results)
+            connection.release()
+        });
+    });
+}
+
+exports.Check_RegistrationType = function (req, res, connection) {
+    connection.getConnection(function (err, connection) {
+        var decoded = jwt.verify(req.query.jwt_token, MariaDB_config.PUB_key);
+        // Executing SQL query
+        connection.query("SELECT registration_type FROM users WHERE mail ='" + decoded.email + "';", function (error, results, fields) {
             // If some error occurs, we throw an error.
             if (error) {
                 console.error(error);
