@@ -16,6 +16,8 @@ import {
   Col
 } from "reactstrap";
 import GoogleLogin from './sub_component/Google_login'
+import FacebookLogin from './sub_component/Facebook_login'
+
 class Register extends React.Component {
   render() {
     var jwt = require('jsonwebtoken');
@@ -111,14 +113,7 @@ class Register extends React.Component {
                 <small>S'inscrire avec</small>
               </div>
               <div className="text-center">
-                <Button
-                  className="btn-neutral btn-icon mr-4"
-                  color="default"
-                  href="#pablo"
-                  onClick={e => e.preventDefault()}
-                >
-                  <span className="btn-inner--text">Github</span>
-                </Button>
+                <FacebookLogin />
                 <GoogleLogin />
               </div>
             </CardHeader>
