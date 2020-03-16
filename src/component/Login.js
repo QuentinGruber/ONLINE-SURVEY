@@ -17,6 +17,7 @@ import {
 } from "reactstrap";
 import GoogleLogin from './sub_component/Google_login'
 import FacebookLogin from './sub_component/Facebook_login'
+import TwitterLogin from './sub_component/twitter_login'
 class Login extends React.Component {
 
   render() {
@@ -66,6 +67,7 @@ class Login extends React.Component {
               </div>
               <div className="btn-wrapper text-center">
                 <FacebookLogin />
+                <TwitterLogin />
                 <GoogleLogin />
               </div>
             </CardHeader>

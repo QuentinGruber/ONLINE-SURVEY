@@ -1,17 +1,14 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+import React from 'react'
+import { Button } from "reactstrap";
 
-class twitter_login extends Component {
-  static defaultProps = {}
-  static propTypes = {}
-
+class TwitterLogin extends React.Component {
   render() {
     return (
-      <div className="twitter_login">
-        twitter_login
-      </div>
+      <Button className="btn-neutral btn-icon" color="default" >
+        Twitter
+      </Button>
     )
   }
 }
 
-export default twitter_login
+export default TwitterLogin
