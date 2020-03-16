@@ -23,6 +23,7 @@
     "react-google-login": "^5.1.1",
     "react-router-dom": "^5.1.2",
     "react-scripts": "^3.4.0",
+    "react-twitter-auth": "0.0.13",
     "reactstrap": "^8.4.1",
     "sha1": "1.1.1",
     "simple-git": "^1.130.0",
