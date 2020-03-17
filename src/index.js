@@ -5,6 +5,10 @@ import * as serviceWorker from './serviceWorker';
 import DevLayout from "./layout/Dev.js";
 import AuthLayout from "./layout/Auth.js";
 import CookiesNeeded from "./component/CookiesNeeded.js"
+import "./assets/css/argon-dashboard-react.css";
+import "./assets/css/argon-dashboard-react.min.css";
+import "./assets/css/argon-dashboard-react.css.map";
+
 if(localStorage.AcceptCookies === "true"){
 ReactDOM.render(
     <BrowserRouter>
