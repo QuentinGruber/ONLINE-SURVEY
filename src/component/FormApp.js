@@ -44,7 +44,7 @@ class FormListItem extends React.Component {
       <li className="list-group-item ">
         <div>
           <span>
-            <input placeholder="Titre de la question" onBlur={this.UpdateQuestionName} ref="QuestionValue"  required="" type="text" className="question form-control" />
+            <input placeholder="Titre de la question" onChange={this.UpdateQuestionName} ref="QuestionValue"  required="" type="text" className="question form-control" />
           </span>
           <button type="button" className="close" onClick={this.onClickClose}>&times;</button>
         </div>
@@ -84,15 +84,16 @@ class FormApp extends React.Component {
   modifyItem(ItemIndex,NewValue,ValueName) {
     console.log(ItemIndex,NewValue)
     if(ValueName === "QuestionName"){
-      formItems[ItemIndex].name = NewValue;
+      var formItemszebi = this.state.formItems.slice();
+      formItemszebi[ItemIndex].name = NewValue;
     }
     this.setState((state) => {
       // Important: read `state` instead of `this.state` when updating.
-      return { formItems: formItems }
+      return { formItems: formItemszebi }
     });
   }
   addItem() {
-    formItems.push({
+    formItems.unshift({
       index: formItems.length + 1,
       name:"nomquestion",
       type:"1",
@@ -102,24 +103,27 @@ class FormApp extends React.Component {
       // Important: read `state` instead of `this.state` when updating.
       return { formItems: formItems }
     });
-    ReactDOM.render(<FormApp initItems={formItems} />, document.getElementById('main')); // HACK
+    //ReactDOM.render(<FormApp initItems={formItems} />, document.getElementById('main')); // HACK
   }
   removeItem(itemIndex) {
-    formItems.splice(itemIndex, 1);
+    console.log("retire l'index : "+itemIndex+" avec la valeur :"+formItems[itemIndex].name)
+    console.log("Formitem après la suppression : "+formItems)
+    var arraydemerde = formItems
+    arraydemerde.splice(itemIndex, 1);
     this.setState((state) => {
       // Important: read `state` instead of `this.state` when updating.
-      return { formItems: formItems }
+      return { formItems: arraydemerde }
     });
   }
   render() {
     return (
       <div id="main">
         <FormListTitle name="list-name" />
-        <FormList items={this.props.initItems} removeItem={this.removeItem} modifyItem={this.modifyItem} />
         <NewQuestion addItem={this.addItem} />
+        <FormList items={this.props.initItems} removeItem={this.removeItem} modifyItem={this.modifyItem} />
       </div>
     );
   }
 }
-export default FormApp
-//ReactDOM.render(<FormApp initItems={formItems}/>, document.getElementById('form-list'));
+//export default FormApp
+ReactDOM.render(<FormApp initItems={formItems}/>, document.getElementById('merde'));
