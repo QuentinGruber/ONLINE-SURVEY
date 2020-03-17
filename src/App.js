@@ -14,7 +14,7 @@ class App extends React.Component {
   render(){
     var formItems = []//[{id: 1, questionType: "", name: "sex"},{id: 2, questionType: "", name: "pd"}]
   return (
-    <div className="App" id="merde" data={formItems}>
+    <div className="App" id="form" data={formItems}>
     </div>
   );
   }

@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import { Button, Dropdown, Input } from "reactstrap";
 import ReactDOM from "react-dom";
 
-class SocialMedia extends Component {
+class FormApp extends Component {
   constructor(props) {
     super(props);
-    this.questionTypeList = [
+    this.questionTypeList = [ // list of possible question type
       {
         id: 1,
         name: "Open"
@@ -15,31 +15,34 @@ class SocialMedia extends Component {
         name: "QCM"
       }
     ]
+    // Form data is inside a state so it update the component each time we modify stuff in it
     this.state = {
       FormData: []
     };
+    // bind func to this
     this.handleAddQuestion = this.handleAddQuestion.bind(this);
     this.handleQuestionNameChange = this.handleQuestionNameChange.bind(this);
-    this.handleQuestion = this.handleQuestion.bind(this);
+    this.handleRemoveQuestion = this.handleRemoveQuestion.bind(this);
     this.handleQuestionTypeChange = this.handleQuestionTypeChange.bind(this);
     this.handleQuestionValueChange = this.handleQuestionValueChange.bind(this);
     this.addExistingData = this.addExistingData.bind(this);
   }
 
+  // Add new question
   handleAddQuestion() {
     let array = this.state.FormData;
-    array.push({ id: array.length + 1, questionType: "" });
-    console.log(this.state.FormData)
+    array.push({ id: array.length + 1, questionType: "" }); // by default a question has an empty question type
     this.setState({ FormData: array });
   }
 
+  // if a question name has been changed
   handleQuestionNameChange(e, idx) {
     let array = this.state.FormData.slice();
     array[idx].name = e.target.value;
-    console.log(array[idx]);
     this.setState({ FormData: array });
   }
 
+  // if a question value has been changed
   handleQuestionValueChange(e, idx) {
     let array = this.state.FormData.slice();
     array[idx].value = e.target.value;
@@ -47,19 +50,21 @@ class SocialMedia extends Component {
     this.setState({ FormData: array });
   }
 
+  // if the type of a question has been changed
   handleQuestionTypeChange(socialName, idx) {
     let array = this.state.FormData.slice();
     array[idx].questionType = socialName;
     this.setState({ FormData: array });
   }
 
-  handleQuestion(idx) {
+  // remove question
+  handleRemoveQuestion(idx) {
     let array = this.state.FormData;
     array.splice(idx, 1);
     this.setState({ FormData: array });
   }
 
-  addExistingData(data) {
+  addExistingData(data) { // Currently not working , will allow to display a registred form
     let array = this.state.FormData;
     console.log(data)
     for (var i = 0; i < Object.keys(data).length; i++) {
@@ -68,8 +73,10 @@ class SocialMedia extends Component {
     }
     this.setState({ FormData: array });
   }
-  componentDidMount() {
+
+  componentDidMount() { // when component has init , check whether data have been provided
     if (this.props.data != []) {
+      // if that the case , add data to our form
       this.addExistingData(this.props.data)
     }
   }
@@ -102,6 +109,7 @@ class SocialMedia extends Component {
                 <td>
                   {(() => {
                     switch (Form.questionType) {
+                      // depending on the type of question, a different input is generated
                       case "Open": return (<Input
                         type="text"
                         placeholder={`réponse?`}
@@ -141,7 +149,7 @@ class SocialMedia extends Component {
                 </td>
                 <td>
                   <Button
-                    onClick={() => this.handleQuestion(idx)}
+                    onClick={() => this.handleRemoveQuestion(idx)}
                   >
                     remove
                   </Button>
@@ -154,5 +162,4 @@ class SocialMedia extends Component {
     );
   }
 }
-console.log(document.getElementById('merde').getAttribute('data'))
-ReactDOM.render(<SocialMedia data={document.getElementById('merde').getAttribute('data')} />, document.getElementById('merde'));
+ReactDOM.render(<FormApp data={document.getElementById('form').getAttribute('data')} />, document.getElementById('form'));
