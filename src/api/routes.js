@@ -44,6 +44,11 @@ app.get('/', function (req, res) {
   res.send("Api server connected !");
 });
 
+app.post('/twitter_auth',function (req,res){
+
+  console.log(req)
+});
+
 
 app.get('/welcome', function (req, res) {   // get name of a logged user
   res.send(req.session.name);
