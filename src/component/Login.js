@@ -30,8 +30,6 @@ class Login extends React.Component {
       xhttp.onreadystatechange = function () { // handle request response
         if (this.readyState === 4 && this.status === 200) {
           if (this.responseText !== "false") {
-            localStorage.clear()
-            sessionStorage.clear()
             if (Keep_logged) {
               alert("Logged in !");
             }
