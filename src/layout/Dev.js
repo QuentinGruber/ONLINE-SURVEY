@@ -1,7 +1,7 @@
 import React from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 import UserPanel from "../component/UserPanel.js"
-import SideBar from "../component/SideBar.js"
+import SideBar from "../component/Sidebar"
 import routes from "../routes.js";
 
 class Dev extends React.Component {
@@ -36,11 +36,10 @@ class Dev extends React.Component {
   render() {
     return (
       <>
-        <UserPanel />
-        <Switch>
+       <Switch>
           {this.getRoutes(routes)}
           <Redirect from="*" to="/dev/all_component" />
-        </Switch>
+       </Switch>
 
       </>
     );
