@@ -33,11 +33,9 @@ class Login extends React.Component {
             localStorage.clear()
             sessionStorage.clear()
             if (Keep_logged) {
-              localStorage.setItem("Admin_token", this.responseText) // store user's Admin_token in his local storage 
               alert("Logged in !");
             }
             else {
-              sessionStorage.setItem("Admin_token", this.responseText) // store user's Admin_token in his session storage 
               alert("Logged in !");
             }
           }

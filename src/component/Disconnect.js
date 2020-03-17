@@ -3,7 +3,6 @@ import React from 'react';
 class Disconnect extends React.Component {
     render() {
       function Disconnect(){ // not used right now
-        // delete admin token
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function () { // handle request response
             if (this.readyState === 4 && this.status === 200) {
