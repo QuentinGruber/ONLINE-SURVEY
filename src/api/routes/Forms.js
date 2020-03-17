@@ -4,7 +4,6 @@
     const writeJsonFile = require('write-json-file');
 
     var data = {
-      AdminToken: req.query.Admin_token,
       Form_name: req.query.Form_name,
       Content: [req.query.Content]
     };

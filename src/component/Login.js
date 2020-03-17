@@ -30,14 +30,10 @@ class Login extends React.Component {
       xhttp.onreadystatechange = function () { // handle request response
         if (this.readyState === 4 && this.status === 200) {
           if (this.responseText !== "false") {
-            localStorage.clear()
-            sessionStorage.clear()
             if (Keep_logged) {
-              localStorage.setItem("Admin_token", this.responseText) // store user's Admin_token in his local storage 
               alert("Logged in !");
             }
             else {
-              sessionStorage.setItem("Admin_token", this.responseText) // store user's Admin_token in his session storage 
               alert("Logged in !");
             }
           }
