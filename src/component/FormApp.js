@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button , Dropdown , Input } from "reactstrap";
+import { Button, Dropdown, Input } from "reactstrap";
 import ReactDOM from "react-dom";
 
 class SocialMedia extends Component {
@@ -59,56 +59,66 @@ class SocialMedia extends Component {
     this.setState({ FormData: array });
   }
 
-  addExistingData(data){
+  addExistingData(data) {
     let array = this.state.FormData;
     console.log(data)
-    for(var i = 0;i<Object.keys(data).length;i++){
-      console.log("for "+i+"times data length : "+Object.keys(data).length)
-    array.push(data[i]);
+    for (var i = 0; i < Object.keys(data).length; i++) {
+      console.log("for " + i + "times data length : " + Object.keys(data).length)
+      array.push(data[i]);
     }
     this.setState({ FormData: array });
   }
-  componentDidMount(){
-    if(this.props.data != []){
+  componentDidMount() {
+    if (this.props.data != []) {
       this.addExistingData(this.props.data)
     }
   }
 
-  
+
   render() {
     return (
       <div>
-        <button
-          className="newFlyerButton btn mb-4"
+        <Button
           type="button"
           onClick={this.handleAddQuestion}
         >
           <span>
-            <span className="buttonText">ADD NEW QUESTION</span>
+            <span>ADD NEW QUESTION</span>
           </span>
-        </button>
+        </Button>
 
-        <table className="table mt-3 bordered table-hover  white-table addNewSocial">
+        <table>
           <tbody>
             {this.state.FormData.map((Form, idx) => (
-              <tr key={idx} className="row Form">
-                <td className="col-6 nameInput">
+              <tr key={idx}>
+                <td>
                   <Input
                     type="text"
-                    placeholder={`Question #${idx + 1} name`}
+                    placeholder={`Question #${idx + 1}`}
                     value={Form.name}
                     onChange={e => this.handleQuestionNameChange(e, idx)}
                   />
                 </td>
-                <td className="col-6 ValueInput">
-                  <Input
-                    type="text"
-                    placeholder={`Comment ça va ?`}
-                    value={Form.value}
-                    onChange={e => this.handleQuestionValueChange(e, idx)}
-                  />
+                <td>
+                  {(() => {
+                    switch (Form.questionType) {
+                      case "Open": return (<Input
+                        type="text"
+                        placeholder={`réponse?`}
+                        value={Form.value}
+                        onChange={e => this.handleQuestionValueChange(e, idx)}
+                      />);
+                      case "QCM": return (<Input
+                        type="radio"
+                        placeholder={`réponse?`}
+                        value={Form.value}
+                        onChange={e => this.handleQuestionValueChange(e, idx)}
+                      />);
+                      default: break;
+                    }
+                  })()}
                 </td>
-                <td className="col-4 socialSelector">
+                <td>
                   <select
                     onChange={e => {
                       this.handleQuestionTypeChange(e.target.value, idx);
@@ -129,7 +139,7 @@ class SocialMedia extends Component {
                     ))}
                   </select>
                 </td>
-                <td className="col-2 closingLink">
+                <td>
                   <Button
                     onClick={() => this.handleQuestion(idx)}
                   >
