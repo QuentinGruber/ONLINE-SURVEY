@@ -12,9 +12,9 @@ class App extends React.Component {
   require('./component/FormApp')
   }
   render(){
-    var formItems = []
+    var formItems = []//[{id: 1, questionType: "", name: "sex"},{id: 2, questionType: "", name: "pd"}]
   return (
-    <div className="App" id="merde">
+    <div className="App" id="merde" data={formItems}>
     </div>
   );
   }

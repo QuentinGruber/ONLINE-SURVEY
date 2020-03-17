@@ -1,129 +1,148 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React, { Component } from "react";
+import { Button , Dropdown , Input } from "reactstrap";
+import ReactDOM from "react-dom";
 
-var formItems = [];
-
-class FormListTitle extends React.Component {
-
-  render() {
-    return <h1>{this.props.name}</h1>;
-  }
-}
-
-class FormList extends React.Component {
-  render() {
-    var items = this.props.items.map((item, index) => {
-      return (
-        <FormListItem key={index} item={item} index={index} removeItem={this.props.removeItem} modifyItem={this.props.modifyItem} />
-      );
-    });
-    return (
-      <ul className="list-group"> {items} </ul>
-    );
-  }
-}
-
-class FormListItem extends React.Component {
+class SocialMedia extends Component {
   constructor(props) {
     super(props);
-    this.onClickClose = this.onClickClose.bind(this);
-    this.UpdateQuestionName = this.UpdateQuestionName.bind(this);
+    this.questionTypeList = [
+      {
+        id: 1,
+        name: "Open"
+      },
+      {
+        id: 2,
+        name: "QCM"
+      }
+    ]
+    this.state = {
+      FormData: []
+    };
+    this.handleAddQuestion = this.handleAddQuestion.bind(this);
+    this.handleQuestionNameChange = this.handleQuestionNameChange.bind(this);
+    this.handleQuestion = this.handleQuestion.bind(this);
+    this.handleQuestionTypeChange = this.handleQuestionTypeChange.bind(this);
+    this.handleQuestionValueChange = this.handleQuestionValueChange.bind(this);
+    this.addExistingData = this.addExistingData.bind(this);
   }
-  onClickClose() {
-    var index = parseInt(this.props.index);
-    this.props.removeItem(index);
 
+  handleAddQuestion() {
+    let array = this.state.FormData;
+    array.push({ id: array.length + 1, questionType: "" });
+    console.log(this.state.FormData)
+    this.setState({ FormData: array });
   }
-  UpdateQuestionName() {
-    var index = parseInt(this.props.index);
-    var NewValue = this.refs.QuestionValue.value
-    this.props.modifyItem(index,NewValue,"QuestionName")
-  }
-  render() {
-    return (
-      <li className="list-group-item ">
-        <div>
-          <span>
-            <input placeholder="Titre de la question" onChange={this.UpdateQuestionName} ref="QuestionValue"  required="" type="text" className="question form-control" />
-          </span>
-          <button type="button" className="close" onClick={this.onClickClose}>&times;</button>
-        </div>
-      </li>
-    );
-  }
-}
 
-class NewQuestion extends React.Component {
-  constructor(props) {
-    super(props);
-    this.onSubmit = this.onSubmit.bind(this);
+  handleQuestionNameChange(e, idx) {
+    let array = this.state.FormData.slice();
+    array[idx].name = e.target.value;
+    console.log(array[idx]);
+    this.setState({ FormData: array });
   }
-  onSubmit(event) {
-    event.preventDefault();
-      this.props.addItem();
-  }
-  render() {
-    return (
-      <form ref="NewItemForm" onSubmit={this.onSubmit} className="form-inline">
-        <button type="submit" className="btn btn-default">Add</button>
-      </form>
-    );
-  }
-}
 
-class FormApp extends React.Component {
-  // Define attribute & function of FormApp
-  constructor(props) {
-    super(props);
-    this.addItem = this.addItem.bind(this);
-    this.removeItem = this.removeItem.bind(this);
-    this.modifyItem = this.modifyItem.bind(this);
-    this.state = { formItems: formItems };
-
+  handleQuestionValueChange(e, idx) {
+    let array = this.state.FormData.slice();
+    array[idx].value = e.target.value;
+    console.log(array[idx]);
+    this.setState({ FormData: array });
   }
-  modifyItem(ItemIndex,NewValue,ValueName) {
-    console.log(ItemIndex,NewValue)
-    if(ValueName === "QuestionName"){
-      var formItemszebi = this.state.formItems.slice();
-      formItemszebi[ItemIndex].name = NewValue;
+
+  handleQuestionTypeChange(socialName, idx) {
+    let array = this.state.FormData.slice();
+    array[idx].questionType = socialName;
+    this.setState({ FormData: array });
+  }
+
+  handleQuestion(idx) {
+    let array = this.state.FormData;
+    array.splice(idx, 1);
+    this.setState({ FormData: array });
+  }
+
+  addExistingData(data){
+    let array = this.state.FormData;
+    console.log(data)
+    for(var i = 0;i<Object.keys(data).length;i++){
+      console.log("for "+i+"times data length : "+Object.keys(data).length)
+    array.push(data[i]);
     }
-    this.setState((state) => {
-      // Important: read `state` instead of `this.state` when updating.
-      return { formItems: formItemszebi }
-    });
+    this.setState({ FormData: array });
   }
-  addItem() {
-    formItems.unshift({
-      index: formItems.length + 1,
-      name:"nomquestion",
-      type:"1",
-      value: "",
-    });
-    this.setState((state) => {
-      // Important: read `state` instead of `this.state` when updating.
-      return { formItems: formItems }
-    });
-    //ReactDOM.render(<FormApp initItems={formItems} />, document.getElementById('main')); // HACK
+  componentDidMount(){
+    if(this.props.data != []){
+      this.addExistingData(this.props.data)
+    }
   }
-  removeItem(itemIndex) {
-    console.log("retire l'index : "+itemIndex+" avec la valeur :"+formItems[itemIndex].name)
-    console.log("Formitem après la suppression : "+formItems)
-    var arraydemerde = formItems
-    arraydemerde.splice(itemIndex, 1);
-    this.setState((state) => {
-      // Important: read `state` instead of `this.state` when updating.
-      return { formItems: arraydemerde }
-    });
-  }
+
+  
   render() {
     return (
-      <div id="main">
-        <FormListTitle name="list-name" />
-        <NewQuestion addItem={this.addItem} />
-        <FormList items={this.props.initItems} removeItem={this.removeItem} modifyItem={this.modifyItem} />
+      <div>
+        <button
+          className="newFlyerButton btn mb-4"
+          type="button"
+          onClick={this.handleAddQuestion}
+        >
+          <span>
+            <span className="buttonText">ADD NEW QUESTION</span>
+          </span>
+        </button>
+
+        <table className="table mt-3 bordered table-hover  white-table addNewSocial">
+          <tbody>
+            {this.state.FormData.map((Form, idx) => (
+              <tr key={idx} className="row Form">
+                <td className="col-6 nameInput">
+                  <Input
+                    type="text"
+                    placeholder={`Question #${idx + 1} name`}
+                    value={Form.name}
+                    onChange={e => this.handleQuestionNameChange(e, idx)}
+                  />
+                </td>
+                <td className="col-6 ValueInput">
+                  <Input
+                    type="text"
+                    placeholder={`Comment ça va ?`}
+                    value={Form.value}
+                    onChange={e => this.handleQuestionValueChange(e, idx)}
+                  />
+                </td>
+                <td className="col-4 socialSelector">
+                  <select
+                    onChange={e => {
+                      this.handleQuestionTypeChange(e.target.value, idx);
+                    }}
+                    value={Form.questionType || "SelectOption"}
+                  >
+                    <option value="SelectOption" disabled>
+                      Select question type
+                    </option>
+                    {this.questionTypeList.map(typeData => (
+                      <option
+                        value={typeData.name}
+                        data={typeData}
+                        key={typeData.id}
+                      >
+                        {typeData.name}
+                      </option>
+                    ))}
+                  </select>
+                </td>
+                <td className="col-2 closingLink">
+                  <Button
+                    onClick={() => this.handleQuestion(idx)}
+                  >
+                    remove
+                  </Button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     );
   }
 }
-//export default FormApp
-ReactDOM.render(<FormApp initItems={formItems}/>, document.getElementById('merde'));
+console.log(document.getElementById('merde').getAttribute('data'))
+ReactDOM.render(<SocialMedia data={document.getElementById('merde').getAttribute('data')} />, document.getElementById('merde'));
