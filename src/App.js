@@ -9,7 +9,7 @@ import { render } from '@testing-library/react';
 class App extends React.Component {
 
   componentDidMount(){
-  require('./component/FormApp')
+  require('./component/FormApp/FormApp')
   }
   render(){
     var formItems = []//[{id: 1, questionType: "", name: "sex"},{id: 2, questionType: "", name: "pd"}]

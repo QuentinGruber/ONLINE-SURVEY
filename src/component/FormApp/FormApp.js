@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import { Button, Dropdown, Input } from "reactstrap";
+import { Button, Dropdown, Input, Table } from "reactstrap";
 import ReactDOM from "react-dom";
+import "./FormApp.css"
 
 class FormApp extends Component {
   constructor(props) {
@@ -94,19 +95,23 @@ class FormApp extends Component {
           </span>
         </Button>
 
-        <table>
+        <table style={{width:"60%", margin: "auto"}}>
           <tbody>
             {this.state.FormData.map((Form, idx) => (
               <tr key={idx}>
-                <td>
+
+                <td id="boxQuestionNumber">
+                #{idx + 1}
+                </td>
+                <td id="boxQuestionTitle">
                   <Input
                     type="text"
-                    placeholder={`Question #${idx + 1}`}
+                    placeholder={`Titre de la question`}
                     value={Form.name}
                     onChange={e => this.handleQuestionNameChange(e, idx)}
                   />
                 </td>
-                <td>
+                <td id="boxAnswers">
                   {(() => {
                     switch (Form.questionType) {
                       // depending on the type of question, a different input is generated
@@ -126,7 +131,7 @@ class FormApp extends Component {
                     }
                   })()}
                 </td>
-                <td>
+                <td id="boxQuestionType">
                   <select
                     onChange={e => {
                       this.handleQuestionTypeChange(e.target.value, idx);
@@ -147,7 +152,7 @@ class FormApp extends Component {
                     ))}
                   </select>
                 </td>
-                <td>
+                <td id="boxRemoveQuestion">
                   <Button
                     onClick={() => this.handleRemoveQuestion(idx)}
                   >
