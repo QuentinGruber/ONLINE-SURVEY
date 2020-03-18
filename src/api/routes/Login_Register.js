@@ -4,6 +4,30 @@ var jwt = require('jsonwebtoken');
 
 
 
+function CreateSession(res,req,connection,username){ // create session for a user
+    connection.getConnection(function (err, connection) {
+
+        connection.query(
+            "SELECT * FROM `users` WHERE username ="+"'"+username+"'"+";" // get all data about the user
+            , function (sql_error, results, fields) {
+                // If some error occurs, we throw an error.
+                if (sql_error) {
+                    res.send("false");
+                    connection.release();
+                }                
+                // store the data we want in his session
+                req.session.fname = results[0].first_name
+                req.session.lname = results[0].last_name
+                req.session.username = results[0].username
+                req.session.email = results[0].mail
+                res.send("true")
+                connection.release()
+                
+            });
+    })
+}
+
+
 exports.register = function (req, res, connection) {
     try {
         var decoded = jwt.verify(req.query.jwt_token, MariaDB_config.PUB_key);
@@ -49,10 +73,7 @@ exports.register = function (req, res, connection) {
                         }
 
                         // Getting the 'response' from the database and sending it to our route. This is were the data is.
-                        req.session.name = data.Username
-                        req.session.username = data.Username
-                        req.session.email = data.Email
-                        res.send("true")
+                        CreateSession(res,req,connection,data.Username)
                         connection.release()
                     });
             }
@@ -71,10 +92,7 @@ exports.register = function (req, res, connection) {
                         }
 
                         // Getting the 'response' from the database and sending it to our route. This is were the data is.
-                        req.session.name = data.Fname
-                        req.session.username = data.Username
-                        req.session.email = data.Email
-                        res.send("true")
+                        CreateSession(res,req,connection,data.Username)
                         connection.release()
                     });
             }
@@ -91,10 +109,7 @@ exports.register = function (req, res, connection) {
                         }
 
                         // Getting the 'response' from the database and sending it to our route. This is were the data is.
-                        req.session.name = data.Username
-                        req.session.username = data.Username
-                        req.session.email = data.Email
-                        res.send("true")
+                        CreateSession(res,req,connection,data.Username)
                         connection.release()
                     });
             }
@@ -159,9 +174,7 @@ exports.login = function (req, res, connection) {
                     }
 
                     if (Stored_pass == data.Password) { // if the Submit pass is the same as storage pass
-                        req.session.name = data.Username
-                        req.session.username = data.Username
-                        res.send(true)
+                        CreateSession(res,req,connection,data.Username)
                     }
                     else {
                         res.send(false);
@@ -173,14 +186,10 @@ exports.login = function (req, res, connection) {
         });
     }
     if (data.Registration_type == "1") {
-        req.session.name = data.Username
-        req.session.username = data.Username
-        res.send(true)
+        CreateSession(res,req,connection,data.Username)
     }
     if (data.Registration_type == "3") {
-        req.session.name = data.Username
-        req.session.username = data.Username
-        res.send(true)
+        CreateSession(res,req,connection,data.Username)
     }
 }
 
