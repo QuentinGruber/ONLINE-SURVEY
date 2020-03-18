@@ -2,12 +2,22 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import * as serviceWorker from './serviceWorker';
+
+// import Layout / Route
 import DevLayout from "./layout/Dev.js";
 import AuthLayout from "./layout/Auth.js";
 import CookiesNeeded from "./component/CookiesNeeded.js"
+
+// import css
 import "./assets/css/argon-dashboard-react.css";
 import "./assets/css/argon-dashboard-react.min.css";
 import "./assets/css/argon-dashboard-react.css.map";
+
+// init Google Analytics
+import ReactGA from 'react-ga';
+
+ReactGA.initialize('UA-160982162-1');
+ReactGA.pageview(window.location.pathname + window.location.search);
 
 if(localStorage.AcceptCookies === "true"){
 ReactDOM.render(
