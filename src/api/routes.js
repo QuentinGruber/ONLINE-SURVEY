@@ -46,7 +46,10 @@ app.get('/', function (req, res) {
 
 
 app.get('/welcome', function (req, res) {   // get name of a logged user
-  res.send(req.session.name);
+  if(req.session.name === undefined)
+    res.send(req.session.username);
+  else
+    res.send(req.session.name);
 });
 
 /*  NEW FORM  */
