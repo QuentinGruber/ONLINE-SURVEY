@@ -4,27 +4,24 @@ var jwt = require('jsonwebtoken');
 
 
 
-function CreateSession(res,req,connection,username){ // create session for a user
-    connection.getConnection(function (err, connection) {
+function CreateSession(res, req, connection, username) { // create session for a user
+    connection.query(
+        "SELECT * FROM `users` WHERE username =" + "'" + username + "'" + ";" // get all data about the user
+        , function (sql_error, results, fields) {
+            // If some error occurs, we throw an error.
+            if (sql_error) {
+                res.send("false");
+                connection.release();
+            }
+            // store the data we want in his session
+            req.session.fname = results[0].first_name
+            req.session.lname = results[0].last_name
+            req.session.username = results[0].username
+            req.session.email = results[0].mail
+            res.send("true")
+            connection.release()
 
-        connection.query(
-            "SELECT * FROM `users` WHERE username ="+"'"+username+"'"+";" // get all data about the user
-            , function (sql_error, results, fields) {
-                // If some error occurs, we throw an error.
-                if (sql_error) {
-                    res.send("false");
-                    connection.release();
-                }                
-                // store the data we want in his session
-                req.session.fname = results[0].first_name
-                req.session.lname = results[0].last_name
-                req.session.username = results[0].username
-                req.session.email = results[0].mail
-                res.send("true")
-                connection.release()
-                
-            });
-    })
+        });
 }
 
 
@@ -51,7 +48,7 @@ exports.register = function (req, res, connection) {
             try {
                 data.Password = sha1(data.Password);
                 data.Password = aes256.encrypt(MariaDB_config.PUB_key, data.Password)
-                WriteUserInfo(connection)
+                WriteUserInfo(req, res, connection)
             }
             catch (e) {
                 console.error("Password fail to encrypt : " + e.message)
@@ -59,7 +56,7 @@ exports.register = function (req, res, connection) {
             }
         }
 
-        function WriteUserInfo(connection) {
+        function WriteUserInfo(req, res, connection) {
             // user creation
             if (data.Registration_type == "0") {
                 connection.query(
@@ -73,8 +70,7 @@ exports.register = function (req, res, connection) {
                         }
 
                         // Getting the 'response' from the database and sending it to our route. This is were the data is.
-                        CreateSession(res,req,connection,data.Username)
-                        connection.release()
+                        CreateSession(res, req, connection, data.Username)
                     });
             }
             if (data.Registration_type == "1") {
@@ -92,8 +88,7 @@ exports.register = function (req, res, connection) {
                         }
 
                         // Getting the 'response' from the database and sending it to our route. This is were the data is.
-                        CreateSession(res,req,connection,data.Username)
-                        connection.release()
+                        CreateSession(res, req, connection, data.Username)
                     });
             }
             if (data.Registration_type == "3") {
@@ -109,8 +104,7 @@ exports.register = function (req, res, connection) {
                         }
 
                         // Getting the 'response' from the database and sending it to our route. This is were the data is.
-                        CreateSession(res,req,connection,data.Username)
-                        connection.release()
+                        CreateSession(res, req, connection, data.Username)
                     });
             }
 
@@ -120,7 +114,7 @@ exports.register = function (req, res, connection) {
             encrypt_password()
         }
         else {
-            WriteUserInfo(connection)
+            WriteUserInfo(req, res, connection)
         }
     });
 }
@@ -140,9 +134,9 @@ exports.login = function (req, res, connection) {
     catch (e) {
         console.error("The POST request is missing Data to login the user : " + e.message)
     }
+    connection.getConnection(async function (err, connection) {
+        if (data.Registration_type == "0") {
 
-    if (data.Registration_type == "0") {
-        connection.getConnection(async function (err, connection) {
 
             // user creation
             connection.query(
@@ -174,7 +168,7 @@ exports.login = function (req, res, connection) {
                     }
 
                     if (Stored_pass == data.Password) { // if the Submit pass is the same as storage pass
-                        CreateSession(res,req,connection,data.Username)
+                        CreateSession(res, req, connection, data.Username)
                     }
                     else {
                         res.send(false);
@@ -183,14 +177,14 @@ exports.login = function (req, res, connection) {
 
                 });
 
-        });
-    }
-    if (data.Registration_type == "1") {
-        CreateSession(res,req,connection,data.Username)
-    }
-    if (data.Registration_type == "3") {
-        CreateSession(res,req,connection,data.Username)
-    }
+        }
+        if (data.Registration_type == "1") {
+            CreateSession(res, req, connection, data.Username)
+        }
+        if (data.Registration_type == "3") {
+            CreateSession(res, req, connection, data.Username)
+        }
+    });
 }
 
 // Checks
