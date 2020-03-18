@@ -1,5 +1,9 @@
 td {
     border: 1px sandybrown dashed;
-    padding: 2%;
+    padding: 10px;
     text-align: center
 };
+.form-control[readonly] {
+    background-color: #ffffff !important;
+    opacity: 1;
+}

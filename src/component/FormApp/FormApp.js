@@ -9,11 +9,15 @@ class FormApp extends Component {
     this.questionTypeList = [ // list of possible question type
       {
         id: 1,
-        name: "Open"
+        name: "Choix unique"
       },
       {
         id: 2,
-        name: "QCM"
+        name: "Choix multiples"
+      },
+      {
+        id: 3,
+        name: "Champ de texte"
       }
     ]
     // Form data is inside a state so it update the component each time we modify stuff in it
@@ -32,7 +36,7 @@ class FormApp extends Component {
   // Add new question
   handleAddQuestion() {
     let array = this.state.FormData;
-    array.push({ id: array.length + 1, questionType: "" }); // by default a question has an empty question type
+    array.push({ id: array.length + 1, questionType: "Choix unique" }); // by default a question has an empty question type
     this.setState({ FormData: array });
   }
 
@@ -95,13 +99,13 @@ class FormApp extends Component {
           </span>
         </Button>
 
-        <table style={{width:"60%", margin: "auto"}}>
+        <table style={{ width: "60%", margin: "auto" }}>
           <tbody>
             {this.state.FormData.map((Form, idx) => (
               <tr key={idx}>
 
                 <td id="boxQuestionNumber">
-                #{idx + 1}
+                  #{idx + 1}
                 </td>
                 <td id="boxQuestionTitle">
                   <Input
@@ -115,55 +119,59 @@ class FormApp extends Component {
                   {(() => {
                     switch (Form.questionType) {
                       // depending on the type of question, a different input is generated
-                      case "Open": return (<Input
+                      case "Choix unique": return (
+                      <>
+                        <Input
+                          type="radio"
+                          value={Form.value}
+                          onChange={e => this.handleQuestionValueChange(e, idx)}
+                          disabled />
+                        <label for={Form.value}>Réponse 1</label>
+                      </>);
+                      case "Choix multiples": return (
+                        <>
+                          <Input
+                            type="checkbox"
+                            value={Form.value}
+                            onChange={e => this.handleQuestionValueChange(e, idx)}
+                            disabled />
+                          <label for={Form.value}>Réponse 1</label>
+                        </>);
+                      case "Champ de texte": return (<Input
                         type="text"
                         placeholder={`réponse?`}
                         value={Form.value}
                         onChange={e => this.handleQuestionValueChange(e, idx)}
-                      />);
-                      case "QCM": return (<Input
-                        type="radio"
-                        placeholder={`réponse?`}
-                        value={Form.value}
-                        onChange={e => this.handleQuestionValueChange(e, idx)}
+                        disabled
+                        //readOnly
                       />);
                       default: break;
                     }
                   })()}
                 </td>
                 <td id="boxQuestionType">
-                  <select
-                    onChange={e => {
-                      this.handleQuestionTypeChange(e.target.value, idx);
-                    }}
-                    value={Form.questionType || "SelectOption"}
-                  >
-                    <option value="SelectOption" disabled>
-                      Select question type
+
+                  <select className="form-control" onChange={e => { this.handleQuestionTypeChange(e.target.value, idx); }} value={Form.questionType || "SelectOption"}>                    {this.questionTypeList.map(typeData => (
+                    <option
+                      value={typeData.name}
+                      data={typeData}
+                      key={typeData.id}>
+                      {typeData.name}
                     </option>
-                    {this.questionTypeList.map(typeData => (
-                      <option
-                        value={typeData.name}
-                        data={typeData}
-                        key={typeData.id}
-                      >
-                        {typeData.name}
-                      </option>
-                    ))}
+                  ))}
                   </select>
                 </td>
                 <td id="boxRemoveQuestion">
                   <Button
-                    onClick={() => this.handleRemoveQuestion(idx)}
-                  >
-                    remove
+                    onClick={() => this.handleRemoveQuestion(idx)}>
+                    Remove
                   </Button>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
-      </div>
+      </div >
     );
   }
 }
