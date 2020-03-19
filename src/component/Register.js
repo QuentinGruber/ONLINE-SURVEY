@@ -23,6 +23,20 @@ class Register extends React.Component {
     var jwt = require('jsonwebtoken');
     const PUB_key = "maxon"; // TODO: need to read PUB_key from json
 
+
+    function validatePassword() {
+      //check if passwords are the same
+      var password = document.getElementById("Register_pass")
+      var confirm_password = document.getElementById("Register_confirm_pass");
+      if(password.value != confirm_password.value) {
+        confirm_password.setCustomValidity("Les mots de passe ne correspondent pas");
+        return false
+      } else {
+        confirm_password.setCustomValidity('');
+        return true
+      }
+    }
+
     function Verify_register_info() {
       // Display an error if an required input is not good filled
       var form = document.getElementById("registerBox")
@@ -32,9 +46,10 @@ class Register extends React.Component {
       var isValidEmail = document.getElementById("Register_email").checkValidity();
       var isValidPassword = document.getElementById("Register_pass").checkValidity();
       var isValidCheckbox = document.getElementById("check_register").checkValidity();
+      var passwordsMatch = validatePassword()
       // If all required input are correctly filled we check if
       // username is already in our DB or not
-      if (isValidUsername && isValidEmail && isValidPassword && isValidCheckbox) {
+      if (isValidUsername && isValidEmail && isValidPassword && isValidCheckbox && passwordsMatch) {
         Check_Username()
       }
     }
@@ -149,7 +164,17 @@ class Register extends React.Component {
                         <i className="ni ni-lock-circle-open" />
                       </InputGroupText>
                     </InputGroupAddon>
-                    <Input type="password" id="Register_pass" name="password" placeholder="Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Doit contenir au moins un chiffre, une minuscule, une majuscule, et 8 caractères" autoComplete="new-password" required />
+                    <Input type="password" id="Register_pass" name="password" placeholder="Password" onChange={validatePassword} pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Doit contenir au moins un chiffre, une minuscule, une majuscule, et 8 caractères" autoComplete="new-password" required />
+                  </InputGroup>
+                </FormGroup>
+                <FormGroup>
+                  <InputGroup className="input-group-alternative">
+                    <InputGroupAddon addonType="prepend">
+                      <InputGroupText>
+                        <i className="ni ni-lock-circle-open" />
+                      </InputGroupText>
+                    </InputGroupAddon>
+                    <Input type="password" id="Register_confirm_pass" name="confirm_password" onKeyUp={validatePassword} placeholder="Confirm Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Doit contenir au moins un chiffre, une minuscule, une majuscule, et 8 caractères" autoComplete="new-password" required />
                   </InputGroup>
                 </FormGroup>
                 <Row className="my-4">
