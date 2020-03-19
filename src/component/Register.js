@@ -30,8 +30,10 @@ class Register extends React.Component {
       var confirm_password = document.getElementById("Register_confirm_pass");
       if(password.value != confirm_password.value) {
         confirm_password.setCustomValidity("Les mots de passe ne correspondent pas");
+        return false
       } else {
         confirm_password.setCustomValidity('');
+        return true
       }
     }
 
@@ -44,9 +46,10 @@ class Register extends React.Component {
       var isValidEmail = document.getElementById("Register_email").checkValidity();
       var isValidPassword = document.getElementById("Register_pass").checkValidity();
       var isValidCheckbox = document.getElementById("check_register").checkValidity();
+      var passwordsMatch = validatePassword()
       // If all required input are correctly filled we check if
       // username is already in our DB or not
-      if (isValidUsername && isValidEmail && isValidPassword && isValidCheckbox) {
+      if (isValidUsername && isValidEmail && isValidPassword && isValidCheckbox && passwordsMatch) {
         Check_Username()
       }
     }
