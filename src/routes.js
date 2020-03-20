@@ -1,8 +1,8 @@
-import Sidebar from "./component/Sidebar"
-import Userpanel from "./component/UserPanel"
+import Sidebar from "./components/Sidebar"
+import Userpanel from "./components/UserPanel"
 import App from "./App"
-import Login from "./component/Login"
-import Register from "./component/Register"
+import Login from "./components/Login"
+import Register from "./components/Register"
 
 var routes = [
   {

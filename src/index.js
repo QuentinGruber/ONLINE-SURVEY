@@ -6,8 +6,8 @@ import * as serviceWorker from './serviceWorker';
 // import Layout / Route
 import DevLayout from "./layout/Dev.js";
 import AuthLayout from "./layout/Auth.js";
-import Legal from "./component/Legal"
-import CookiesNeeded from "./component/CookiesNeeded.js"
+import Legal from "./components/Legal"
+import CookiesNeeded from "./components/CookiesNeeded.js"
 
 // import css
 import "./assets/css/argon-dashboard-react.css";
