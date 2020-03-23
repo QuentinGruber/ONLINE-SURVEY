@@ -52,16 +52,13 @@ class Login extends React.Component {
 
     }
     return (
-
-
       <>
-        <Col lg="5" md="7">
-          <Card className="bg-secondary shadow border-0">
+          <Card className="fullCard bg-secondary w-33 shadow border-0">
             <CardHeader className="bg-transparent pb-5">
               <div className="text-muted text-center mt-2 mb-3">
                 <small>Se connecter avec</small>
               </div>
-              <div className="btn-wrapper text-center">
+              <div className="apiBox btn-wrapper">
                 <FacebookLogin />
                 <LinkedInLogin />
                 <GoogleLogin />
@@ -69,7 +66,7 @@ class Login extends React.Component {
             </CardHeader>
             <CardBody className="px-lg-5 py-lg-5">
               <div className="text-center text-muted mb-4">
-                <small>Ou se connecter avec les identifiants</small>
+                <small>Ou avec vos identifiants</small>
               </div>
               <Form role="form" id="loginBox">
                 <FormGroup className="mb-3">
@@ -79,7 +76,7 @@ class Login extends React.Component {
                         <i className="ni ni-email-83" />
                       </InputGroupText>
                     </InputGroupAddon>
-                    <Input id="Login_name" name="username" placeholder="Username" />
+                    <Input id="Login_name" name="username" placeholder="Nom d'utilisateur" />
                   </InputGroup>
                 </FormGroup>
                 <FormGroup>
@@ -89,7 +86,7 @@ class Login extends React.Component {
                         <i className="ni ni-lock-circle-open" />
                       </InputGroupText>
                     </InputGroupAddon>
-                    <Input id="Login_pass" name="password" placeholder="Password" type="password" />
+                    <Input id="Login_pass" name="password" placeholder="Mot de passe" type="password" />
                   </InputGroup>
                 </FormGroup>
                 <div className="custom-control custom-control-alternative custom-checkbox">
@@ -107,8 +104,8 @@ class Login extends React.Component {
                   </label>
                 </div>
                 <div className="text-center">
-                  <Button onClick={Login} className="my-4" color="primary" type="button">
-                    Sign in
+                  <Button onClick={Login} className="my-4 btn-trueblue btn-icon" color="default" type="button">
+                    Connexion
                   </Button>
                 </div>
               </Form>
@@ -119,7 +116,7 @@ class Login extends React.Component {
                     href="#pablo"
                     onClick={e => e.preventDefault()}
                   >
-                    <small>Forgot password?</small>
+                    <small>Mot de passe oublié ?</small>
                   </a>
                 </Col>
                 <Col className="text-right" xs="6">
@@ -127,13 +124,12 @@ class Login extends React.Component {
                     to="/auth/register"
                     tag={Link}
                   >
-                    <span className="text-light">Create new account</span>
+                    <small className="text-light">Créer un compte</small>
                   </NavLink>
                 </Col>
               </Row>
             </CardBody>
           </Card>
-        </Col>
       </>
     );
   }

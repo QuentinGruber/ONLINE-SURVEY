@@ -3,6 +3,9 @@ import { Route, Switch, Redirect } from "react-router-dom";
 
 import routes from "../routes.js";
 
+import BackgroundAuth from '../component/sub_component/BackgroundAuth'
+import '../assets/css/auth.css'
+
 class Auth extends React.Component {
   // Get layout's routes
   getRoutes = routes => {

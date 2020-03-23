@@ -16,6 +16,7 @@
 
 */
 :root {
+  --trueblue: #0000FF;
   --blue: #5e72e4;
   --indigo: #5603ad;
   --purple: #8965e0;
@@ -2796,7 +2797,7 @@ input[type="button"].btn-block {
 
 .custom-radio .custom-control-label::before {
   border-radius: 50%; }
-
+  
 .custom-radio .custom-control-input:checked ~ .custom-control-label::before {
   background-color: #5e72e4; }
 
@@ -5523,8 +5524,14 @@ button.bg-darker:focus {
 .w-25 {
   width: 25% !important; }
 
+.w-33 {
+  width: 33% !important; }
+
 .w-50 {
   width: 50% !important; }
+
+.w-66 {
+  width: 66% !important; }
 
 .w-75 {
   width: 75% !important; }
@@ -9938,6 +9945,9 @@ a.text-lighter:hover, a.text-lighter:focus {
 
 .btn-neutral {
   color: #5e72e4; }
+  
+.btn-trueblue {
+    color: #0000FF; }
 
 .btn-icon .btn-inner--icon img {
   width: 20px; }

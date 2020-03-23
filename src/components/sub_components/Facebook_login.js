@@ -122,7 +122,7 @@ class FacebookLogin extends React.Component {
                 fields="name,email"
                 callback={responseFacebook}
                 render={renderProps => (
-                    <Button className="btn-neutral btn-icon" color="default" onClick={renderProps.onClick}>
+                    <Button className="btn-trueblue btn-icon apiButton" color="default" onClick={renderProps.onClick}>
                         <span>Facebook</span>
                     </Button>
                 )} />
