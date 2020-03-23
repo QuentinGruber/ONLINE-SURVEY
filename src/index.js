@@ -6,6 +6,7 @@ import * as serviceWorker from './serviceWorker';
 // import Layout / Route
 import DevLayout from "./layout/Dev.js";
 import AuthLayout from "./layout/Auth.js";
+import Legal from "./component/Legal"
 import CookiesNeeded from "./component/CookiesNeeded.js"
 
 // import css
@@ -25,6 +26,7 @@ ReactDOM.render(
         <Switch>
             <Route path="/dev" render={props => <DevLayout {...props} />} />
             <Route path="/auth" render={props => <AuthLayout {...props} />} />
+            <Route path="/legal" render={props => <Legal {...props} />} />
             <Redirect from="/" to="/dev" />
         </Switch>
     </BrowserRouter>,
