@@ -12,7 +12,6 @@ exports.GetAccessToken = function (req, res) {
         console.log("answer : " + this.responseText);
       }
     };
-    xhttp.handleError()
     // Send a post request
     xhttp.open("POST", "https://www.linkedin.com/oauth/v2/accessToken?code=" + decoded.code + "&client_id=78s03bsfw6m7c3&client_secret=KBghXMRTiKoNycwP&grant_type=authorization_code&redirect_uri=http://localhost:3000/linkedin", true);
     xhttp.send();
