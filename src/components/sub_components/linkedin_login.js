@@ -18,6 +18,7 @@ class LinkedInLogin extends React.Component {
     var jwt = require('jsonwebtoken');
     var jwt_token = jwt.sign({ code: data.code}, PUB_key);
     xhttp.open("POST", process.env.REACT_APP_API_URL + "/linkedin?jwt_token=" + jwt_token + "", true);
+    xhttp.withCredentials = true;
     xhttp.send();
 
   }
