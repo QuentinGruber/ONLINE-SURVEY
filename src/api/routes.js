@@ -101,7 +101,6 @@ app.delete('/Disconnect', urlencodedParser, function (req, res) {
 /* API EXTERNE */
 
 app.post('/linkedin', urlencodedParser, function (req, res) {
-  console.log("linkedin route called")
   linkedin.GetAccessToken(req, res)
 });
 
