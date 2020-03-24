@@ -30,7 +30,8 @@
     "sha1": "1.1.1",
     "simple-git": "^1.130.0",
     "stringify-object": "^3.3.0",
-    "write-json-file": "^4.2.1"
+    "write-json-file": "^4.2.1",
+    "xmlhttprequest": "^1.8.0"
   },
   "scripts": {
     "start": "react-scripts start",

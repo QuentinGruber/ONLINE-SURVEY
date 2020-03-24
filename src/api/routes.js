@@ -10,6 +10,7 @@ const bodyParser = require('body-parser');  // for POST method
 // Export func
 const Forms = require('./routes/Forms');
 const Login_Register = require('./routes/Login_Register');
+const linkedin = require('./routes/linkedin_api')
 
 // get MariaDB config
 MariaDB_config = Sjs.extract("src/Config/MariaDBconfig.json");
@@ -96,6 +97,14 @@ app.delete('/Disconnect', urlencodedParser, function (req, res) {
     res.send(false)
   }
 });
+
+/* API EXTERNE */
+
+app.post('/linkedin', urlencodedParser, function (req, res) {
+  console.log("linkedin route called")
+  linkedin.GetAccessToken(req, res)
+});
+
 
 // Starting our server.
 app.listen(3001, () => {
