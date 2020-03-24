@@ -11,7 +11,7 @@ background-size: cover;
   }
 
 .fullCard {
-  min-width: 350px;
+  min-width: 350px !important;
   position: absolute !important;
   top: 50% !important;
   left: 50% !important;
