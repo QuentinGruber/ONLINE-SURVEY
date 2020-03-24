@@ -15,8 +15,8 @@ import {
   Row,
   Col
 } from "reactstrap";
-import GoogleLogin from './sub_component/Google_login'
-import FacebookLogin from './sub_component/Facebook_login'
+import GoogleLogin from './sub_components/Google_login'
+import FacebookLogin from './sub_components/Facebook_login'
 
 class Register extends React.Component {
   render() {

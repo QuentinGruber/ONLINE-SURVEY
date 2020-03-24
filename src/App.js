@@ -1,8 +1,8 @@
 import React from 'react';
-import Welcome from './component/sub_component/Welcome'
-import Login from './component/Login';
-import Register from './component/Register'
-import Disconnect from './component/Disconnect'
+import Welcome from './components/sub_components/Welcome'
+import Login from './components/Login';
+import Register from './components/Register'
+import Disconnect from './components/Disconnect'
 
 
 
