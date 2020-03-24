@@ -193,7 +193,7 @@ class Register extends React.Component {
 
                         <span className="text-muted">
                           J'accepte les {" "}
-                          <a href="https://www.dofus.com/fr" >
+                          <a href="/legal" >
                             conditions d'utilisation&nbsp;
                           </a>
                           de Online Survey
