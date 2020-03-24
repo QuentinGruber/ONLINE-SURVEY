@@ -17,6 +17,7 @@ import {
 } from "reactstrap";
 import GoogleLogin from './sub_components/Google_login'
 import FacebookLogin from './sub_components/Facebook_login'
+import LinkedInLogin from './sub_components/linkedin_login'
 
 class Register extends React.Component {
   render() {
@@ -28,7 +29,7 @@ class Register extends React.Component {
       //check if passwords are the same
       var password = document.getElementById("Register_pass")
       var confirm_password = document.getElementById("Register_confirm_pass");
-      if(password.value != confirm_password.value) {
+      if(password.value !== confirm_password.value) {
         confirm_password.setCustomValidity("Les mots de passe ne correspondent pas");
         return false
       } else {
@@ -129,6 +130,7 @@ class Register extends React.Component {
               </div>
               <div className="text-center">
                 <FacebookLogin />
+                <LinkedInLogin />
                 <GoogleLogin />
               </div>
             </CardHeader>
@@ -193,7 +195,7 @@ class Register extends React.Component {
 
                         <span className="text-muted">
                           J'accepte les {" "}
-                          <a href="/legal" >
+                          <a href="https://www.dofus.com/fr" >
                             conditions d'utilisation&nbsp;
                           </a>
                           de Online Survey
