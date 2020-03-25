@@ -29,7 +29,7 @@ class Register extends React.Component {
       //check if passwords are the same
       var password = document.getElementById("Register_pass")
       var confirm_password = document.getElementById("Register_confirm_pass");
-      if(password.value !== confirm_password.value) {
+      if(password.value != confirm_password.value) {
         confirm_password.setCustomValidity("Les mots de passe ne correspondent pas");
         return false
       } else {
@@ -129,7 +129,6 @@ class Register extends React.Component {
               </div>
               <div className="apiBox btn-wrapper">
                 <FacebookLogin />
-                <LinkedInLogin />
                 <GoogleLogin />
               </div>
             </CardHeader>
@@ -194,17 +193,17 @@ class Register extends React.Component {
 
                         <span className="text-muted">
                           J'accepte les {" "}
-                          <a href="https://www.dofus.com/fr" >
+                          <a href="/legal" >
                             conditions d'utilisation&nbsp;
                           </a>
                           de Online Survey
                         </span>
-                      </label>
-                    </div>
-                  </Col>
-                </Row>
-                <div className="text-center">
-                  <Button onClick={Verify_register_info} className="my-4 btn-trueblue btn-icon" color="default" type="button" value="SUBMIT">
+                    </label>
+                  </div>
+                </Col>
+              </Row>
+              <div className="text-center">
+                  <Button onClick={Verify_register_info} className="btn-submit p-3 my-1 btn-trueblue btn-icon" color="default" type="button" value="SUBMIT">
                     Inscription
                   </Button>
                 </div>
@@ -219,8 +218,8 @@ class Register extends React.Component {
                     </NavLink>
                   </Col>
                 </Row>
-            </CardBody>
-          </Card>
+          </CardBody>
+        </Card>
       </>
 
     )

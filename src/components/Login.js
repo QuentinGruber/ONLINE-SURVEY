@@ -53,23 +53,24 @@ class Login extends React.Component {
     }
     return (
       <>
+        <BackgroundAuth />
           <Card className="fullCard bg-secondary w-33 shadow border-0">
-            <CardHeader className="bg-transparent pb-5">
-              <div className="text-muted text-center mt-2 mb-3">
+            <CardHeader className="bg-transparent">
+              <div className="text-muted text-center">
                 <small>Se connecter avec</small>
               </div>
-              <div className="apiBox btn-wrapper">
+              <div className="apiBox btn-wrapper mt-3">
                 <FacebookLogin />
                 <LinkedInLogin />
                 <GoogleLogin />
               </div>
             </CardHeader>
-            <CardBody className="px-lg-5 py-lg-5">
+            <CardBody className="px-lg-5">
               <div className="text-center text-muted mb-4">
                 <small>Ou avec vos identifiants</small>
               </div>
               <Form role="form" id="loginBox">
-                <FormGroup className="mb-3">
+                <FormGroup className="mb-4">
                   <InputGroup className="input-group-alternative">
                     <InputGroupAddon addonType="prepend">
                       <InputGroupText>
@@ -89,7 +90,7 @@ class Login extends React.Component {
                     <Input id="Login_pass" name="password" placeholder="Mot de passe" type="password" />
                   </InputGroup>
                 </FormGroup>
-                <div className="custom-control custom-control-alternative custom-checkbox">
+                <div className="custom-control custom-control-alternative custom-checkbox my-4">
                   <input
                     className="custom-control-input"
                     id="check_login"
@@ -104,7 +105,7 @@ class Login extends React.Component {
                   </label>
                 </div>
                 <div className="text-center">
-                  <Button onClick={Login} className="my-4 btn-trueblue btn-icon" color="default" type="button">
+                  <Button onClick={Login} className="btn-submit p-3 my-1 btn-trueblue btn-icon" color="default" type="button">
                     Connexion
                   </Button>
                 </div>
