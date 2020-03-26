@@ -1,5 +1,6 @@
 import React from 'react';
 import LinkedIn from "react-linkedin-login-oauth2";
+import { Button } from 'reactstrap'
 import Axios from 'axios';
 const PUB_key = "maxon"
 
@@ -32,7 +33,7 @@ class LinkedInLogin extends React.Component {
         onSuccess={this.handleSuccess}
         redirectUri="http://localhost:3000/linkedin"
         renderElement={({ onClick, disabled }) => (
-          <button onClick={onClick} disabled={disabled}>linkedin</button>
+          <Button className="btn-neutral btn-icon" color="default" onClick={onClick} disabled={disabled}>Linkedin</Button>
         )}
       />
     )
