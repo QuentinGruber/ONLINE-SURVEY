@@ -56,6 +56,5 @@ exports.LoginWithLinkedin = async function (req, res) {
     catch (e) {
         console.log(e)
     }
-    //console.log(access_token_promise)
     RetrieveUserInfo(access_token_promise.data.access_token, req, res)
 }
