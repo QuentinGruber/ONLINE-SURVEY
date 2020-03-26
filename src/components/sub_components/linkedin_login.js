@@ -1,25 +1,22 @@
 import React from 'react';
 import LinkedIn from "react-linkedin-login-oauth2";
-
+import Axios from 'axios';
 const PUB_key = "maxon"
 
 class LinkedInLogin extends React.Component {
 
-  handleSuccess = (data) => {
-    console.log(data)
-
-    /// A METTRE DANS LE BACK /Linkedin 
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function () { // handle request response
-      if (this.readyState === 4 && this.status === 200) {
-        console.log(this.responseText);
-      }
-    };
+   handleSuccess = async (data) => {
     var jwt = require('jsonwebtoken');
     var jwt_token = jwt.sign({ code: data.code}, PUB_key);
-    xhttp.open("POST", process.env.REACT_APP_API_URL + "/linkedin?jwt_token=" + jwt_token + "", true);
-    xhttp.withCredentials = true;
-    xhttp.send();
+    try {
+      var linkedin_promise = await Axios({
+          method: 'post',
+          url: process.env.REACT_APP_API_URL + "/linkedin?jwt_token=" + jwt_token + ""
+      })
+  }
+  catch (e) {
+      console.log(e)
+  }
 
   }
 
