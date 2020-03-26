@@ -91,6 +91,24 @@ exports.register = function (req, res, connection) {
                         CreateSession(res, req, connection, data.Username)
                     });
             }
+            if (data.Registration_type == "2") {
+                connection.query(
+                    "INSERT INTO users (username,first_name,last_name,mail,registration_type) VALUES (" + "'" + data.Username + "'" + ","
+                    + "'" + data.Fname + "'" + ","
+                    + "'" + data.Lname + "'" + ","
+                    + "'" + data.Email + "'" + ","
+                    + "'" + data.Registration_type + "'" + ");"
+                    , function (sql_error, results, fields) {
+                        // If some error occurs, we throw an error.
+                        if (sql_error) {
+                            res.send("false");
+                            connection.release();
+                        }
+
+                        // Getting the 'response' from the database and sending it to our route. This is were the data is.
+                        CreateSession(res, req, connection, data.Username)
+                    });
+            }
             if (data.Registration_type == "3") {
                 connection.query(
                     "INSERT INTO users (username,mail,registration_type) VALUES (" + "'" + data.Username + "'" + ","
@@ -179,6 +197,9 @@ exports.login = function (req, res, connection) {
 
         }
         if (data.Registration_type == "1") {
+            CreateSession(res, req, connection, data.Username)
+        }
+        if (data.Registration_type == "2") {
             CreateSession(res, req, connection, data.Username)
         }
         if (data.Registration_type == "3") {

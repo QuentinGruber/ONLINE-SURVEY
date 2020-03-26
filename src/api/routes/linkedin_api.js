@@ -37,8 +37,8 @@ async function RetrieveUserInfo(access_token, req, res) {
     let User_email = email_promise.data.elements[0]['handle~'].emailAddress
     let User_LastName = profileInfo_promise.data.localizedLastName
     let User_FirstName = profileInfo_promise.data.localizedFirstName
-
-    console.log(User_email,User_LastName,User_FirstName)
+    var user_data = {givenName:User_FirstName,familyName:User_LastName,email:User_email}
+    res.send(user_data)
 }
 
 
