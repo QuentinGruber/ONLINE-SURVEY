@@ -10,6 +10,7 @@ const bodyParser = require('body-parser');  // for POST method
 // Export func
 const Forms = require('./routes/Forms');
 const Login_Register = require('./routes/Login_Register');
+const linkedin = require('./routes/linkedin_api')
 
 // get MariaDB config
 MariaDB_config = Sjs.extract("src/Config/MariaDBconfig.json");
@@ -60,6 +61,7 @@ app.post('/new_form', urlencodedParser, function (req, res) {
 /*  REGISTER  */
 
 app.post('/sign_up', urlencodedParser, function (req, res) {
+  console.log("/sign_up")
   Login_Register.register(req, res, connection);
 
 });
@@ -67,22 +69,26 @@ app.post('/sign_up', urlencodedParser, function (req, res) {
 /*  LOGIN  */
 
 app.post('/sign_in', urlencodedParser, function (req, res) {
+  console.log("/sign_in")
   Login_Register.login(req, res, connection);
 
 });
 
 // Check if a username exist in our db
 app.post('/Check_Username', urlencodedParser, function (req, res) {
+  console.log("/Check_Username")
   Login_Register.Check_Username(req, res, connection)
 });
 
 // Check if an email exist in our db
 app.post('/Check_Email', urlencodedParser, function (req, res) {
+  console.log("/Check_Email")
   Login_Register.Check_Email(req, res, connection)
 });
 
 // Check registration type to allow api login
 app.post('/Check_RegistrationType', urlencodedParser, function (req, res) {
+  console.log("/Check_RegistrationType")
   Login_Register.Check_RegistrationType(req, res, connection)
 });
 
@@ -96,6 +102,15 @@ app.delete('/Disconnect', urlencodedParser, function (req, res) {
     res.send(false)
   }
 });
+
+/* API EXTERNE */
+
+app.post('/linkedin', urlencodedParser, function (req, res) {
+  console.log("/linkedin")
+
+  linkedin.LoginWithLinkedin(req, res)
+});
+
 
 // Starting our server.
 app.listen(3001, () => {
