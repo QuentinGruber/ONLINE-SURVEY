@@ -144,7 +144,7 @@ class LinkedInLogin extends React.Component {
         clientId="78s03bsfw6m7c3"
         onFailure={handleFailure}
         onSuccess={handleSuccess}
-        redirectUri="http://localhost:3000/linkedin"
+        redirectUri={process.env.REACT_APP_URL}
         renderElement={({ onClick, disabled }) => (
           <Button className="btn-neutral btn-icon" color="default" onClick={onClick} disabled={disabled}>Linkedin</Button>
         )}
