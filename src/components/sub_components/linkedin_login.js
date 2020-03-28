@@ -2,7 +2,6 @@ import React from 'react';
 import LinkedIn from "react-linkedin-login-oauth2";
 import { Button } from 'reactstrap'
 import Axios from 'axios';
-const PUB_key = "maxon"
 
 class LinkedInLogin extends React.Component {
 
@@ -33,7 +32,7 @@ class LinkedInLogin extends React.Component {
     }
   
     
-    const PUB_key = "maxon"; // TODO: need to read PUB_key from json
+    const PUB_key = process.env.REACT_APP_PUB_KEY; 
 
     function Check_Username(user_data) {
         // Check if Username is not already taken

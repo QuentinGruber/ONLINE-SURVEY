@@ -21,7 +21,7 @@ import LinkedInLogin from './sub_components/linkedin_login'
 class Login extends React.Component {
 
   render() {
-    const PUB_key = "maxon"; // TODO: need to read PUB_key from json
+    const PUB_key = process.env.REACT_APP_PUB_KEY;
     function Login() {
       // get our input values
       var username = document.getElementById("Login_name").value;

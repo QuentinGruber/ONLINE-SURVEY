@@ -19,7 +19,7 @@ class Google_Login extends React.Component {
             Google_Login(user_data)
         }
 
-        const PUB_key = "maxon"; // TODO: need to read PUB_key from json
+        const PUB_key = process.env.REACT_APP_PUB_KEY; 
 
         function Check_Username(user_data) {
             // Check if Username is not already taken

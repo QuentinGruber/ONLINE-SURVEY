@@ -22,7 +22,7 @@ import LinkedInLogin from './sub_components/linkedin_login'
 class Register extends React.Component {
   render() {
     var jwt = require('jsonwebtoken');
-    const PUB_key = "maxon"; // TODO: need to read PUB_key from json
+    const PUB_key = process.env.REACT_APP_PUB_KEY;
 
 
     function validatePassword() {
