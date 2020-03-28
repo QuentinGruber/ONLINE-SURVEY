@@ -3,7 +3,6 @@ require("dotenv").config();
 const express = require('express');  // To create the "app"
 const cors = require('cors');  // For security issue
 const mysql = require('mysql'); // to access the database 
-const Sjs = require('@quentingruber/simple-json'); // for json reading
 const session = require('express-session')
 const bodyParser = require('body-parser');  // for POST method
 
@@ -13,14 +12,12 @@ const Login_Register = require('./routes/Login_Register');
 const linkedin = require('./routes/linkedin_api')
 
 // get MariaDB config
-MariaDB_config = Sjs.extract("src/Config/MariaDBconfig.json");
-
 const connection = mysql.createPool({
-  host: MariaDB_config.host, // Your connection address (localhost).
-  user: MariaDB_config.user,     // Your database's username.
-  password: MariaDB_config.password,        // Your database's password.
-  database: MariaDB_config.database,
-  connectionLimit: MariaDB_config.ConnectionLimit
+  host: process.env.REACT_APP_HOST, // Your connection address (localhost).
+  user: process.env.REACT_APP_USER,     // Your database's username.
+  password: process.env.REACT_APP_PASS,        // Your database's password.
+  database: process.env.REACT_APP_DB,
+  connectionLimit: process.env.REACT_APP_CLIMIT
 });
 
 const app = express();
@@ -29,7 +26,7 @@ const app = express();
 app.use(
 
   session({resave: true,
-  saveUninitialized: false ,name: "SessionID",secret: 'maxon'}),
+  saveUninitialized: false ,name: "SessionID",secret: process.env.REACT_APP_SECRET_KEY}),
 
   cors({credentials: true,
     origin: ['https://www.online-survey.app','https://online-survey.app','http://localhost:3000'] // only our webapp has access to the database

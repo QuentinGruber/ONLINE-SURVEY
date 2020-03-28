@@ -1,0 +1,10 @@
+REACT_APP_API_URL = "http://localhost:3001"
+REACT_APP_URL = "http://localhost:3000/linkedin"
+API_ROUTE = "/api/"
+
+REACT_APP_HOST = "localhost"
+REACT_APP_USER = "root"
+REACT_APP_PASS = ""
+REACT_APP_DB = ""
+REACT_APP_CLIMIT = 100
+REACT_APP_SECRET_KEY  = ""

@@ -27,7 +27,7 @@ function CreateSession(res, req, connection, username) { // create session for a
 
 exports.register = function (req, res, connection) {
     try {
-        var decoded = jwt.verify(req.query.jwt_token, MariaDB_config.PUB_key);
+        var decoded = jwt.verify(req.query.jwt_token, process.env.REACT_APP_SECRET_KEY);
         data = { // Fetch data from POST request
             "Username": decoded.username,
             "Email": decoded.email,
@@ -47,7 +47,7 @@ exports.register = function (req, res, connection) {
             // Password encryption
             try {
                 data.Password = sha1(data.Password);
-                data.Password = aes256.encrypt(MariaDB_config.PUB_key, data.Password)
+                data.Password = aes256.encrypt(process.env.REACT_APP_SECRET_KEY, data.Password)
                 WriteUserInfo(req, res, connection)
             }
             catch (e) {
@@ -139,7 +139,7 @@ exports.register = function (req, res, connection) {
 
 exports.login = function (req, res, connection) {
     try {
-        var decoded = jwt.verify(req.query.jwt_token, MariaDB_config.PUB_key);
+        var decoded = jwt.verify(req.query.jwt_token, process.env.REACT_APP_SECRET_KEY);
         data = { // Fetch data from POST request
             "Username": decoded.username,
             "Password": decoded.password,
@@ -171,7 +171,7 @@ exports.login = function (req, res, connection) {
 
                     // Stored Password Decryption
                     try {
-                        Stored_pass = aes256.decrypt(MariaDB_config.PUB_key, Stored_pass)
+                        Stored_pass = aes256.decrypt(process.env.REACT_APP_SECRET_KEY, Stored_pass)
                     }
                     catch (e) {
                         console.error("Stored password fail to decrypt : " + e.message)
@@ -211,7 +211,7 @@ exports.login = function (req, res, connection) {
 // Checks
 
 exports.Check_Username = function (req, res, connection) {
-    var decoded = jwt.verify(req.query.jwt_token, MariaDB_config.PUB_key);
+    var decoded = jwt.verify(req.query.jwt_token, process.env.REACT_APP_SECRET_KEY);
     connection.getConnection(function (err, connection) {
 
         // Executing SQL query
@@ -230,7 +230,7 @@ exports.Check_Username = function (req, res, connection) {
 
 exports.Check_Email = function (req, res, connection) {
     connection.getConnection(function (err, connection) {
-        var decoded = jwt.verify(req.query.jwt_token, MariaDB_config.PUB_key);
+        var decoded = jwt.verify(req.query.jwt_token, process.env.REACT_APP_SECRET_KEY);
         // Executing SQL query
         connection.query("SELECT EXISTS(SELECT * FROM users WHERE mail='" + decoded.email + "');", function (error, results, fields) {
             // If some error occurs, we throw an error.
@@ -247,7 +247,7 @@ exports.Check_Email = function (req, res, connection) {
 
 exports.Check_RegistrationType = function (req, res, connection) {
     connection.getConnection(function (err, connection) {
-        var decoded = jwt.verify(req.query.jwt_token, MariaDB_config.PUB_key);
+        var decoded = jwt.verify(req.query.jwt_token, process.env.REACT_APP_SECRET_KEY);
         // Executing SQL query
         connection.query("SELECT registration_type FROM users WHERE mail ='" + decoded.email + "';", function (error, results, fields) {
             // If some error occurs, we throw an error.

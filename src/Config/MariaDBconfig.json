@@ -1,8 +1,0 @@
-{
-    "host":"localhost",
-    "user":"root",
-    "password":"DBOnlineSurvey123&",
-    "database":"LoginDB",
-    "ConnectionLimit":100,
-    "PUB_key":"maxon"
-}
