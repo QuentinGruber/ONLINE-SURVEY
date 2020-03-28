@@ -21,7 +21,7 @@ import LinkedInLogin from './sub_components/linkedin_login'
 class Login extends React.Component {
 
   render() {
-    const PUB_key = process.env.REACT_APP_PUB_KEY;
+    const SECRET_KEY = process.env.REACT_APP_SECRET_KEY;
     function Login() {
       // get our input values
       var username = document.getElementById("Login_name").value;
@@ -45,7 +45,7 @@ class Login extends React.Component {
       };
       // Send a post request
       var jwt = require('jsonwebtoken');
-      var jwt_token = jwt.sign({ username: username, password: password }, PUB_key);
+      var jwt_token = jwt.sign({ username: username, password: password }, SECRET_KEY);
       xhttp.open("POST", process.env.REACT_APP_API_URL + "/sign_in?jwt_token=" + jwt_token + "", true);
       xhttp.withCredentials = true;
       xhttp.send();

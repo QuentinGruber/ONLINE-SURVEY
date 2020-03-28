@@ -26,7 +26,7 @@ const app = express();
 app.use(
 
   session({resave: true,
-  saveUninitialized: false ,name: "SessionID",secret: process.env.REACT_APP_PUB_KEY}),
+  saveUninitialized: false ,name: "SessionID",secret: process.env.REACT_APP_SECRET_KEY}),
 
   cors({credentials: true,
     origin: ['https://www.online-survey.app','https://online-survey.app','http://localhost:3000'] // only our webapp has access to the database

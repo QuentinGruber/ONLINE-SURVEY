@@ -45,7 +45,7 @@ async function RetrieveUserInfo(access_token, req, res) {
 
 exports.LoginWithLinkedin = async function (req, res) {
 
-    var decoded = jwt.verify(req.query.jwt_token, process.env.REACT_APP_PUB_KEY);
+    var decoded = jwt.verify(req.query.jwt_token, process.env.REACT_APP_SECRET_KEY);
     try {
         var access_token_promise = await Axios({
             method: 'post',
