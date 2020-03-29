@@ -53,7 +53,6 @@ class Login extends React.Component {
     }
     return (
       <>
-        <BackgroundAuth />
           <Card className="fullCard bg-secondary w-33 shadow border-0">
             <CardHeader className="bg-transparent">
               <div className="text-muted text-center">

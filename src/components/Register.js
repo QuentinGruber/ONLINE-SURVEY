@@ -122,74 +122,75 @@ class Register extends React.Component {
 
     return (
       <>
-          <Card className="fullCard bg-secondary w-33 shadow border-0">
-            <CardHeader className="bg-transparent pb-5">
-              <div className="text-muted text-center mt-2 mb-4">
-                <small>S'inscrire avec</small>
-              </div>
-              <div className="apiBox btn-wrapper">
-                <FacebookLogin />
-                <GoogleLogin />
-              </div>
-            </CardHeader>
-            <CardBody className="px-lg-5 py-lg-5">
-              <div className="text-center text-muted mb-4">
-                <small>Ou avec vos identifiants</small>
-              </div>
-              <Form role="form" id="registerBox">
-                <FormGroup>
-                  <InputGroup className="input-group-alternative mb-3">
-                    <InputGroupAddon addonType="prepend">
-                      <InputGroupText>
-                        <i className="ni ni-hat-3" />
-                      </InputGroupText>
-                    </InputGroupAddon>
-                    <Input id="Register_name" name="username" placeholder="Nom d'utilisateur" type="text" pattern='.{3,16}' required />
-                  </InputGroup>
-                </FormGroup>
-                <FormGroup>
-                  <InputGroup className="input-group-alternative mb-3">
-                    <InputGroupAddon addonType="prepend">
-                      <InputGroupText>
-                        <i className="ni ni-email-83" />
-                      </InputGroupText>
-                    </InputGroupAddon>
-                    <Input type="text" id="Register_email" name="email" placeholder="Email" pattern='^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$' title="Doit respecter le format d'un email" required />
-                  </InputGroup>
-                </FormGroup>
-                <FormGroup>
-                  <InputGroup className="input-group-alternative">
-                    <InputGroupAddon addonType="prepend">
-                      <InputGroupText>
-                        <i className="ni ni-lock-circle-open" />
-                      </InputGroupText>
-                    </InputGroupAddon>
-                    <Input type="password" id="Register_pass" name="password" placeholder="Mot de passe" onChange={validatePassword} pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Doit contenir au moins un chiffre, une minuscule, une majuscule, et 8 caractères" autoComplete="new-password" required />
-                  </InputGroup>
-                </FormGroup>
-                <FormGroup>
-                  <InputGroup className="input-group-alternative">
-                    <InputGroupAddon addonType="prepend">
-                      <InputGroupText>
-                        <i className="ni ni-lock-circle-open" />
-                      </InputGroupText>
-                    </InputGroupAddon>
-                    <Input type="password" id="Register_confirm_pass" name="confirm_password" onKeyUp={validatePassword} placeholder="Confirmer mot de passe" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Doit contenir au moins un chiffre, une minuscule, une majuscule, et 8 caractères" autoComplete="new-password" required />
-                  </InputGroup>
-                </FormGroup>
-                <Row className="my-4">
-                  <Col xs="12">
-                    <div className="custom-control custom-control-alternative custom-checkbox">
-                      <input
-                        className="custom-control-input"
-                        id="check_register"
-                        type="checkbox"
-                        name="checkbox inscription"
-                        required
-                      />
-                      <label
-                        className="custom-control-label"
-                        htmlFor="check_register">
+        <BackgroundAuth />
+        <Card className="fullCard bg-secondary w-33 shadow border-0">
+          <CardHeader className="bg-transparent ">
+            <div className="text-muted text-center">
+              <small>S'inscrire avec</small>
+            </div>
+            <div className="apiBox btn-wrapper mt-3">
+              <FacebookLogin />
+              <GoogleLogin />
+            </div>
+          </CardHeader>
+          <CardBody className="px-lg-5">
+            <div className="text-center text-muted mb-4">
+              <small>Ou avec vos identifiants</small>
+            </div>
+            <Form role="form" id="registerBox">
+              <FormGroup>
+                <InputGroup className="input-group-alternative mb-3">
+                  <InputGroupAddon addonType="prepend">
+                    <InputGroupText>
+                      <i className="ni ni-hat-3" />
+                    </InputGroupText>
+                  </InputGroupAddon>
+                  <Input id="Register_name" name="username" placeholder="Nom d'utilisateur" type="text" pattern='.{3,16}' required />
+                </InputGroup>
+              </FormGroup>
+              <FormGroup>
+                <InputGroup className="input-group-alternative mb-3">
+                  <InputGroupAddon addonType="prepend">
+                    <InputGroupText>
+                      <i className="ni ni-email-83" />
+                    </InputGroupText>
+                  </InputGroupAddon>
+                  <Input type="text" id="Register_email" name="email" placeholder="Email" pattern='^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$' title="Doit respecter le format d'un email" required />
+                </InputGroup>
+              </FormGroup>
+              <FormGroup>
+                <InputGroup className="input-group-alternative">
+                  <InputGroupAddon addonType="prepend">
+                    <InputGroupText>
+                      <i className="ni ni-lock-circle-open" />
+                    </InputGroupText>
+                  </InputGroupAddon>
+                  <Input type="password" id="Register_pass" name="password" placeholder="Mot de passe" onChange={validatePassword} pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Doit contenir au moins un chiffre, une minuscule, une majuscule, et 8 caractères" autoComplete="new-password" required />
+                </InputGroup>
+              </FormGroup>
+              <FormGroup>
+                <InputGroup className="input-group-alternative">
+                  <InputGroupAddon addonType="prepend">
+                    <InputGroupText>
+                      <i className="ni ni-lock-circle-open" />
+                    </InputGroupText>
+                  </InputGroupAddon>
+                  <Input type="password" id="Register_confirm_pass" name="confirm_password" onKeyUp={validatePassword} placeholder="Confirmer mot de passe" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Doit contenir au moins un chiffre, une minuscule, une majuscule, et 8 caractères" autoComplete="new-password" required />
+                </InputGroup>
+              </FormGroup>
+              <Row className="my-2">
+                <Col xs="12">
+                  <div className="custom-control custom-control-alternative custom-checkbox">
+                    <input
+                      className="custom-control-input"
+                      id="check_register"
+                      type="checkbox"
+                      name="checkbox inscription"
+                      required
+                    />
+                    <label
+                      className="custom-control-label"
+                      htmlFor="check_register">
 
                         <span className="text-muted">
                           J'accepte les {" "}

@@ -1,15 +1,14 @@
 import React from 'react';
-import '../../assets/css/auth.css';
-
 
 class BackgroundAuth extends React.Component {
   render() {
     return <>
       <div className="whiteDiv">
       </div>
-
-      <div classname="boxText">
-
+      
+      <div className="boxText">
+        <div className="boxTextTitre">Online Survey</div>
+        <div className="boxTextSlogan">Your forms, made simple</div>
       </div>
     </>;
   }
