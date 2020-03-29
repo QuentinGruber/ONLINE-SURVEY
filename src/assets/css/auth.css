@@ -69,3 +69,15 @@ background-size: cover;
 .boxTextTitre {
   font-size: 40px;
 }
+
+@media screen and (max-width: 600px) {
+  .fullCard {
+    top: 65% !important;
+  }
+
+  .whiteDiv {
+    display: none;
+  }
+
+}
+
