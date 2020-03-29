@@ -8,7 +8,7 @@ class BackgroundAuth extends React.Component {
       
       <div className="boxText">
         <div className="boxTextTitre">Online Survey</div>
-        <div className="boxTextSlogan">Your forms, made simple</div>
+        <div>Your forms, made simple</div>
       </div>
     </>;
   }
