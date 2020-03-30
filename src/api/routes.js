@@ -7,9 +7,9 @@ const session = require('express-session')
 const bodyParser = require('body-parser');  // for POST method
 
 // Export func
-const Forms = require('./routes/Forms');
-const Login_Register = require('./routes/Login_Register');
-const linkedin = require('./routes/linkedin_api')
+const FormsController = require('./controllers/FormsController');
+const AuthController = require('./controllers/AuthController');
+const LinkedinAPIController = require('./controllers/LinkedinAPIController')
 
 // get MariaDB config
 const connection = mysql.createPool({
@@ -52,36 +52,36 @@ app.get('/welcome', function (req, res) {   // get name of a logged user
 
 /*  NEW FORM  */
 app.post('/new_form', urlencodedParser, function (req, res) {
-  Forms.create_new_form(req, res);
+  FormsController.create_new_form(req, res);
 });
 
 /*  REGISTER  */
 
 app.post('/sign_up', urlencodedParser, function (req, res) {
-  Login_Register.register(req, res, connection);
+  AuthController.register(req, res, connection);
 
 });
 
 /*  LOGIN  */
 
 app.post('/sign_in', urlencodedParser, function (req, res) {
-  Login_Register.login(req, res, connection);
+  AuthController.login(req, res, connection);
 
 });
 
 // Check if a username exist in our db
 app.post('/Check_Username', urlencodedParser, function (req, res) {
-  Login_Register.Check_Username(req, res, connection)
+  AuthController.Check_Username(req, res, connection)
 });
 
 // Check if an email exist in our db
 app.post('/Check_Email', urlencodedParser, function (req, res) {
-  Login_Register.Check_Email(req, res, connection)
+  AuthController.Check_Email(req, res, connection)
 });
 
 // Check registration type to allow api login
 app.post('/Check_RegistrationType', urlencodedParser, function (req, res) {
-  Login_Register.Check_RegistrationType(req, res, connection)
+  AuthController.Check_RegistrationType(req, res, connection)
 });
 
 app.delete('/Disconnect', urlencodedParser, function (req, res) {
@@ -98,7 +98,7 @@ app.delete('/Disconnect', urlencodedParser, function (req, res) {
 /* API EXTERNE */
 
 app.post('/linkedin', urlencodedParser, function (req, res) {
-  linkedin.LoginWithLinkedin(req, res)
+  LinkedinAPIController.LoginWithLinkedin(req, res)
 });
 
 
