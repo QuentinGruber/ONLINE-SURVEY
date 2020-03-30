@@ -1,0 +1,10 @@
+{
+    "dev": {
+      "host": "localhost",
+      "user": { "ENV" : "REACT_APP_USER" },
+      "password" : { "ENV" : "REACT_APP_PASS" },
+      "database": { "ENV" : "REACT_APP_DB" },
+      "driver": "mysql",
+      "multipleStatements": true
+    }
+  }
