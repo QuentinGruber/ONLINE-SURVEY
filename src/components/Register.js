@@ -122,7 +122,6 @@ class Register extends React.Component {
 
     return (
       <>
-        <BackgroundAuth />
         <Card className="fullCard bg-secondary w-33 shadow border-0">
           <CardHeader className="bg-transparent ">
             <div className="text-muted text-center">
@@ -130,6 +129,7 @@ class Register extends React.Component {
             </div>
             <div className="apiBox btn-wrapper mt-3">
               <FacebookLogin />
+              <LinkedInLogin />
               <GoogleLogin />
             </div>
           </CardHeader>

@@ -145,7 +145,7 @@ class LinkedInLogin extends React.Component {
         onSuccess={handleSuccess}
         redirectUri={process.env.REACT_APP_URL}
         renderElement={({ onClick, disabled }) => (
-          <Button className="btn-neutral btn-icon" color="default" onClick={onClick} disabled={disabled}>Linkedin</Button>
+          <Button className="btn-icon apiButton" color="default" onClick={onClick} disabled={disabled}>Linkedin</Button>
         )}
       />
     )
