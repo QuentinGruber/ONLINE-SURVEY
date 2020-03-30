@@ -104,7 +104,7 @@ class Login extends React.Component {
                   </label>
                 </div>
                 <div className="text-center">
-                  <Button onClick={Login} className="btn-submit p-3 my-1 btn-trueblue btn-icon" color="default" type="button">
+                  <Button onClick={Login} className="btn-submit p-3 my-1 btn-icon" color="default" type="button">
                     Connexion
                   </Button>
                 </div>

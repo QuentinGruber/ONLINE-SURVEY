@@ -204,7 +204,7 @@ class Register extends React.Component {
                 </Col>
               </Row>
               <div className="text-center">
-                  <Button onClick={Verify_register_info} className="btn-submit p-3 my-1 btn-trueblue btn-icon" color="default" type="button" value="SUBMIT">
+                  <Button onClick={Verify_register_info} className="btn-submit p-3 my-1 btn-icon" color="default" type="button" value="SUBMIT">
                     Inscription
                   </Button>
                 </div>
