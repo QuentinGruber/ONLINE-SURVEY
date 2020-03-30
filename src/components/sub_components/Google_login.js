@@ -128,7 +128,7 @@ class Google_Login extends React.Component {
             <GoogleLogin
                 clientId="367335034854-8kolqq461bk29p1fl7umg0n0m2c8tacc.apps.googleusercontent.com"
                 render={renderProps => (
-                    <Button className="btn-neutral btn-icon" color="default" onClick={renderProps.onClick} disabled={renderProps.disabled}>
+                    <Button className="btn-icon apiButton" color="default" onClick={renderProps.onClick} >
                         <span className="btn-inner--text">Google</span>
                     </Button>
                 )}

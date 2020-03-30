@@ -12,8 +12,6 @@ import CookiesNeeded from "./components/CookiesNeeded.js"
 
 // import css
 import "./assets/css/argon-dashboard-react.css";
-import "./assets/css/argon-dashboard-react.min.css";
-import "./assets/css/argon-dashboard-react.css.map";
 
 // init Google Analytics
 import ReactGA from 'react-ga';

@@ -29,7 +29,7 @@ class Register extends React.Component {
       //check if passwords are the same
       var password = document.getElementById("Register_pass")
       var confirm_password = document.getElementById("Register_confirm_pass");
-      if(password.value !== confirm_password.value) {
+      if(password.value != confirm_password.value) {
         confirm_password.setCustomValidity("Les mots de passe ne correspondent pas");
         return false
       } else {
@@ -122,117 +122,105 @@ class Register extends React.Component {
 
     return (
       <>
-        <Col lg="6" md="8">
-          <Card className="bg-secondary shadow border-0">
-            <CardHeader className="bg-transparent pb-5">
-              <div className="text-muted text-center mt-2 mb-4">
-                <small>S'inscrire avec</small>
-              </div>
-              <div className="text-center">
-                <FacebookLogin />
-                <LinkedInLogin />
-                <GoogleLogin />
-              </div>
-            </CardHeader>
-            <CardBody className="px-lg-5 py-lg-5">
-              <div className="text-center text-muted mb-4">
-                <small>Ou s'inscrire avec les identifiants</small>
-              </div>
-              <Form role="form" id="registerBox">
-                <FormGroup>
-                  <InputGroup className="input-group-alternative mb-3">
-                    <InputGroupAddon addonType="prepend">
-                      <InputGroupText>
-                        <i className="ni ni-hat-3" />
-                      </InputGroupText>
-                    </InputGroupAddon>
-                    <Input id="Register_name" name="username" placeholder="Username" type="text" pattern='.{3,16}' required />
-                  </InputGroup>
-                </FormGroup>
-                <FormGroup>
-                  <InputGroup className="input-group-alternative mb-3">
-                    <InputGroupAddon addonType="prepend">
-                      <InputGroupText>
-                        <i className="ni ni-email-83" />
-                      </InputGroupText>
-                    </InputGroupAddon>
-                    <Input type="text" id="Register_email" name="email" placeholder="Email" pattern='^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$' title="Doit respecter le format d'un email" required />
-                  </InputGroup>
-                </FormGroup>
-                <FormGroup>
-                  <InputGroup className="input-group-alternative">
-                    <InputGroupAddon addonType="prepend">
-                      <InputGroupText>
-                        <i className="ni ni-lock-circle-open" />
-                      </InputGroupText>
-                    </InputGroupAddon>
-                    <Input type="password" id="Register_pass" name="password" placeholder="Password" onChange={validatePassword} pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Doit contenir au moins un chiffre, une minuscule, une majuscule, et 8 caractères" autoComplete="new-password" required />
-                  </InputGroup>
-                </FormGroup>
-                <FormGroup>
-                  <InputGroup className="input-group-alternative">
-                    <InputGroupAddon addonType="prepend">
-                      <InputGroupText>
-                        <i className="ni ni-lock-circle-open" />
-                      </InputGroupText>
-                    </InputGroupAddon>
-                    <Input type="password" id="Register_confirm_pass" name="confirm_password" onKeyUp={validatePassword} placeholder="Confirm Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Doit contenir au moins un chiffre, une minuscule, une majuscule, et 8 caractères" autoComplete="new-password" required />
-                  </InputGroup>
-                </FormGroup>
-                <Row className="my-4">
-                  <Col xs="12">
-                    <div className="custom-control custom-control-alternative custom-checkbox">
-                      <input
-                        className="custom-control-input"
-                        id="check_register"
-                        type="checkbox"
-                        name="checkbox inscription"
-                        required
-                      />
-                      <label
-                        className="custom-control-label"
-                        htmlFor="check_register">
+        <Card className="fullCard bg-secondary w-33 shadow border-0">
+          <CardHeader className="bg-transparent ">
+            <div className="text-muted text-center">
+              <small>S'inscrire avec</small>
+            </div>
+            <div className="apiBox btn-wrapper mt-3">
+              <FacebookLogin />
+              <LinkedInLogin />
+              <GoogleLogin />
+            </div>
+          </CardHeader>
+          <CardBody className="px-lg-5">
+            <div className="text-center text-muted mb-4">
+              <small>Ou avec vos identifiants</small>
+            </div>
+            <Form role="form" id="registerBox">
+              <FormGroup>
+                <InputGroup className="input-group-alternative mb-3">
+                  <InputGroupAddon addonType="prepend">
+                    <InputGroupText>
+                      <i className="ni ni-hat-3" />
+                    </InputGroupText>
+                  </InputGroupAddon>
+                  <Input id="Register_name" name="username" placeholder="Nom d'utilisateur" type="text" pattern='.{3,16}' required />
+                </InputGroup>
+              </FormGroup>
+              <FormGroup>
+                <InputGroup className="input-group-alternative mb-3">
+                  <InputGroupAddon addonType="prepend">
+                    <InputGroupText>
+                      <i className="ni ni-email-83" />
+                    </InputGroupText>
+                  </InputGroupAddon>
+                  <Input type="text" id="Register_email" name="email" placeholder="Email" pattern='^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$' title="Doit respecter le format d'un email" required />
+                </InputGroup>
+              </FormGroup>
+              <FormGroup>
+                <InputGroup className="input-group-alternative">
+                  <InputGroupAddon addonType="prepend">
+                    <InputGroupText>
+                      <i className="ni ni-lock-circle-open" />
+                    </InputGroupText>
+                  </InputGroupAddon>
+                  <Input type="password" id="Register_pass" name="password" placeholder="Mot de passe" onChange={validatePassword} pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Doit contenir au moins un chiffre, une minuscule, une majuscule, et 8 caractères" autoComplete="new-password" required />
+                </InputGroup>
+              </FormGroup>
+              <FormGroup>
+                <InputGroup className="input-group-alternative">
+                  <InputGroupAddon addonType="prepend">
+                    <InputGroupText>
+                      <i className="ni ni-lock-circle-open" />
+                    </InputGroupText>
+                  </InputGroupAddon>
+                  <Input type="password" id="Register_confirm_pass" name="confirm_password" onKeyUp={validatePassword} placeholder="Confirmer mot de passe" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Doit contenir au moins un chiffre, une minuscule, une majuscule, et 8 caractères" autoComplete="new-password" required />
+                </InputGroup>
+              </FormGroup>
+              <Row className="my-2">
+                <Col xs="12">
+                  <div className="custom-control custom-control-alternative custom-checkbox">
+                    <input
+                      className="custom-control-input"
+                      id="check_register"
+                      type="checkbox"
+                      name="checkbox inscription"
+                      required
+                    />
+                    <label
+                      className="custom-control-label"
+                      htmlFor="check_register">
 
                         <span className="text-muted">
                           J'accepte les {" "}
-                          <a href="https://www.dofus.com/fr" >
+                          <a href="/legal" >
                             conditions d'utilisation&nbsp;
                           </a>
                           de Online Survey
                         </span>
-                      </label>
-                    </div>
-                  </Col>
-                </Row>
-                <div className="text-center">
-                  <Button onClick={Verify_register_info} id="registerSubmitButton" className="mt-4" color="primary" type="button" value="SUBMIT">
-                    S'inscrire
+                    </label>
+                  </div>
+                </Col>
+              </Row>
+              <div className="text-center">
+                  <Button onClick={Verify_register_info} className="btn-submit p-3 my-1 btn-icon" color="default" type="button" value="SUBMIT">
+                    Inscription
                   </Button>
                 </div>
-
-                <Row className="mt-3">
-                  <Col xs="6">
-                    <a
-                      className="text-light"
-                      href="#pablo"
-                      onClick={e => e.preventDefault()}
-                    >
-                      <small>Forgot password?</small>
-                    </a>
-                  </Col>
-                  <Col className="text-right" xs="6">
+                </Form>
+                <Row>
+                  <Col className="text-right">
                     <NavLink
                       to="/auth/login"
                       tag={Link}
                     >
-                      <span className="text-light">Log in to an existing account</span>
+                      <small className="text-light">Se connecter à un compte existant</small>
                     </NavLink>
                   </Col>
                 </Row>
-              </Form>
-            </CardBody>
-          </Card>
-        </Col>
+          </CardBody>
+        </Card>
       </>
 
     )
