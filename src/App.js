@@ -1,23 +1,20 @@
 import React from 'react';
-import Welcome from './component/sub_component/Welcome'
-import Login from './component/Login';
-import Register from './component/Register'
-import Disconnect from './component/Disconnect'
-import { render } from '@testing-library/react';
+import Welcome from './components/sub_components/Welcome'
+import Login from './components/Login';
+import Register from './components/Register'
+import Disconnect from './components/Disconnect'
 
 
-class App extends React.Component {
 
-  componentDidMount(){
-  require('./component/FormApp/FormApp')
-  }
-  render(){
-    var formItems = []//[{id: 1, questionType: "", name: "sex"},{id: 2, questionType: "", name: "pd"}]
+function App() {
   return (
-    <div className="App" id="form" data={formItems}>
+    <div className="App">
+      <Welcome />
+      <Login />
+      <Register />
+      <Disconnect />
     </div>
   );
-  }
 }
 
 export default App;

@@ -175,4 +175,4 @@ class FormApp extends Component {
     );
   }
 }
-ReactDOM.render(<FormApp data={document.getElementById('form').getAttribute('data')} />, document.getElementById('form'));
+//ReactDOM.render(<FormApp data={document.getElementById('form').getAttribute('data')} />, document.getElementById('form'));

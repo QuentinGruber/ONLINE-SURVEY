@@ -1,8 +1,9 @@
-import Sidebar from "./components/Sidebar";
-import Userpanel from "./components/UserPanel";
-import App from "./App";
-import Login from "./components/Login";
-import Register from "./components/Register";
+import Sidebar from "./components/Sidebar"
+import Userpanel from "./components/UserPanel"
+import FormApp from "./components/FormApp/FormApp"
+import App from "./App"
+import Login from "./components/Login"
+import Register from "./components/Register"
 
 var routes = [
   {
@@ -19,6 +20,11 @@ var routes = [
     path: "/userpanel",
     component: Userpanel,
     layout: "/dev",
+  },
+  {
+    path: "/new",
+    component: "nothing here",
+    layout: "/form"
   },
   {
     path: "/login",
