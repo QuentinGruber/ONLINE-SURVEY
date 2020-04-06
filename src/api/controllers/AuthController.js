@@ -161,10 +161,10 @@ exports.login = function (req, res, connection) {
                 "SELECT pass FROM users WHERE username='" + data.Username + "';"
                 , function (sql_error, results, fields) {
                     // If some error occurs, we throw an error.
-                    if (sql_error) res.send(false);
+                    if (sql_error) res.send("false");
                     if (results.length > 0) var Stored_pass = results[0].pass; // if provided username is in our database
                     else {
-                        res.send(false); // if not send false
+                        res.send("false"); // if not send false
                         connection.release()
                         return; // and stop the connection.query
                     }
@@ -189,7 +189,7 @@ exports.login = function (req, res, connection) {
                         CreateSession(res, req, connection, data.Username)
                     }
                     else {
-                        res.send(false);
+                        res.send("false");
                         connection.release()
                     }
 
