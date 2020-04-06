@@ -41,7 +41,8 @@
     "api": "node src/api/routes.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "quick-install": "npm i & db-migrate up & echo Run npm start to start frontend server & echo Run npm run api to start backend server"
   },
   "eslintConfig": {
     "extends": "react-app"
