@@ -23,7 +23,7 @@ Change :
 
 ### Auto
 
-`npm run quick-install`
+* `npm run quick-install`
 
 ### Manually
 
