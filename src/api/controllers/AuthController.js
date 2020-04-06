@@ -222,7 +222,8 @@ exports.Check_Username = function (req, res, connection) {
                 connection.release()
             }
             // Getting the 'response' from the database and sending it to our route. This is were the data is.
-            res.send(results)
+            let result_converted = Object.values(results[0])
+            res.send(JSON.stringify(result_converted[0]))
             connection.release()
         });
     });
@@ -239,7 +240,8 @@ exports.Check_Email = function (req, res, connection) {
                 connection.release()
             }
             // Getting the 'response' from the database and sending it to our route. This is were the data is.
-            res.send(results)
+            let result_converted = Object.values(results[0])
+            res.send(JSON.stringify(result_converted[0]))
             connection.release()
         });
     });
@@ -256,7 +258,8 @@ exports.Check_RegistrationType = function (req, res, connection) {
                 connection.release()
             }
             // Getting the 'response' from the database and sending it to our route. This is were the data is.
-            res.send(results)
+            let result_converted = Object.values(results[0])
+            res.send(JSON.stringify(result_converted[0]))
             connection.release()
         });
     });

@@ -9,7 +9,7 @@ function Check_Username(user_data,registration_type,registration_type_name) {
     xhttp.onreadystatechange = function () { // handle request response
         if (this.readyState === 4 && this.status === 200) {
             // response format is a rowdatapacket so it was needed to do like that.
-            if (Object.values(this.response[Object.values(this.response).length - 3])[0] === "0")
+            if (this.response === "0")
                 // next step check if provided username isn't already in our database
                 Register_user(user_data,registration_type,registration_type_name)
 
@@ -41,7 +41,8 @@ function Register_user(user_data,registration_type,registration_type_name) {
     };
     // Send a post request
 
-    var jwt_token = jwt.sign({ username: user_data.username, lname: user_data.lname, fname: user_data.fname, email: user_data.email, registration_type: registration_type }, process.env.REACT_APP_SECRET_KEY);
+    var jwt_token = jwt.sign({ username: user_data.username, lname: user_data.lname, fname: user_data.fname,
+         email: user_data.email, registration_type: registration_type }, process.env.REACT_APP_SECRET_KEY);
     xhttp.open("POST", process.env.REACT_APP_API_URL + "/sign_up?jwt_token=" + jwt_token + "", true);
     xhttp.withCredentials = true;
     xhttp.send();
@@ -53,14 +54,14 @@ exports.Login = function(user_data,registration_type,registration_type_name) {
         if (this.readyState === 4 && this.status === 200) {
             if (this.responseText !== "false") {
                 // next step check if provided email isn't already in our database
-                if (Object.values(this.response[Object.values(this.response).length - 3])[0] === "0") {
+                if (this.response === "0") {
                     // if not check if the username we want to give isn't already taken
                     Check_Username(user_data,registration_type,registration_type_name)
                 }
                 else {
                     xhttp.onreadystatechange = function () { // handle request response
                         if (this.readyState === 4 && this.status === 200) {
-                            if (Object.values(this.response[Object.values(this.response).length - 3])[0] === registration_type) {
+                            if (this.response === registration_type) {
                                 var xhttp = new XMLHttpRequest();
                                 xhttp.onreadystatechange = function () { // handle request response
                                     if (this.readyState === 4 && this.status === 200) {
