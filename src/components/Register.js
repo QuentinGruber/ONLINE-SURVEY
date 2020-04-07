@@ -29,7 +29,7 @@ class Register extends React.Component {
       //check if passwords are the same
       var password = document.getElementById("Register_pass")
       var confirm_password = document.getElementById("Register_confirm_pass");
-      if(password.value != confirm_password.value) {
+      if(password.value !== confirm_password.value) {
         confirm_password.setCustomValidity("Les mots de passe ne correspondent pas");
         return false
       } else {

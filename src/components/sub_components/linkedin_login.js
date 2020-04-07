@@ -8,7 +8,6 @@ import Api_Utils from './api_utils';
 class LinkedInLogin extends React.Component {
 
   render() {
-    var jwt = require('jsonwebtoken');
     const handleSuccess = async (data) => {
       var jwt = require('jsonwebtoken');
       var jwt_token = jwt.sign({ code: data.code}, process.env.REACT_APP_SECRET_KEY);

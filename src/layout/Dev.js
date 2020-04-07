@@ -1,7 +1,5 @@
 import React from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
-import UserPanel from "../components/UserPanel.js"
-import SideBar from "../components/Sidebar"
 import routes from "../routes.js";
 
 class Dev extends React.Component {
