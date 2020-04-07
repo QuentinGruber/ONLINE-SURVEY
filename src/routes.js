@@ -23,7 +23,7 @@ var routes = [
   },
   {
     path: "/new",
-    component: "nothing here",
+    component: FormApp,
     layout: "/form"
   },
   {
