@@ -36,6 +36,7 @@ class Auth extends React.Component {
     require('../assets/css/auth.css') // import CSS for /Auth only
     return (
       <>
+      {document.body.classList.add('bg-auth')}
         <div className="whiteDiv">
         </div>
 
