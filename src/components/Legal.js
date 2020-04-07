@@ -3,7 +3,7 @@ class Legal extends React.Component {
   render() {
       // Le code js s'écrit ici
     return (
-        <div style={{textAlign:"center", width:"90%", margin:"10%"}}>
+        <div style={{margin:"10%"}}>
         {/*L'html s'écrit ici*/}
         <a href id="presentation"><h2>I. Présentation du site internet. </h2> </a><br/> <br/>
       En vertu de l'<i>article 6 de la loi n° 2004-575 du 21 juin 2004</i> pour la confiance dans l'économie numérique, il est précisé aux utilisateurs
