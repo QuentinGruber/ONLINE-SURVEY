@@ -1,7 +1,6 @@
 import React from 'react';
-import { Button, Input } from 'reactstrap'
 
-class NewTodo extends React.Component {
+class NewQuestion extends React.Component {
   constructor(props) {
     super(props);
     this.onSubmit = this.onSubmit.bind(this);
@@ -23,11 +22,11 @@ class NewTodo extends React.Component {
   render() {
     return (
       <form ref="NewItemForm" onSubmit={this.onSubmit} className="form-inline">
-        <input type="text" ref="itemName" className="form-control input-add" placeholder="add a new todo..." />
+        <input type="text" ref="itemName" className="form-control input-add" placeholder="add a new question..." />
         <button type="submit" className="btn btn-secondary button-add">Add</button>
       </form>
     );
   }
 }
 
-export default NewTodo;
+export default NewQuestion;

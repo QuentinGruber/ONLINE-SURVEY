@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from 'reactstrap'
 
-class SaveTodoList extends React.Component {
+class SaveForm extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -12,4 +12,4 @@ class SaveTodoList extends React.Component {
   }
 }
 
-export default SaveTodoList;
+export default SaveForm;
