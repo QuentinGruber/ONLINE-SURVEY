@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button } from 'reactstrap'
+import { Button , Input} from 'reactstrap'
 
 class FormItem extends React.Component {
   constructor(props) {
@@ -11,8 +11,6 @@ class FormItem extends React.Component {
     this.props.removeItem(index); // remove it
   }
   render() {
-    var ItemClass = this.props.item.done ?
-      "done" : "undone";
     return (
       <>
         {/* If is a title */}
@@ -23,9 +21,9 @@ class FormItem extends React.Component {
         {this.props.item.title == undefined &&
           // if not display item layout
           <li className="list-group-item card">
-            <span className={ItemClass + " no-transition"}>
-              {this.props.item.value}
-            </span>
+            <Input className="question" type="text" placeholder="Titre de la question" 
+            value={this.props.item.value} onChange={e => this.props.handleChangeQuestionTitle(e.target.value,this.props.index)}/>
+            {/* type de reponse */}
             <Button type="button" className="close" onClick={this.onClickDelete}>&times;</Button>
           </li>
         }

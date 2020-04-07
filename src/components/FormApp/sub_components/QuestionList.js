@@ -7,7 +7,8 @@ class QuestionList extends React.Component {
     var items = this.props.items.map((item, index) => {
       return (
         <div className="no-transition" id="question">
-          <FormItem userole={this.props.userole} key={index} item={item} index={index} removeItem={this.props.removeItem} />
+          <FormItem userole={this.props.userole} key={index} item={item} index={index} removeItem={this.props.removeItem}
+          handleChangeQuestionTitle={this.props.handleChangeQuestionTitle} />
         </div>
       );
     });

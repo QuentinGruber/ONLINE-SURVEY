@@ -15,6 +15,7 @@ class FormApp extends React.Component {
     this.isNew = true; // by default the question_list is a new one
     this.FormID = 1; // the id of the current question_list
     this.handleChangeTitle = this.handleChangeTitle.bind(this);
+    this.handleChangeQuestionTitle = this.handleChangeQuestionTitle.bind(this);
     this.addItem = this.addItem.bind(this);
     this.removeItem = this.removeItem.bind(this);
     this.saveItem = this.saveItem.bind(this);
@@ -76,6 +77,12 @@ class FormApp extends React.Component {
 
   handleChangeTitle(title) { // change title in component state
     this.setState({ FormName: title });
+  }
+
+  handleChangeQuestionTitle(title,idx) { // change title in component state
+    let temp_formitems = this.state.formitems;
+    temp_formitems[idx].value = title;
+    this.setState({ formitems: temp_formitems });
   }
 
 
@@ -198,7 +205,8 @@ class FormApp extends React.Component {
           <FormTitle handleChangeTitle={this.handleChangeTitle} title={this.state.FormName} />
           : <Input value={this.state.FormName} disabled></Input>
         }
-        <QuestionList userole={this.CurrentUserRole} items={formitems} removeItem={this.removeItem} />
+        <QuestionList userole={this.CurrentUserRole} items={formitems} removeItem={this.removeItem}
+        handleChangeQuestionTitle={this.handleChangeQuestionTitle} />
         {this.CurrentUserRole == "2" || this.CurrentUserRole == "3" ?
           <NewQuestion addItem={this.addItem} /> : null
         }
