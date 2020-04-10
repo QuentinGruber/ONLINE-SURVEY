@@ -35,6 +35,7 @@ Change :
 * `npm start` to start frontend server
 * `npm run api` to start backend server
 * `npm i` to install package dependencies
-* `db-migrate up` to setup tables
+* `npm run db-set` to setup tables
 * `db-migrate down` to remove tables
-* `db-migrate reset` to reset tables
+* `npm run db-reset` to reset tables
+
