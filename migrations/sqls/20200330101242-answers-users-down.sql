@@ -1,2 +1,2 @@
 /* Replace with your SQL commands */
-DROP TABLE 'answers_users';
+/*DROP TABLE answers_users;*/
