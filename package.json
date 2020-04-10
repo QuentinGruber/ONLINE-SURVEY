@@ -42,7 +42,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "quick-install": "npm i & db-migrate up & echo Run npm start to start frontend server & echo Run npm run api to start backend server"
+    "quick-install": "npm i & db-migrate up & echo Run npm start to start frontend server & echo Run npm run api to start backend server",
+    "db-reset": "db-migrate down & db-migrate up & echo [INFO] Updated database",
+    "db-set": "db-migrate up & echo [INFO] Created database"
   },
   "eslintConfig": {
     "extends": "react-app"
