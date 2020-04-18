@@ -5,7 +5,14 @@ class FormItem extends React.Component {
   constructor(props) {
     super(props);
     this.onClickDelete = this.onClickDelete.bind(this);
+    this.HandleQuestionTypeChange = this.HandleQuestionTypeChange.bind(this);
+    this.state = { QuestionType: "text" };
   }
+
+  HandleQuestionTypeChange(NewValue) {
+    this.setState({ QuestionType: NewValue });
+  }
+
   onClickDelete() {
     var index = parseInt(this.props.index); // get item index
     this.props.removeItem(index); // remove it
@@ -35,6 +42,40 @@ class FormItem extends React.Component {
                 )
               }
             />
+            {(() => {
+              switch (this.state.QuestionType) {
+                case "text":
+                  return (
+                    <input
+                      type="text"
+                      value="exemple de réponse"
+                      disabled
+                    ></input>
+                  );
+                case "radio":
+                  return (
+                    <input
+                      type="radio"
+                      value="exemple de réponse"
+                      disabled
+                    ></input>
+                  );
+                default:
+                  console.error(
+                    this.state.QuestionType + " is not an handled question type"
+                  );
+                  break;
+              }
+            })()}
+            <select
+              name="QuestionType"
+              id="type-select"
+              onChange={(e) => this.HandleQuestionTypeChange(e.target.value)}
+            >
+              <option value="">--Please choose a question type--</option>
+              <option value="text">text</option>
+              <option value="radio">radio</option>
+            </select>
             {/* type de reponse */}
             <Button
               type="button"
