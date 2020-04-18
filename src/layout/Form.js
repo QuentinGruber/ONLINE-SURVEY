@@ -5,7 +5,7 @@ import routes from "../routes.js";
 
 class Form extends React.Component {
   // Get layout's routes
-  getRoutes = routes => {
+  getRoutes = (routes) => {
     return routes.map((prop, key) => {
       if (prop.layout === "/form") {
         return (
@@ -20,7 +20,7 @@ class Form extends React.Component {
       }
     });
   };
-  getBrandText = path => {
+  getBrandText = (path) => {
     for (let i = 0; i < routes.length; i++) {
       if (
         this.props.location.pathname.indexOf(
@@ -35,12 +35,10 @@ class Form extends React.Component {
   render() {
     return (
       <>
-
         <Switch>
           {this.getRoutes(routes)}
           <Redirect from="*" to="/form/new" />
         </Switch>
-
       </>
     );
   }

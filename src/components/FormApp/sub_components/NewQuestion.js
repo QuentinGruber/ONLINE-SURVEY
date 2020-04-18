@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 class NewQuestion extends React.Component {
   constructor(props) {
@@ -22,8 +22,15 @@ class NewQuestion extends React.Component {
   render() {
     return (
       <form ref="NewItemForm" onSubmit={this.onSubmit} className="form-inline">
-        <input type="text" ref="itemName" className="form-control input-add" placeholder="add a new question..." />
-        <button type="submit" className="btn btn-secondary button-add">Add</button>
+        <input
+          type="text"
+          ref="itemName"
+          className="form-control input-add"
+          placeholder="add a new question..."
+        />
+        <button type="submit" className="btn btn-secondary button-add">
+          Add
+        </button>
       </form>
     );
   }

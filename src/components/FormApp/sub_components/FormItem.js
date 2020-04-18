@@ -1,5 +1,5 @@
-import React from 'react';
-import { Button , Input} from 'reactstrap'
+import React from "react";
+import { Button, Input } from "reactstrap";
 
 class FormItem extends React.Component {
   constructor(props) {
@@ -14,19 +14,37 @@ class FormItem extends React.Component {
     return (
       <>
         {/* If is a title */}
-        {this.props.item.title != undefined &&
+        {this.props.item.title != undefined && (
           // Display it
-          <h2 className="no-transition section-todo-done">{this.props.item.value}</h2>
-        }
-        {this.props.item.title == undefined &&
+          <h2 className="no-transition section-todo-done">
+            {this.props.item.value}
+          </h2>
+        )}
+        {this.props.item.title == undefined && (
           // if not display item layout
           <li className="list-group-item card">
-            <Input className="question" type="text" placeholder="Titre de la question" 
-            value={this.props.item.value} onChange={e => this.props.handleChangeQuestionTitle(e.target.value,this.props.index)}/>
+            <Input
+              className="question"
+              type="text"
+              placeholder="Titre de la question"
+              value={this.props.item.value}
+              onChange={(e) =>
+                this.props.handleChangeQuestionTitle(
+                  e.target.value,
+                  this.props.index
+                )
+              }
+            />
             {/* type de reponse */}
-            <Button type="button" className="close" onClick={this.onClickDelete}>&times;</Button>
+            <Button
+              type="button"
+              className="close"
+              onClick={this.onClickDelete}
+            >
+              Delete Question
+            </Button>
           </li>
-        }
+        )}
       </>
     );
   }
