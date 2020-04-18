@@ -35,12 +35,19 @@ class FormItem extends React.Component {
                 return (
                   <input
                     type="text"
-                    value="exemple de réponse"
-                    disabled
+                    value={this.props.item.p_answer}
+                    onChange={(e) =>
+                      this.props.HandlePremadeAnswerChange(
+                        this.props.index,
+                        e.target.type,
+                        e.target.value
+                      )
+                    }
+                    placeholder="exemple de réponse"
                   ></input>
                 );
               case "radio":
-                return <input type="radio" disabled></input>;
+                return <input type="radio"></input>;
               default:
                 console.error(
                   this.props.item.type + " is not an handled question type"
@@ -51,6 +58,7 @@ class FormItem extends React.Component {
           <select
             name="QuestionType"
             id="type-select"
+            value={this.props.item.type}
             onChange={(e) =>
               this.props.HandleQuestionTypeChange(
                 this.props.index,

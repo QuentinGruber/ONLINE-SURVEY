@@ -16,6 +16,7 @@ class FormApp extends React.Component {
     this.handleChangeTitle = this.handleChangeTitle.bind(this);
     this.handleChangeQuestionTitle = this.handleChangeQuestionTitle.bind(this);
     this.HandleQuestionTypeChange = this.HandleQuestionTypeChange.bind(this);
+    this.HandlePremadeAnswerChange = this.HandlePremadeAnswerChange.bind(this);
     this.addItem = this.addItem.bind(this);
     this.removeItem = this.removeItem.bind(this);
     this.saveItem = this.saveItem.bind(this);
@@ -77,6 +78,22 @@ class FormApp extends React.Component {
     }
   }
 
+  HandlePremadeAnswerChange(idx, type, NewValue) {
+    // change title in component state
+    let temp_formitems = this.state.formitems;
+    switch (type) {
+      case "text":
+        temp_formitems[idx].p_answer = NewValue;
+        break;
+
+      default:
+        console.error(type + " is not an handled PremadeAnswer type");
+        break;
+    }
+
+    this.setState({ formitems: temp_formitems });
+  }
+
   HandleQuestionTypeChange(idx, NewValue) {
     // change title in component state
     let temp_formitems = this.state.formitems;
@@ -122,6 +139,7 @@ class FormApp extends React.Component {
         index: formitems.length + 1,
         title: Item.newItemValue,
         type: "text",
+        p_answer: "",
       });
     }
     // update state
@@ -151,7 +169,12 @@ class FormApp extends React.Component {
     if (lastURLSegment === "new") {
       // if it's a new question list
       this.CurrentUserRole = "3"; // make current user the owner of the list
-      formitems.push({ index: 1, value: "Exemple de question", done: true });
+      formitems.push({
+        index: 1,
+        title: "Exemple de question",
+        type: "nothing",
+        p_answer: "",
+      });
       this.setState({ formitems: formitems });
     } else {
       this.isNew = false; // change isNew boolean
@@ -255,6 +278,7 @@ class FormApp extends React.Component {
           removeItem={this.removeItem}
           handleChangeQuestionTitle={this.handleChangeQuestionTitle}
           HandleQuestionTypeChange={this.HandleQuestionTypeChange}
+          HandlePremadeAnswerChange={this.HandlePremadeAnswerChange}
         />
         {this.CurrentUserRole === "2" || this.CurrentUserRole === "3" ? (
           <NewQuestion addItem={this.addItem} />
