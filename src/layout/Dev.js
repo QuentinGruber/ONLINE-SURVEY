@@ -4,7 +4,7 @@ import routes from "../routes.js";
 
 class Dev extends React.Component {
   // Get layout's routes
-  getRoutes = routes => {
+  getRoutes = (routes) => {
     return routes.map((prop, key) => {
       if (prop.layout === "/dev") {
         return (
@@ -19,7 +19,7 @@ class Dev extends React.Component {
       }
     });
   };
-  getBrandText = path => {
+  getBrandText = (path) => {
     for (let i = 0; i < routes.length; i++) {
       if (
         this.props.location.pathname.indexOf(
@@ -34,11 +34,10 @@ class Dev extends React.Component {
   render() {
     return (
       <>
-       <Switch>
+        <Switch>
           {this.getRoutes(routes)}
           <Redirect from="*" to="/dev/all_component" />
-       </Switch>
-
+        </Switch>
       </>
     );
   }
