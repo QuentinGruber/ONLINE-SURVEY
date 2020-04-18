@@ -1,5 +1,4 @@
 import React from "react";
-import ReactDOM from "react-dom";
 import FormTitle from "./sub_components/FormTitle";
 import QuestionList from "./sub_components/QuestionList";
 import NewQuestion from "./sub_components/NewQuestion";
@@ -141,7 +140,7 @@ class FormApp extends React.Component {
     var pageURL = window.location.href;
     var lastURLSegment = pageURL.substr(pageURL.lastIndexOf("/") + 1);
     this.FormID = lastURLSegment;
-    if (lastURLSegment == "new") {
+    if (lastURLSegment === "new") {
       // if it's a new question list
       this.CurrentUserRole = "3"; // make current user the owner of the list
       formitems.push({ index: 1, value: "Exemple de question", done: true });
@@ -163,7 +162,7 @@ class FormApp extends React.Component {
         // redirect user to /question_list/new
         document.location.href = "/question_list/new";
       }
-      if (question_list.data == "Access Denied") {
+      if (question_list.data === "Access Denied") {
         // if access denied
         alert(
           "Todolist id : " +
@@ -179,7 +178,7 @@ class FormApp extends React.Component {
 
       // check for any not done question
       for (let i = 0; i < form_data.length; i++) {
-        if (form_data[i].state == 0) {
+        if (form_data[i].state === 0) {
           // if the current item isn't done
           let item = {
             id: form_data[i].id,
@@ -201,7 +200,7 @@ class FormApp extends React.Component {
       // check for any done question
       for (let i = 0; i < form_data.length; i++) {
         let index = i + contentList.length;
-        if (form_data[i].state == 1) {
+        if (form_data[i].state === 1) {
           // if the current item is done
           let item = {
             id: form_data[i].id,
@@ -234,7 +233,7 @@ class FormApp extends React.Component {
   render() {
     return (
       <div id="main" className="card">
-        {this.CurrentUserRole == "2" || this.CurrentUserRole == "3" ? (
+        {this.CurrentUserRole === "2" || this.CurrentUserRole === "3" ? (
           <FormTitle
             handleChangeTitle={this.handleChangeTitle}
             title={this.state.FormName}
@@ -248,11 +247,11 @@ class FormApp extends React.Component {
           removeItem={this.removeItem}
           handleChangeQuestionTitle={this.handleChangeQuestionTitle}
         />
-        {this.CurrentUserRole == "2" || this.CurrentUserRole == "3" ? (
+        {this.CurrentUserRole === "2" || this.CurrentUserRole === "3" ? (
           <NewQuestion addItem={this.addItem} />
         ) : null}
         {this.isNew && <SaveForm save={this.saveItem} />}
-        {(this.isNew != true) & (this.CurrentUserRole == "3")
+        {(this.isNew !== true) & (this.CurrentUserRole === "3")
           ? {
               /* update form */
             }
