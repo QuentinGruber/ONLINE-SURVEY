@@ -13,6 +13,7 @@ class QuestionList extends React.Component {
             index={index}
             removeItem={this.props.removeItem}
             handleChangeQuestionTitle={this.props.handleChangeQuestionTitle}
+            HandleQuestionTypeChange={this.props.HandleQuestionTypeChange}
           />
         </div>
       );

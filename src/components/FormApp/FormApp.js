@@ -15,6 +15,7 @@ class FormApp extends React.Component {
     this.FormID = 1; // the id of the current question_list
     this.handleChangeTitle = this.handleChangeTitle.bind(this);
     this.handleChangeQuestionTitle = this.handleChangeQuestionTitle.bind(this);
+    this.HandleQuestionTypeChange = this.HandleQuestionTypeChange.bind(this);
     this.addItem = this.addItem.bind(this);
     this.removeItem = this.removeItem.bind(this);
     this.saveItem = this.saveItem.bind(this);
@@ -76,6 +77,13 @@ class FormApp extends React.Component {
     }
   }
 
+  HandleQuestionTypeChange(idx, NewValue) {
+    // change title in component state
+    let temp_formitems = this.state.formitems;
+    temp_formitems[idx].type = NewValue;
+    this.setState({ formitems: temp_formitems });
+  }
+
   handleChangeTitle(title) {
     // change title in component state
     this.setState({ FormName: title });
@@ -84,7 +92,7 @@ class FormApp extends React.Component {
   handleChangeQuestionTitle(title, idx) {
     // change title in component state
     let temp_formitems = this.state.formitems;
-    temp_formitems[idx].value = title;
+    temp_formitems[idx].title = title;
     this.setState({ formitems: temp_formitems });
   }
 
@@ -101,19 +109,19 @@ class FormApp extends React.Component {
         },
       });
       // add the item to formitems array
-      formitems.unshift({
+      formitems.push({
         id: createItem_promise.data, // add him is id
         index: formitems.length + 1,
-        value: Item.newItemValue,
-        done: false,
+        title: Item.newItemValue,
+        type: "text",
       });
     } else {
       // if this is a new question_list
       // add the item to formitems array
-      formitems.unshift({
+      formitems.push({
         index: formitems.length + 1,
-        value: Item.newItemValue,
-        done: false,
+        title: Item.newItemValue,
+        type: "text",
       });
     }
     // update state
@@ -246,6 +254,7 @@ class FormApp extends React.Component {
           items={formitems}
           removeItem={this.removeItem}
           handleChangeQuestionTitle={this.handleChangeQuestionTitle}
+          HandleQuestionTypeChange={this.HandleQuestionTypeChange}
         />
         {this.CurrentUserRole === "2" || this.CurrentUserRole === "3" ? (
           <NewQuestion addItem={this.addItem} />
