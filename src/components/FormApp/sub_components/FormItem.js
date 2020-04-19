@@ -1,5 +1,6 @@
 import React from "react";
 import { Button, Input } from "reactstrap";
+import RadioAnswerList from "./answer_components/RadioAnswerList";
 
 class FormItem extends React.Component {
   constructor(props) {
@@ -47,7 +48,9 @@ class FormItem extends React.Component {
                   ></input>
                 );
               case "radio":
-                return <input type="radio"></input>;
+                return (
+                  <RadioAnswerList index={this.props.index} nb_answer={3} />
+                );
               default:
                 console.error(
                   this.props.item.type + " is not an handled question type"
@@ -59,14 +62,17 @@ class FormItem extends React.Component {
             name="QuestionType"
             id="type-select"
             value={this.props.item.type}
-            onChange={(e) =>
+            onChange={(e) => {
+              this.props.item.p_answer = ""; // reset premade answer
               this.props.HandleQuestionTypeChange(
                 this.props.index,
                 e.target.value
-              )
-            }
+              );
+            }}
           >
-            <option value="nothing">--Please choose a question type--</option>
+            <option value="nothing" disabled>
+              --Please choose a question type--
+            </option>
             <option value="text">text</option>
             <option value="radio">radio</option>
           </select>
