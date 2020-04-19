@@ -49,7 +49,13 @@ class FormItem extends React.Component {
                 );
               case "radio":
                 return (
-                  <RadioAnswerList index={this.props.index} nb_answer={3} />
+                  <RadioAnswerList
+                    HandlePremadeAnswerChange={
+                      this.props.HandlePremadeAnswerChange
+                    }
+                    index={this.props.index}
+                    answers={this.props.item.p_answer}
+                  />
                 );
               default:
                 console.error(

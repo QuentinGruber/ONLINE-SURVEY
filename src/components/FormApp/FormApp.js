@@ -79,13 +79,16 @@ class FormApp extends React.Component {
   }
 
   HandlePremadeAnswerChange(idx, type, NewValue) {
-    // change title in component state
+    // TODO: add type inside
     let temp_formitems = this.state.formitems;
     switch (type) {
       case "text":
         temp_formitems[idx].p_answer = NewValue;
         break;
-
+      case "radio":
+        console.log(NewValue);
+        temp_formitems[idx].p_answer = NewValue;
+        break;
       default:
         console.error(type + " is not an handled PremadeAnswer type");
         break;
