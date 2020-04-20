@@ -50,6 +50,7 @@ class FormItem extends React.Component {
               case "radio":
                 return (
                   <RadioAnswerList
+                    key={this.props.index}
                     HandlePremadeAnswerChange={
                       this.props.HandlePremadeAnswerChange
                     }

@@ -141,7 +141,7 @@ class FormApp extends React.Component {
       formitems.push({
         index: formitems.length + 1,
         title: Item.newItemValue,
-        type: "text",
+        type: "nothing",
         p_answer: "",
       });
     }
