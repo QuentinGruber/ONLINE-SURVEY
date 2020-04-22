@@ -12,18 +12,12 @@ class RadioAnswer extends React.Component {
             name={"Q_radio_" + this.props.index}
             defaultChecked
           ></input>
-          <label
-            contentEditable="true"
-            suppressContentEditableWarning={true}
-            onBlur={(e) => {
-              this.props.HandleRadioTextChange(
-                this.props.id,
-                e.target.innerText
-              );
+          <input
+            value={this.props.value}
+            onChange={(e) => {
+              this.props.HandleRadioTextChange(this.props.id, e.target.value);
             }}
-          >
-            {this.props.value}
-          </label>
+          ></input>
           <button
             onClick={() => {
               this.props.RemoveRadioButton(this.props.id);
@@ -37,18 +31,12 @@ class RadioAnswer extends React.Component {
       return (
         <>
           <input type="radio" name={"Q_radio_" + this.props.index}></input>
-          <label
-            contentEditable="true"
-            suppressContentEditableWarning={true}
-            onBlur={(e) => {
-              this.props.HandleRadioTextChange(
-                this.props.id,
-                e.target.innerText
-              );
+          <input
+            value={this.props.value}
+            onChange={(e) => {
+              this.props.HandleRadioTextChange(this.props.id, e.target.value);
             }}
-          >
-            {this.props.value}
-          </label>
+          ></input>
           <button
             onClick={() => {
               this.props.RemoveRadioButton(this.props.id);
