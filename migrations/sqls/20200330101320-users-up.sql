@@ -24,7 +24,8 @@ ALTER TABLE `answers`
 ALTER TABLE `answers_users`
   ADD PRIMARY KEY (`id`),
   ADD KEY `answers_id` (`answers_id`),
-  ADD KEY `question_id` (`question_id`);
+  ADD KEY `question_id` (`question_id`),
+  ADD KEY `user_id` (`user_id`);
 
 --
 -- Index pour la table `forms`
@@ -90,7 +91,8 @@ ALTER TABLE `answers`
 --
 ALTER TABLE `answers_users`
   ADD CONSTRAINT `answers_users_ibfk_1` FOREIGN KEY (`answers_id`) REFERENCES `answers` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `answers_users_ibfk_2` FOREIGN KEY (`question_id`) REFERENCES `questions` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `answers_users_ibfk_2` FOREIGN KEY (`question_id`) REFERENCES `questions` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `answers_users_ibfk_3` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `forms`
