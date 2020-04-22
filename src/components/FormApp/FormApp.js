@@ -32,7 +32,7 @@ class FormApp extends React.Component {
         // create an entry in our db
         let createList_promise = await Axios({
           method: "post",
-          url: "/api/new_form",
+          url: process.env.REACT_APP_API_URL + "/new_form",
           data: {
             title: this.state.FormName,
             content: this.state.formitems,

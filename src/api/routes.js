@@ -53,7 +53,7 @@ app.get("/welcome", function (req, res) {
 
 /*  NEW FORM  */
 app.post("/new_form", function (req, res) {
-  FormsController.create_new_form(req, res);
+  FormsController.create_new_form(req, res, connection);
 });
 
 /*  REGISTER  */
