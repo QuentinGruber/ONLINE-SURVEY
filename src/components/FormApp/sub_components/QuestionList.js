@@ -15,6 +15,7 @@ class QuestionList extends React.Component {
             handleChangeQuestionTitle={this.props.handleChangeQuestionTitle}
             HandleQuestionTypeChange={this.props.HandleQuestionTypeChange}
             HandlePremadeAnswerChange={this.props.HandlePremadeAnswerChange}
+            GetAnswers={this.props.GetAnswers}
           />
         </div>
       );

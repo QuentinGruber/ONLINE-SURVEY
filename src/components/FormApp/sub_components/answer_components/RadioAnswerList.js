@@ -3,43 +3,31 @@ import RadioAnswer from "./RadioAnswer";
 class RadioAnswerList extends React.Component {
   constructor(props) {
     super(props);
-    if (typeof this.props.answers == Array) {
-      this.state = { answers: this.props.answers };
-    } else {
-      console.log(typeof this.props.answers);
-      this.state = {
-        answers: [
-          { text: "réponse1", checked: true },
-          { text: "réponse2", checked: false },
-        ],
-      };
-    }
+    this.answers = null;
     this.AddRadioButton = this.AddRadioButton.bind(this);
     this.RemoveRadioButton = this.RemoveRadioButton.bind(this);
     this.HandleRadioTextChange = this.HandleRadioTextChange.bind(this);
   }
 
   HandleRadioTextChange(id, NewText) {
-    let temp_answers = this.state.answers;
+    let temp_answers = this.answers;
     temp_answers[id].text = NewText;
-    this.setState({ answers: temp_answers });
     this.props.HandlePremadeAnswerChange(
       this.props.index,
       "radio",
-      this.state.answers
+      temp_answers
     );
   }
 
   HandleRadioCheckChange(id, NewText) {}
 
   AddRadioButton() {
-    let temp_answers = this.state.answers;
+    let temp_answers = this.answers;
     temp_answers.push({ text: "new", checked: false });
-    this.setState({ answers: temp_answers });
     this.props.HandlePremadeAnswerChange(
       this.props.index,
       "radio",
-      this.state.answers
+      temp_answers
     );
   }
 
@@ -54,13 +42,31 @@ class RadioAnswerList extends React.Component {
     );
   }
 
+  componentDidUpdate() {
+    console.log(
+      "%c RadioAnswerListUpdated ! answer = " + this.answers,
+      "color: blue"
+    );
+  }
+
+  componentWillMount() {
+    this.answers = this.props.GetAnswers(this.props.index);
+    console.log(typeof this.answers);
+    if (typeof this.answers == "string") {
+      this.answers = [
+        { text: "réponse1", checked: true },
+        { text: "réponse2", checked: false },
+      ];
+    }
+  }
+
   render() {
     var items = [];
-    for (var i = 0; i < this.state.answers.length; i++) {
+    for (var i = 0; i < this.answers.length; i++) {
       items.push({
         id: i,
-        value: this.state.answers[i].text,
-        checked: this.state.answers[i].checked,
+        value: this.answers[i].text,
+        checked: this.answers[i].checked,
       });
     }
     return (

@@ -55,7 +55,7 @@ class FormItem extends React.Component {
                       this.props.HandlePremadeAnswerChange
                     }
                     index={this.props.index}
-                    answers={this.props.item.p_answer}
+                    GetAnswers={this.props.GetAnswers}
                   />
                 );
               default:

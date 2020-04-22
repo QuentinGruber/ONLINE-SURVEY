@@ -17,6 +17,7 @@ class FormApp extends React.Component {
     this.handleChangeQuestionTitle = this.handleChangeQuestionTitle.bind(this);
     this.HandleQuestionTypeChange = this.HandleQuestionTypeChange.bind(this);
     this.HandlePremadeAnswerChange = this.HandlePremadeAnswerChange.bind(this);
+    this.GetAnswers = this.GetAnswers.bind(this);
     this.addItem = this.addItem.bind(this);
     this.removeItem = this.removeItem.bind(this);
     this.saveItem = this.saveItem.bind(this);
@@ -78,6 +79,10 @@ class FormApp extends React.Component {
     }
   }
 
+  GetAnswers(id) {
+    return this.state.formitems[id].p_answer;
+  }
+
   HandlePremadeAnswerChange(idx, type, NewValue) {
     // TODO: add type inside
     let temp_formitems = this.state.formitems;
@@ -95,6 +100,11 @@ class FormApp extends React.Component {
     }
 
     this.setState({ formitems: temp_formitems });
+
+    console.log(
+      "%c FormApp Updated ! formitems = " + temp_formitems,
+      "color: red"
+    );
   }
 
   HandleQuestionTypeChange(idx, NewValue) {
@@ -282,6 +292,7 @@ class FormApp extends React.Component {
           handleChangeQuestionTitle={this.handleChangeQuestionTitle}
           HandleQuestionTypeChange={this.HandleQuestionTypeChange}
           HandlePremadeAnswerChange={this.HandlePremadeAnswerChange}
+          GetAnswers={this.GetAnswers}
         />
         {this.CurrentUserRole === "2" || this.CurrentUserRole === "3" ? (
           <NewQuestion addItem={this.addItem} />
