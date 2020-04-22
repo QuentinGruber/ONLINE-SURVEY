@@ -1341,7 +1341,7 @@ pre {
   .form-control::placeholder {
     color: #adb5bd;
     opacity: 1; }
-  .form-control:disabled, .form-control[readonly] {
+  .form-control:disabled {
     background-color: #e9ecef;
     opacity: 1; }
 
