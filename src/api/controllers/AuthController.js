@@ -2,27 +2,6 @@ var aes256 = require("aes256"); // for Aes encryption
 var sha1 = require("sha1"); // for sha cipher
 var jwt = require("jsonwebtoken");
 
-function CreateSession(res, req, connection, username) {
-  // create session for a user
-  connection.query(
-    "SELECT * FROM `users` WHERE username =" + "'" + username + "'" + ";", // get all data about the user
-    function (sql_error, results, fields) {
-      // If some error occurs, we throw an error.
-      if (sql_error) {
-        res.send("false");
-        connection.release();
-      }
-      // store the data we want in his session
-      req.session.fname = results[0].first_name;
-      req.session.lname = results[0].last_name;
-      req.session.username = results[0].username;
-      req.session.email = results[0].mail;
-      res.send("true");
-      connection.release();
-    }
-  );
-}
-
 exports.register = function (req, res, connection) {
   try {
     var decoded = jwt.verify(
@@ -88,8 +67,10 @@ exports.register = function (req, res, connection) {
               connection.release();
             }
 
-            // Getting the 'response' from the database and sending it to our route. This is were the data is.
-            CreateSession(res, req, connection, data.Username);
+            // store the user_id in session
+            req.session.user_id = results.insertId;
+            res.send("true");
+            connection.release();
           }
         );
       }
@@ -122,9 +103,10 @@ exports.register = function (req, res, connection) {
               res.send("false");
               connection.release();
             }
-
-            // Getting the 'response' from the database and sending it to our route. This is were the data is.
-            CreateSession(res, req, connection, data.Username);
+            // store the user_id in session
+            req.session.user_id = results.insertId;
+            res.send("true");
+            connection.release();
           }
         );
       }
@@ -158,8 +140,10 @@ exports.register = function (req, res, connection) {
               connection.release();
             }
 
-            // Getting the 'response' from the database and sending it to our route. This is were the data is.
-            CreateSession(res, req, connection, data.Username);
+            // store the user_id in session
+            req.session.user_id = results.insertId;
+            res.send("true");
+            connection.release();
           }
         );
       }
@@ -185,8 +169,10 @@ exports.register = function (req, res, connection) {
               connection.release();
             }
 
-            // Getting the 'response' from the database and sending it to our route. This is were the data is.
-            CreateSession(res, req, connection, data.Username);
+            // store the user_id in session
+            req.session.user_id = results.insertId;
+            res.send("true");
+            connection.release();
           }
         );
       }
@@ -255,7 +241,10 @@ exports.login = function (req, res, connection) {
 
           if (Stored_pass == data.Password) {
             // if the Submit pass is the same as storage pass
-            CreateSession(res, req, connection, data.Username);
+            // store the user_id in session
+            req.session.user_id = results.insertId;
+            res.send("true");
+            connection.release();
           } else {
             res.send("false");
             connection.release();
@@ -263,14 +252,22 @@ exports.login = function (req, res, connection) {
         }
       );
     }
-    if (data.Registration_type == "1") {
-      CreateSession(res, req, connection, data.Username);
-    }
-    if (data.Registration_type == "2") {
-      CreateSession(res, req, connection, data.Username);
-    }
-    if (data.Registration_type == "3") {
-      CreateSession(res, req, connection, data.Username);
+    if (
+      data.Registration_type == "1" ||
+      data.Registration_type == "2" ||
+      data.Registration_type == "3"
+    ) {
+      connection.query(
+        "SELECT id FROM users WHERE username='" + data.Username + "';",
+        function (sql_error, results, fields) {
+          // If some error occurs, we throw an error.
+          if (sql_error) res.send("false");
+          // store the user_id in session
+          req.session.user_id = results[0].id;
+          res.send("true");
+          connection.release();
+        }
+      );
     }
   });
 };
