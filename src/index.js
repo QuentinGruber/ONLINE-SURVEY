@@ -29,7 +29,7 @@ if (localStorage.AcceptCookies === "true") {
         <Route path="/auth" render={(props) => <AuthLayout {...props} />} />
         <Route path="/form" render={(props) => <Form {...props} />} />
         <Route path="/legal" render={(props) => <Legal {...props} />} />
-        <Redirect from="/" to="/dev" />
+        <Redirect from="/" to="/auth" />
       </Switch>
     </BrowserRouter>,
     document.getElementById("root")
