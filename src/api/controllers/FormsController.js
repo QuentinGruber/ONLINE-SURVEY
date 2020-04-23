@@ -30,11 +30,11 @@ exports.create_new_form = async function (req, res, connection) {
 
               if (req.body.content[i].type === "text") {
                 connection.query(
-                  "INSERT INTO answers ( question_id, text) VALUES ( '" +
+                  "INSERT INTO answers ( question_id, text , checked) VALUES ( '" +
                     results.insertId +
                     "', '" +
                     req.body.content[i].p_answer +
-                    "');",
+                    "','1');",
                   function (sql_error, results, fields) {
                     // If some error occurs, we throw an error.
                     if (sql_error) {
@@ -45,7 +45,26 @@ exports.create_new_form = async function (req, res, connection) {
                 );
               }
 
-              // Add more type here
+              if (req.body.content[i].type === "radio") {
+                for (let j = 0; j < req.body.content[i].p_answer.length; j++) {
+                  connection.query(
+                    "INSERT INTO answers ( question_id, text , checked) VALUES ( '" +
+                      results.insertId +
+                      "', '" +
+                      req.body.content[i].p_answer[j].text +
+                      "','" +
+                      (req.body.content[i].p_answer[j].checked | 0) +
+                      "');",
+                    function (sql_error, results, fields) {
+                      // If some error occurs, we throw an error.
+                      if (sql_error) {
+                        res.send("false");
+                        connection.release();
+                      }
+                    }
+                  );
+                }
+              }
             }
           );
         }
