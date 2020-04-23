@@ -5,7 +5,7 @@ import * as serviceWorker from "./serviceWorker";
 
 // import Layout / Route
 import DevLayout from "./layout/Dev.js";
-import AuthLayout from "./layout/Auth/index.js";
+import AuthLayout from "./layout/Auth/";
 import { LinkedInPopUp } from "react-linkedin-login-oauth2";
 import Legal from "./components/Legal";
 import CookiesNeeded from "./components/CookiesNeeded.js";
