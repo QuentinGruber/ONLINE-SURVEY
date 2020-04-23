@@ -1,7 +1,5 @@
-import styled from "styled-components";
-
 import { createGlobalStyle } from "styled-components";
-import backgroundImage from "/public/background-stars.jpg";
+import backgroundImage from "../../assets/img/backgrounds/background-stars.jpg";
 export const GlobalStyle = createGlobalStyle`
 body{
   /*  background-image: url(img/backgrounds/background-stars.jpg);
