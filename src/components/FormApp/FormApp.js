@@ -32,24 +32,15 @@ class FormApp extends React.Component {
         // create an entry in our db
         let createList_promise = await Axios({
           method: "post",
-          url: "/api/ToDoList",
+          url: process.env.REACT_APP_API_URL + "/new_form",
+          withCredentials: true,
           data: {
             title: this.state.FormName,
-            closed: "0",
             content: this.state.formitems,
           },
         });
-        // setup user role for this question_list
-        let createRole_promise = await Axios({
-          method: "post",
-          url: "/api/ToDoListUser",
-          data: {
-            to_do_list_id: createList_promise.data.id,
-            role: "3",
-          },
-        });
         // if succeed redirect user to the question_list page
-        document.location.href = "/question_list/" + createList_promise.data.id;
+        // document.location.href = "/question_list/" + createList_promise.data.id;
       } catch (e) {
         console.error("Error while saving a new question_list ! " + e);
       }
@@ -67,14 +58,6 @@ class FormApp extends React.Component {
           },
         });
       }
-    }
-  }
-
-  componentDidUpdate() {
-    // when is not a new question_list
-    // Update the question_list every time something change
-    if (!this.isNew) {
-      this.saveItem();
     }
   }
 
