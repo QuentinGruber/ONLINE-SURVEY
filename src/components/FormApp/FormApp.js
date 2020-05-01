@@ -33,6 +33,7 @@ class FormApp extends React.Component {
         let createList_promise = await Axios({
           method: "post",
           url: process.env.REACT_APP_API_URL + "/new_form",
+          withCredentials: true,
           data: {
             title: this.state.FormName,
             content: this.state.formitems,
