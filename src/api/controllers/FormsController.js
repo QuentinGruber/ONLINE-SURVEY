@@ -2,7 +2,15 @@ exports.create_new_form = async function (req, res, connection) {
   connection.getConnection(function (err, connection) {
     // Create form
     connection.query(
-      "INSERT INTO forms (name) VALUES (" + "'" + req.body.title + "'" + ");",
+      "INSERT INTO forms (user_id,name) VALUES (" +
+        "'" +
+        req.session.user_id +
+        "'" +
+        "," +
+        "'" +
+        req.body.title +
+        "'" +
+        ");",
       function (sql_error, results, fields) {
         // If some error occurs, we throw an error.
         if (sql_error) {
