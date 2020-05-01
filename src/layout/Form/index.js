@@ -1,7 +1,9 @@
 import React from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 
-import routes from "../routes.js";
+import routes from "../../routes.js";
+
+import { GlobalStyle } from "./styles";
 
 class Form extends React.Component {
   // Get layout's routes
@@ -35,6 +37,7 @@ class Form extends React.Component {
   render() {
     return (
       <>
+        <GlobalStyle />
         <Switch>
           {this.getRoutes(routes)}
           <Redirect from="*" to="/form/new" />

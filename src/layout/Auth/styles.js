@@ -2,10 +2,6 @@ import { createGlobalStyle } from "styled-components";
 import backgroundImage from "../../assets/img/backgrounds/background-stars.jpg";
 export const GlobalStyle = createGlobalStyle`
 body{
-  /*  background-image: url(img/backgrounds/background-stars.jpg);
-      background-size: 1920px, 1080px;
-      background-repeat: no-repeat;
-  */
   background: url(${backgroundImage}) no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
