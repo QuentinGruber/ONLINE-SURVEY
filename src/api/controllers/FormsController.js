@@ -2,7 +2,7 @@ exports.create_new_form = async function (req, res, connection) {
   connection.getConnection(function (err, connection) {
     // Create form
     connection.query(
-      "INSERT INTO forms (user_id,name) VALUES (" +
+      "INSERT INTO forms (users_id,name) VALUES (" +
         "'" +
         req.session.user_id +
         "'" +
