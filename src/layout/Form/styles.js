@@ -8,6 +8,17 @@ body{
   -o-background-size: cover;
   background-size: cover;
     }
+
+  .fullCard {
+    min-width: 500px !important;
+    width: 50% !important;
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%,-50%) !important;
+  }
+
+
   
   .whiteDiv {
     position: relative;
@@ -35,7 +46,7 @@ body{
   .boxText {
     position: absolute;
     width : 20%;
-    right: 6%;
+    right: 3%;
     top : 50%;
     transform: translateY(-50%);
     color: white;
@@ -51,6 +62,15 @@ body{
   
   @media screen and (max-width: 600px) {
   
+  .fullCard {
+    min-width: 300px !important;
+    width: 95% !important;
+    top: 90px !important;
+    transform: translate(-50%, 0) !important;
+    margin-bottom: 15px;
+  }
+
+
     .whiteDiv {
       display: none;
     }

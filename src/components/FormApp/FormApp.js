@@ -249,7 +249,7 @@ class FormApp extends React.Component {
 
   render() {
     return (
-      <div id="main" className="card">
+      <div id="main" className="fullCard bg-secondary shadow border-0">
         {this.CurrentUserRole === "2" || this.CurrentUserRole === "3" ? (
           <FormTitle
             handleChangeTitle={this.handleChangeTitle}
