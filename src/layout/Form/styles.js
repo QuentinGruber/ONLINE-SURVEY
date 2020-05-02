@@ -9,28 +9,6 @@ body{
   background-size: cover;
     }
   
-  .fullCard {
-    min-width: 350px !important;
-    position: absolute !important;
-    top: 50% !important;
-    left: 50% !important;
-    transform: translate(-50%,-50%) !important;
-  }
-  
-  .apiBox {
-    display: flex;
-    justify-content: space-evenly;
-  }
-  
-  .apiButton {
-    width: 130px;
-    padding: 10px;
-  }
-  
-  .btn-submit {
-    width: 200px;
-  }
-  
   .whiteDiv {
     position: relative;
     width: 100%;
@@ -72,15 +50,6 @@ body{
   /* ON MOBILE */
   
   @media screen and (max-width: 600px) {
-    .fullCard {
-      top: 90px !important;
-      transform: translate(-50%, 0) !important;
-      margin-bottom: 15px;
-    }
-  
-    .apiButton {
-      width: 30%;
-    }
   
     .whiteDiv {
       display: none;
@@ -101,6 +70,4 @@ body{
       font-size: 32px;
     }
   }
-  
-  
 `;
