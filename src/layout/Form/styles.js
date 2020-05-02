@@ -11,17 +11,16 @@ body{
 
   .fullCard {
     min-width: 500px !important;
+    min-height: 80% !important;
     width: 50% !important;
     position: absolute !important;
-    top: 50% !important;
+    top: 10% !important;
     left: 50% !important;
-    transform: translate(-50%,-50%) !important;
+    transform: translateX(-50%) !important;
   }
 
-
-  
   .whiteDiv {
-    position: relative;
+    position: fixed;
     width: 100%;
     height: 600px;
     top: -400px;
