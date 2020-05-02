@@ -38,6 +38,13 @@ class Form extends React.Component {
     return (
       <>
         <GlobalStyle />
+        <div className="whiteDiv"></div>
+
+        <div className="boxText">
+          <div className="boxTextTitre">Online Survey</div>
+          <div className="boxTextSlogan">Your forms, made simple</div>
+        </div>
+
         <Switch>
           {this.getRoutes(routes)}
           <Redirect from="*" to="/form/new" />
