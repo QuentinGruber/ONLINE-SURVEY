@@ -1,6 +1,6 @@
 import Sidebar from "./components/Sidebar";
 import Userpanel from "./components/UserPanel";
-import FormApp from "./components/FormApp/FormApp";
+import FormApp from "./components/FormApp";
 import App from "./App";
 import Login from "./components/Login";
 import Register from "./components/Register";

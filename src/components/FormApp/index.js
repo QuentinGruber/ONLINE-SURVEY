@@ -5,6 +5,9 @@ import NewQuestion from "./sub_components/NewQuestion";
 import SaveForm from "./sub_components/SaveForm";
 import Axios from "axios";
 import { Input } from "reactstrap";
+
+import { GlobalStyle } from "./styles";
+
 var formitems = [];
 
 class FormApp extends React.Component {
@@ -249,33 +252,37 @@ class FormApp extends React.Component {
 
   render() {
     return (
-      <div id="main" className="fullCard bg-secondary shadow border-0">
-        {this.CurrentUserRole === "2" || this.CurrentUserRole === "3" ? (
-          <FormTitle
-            handleChangeTitle={this.handleChangeTitle}
-            title={this.state.FormName}
+      <>
+        <GlobalStyle />
+
+        <div id="main" className="fullCard bg-secondary shadow border-0">
+          {this.CurrentUserRole === "2" || this.CurrentUserRole === "3" ? (
+            <FormTitle
+              handleChangeTitle={this.handleChangeTitle}
+              title={this.state.FormName}
+            />
+          ) : (
+            <Input value={this.state.FormName} disabled></Input>
+          )}
+          <QuestionList
+            userole={this.CurrentUserRole}
+            items={formitems}
+            removeItem={this.removeItem}
+            handleChangeQuestionTitle={this.handleChangeQuestionTitle}
+            HandleQuestionTypeChange={this.HandleQuestionTypeChange}
+            HandlePremadeAnswerChange={this.HandlePremadeAnswerChange}
           />
-        ) : (
-          <Input value={this.state.FormName} disabled></Input>
-        )}
-        <QuestionList
-          userole={this.CurrentUserRole}
-          items={formitems}
-          removeItem={this.removeItem}
-          handleChangeQuestionTitle={this.handleChangeQuestionTitle}
-          HandleQuestionTypeChange={this.HandleQuestionTypeChange}
-          HandlePremadeAnswerChange={this.HandlePremadeAnswerChange}
-        />
-        {this.CurrentUserRole === "2" || this.CurrentUserRole === "3" ? (
-          <NewQuestion addItem={this.addItem} />
-        ) : null}
-        {this.isNew && <SaveForm save={this.saveItem} />}
-        {(this.isNew !== true) & (this.CurrentUserRole === "3")
-          ? {
-              /* update form */
-            }
-          : null}
-      </div>
+          {this.CurrentUserRole === "2" || this.CurrentUserRole === "3" ? (
+            <NewQuestion addItem={this.addItem} />
+          ) : null}
+          {this.isNew && <SaveForm save={this.saveItem} />}
+          {(this.isNew !== true) & (this.CurrentUserRole === "3")
+            ? {
+                /* update form */
+              }
+            : null}
+        </div>
+      </>
     );
   }
 }

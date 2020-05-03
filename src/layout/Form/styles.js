@@ -2,21 +2,11 @@ import { createGlobalStyle } from "styled-components";
 import backgroundImage from "../../assets/img/backgrounds/background-stars.jpg";
 export const GlobalStyle = createGlobalStyle`
 body{
-  background: url(${backgroundImage}) no-repeat center center fixed; 
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-    }
-
-  .fullCard {
-    min-width: 500px !important;
-    min-height: 80% !important;
-    width: 50% !important;
-    position: absolute !important;
-    top: 10% !important;
-    left: 50% !important;
-    transform: translateX(-50%) !important;
+    background: url(${backgroundImage}) no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
   }
 
   .whiteDiv {
@@ -61,15 +51,6 @@ body{
   
   @media screen and (max-width: 600px) {
   
-  .fullCard {
-    min-width: 300px !important;
-    width: 95% !important;
-    top: 90px !important;
-    transform: translate(-50%, 0) !important;
-    margin-bottom: 15px;
-  }
-
-
     .whiteDiv {
       display: none;
     }
