@@ -5,8 +5,8 @@ class FormTitle extends React.Component {
   render() {
     return (
       <Input
-        placeholder={"Title"}
-        className="form-edit-title"
+        placeholder={"Titre du formulaire"}
+        className="form-title"
         value={this.props.title}
         onChange={(e) => this.props.handleChangeTitle(e.target.value)}
       ></Input>

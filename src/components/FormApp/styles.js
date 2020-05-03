@@ -9,7 +9,26 @@ export const GlobalStyle = createGlobalStyle`
     top: 10% !important;
     left: 50% !important;
     transform: translateX(-50%) !important;
+    padding: 20px;
+    border-radius: 5px;
   }
+
+  .form-title {
+    width: 100%;
+    margin: auto;
+    margin-bottom: 15px;
+    text-align: center;
+    font-size: 25px;
+    color: black;
+    border: none;
+    background: transparent;
+  }
+  .form-title:focus {
+    color: black;
+    background: transparent;
+  }
+
+
 
   /* ON MOBILE */
 
@@ -21,6 +40,7 @@ export const GlobalStyle = createGlobalStyle`
       top: 90px !important;
       transform: translate(-50%, 0) !important;
       margin-bottom: 15px;
+      padding: 10px
     }
 
     
