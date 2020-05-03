@@ -160,7 +160,7 @@ class FormApp extends React.Component {
       this.CurrentUserRole = "3"; // make current user the owner of the list
       formitems.push({
         index: 1,
-        title: "Exemple de question",
+        title: "",
         type: "nothing",
         p_answer: "",
       });

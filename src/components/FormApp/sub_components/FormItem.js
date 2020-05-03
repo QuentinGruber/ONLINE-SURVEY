@@ -15,7 +15,7 @@ class FormItem extends React.Component {
   render() {
     return (
       <>
-        <li className="list-group-item card">
+        <li className="list-group-item card-question">
           <Input
             className="question"
             type="text"
