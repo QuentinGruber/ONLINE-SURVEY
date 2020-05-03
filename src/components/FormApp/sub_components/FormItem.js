@@ -28,6 +28,16 @@ class FormItem extends React.Component {
               )
             }
           />
+
+          <button
+            type="button"
+            className="close delete-question"
+            aria-label="Close"
+            onClick={this.onClickDelete}
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+
           {(() => {
             switch (this.props.item.type) {
               case "nothing":
@@ -84,9 +94,6 @@ class FormItem extends React.Component {
             <option value="radio">radio</option>
           </select>
           {/* type de reponse */}
-          <Button type="button" className="close" onClick={this.onClickDelete}>
-            Delete Question
-          </Button>
         </li>
       </>
     );

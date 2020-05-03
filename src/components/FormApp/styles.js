@@ -36,7 +36,6 @@ export const GlobalStyle = createGlobalStyle`
 
   .question { /* titre de la question */
     width: 100%;
-    margin: auto;
     padding: 5px 0px;
     font-weight: 549;
     font-size: 18px;
@@ -50,19 +49,35 @@ export const GlobalStyle = createGlobalStyle`
   }
 
 
+.delete-question {
+}
+
+
+.card-bottom {
+  position: absolute;
+  width: 33%;
+  bottom: 15px;;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.SaveFormButton {
+  width: 100%;
+  color: white; 
+}
+
 
   /* ON MOBILE */
 
-  @media screen and (max-width: 600px) {
-  
-    .fullCard {
-      min-width: 300px !important;
-      width: 95% !important;
-      top: 90px !important;
-      transform: translate(-50%, 0) !important;
-      margin-bottom: 15px;
-      padding: 10px
-    }
+@media screen and (max-width: 600px) {
+
+  .fullCard {
+    min-width: 300px !important;
+    width: 95% !important;
+    top: 90px !important;
+    transform: translate(-50%, 0) !important;
+    margin-bottom: 15px;
+    padding: 10px
+  }
 
     
 `;
