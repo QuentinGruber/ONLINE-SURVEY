@@ -1,6 +1,7 @@
 import Sidebar from "./components/Sidebar";
 import Userpanel from "./components/UserPanel";
 import FormApp from "./components/FormApp/FormApp";
+import FormReader from "./components/FormReader";
 import App from "./App";
 import Login from "./components/Login";
 import Register from "./components/Register";
@@ -24,6 +25,11 @@ var routes = [
   {
     path: "/new",
     component: FormApp,
+    layout: "/form",
+  },
+  {
+    path: "/1",
+    component: FormReader,
     layout: "/form",
   },
   {
