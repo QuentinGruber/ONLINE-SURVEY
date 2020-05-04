@@ -28,15 +28,25 @@ class FormItem extends React.Component {
               )
             }
           />
-
-          <button
-            type="button"
-            className="close delete-question"
-            aria-label="Close"
-            onClick={this.onClickDelete}
+          <select
+            name="QuestionType"
+            className="type-select"
+            value={this.props.item.type}
+            onChange={(e) => {
+              this.props.item.p_answer = ""; // reset premade answer
+              this.props.HandleQuestionTypeChange(
+                this.props.index,
+                e.target.value
+              );
+            }}
           >
-            <span aria-hidden="true">&times;</span>
-          </button>
+            <option value="nothing" disabled>
+              Question Type
+            </option>
+            <option value="text">text</option>
+            <option value="radio">radio</option>
+          </select>
+          {/* type de reponse */}
 
           {(() => {
             switch (this.props.item.type) {
@@ -75,25 +85,15 @@ class FormItem extends React.Component {
                 break;
             }
           })()}
-          <select
-            name="QuestionType"
-            id="type-select"
-            value={this.props.item.type}
-            onChange={(e) => {
-              this.props.item.p_answer = ""; // reset premade answer
-              this.props.HandleQuestionTypeChange(
-                this.props.index,
-                e.target.value
-              );
-            }}
+
+          <button
+            type="button"
+            className="close delete-question"
+            aria-label="Close"
+            onClick={this.onClickDelete}
           >
-            <option value="nothing" disabled>
-              --Please choose a question type--
-            </option>
-            <option value="text">text</option>
-            <option value="radio">radio</option>
-          </select>
-          {/* type de reponse */}
+            <span aria-hidden="true">&times;</span>
+          </button>
         </li>
       </>
     );

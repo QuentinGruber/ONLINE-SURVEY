@@ -35,18 +35,28 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   .question { /* titre de la question */
-    width: 100%;
+    display: inline-block;
+    width: 80%;
     padding: 5px 0px;
     font-weight: 549;
     font-size: 18px;
     color: black;
-    border: none;
+    border: 2px solid blue;
     background: transparent;
   }
   .question:focus {
     color: black;
     background: transparent;
   }
+
+  .type-select {
+    right: 0;
+    display: inline-block;
+    width: 130px;
+    border: 2px solid red;
+  }
+
+
 
 
 .delete-question {
