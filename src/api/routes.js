@@ -59,7 +59,7 @@ app.get("/form/*", function (req, res) {
 
 /* Register Form response */
 
-app.get("/send_form/*", function (req, res) {
+app.post("/send_form/*", function (req, res) {
   FormsController.register_answer(req, res, connection);
 });
 
