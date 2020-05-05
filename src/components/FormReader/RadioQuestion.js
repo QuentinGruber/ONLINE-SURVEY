@@ -7,15 +7,30 @@ class RadioQuestion extends React.Component {
       if (this.props.data.p_answer[i].checked) {
         items.push(
           <>
-            <input type="radio" name={this.props.data.title} defaultChecked />
-            <label>{this.props.data.p_answer[i].text}</label>
+            <input
+              questionid={this.props.data.id}
+              id={this.props.data.p_answer[i].id}
+              type="radio"
+              name={this.props.data.title}
+              defaultChecked
+            />
+            <label htmlFor={this.props.data.p_answer[i].id}>
+              {this.props.data.p_answer[i].text}
+            </label>
           </>
         );
       } else {
         items.push(
           <>
-            <input type="radio" name={this.props.data.title} />
-            <label>{this.props.data.p_answer[i].text}</label>
+            <input
+              questionid={this.props.data.id}
+              id={this.props.data.p_answer[i].id}
+              type="radio"
+              name={this.props.data.title}
+            />
+            <label htmlFor={this.props.data.p_answer[i].id}>
+              {this.props.data.p_answer[i].text}
+            </label>
           </>
         );
       }
