@@ -96,6 +96,12 @@ exports.get_form_content = async function (req, res, connection) {
           res.send("false");
           connection.release();
         }
+        if (results.length == 0) {
+          // if form doesn't exist
+          res.send("false");
+          connection.release();
+          return;
+        }
         Formcontent.title = results[0].name;
         connection.query(
           "SELECT * FROM `questions` WHERE forms_id= " +

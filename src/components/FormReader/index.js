@@ -20,19 +20,23 @@ class FormReader extends React.Component {
       withCredentials: true,
     });
     let FormContent = await GetFormPromise.data;
-    let items = [];
-    for (let i = 0; i < FormContent.content.length; i++) {
-      switch (FormContent.content[i].type) {
-        case "text":
-          items.push(<TextQuestion key={i} data={FormContent.content[i]} />);
-          break;
-        case "radio":
-          items.push(<RadioQuestion key={i} data={FormContent.content[i]} />);
-          break;
+    if (FormContent) {
+      let items = [];
+      for (let i = 0; i < FormContent.content.length; i++) {
+        switch (FormContent.content[i].type) {
+          case "text":
+            items.push(<TextQuestion key={i} data={FormContent.content[i]} />);
+            break;
+          case "radio":
+            items.push(<RadioQuestion key={i} data={FormContent.content[i]} />);
+            break;
+        }
       }
+      this.setState({ FormContent: FormContent, items: items });
+    } else {
+      alert("You don't have access to this Form or he doesn't exist !");
+      document.location.href = "/form/new";
     }
-    console.log(FormContent);
-    this.setState({ FormContent: FormContent, items: items });
   }
 
   render() {
