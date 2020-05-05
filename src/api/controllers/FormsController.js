@@ -161,27 +161,37 @@ exports.get_form_content = async function (req, res, connection) {
 };
 
 exports.register_answer = async function (req, res, connection) {
-  var Formcontent = { title: "", content: [] };
-  var FormID = req.path.substr(req.path.lastIndexOf("/") + 1);
   connection.getConnection(function (err, connection) {
+    if (!req.session.user_id) {
+      // if not connected
+      res.send(false);
+      connection.release();
+      return;
+    }
     // Create form
-    connection.query(
-      "INSERT INTO `answers_users` (`id`, `answers_id`, `question_id`, `text`, `user_id`) VALUES (NULL, NULL, '" +
-        1 +
-        "', '" +
-        "tg" +
-        "', '" +
-        3 +
-        "');",
-      function (sql_error, results, fields) {
-        // If some error occurs, we throw an error.
-        if (sql_error) {
-          res.send("false");
+    for (let i = 0; i < req.body.length; i++) {
+      connection.query(
+        "INSERT INTO `answers_users` (`id`, `answers_id`, `question_id`, `text`, `user_id`) VALUES (NULL, " +
+          req.body[i].answerid +
+          ", '" +
+          req.body[i].questionid +
+          "', '" +
+          "" +
+          req.body[i].value +
+          "" +
+          "', '" +
+          req.session.user_id +
+          "');",
+        function (sql_error, results, fields) {
+          // If some error occurs, we throw an error.
+          if (sql_error) {
+            res.send("false");
+            connection.release();
+          }
+          res.send(true);
           connection.release();
         }
-        res.send(true);
-        connection.release();
-      }
-    );
+      );
+    }
   });
 };
