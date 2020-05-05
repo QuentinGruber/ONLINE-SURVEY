@@ -131,9 +131,13 @@ exports.get_form_content = async function (req, res, connection) {
                     res.send("false");
                     connection.release();
                   }
-
-                  Formcontent.content[i].p_answer = results;
-
+                  Formcontent.content[i].p_answer = [];
+                  for (let j = 0; j < results.length; j++) {
+                    Formcontent.content[i].p_answer.push({
+                      text: results[j].text,
+                      checked: results[j].checked,
+                    });
+                  }
                   if (i + 1 == nb_questions) {
                     res.send(Formcontent);
                     connection.release();
