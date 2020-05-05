@@ -8,7 +8,10 @@ class TextQuestion extends React.Component {
     return (
       <>
         <h3>{this.props.data.title}</h3>
-        <input type="text" placeholder={this.props.data.p_answer}></input>
+        <input
+          type="text"
+          placeholder={this.props.data.p_answer[0].text}
+        ></input>
       </>
     );
   }

@@ -5,29 +5,22 @@ import RadioQuestion from "./RadioQuestion";
 import { Form } from "reactstrap";
 
 class FormReader extends React.Component {
-  render() {
+  constructor(props) {
+    super(props);
+    this.state = { FormContent: null, items: [] };
+  }
+  async componentDidMount() {
     var pageURL = window.location.href;
     var FormID = pageURL.substr(pageURL.lastIndexOf("/") + 1);
     // get Form content from FormID
 
-    var FormContent = {
-      // formcontent example
-      title: "test titre",
-      content: [
-        { index: 1, title: "test", type: "text", p_answer: "tg" },
-        {
-          index: 2,
-          title: "ee",
-          type: "radio",
-          p_answer: [
-            { text: "réponzdzse1", checked: true },
-            { text: "zdzd", checked: false },
-            { text: "dzzzzzzzzzz", checked: false },
-          ],
-        },
-      ],
-    };
-    var items = [];
+    let GetFormPromise = await Axios({
+      method: "get",
+      url: process.env.REACT_APP_API_URL + "/form/" + FormID,
+      withCredentials: true,
+    });
+    let FormContent = await GetFormPromise.data;
+    let items = [];
     for (let i = 0; i < FormContent.content.length; i++) {
       switch (FormContent.content[i].type) {
         case "text":
@@ -38,15 +31,24 @@ class FormReader extends React.Component {
           break;
       }
     }
+    console.log(FormContent);
+    this.setState({ FormContent: FormContent, items: items });
+  }
+
+  render() {
     return (
       <>
-        <h1> {FormContent.title} </h1>
-        <Form action="" method="post">
-          {items}
-          <div>
-            <input type="submit" value="Send"></input>
-          </div>
-        </Form>
+        {this.state.FormContent != null ? (
+          <>
+            <h1> {this.state.FormContent.title} </h1>
+            <Form action="" method="post">
+              {this.state.items}
+              <div>
+                <input type="submit" value="Send"></input>
+              </div>
+            </Form>
+          </>
+        ) : null}
       </>
     );
   }
