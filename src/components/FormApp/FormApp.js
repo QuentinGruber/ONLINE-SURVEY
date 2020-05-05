@@ -39,6 +39,9 @@ class FormApp extends React.Component {
             content: this.state.formitems,
           },
         });
+        if (createList_promise.data == true) {
+          alert("Form created !");
+        }
         // if succeed redirect user to the question_list page
         // document.location.href = "/question_list/" + createList_promise.data.id;
       } catch (e) {
