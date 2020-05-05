@@ -54,8 +54,13 @@ app.get("/welcome", function (req, res) {
 /* GET FORM CONTENT */
 
 app.get("/form/*", function (req, res) {
-  // get name of a logged user
   FormsController.get_form_content(req, res, connection);
+});
+
+/* Register Form response */
+
+app.post("/send_form/*", function (req, res) {
+  FormsController.register_answer(req, res, connection);
 });
 
 /*  NEW FORM  */
