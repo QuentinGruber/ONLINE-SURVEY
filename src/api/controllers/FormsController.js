@@ -118,6 +118,7 @@ exports.get_form_content = async function (req, res, connection) {
             for (let i = 0; i < results.length; i++) {
               // create new item
               let item = {};
+              item.id = results[i].id;
               item.index = i;
               item.title = results[i].text;
               item.type = results[i].type;
@@ -140,6 +141,7 @@ exports.get_form_content = async function (req, res, connection) {
                   Formcontent.content[i].p_answer = [];
                   for (let j = 0; j < results.length; j++) {
                     Formcontent.content[i].p_answer.push({
+                      id: results[j].id,
                       text: results[j].text,
                       checked: results[j].checked,
                     });
