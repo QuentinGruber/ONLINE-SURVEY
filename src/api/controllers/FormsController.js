@@ -82,3 +82,68 @@ exports.create_new_form = async function (req, res, connection) {
     connection.release();
   });
 };
+
+exports.get_form_content = async function (req, res, connection) {
+  var Formcontent = { title: "", content: [] };
+  var FormID = req.path.substr(req.path.lastIndexOf("/") + 1);
+  connection.getConnection(function (err, connection) {
+    // Create form
+    connection.query(
+      "SELECT name  FROM `forms` WHERE id= " + "'" + FormID + "'" + ";",
+      function (sql_error, results, fields) {
+        // If some error occurs, we throw an error.
+        if (sql_error) {
+          res.send("false");
+          connection.release();
+        }
+        Formcontent.title = results[0].name;
+        connection.query(
+          "SELECT * FROM `questions` WHERE forms_id= " +
+            "'" +
+            FormID +
+            "'" +
+            ";",
+          function (sql_error, results, fields) {
+            // If some error occurs, we throw an error.
+            if (sql_error) {
+              res.send("false");
+              connection.release();
+            }
+            for (let i = 0; i < results.length; i++) {
+              // create new item
+              let item = {};
+              item.index = i;
+              item.title = results[i].text;
+              item.type = results[i].type;
+              Formcontent.content.push(item);
+            }
+            var nb_questions = results.length;
+            for (let i = 0; i < nb_questions; i++) {
+              connection.query(
+                "SELECT * FROM `answers` WHERE `question_id`= " +
+                  "'" +
+                  results[i].id +
+                  "'" +
+                  ";",
+                function (sql_error, results, fields) {
+                  // If some error occurs, we throw an error.
+                  if (sql_error) {
+                    res.send("false");
+                    connection.release();
+                  }
+
+                  Formcontent.content[i].p_answer = results;
+
+                  if (i + 1 == nb_questions) {
+                    res.send(Formcontent);
+                    connection.release();
+                  }
+                }
+              );
+            }
+          }
+        );
+      }
+    );
+  });
+};
