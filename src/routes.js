@@ -28,7 +28,7 @@ var routes = [
     layout: "/form",
   },
   {
-    path: "/1",
+    path: "/*",
     component: FormReader,
     layout: "/form",
   },
