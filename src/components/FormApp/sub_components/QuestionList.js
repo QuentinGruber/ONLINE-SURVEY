@@ -12,6 +12,7 @@ class QuestionList extends React.Component {
             item={item}
             index={index}
             removeItem={this.props.removeItem}
+            ToogleRequireStateChange={this.props.ToogleRequireStateChange}
             handleChangeQuestionTitle={this.props.handleChangeQuestionTitle}
             HandleQuestionTypeChange={this.props.HandleQuestionTypeChange}
             HandlePremadeAnswerChange={this.props.HandlePremadeAnswerChange}

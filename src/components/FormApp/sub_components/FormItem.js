@@ -84,6 +84,14 @@ class FormItem extends React.Component {
             <option value="radio">radio</option>
           </select>
           {/* type de reponse */}
+          <input
+            id={"Require_" + this.props.index}
+            type="checkbox"
+            onChange={() => {
+              this.props.ToogleRequireStateChange(this.props.index);
+            }}
+          />
+          <label for={"Require_" + this.props.index}>required</label>
           <Button type="button" className="close" onClick={this.onClickDelete}>
             Delete Question
           </Button>
