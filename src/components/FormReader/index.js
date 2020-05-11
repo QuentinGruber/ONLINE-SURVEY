@@ -88,7 +88,13 @@ class FormReader extends React.Component {
             <Form id="Form">
               {this.state.items}
               <div>
-                <Button onClick={this.SendAnswers} value="Send"></Button>
+                <Button
+                  onClick={() => {
+                    if (document.forms["Form"].reportValidity())
+                      this.SendAnswers();
+                  }}
+                  value="Send"
+                ></Button>
               </div>
             </Form>
           </>

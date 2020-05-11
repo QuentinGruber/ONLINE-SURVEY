@@ -123,6 +123,7 @@ exports.get_form_content = async function (req, res, connection) {
               item.id = results[i].id;
               item.index = i;
               item.title = results[i].text;
+              item.required = results[i].required;
               item.type = results[i].type;
               Formcontent.content.push(item);
             }
