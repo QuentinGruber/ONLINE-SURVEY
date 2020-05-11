@@ -21,12 +21,14 @@ exports.create_new_form = async function (req, res, connection) {
           // Create question linked to form
           connection.query(
             "INSERT INTO questions (forms_id, text, type, required) VALUES ( '" +
-              results.insertId +
-              "', '" +
-              req.body.content[i].title +
-              "', '" +
-              req.body.content[i].type +
-              "', '1');",
+            results.insertId +
+            "', '" +
+            req.body.content[i].title +
+            "', '" +
+            req.body.content[i].type +
+            "', '" +
+            +req.body.content[i].required + // use "+" to change type from boolean to int
+              "');",
             function (sql_error, results, fields) {
               // If some error occurs, we throw an error.
               if (sql_error) {
@@ -121,6 +123,7 @@ exports.get_form_content = async function (req, res, connection) {
               item.id = results[i].id;
               item.index = i;
               item.title = results[i].text;
+              item.required = results[i].required;
               item.type = results[i].type;
               Formcontent.content.push(item);
             }

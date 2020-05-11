@@ -13,7 +13,9 @@ class TextQuestion extends React.Component {
           id={this.props.data.p_answer[0].id}
           type="text"
           placeholder={this.props.data.p_answer[0].text}
+          required={true}
         ></input>
+        {this.props.data.required && <label>required</label>}
       </>
     );
   }
