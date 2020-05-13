@@ -9,7 +9,7 @@ class RadioAnswerList extends React.Component {
       console.log(typeof this.props.answers);
       this.state = {
         answers: [
-          { text: "réponse1", checked: true },
+          { text: "réponse1", checked: false },
           { text: "réponse2", checked: false },
         ],
       };
