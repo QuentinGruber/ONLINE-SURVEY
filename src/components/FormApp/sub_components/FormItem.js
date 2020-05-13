@@ -28,6 +28,16 @@ class FormItem extends React.Component {
               )
             }
           />
+
+          <button
+            type="button"
+            className="close delete-question"
+            aria-label="Close"
+            onClick={this.onClickDelete}
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+
           <select
             name="QuestionType"
             className="type-select"
@@ -85,15 +95,6 @@ class FormItem extends React.Component {
                 break;
             }
           })()}
-
-          <button
-            type="button"
-            className="close delete-question"
-            aria-label="Close"
-            onClick={this.onClickDelete}
-          >
-            <span aria-hidden="true">&times;</span>
-          </button>
         </li>
       </>
     );

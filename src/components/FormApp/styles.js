@@ -36,12 +36,12 @@ export const GlobalStyle = createGlobalStyle`
 
   .question { /* titre de la question */
     display: inline-block;
-    width: 80%;
+    width: calc(100% - 150px);
     padding: 5px 0px;
     font-weight: 549;
     font-size: 18px;
     color: black;
-    border: 2px solid blue;
+    border: none;
     background: transparent;
   }
   .question:focus {
@@ -51,15 +51,18 @@ export const GlobalStyle = createGlobalStyle`
 
   .type-select {
     right: 0;
+    top: 0px;
     display: inline-block;
     width: 130px;
-    border: 2px solid red;
   }
 
 
 
 
 .delete-question {
+  position: absolute;
+  top: 2px;
+  right: 2px;
 }
 
 
@@ -89,5 +92,7 @@ export const GlobalStyle = createGlobalStyle`
     padding: 10px
   }
 
-    
+  .question { /* titre de la question */
+    width: 95%;
+  }
 `;
