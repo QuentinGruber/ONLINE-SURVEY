@@ -20,6 +20,7 @@ class FormApp extends React.Component {
     this.handleChangeQuestionTitle = this.handleChangeQuestionTitle.bind(this);
     this.HandleQuestionTypeChange = this.HandleQuestionTypeChange.bind(this);
     this.HandlePremadeAnswerChange = this.HandlePremadeAnswerChange.bind(this);
+    this.ToogleRequireStateChange = this.ToogleRequireStateChange.bind(this);
     this.addItem = this.addItem.bind(this);
     this.removeItem = this.removeItem.bind(this);
     this.saveItem = this.saveItem.bind(this);
@@ -42,6 +43,9 @@ class FormApp extends React.Component {
             content: this.state.formitems,
           },
         });
+        if (createList_promise.data == true) {
+          alert("Form created !");
+        }
         // if succeed redirect user to the question_list page
         // document.location.href = "/question_list/" + createList_promise.data.id;
       } catch (e) {
@@ -83,6 +87,17 @@ class FormApp extends React.Component {
     this.setState({ formitems: temp_formitems });
   }
 
+  ToogleRequireStateChange(idx) {
+    // change title in component state
+    let temp_formitems = this.state.formitems;
+    if (temp_formitems[idx].required) {
+      temp_formitems[idx].required = false;
+    } else {
+      temp_formitems[idx].required = true;
+    }
+    this.setState({ formitems: temp_formitems });
+  }
+
   HandleQuestionTypeChange(idx, NewValue) {
     // change title in component state
     let temp_formitems = this.state.formitems;
@@ -119,6 +134,7 @@ class FormApp extends React.Component {
         id: createItem_promise.data, // add him is id
         index: formitems.length + 1,
         title: Item.newItemValue,
+        required: false,
         type: "text",
       });
     } else {
@@ -127,6 +143,7 @@ class FormApp extends React.Component {
       formitems.push({
         index: formitems.length + 1,
         title: Item.newItemValue,
+        required: false,
         type: "nothing",
         p_answer: "",
       });
@@ -160,7 +177,8 @@ class FormApp extends React.Component {
       this.CurrentUserRole = "3"; // make current user the owner of the list
       formitems.push({
         index: 1,
-        title: "",
+        title: "Exemple de question",
+        required: false,
         type: "nothing",
         p_answer: "",
       });
@@ -267,6 +285,7 @@ class FormApp extends React.Component {
           <QuestionList
             userole={this.CurrentUserRole}
             items={formitems}
+          ToogleRequireStateChange={this.ToogleRequireStateChange}
             removeItem={this.removeItem}
             handleChangeQuestionTitle={this.handleChangeQuestionTitle}
             HandleQuestionTypeChange={this.HandleQuestionTypeChange}
