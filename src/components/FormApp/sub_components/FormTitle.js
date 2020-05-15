@@ -1,15 +1,19 @@
 import React from "react";
-import { Input } from "reactstrap";
+import ContentEditable from "react-contenteditable";
 
 class FormTitle extends React.Component {
   render() {
+    let title;
+    if (this.props.title == "") title = "Titre du formulaire";
+    else title = this.props.title;
     return (
-      <Input
-        placeholder={"Title"}
+      <ContentEditable
+        innerRef={this.contentEditable}
+        html={title} // innerHTML of the editable div
+        disabled={false} // use true to disable editing
         className="form-edit-title"
-        value={this.props.title}
         onChange={(e) => this.props.handleChangeTitle(e.target.value)}
-      ></Input>
+      ></ContentEditable>
     );
   }
 }
