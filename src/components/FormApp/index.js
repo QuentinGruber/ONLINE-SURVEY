@@ -276,7 +276,7 @@ class FormApp extends React.Component {
             <NewQuestion addItem={this.addItem} />
           ) : null}
 
-          <div class="card-bottom">
+          <div className="card-bottom">
             {this.isNew && <SaveForm save={this.saveItem} />}
             {(this.isNew !== true) & (this.CurrentUserRole === "3")
               ? {

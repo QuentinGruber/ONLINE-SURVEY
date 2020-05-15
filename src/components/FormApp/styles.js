@@ -78,6 +78,20 @@ export const GlobalStyle = createGlobalStyle`
   color: white; 
 }
 
+/* ON SMALL SCREENS */
+
+@media screen and (max-width: 1200px) {
+
+  .fullCard {
+    min-width: 300px !important;
+    width: 90% !important;
+    top: 90px !important;
+    transform: translate(-50%, 0) !important;
+    margin-bottom: 15px;
+    padding: 10px
+  }
+
+
 
   /* ON MOBILE */
 

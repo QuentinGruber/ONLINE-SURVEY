@@ -49,7 +49,7 @@ body{
   
   /* ON MOBILE */
   
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 1200px) {
   
     .whiteDiv {
       display: none;
