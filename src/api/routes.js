@@ -51,6 +51,18 @@ app.get("/welcome", function (req, res) {
   else res.send(req.session.name);
 });
 
+/* GET FORM CONTENT */
+
+app.get("/form/*", function (req, res) {
+  FormsController.get_form_content(req, res, connection);
+});
+
+/* Register Form response */
+
+app.post("/send_form/*", function (req, res) {
+  FormsController.register_answer(req, res, connection);
+});
+
 /*  NEW FORM  */
 app.post("/new_form", function (req, res) {
   FormsController.create_new_form(req, res, connection);

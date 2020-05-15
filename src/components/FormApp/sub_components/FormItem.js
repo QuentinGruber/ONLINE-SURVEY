@@ -95,6 +95,36 @@ class FormItem extends React.Component {
                 break;
             }
           })()}
+          <select
+            name="QuestionType"
+            id="type-select"
+            value={this.props.item.type}
+            onChange={(e) => {
+              this.props.item.p_answer = ""; // reset premade answer
+              this.props.HandleQuestionTypeChange(
+                this.props.index,
+                e.target.value
+              );
+            }}
+          >
+            <option value="nothing" disabled>
+              --Please choose a question type--
+            </option>
+            <option value="text">text</option>
+            <option value="radio">radio</option>
+          </select>
+          {/* type de reponse */}
+          <input
+            id={"Require_" + this.props.index}
+            type="checkbox"
+            onChange={() => {
+              this.props.ToogleRequireStateChange(this.props.index);
+            }}
+          />
+          <label for={"Require_" + this.props.index}>required</label>
+          <Button type="button" className="close" onClick={this.onClickDelete}>
+            Delete Question
+          </Button>
         </li>
       </>
     );

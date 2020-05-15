@@ -1,6 +1,5 @@
 REACT_APP_API_URL = "https://www.online-survey.app/api"
 REACT_APP_URL = "https://www.online-survey.app/linkedin"
-API_ROUTE = ""
 
 REACT_APP_HOST = "localhost"
 REACT_APP_USER = "root"
