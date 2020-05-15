@@ -285,7 +285,7 @@ class FormApp extends React.Component {
           <QuestionList
             userole={this.CurrentUserRole}
             items={formitems}
-          ToogleRequireStateChange={this.ToogleRequireStateChange}
+            ToogleRequireStateChange={this.ToogleRequireStateChange}
             removeItem={this.removeItem}
             handleChangeQuestionTitle={this.handleChangeQuestionTitle}
             HandleQuestionTypeChange={this.HandleQuestionTypeChange}
