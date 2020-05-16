@@ -8,10 +8,7 @@ class RadioAnswerList extends React.Component {
     } else {
       console.log(typeof this.props.answers);
       this.state = {
-        answers: [
-          { text: "réponse1", checked: false },
-          { text: "réponse2", checked: false },
-        ],
+        answers: [{ checked: false }, { checked: false }],
       };
     }
     this.AddRadioButton = this.AddRadioButton.bind(this);

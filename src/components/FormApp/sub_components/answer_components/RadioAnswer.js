@@ -1,4 +1,5 @@
 import React from "react";
+
 class RadioAnswer extends React.Component {
   constructor(props) {
     super(props);
@@ -13,7 +14,9 @@ class RadioAnswer extends React.Component {
             disabled="disabled"
           ></input>
           <label
+            className="radio-answer-input"
             contentEditable="true"
+            data-placeholder="Exemple de réponse"
             suppressContentEditableWarning={true}
             onBlur={(e) => {
               this.props.HandleRadioTextChange(
@@ -21,9 +24,18 @@ class RadioAnswer extends React.Component {
                 e.target.innerText
               );
             }}
-          >
-            {this.props.value}
-          </label>
+            onKeyPress={(evt) => {
+              if (evt.which === 13) {
+                evt.preventDefault();
+              }
+            }}
+            onPaste={(e) => {
+              e.preventDefault();
+              var text = e.clipboardData.getData("text/plain");
+              text = text.replace(/(?:\r\n|\r|\n)/g, " ");
+              document.execCommand("insertText", false, text);
+            }}
+          ></label>
           <button
             onClick={() => {
               this.props.RemoveRadioButton(this.props.id);

@@ -14,7 +14,6 @@ export const GlobalStyle = createGlobalStyle`
     border-radius: 5px;
   }
 
-
   .form-title {
     width: 100%;
     text-align: center;
@@ -23,9 +22,10 @@ export const GlobalStyle = createGlobalStyle`
     border: none;
     background: transparent;
   }
-  .form-title:focus {
-    color: black;
-    background: transparent;
+
+  .form-title:empty:not(:focus):before{
+    color: #999;
+    content:attr(data-placeholder);
   }
 
 
@@ -54,9 +54,23 @@ export const GlobalStyle = createGlobalStyle`
     top: 0px;
     display: inline-block;
     width: 130px;
+    margin-left: 10px;
   }
 
-
+  .radio-answer-input {
+    min-width: 300px;
+    max-width: 90%;
+    padding: 5px;
+    margin: 5px 10px;
+    border: 1px solid #999;
+    border-radius: 3px;
+    color: black;
+  }
+  
+  .radio-answer-input:empty:not(:focus):before{
+    color: #999;
+    content:attr(data-placeholder);
+  }
 
 
 .delete-question {
