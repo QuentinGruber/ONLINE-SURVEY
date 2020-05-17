@@ -9,6 +9,8 @@
     "@types/react-facebook-login": "^4.1.1",
     "aes256": "^1.0.4",
     "axios": "^0.19.2",
+    "bootstrap": "^4.5.0",
+    "bootstrap-select": "^1.13.17",
     "cors": "^2.8.5",
     "db-migrate": "^0.11.6",
     "db-migrate-mysql": "^2.1.1",

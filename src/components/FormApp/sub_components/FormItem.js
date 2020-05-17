@@ -1,5 +1,19 @@
 import React from "react";
-import { Button, Input } from "reactstrap";
+import {
+  Button,
+  Card,
+  CardHeader,
+  CardBody,
+  NavLink,
+  FormGroup,
+  Form,
+  Input,
+  InputGroupAddon,
+  InputGroupText,
+  InputGroup,
+  Row,
+  Col,
+} from "reactstrap";
 import RadioAnswerList from "./answer_components/RadioAnswerList";
 
 class FormItem extends React.Component {
@@ -40,7 +54,7 @@ class FormItem extends React.Component {
 
           <select
             name="QuestionType"
-            className="type-select"
+            className="type-select selectpicker"
             value={this.props.item.type}
             onChange={(e) => {
               this.props.item.p_answer = ""; // reset premade answer
@@ -96,14 +110,19 @@ class FormItem extends React.Component {
             }
           })()}
 
-          <input
-            id={"Require_" + this.props.index}
-            type="checkbox"
-            onChange={() => {
-              this.props.ToogleRequireStateChange(this.props.index);
-            }}
-          />
-          <label for={"Require_" + this.props.index}>required</label>
+          <div className="custom-control custom-control-alternative custom-checkbox my-4">
+            <input
+              id={"Require_" + this.props.index}
+              className="custom-control-input"
+              type="checkbox"
+              onChange={() => {
+                this.props.ToogleRequireStateChange(this.props.index);
+              }}
+            />
+            <label htmlFor={"Require_" + this.props.index}>
+              <span className="text-muted">Required</span>
+            </label>
+          </div>
         </li>
       </>
     );
