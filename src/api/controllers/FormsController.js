@@ -200,7 +200,6 @@ exports.register_answer = async function (req, res, connection) {
 };
 
 exports.get_user_form_content = async function (req, res, connection) {
-  console.log(req.session.user_id);
   if (req.session.user_id != undefined) {
     connection.getConnection(function (err, connection) {
       connection.query(

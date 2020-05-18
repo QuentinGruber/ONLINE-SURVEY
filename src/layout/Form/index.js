@@ -7,7 +7,13 @@ import { GlobalStyle } from "./styles";
 
 import Axios from "axios";
 
+import Myform_item from "./components/Myform_item";
+
 class Form extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { items: [] };
+  }
   // Get layout's routes
   getRoutes = (routes) => {
     return routes.map((prop, key) => {
@@ -39,18 +45,23 @@ class Form extends React.Component {
   async componentDidMount() {
     try {
       // create an entry in our db
-      let createList_promise = await Axios({
+      let myform_list_promise = await Axios({
         method: "get",
         url: process.env.REACT_APP_API_URL + "/myform",
         withCredentials: true,
       });
-      if (createList_promise.data != false) {
-        console.log(createList_promise.data);
+      if (myform_list_promise.data != false) {
+        let items = [];
+        for (let i = 0; i < myform_list_promise.data.length; i++) {
+          items.push(
+            <Myform_item key={i} data={myform_list_promise.data[i]} />
+          );
+        }
+        this.setState({ items: items });
       } else {
+        document.location.href = "/auth/";
         alert("You need to be connected !");
       }
-      // if succeed redirect user to the question_list page
-      // document.location.href = "/question_list/" + createList_promise.data.id;
     } catch (e) {
       console.error("Error while fetching user's forms! " + e);
     }
@@ -67,6 +78,8 @@ class Form extends React.Component {
         </div>
 
         <Switch>{this.getRoutes(routes)}</Switch>
+
+        <div>{this.state.items}</div>
       </>
     );
   }
