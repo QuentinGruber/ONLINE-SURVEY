@@ -5,6 +5,8 @@ import routes from "../../routes.js";
 
 import { GlobalStyle } from "./styles";
 
+import Axios from "axios";
+
 class Form extends React.Component {
   // Get layout's routes
   getRoutes = (routes) => {
@@ -34,6 +36,25 @@ class Form extends React.Component {
     }
     return "Brand";
   };
+  async componentDidMount() {
+    try {
+      // create an entry in our db
+      let createList_promise = await Axios({
+        method: "get",
+        url: process.env.REACT_APP_API_URL + "/myform",
+        withCredentials: true,
+      });
+      if (createList_promise.data != false) {
+        console.log(createList_promise.data);
+      } else {
+        alert("You need to be connected !");
+      }
+      // if succeed redirect user to the question_list page
+      // document.location.href = "/question_list/" + createList_promise.data.id;
+    } catch (e) {
+      console.error("Error while fetching user's forms! " + e);
+    }
+  }
   render() {
     return (
       <>
@@ -45,10 +66,7 @@ class Form extends React.Component {
           <div className="boxTextSlogan">Your forms, made simple</div>
         </div>
 
-        <Switch>
-          {this.getRoutes(routes)}
-          <Redirect from="*" to="/form/new" />
-        </Switch>
+        <Switch>{this.getRoutes(routes)}</Switch>
       </>
     );
   }

@@ -51,6 +51,12 @@ app.get("/welcome", function (req, res) {
   else res.send(req.session.name);
 });
 
+/* User form*/
+
+app.get("/myform", function (req, res) {
+  FormsController.get_user_form_content(req, res, connection);
+});
+
 /* GET FORM CONTENT */
 
 app.get("/form/*", function (req, res) {
