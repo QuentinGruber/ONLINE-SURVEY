@@ -1,19 +1,5 @@
 import React from "react";
-import {
-  Button,
-  Card,
-  CardHeader,
-  CardBody,
-  NavLink,
-  FormGroup,
-  Form,
-  Input,
-  InputGroupAddon,
-  InputGroupText,
-  InputGroup,
-  Row,
-  Col,
-} from "reactstrap";
+import { Input } from "reactstrap";
 import RadioAnswerList from "./answer_components/RadioAnswerList";
 
 class FormItem extends React.Component {
@@ -111,16 +97,18 @@ class FormItem extends React.Component {
           })()}
 
           <div className="custom-control custom-control-alternative custom-checkbox my-4">
-            <input
-              id={"Require_" + this.props.index}
-              className="custom-control-input"
-              type="checkbox"
-              onChange={() => {
-                this.props.ToogleRequireStateChange(this.props.index);
-              }}
-            />
-            <label htmlFor={"Require_" + this.props.index}>
-              <span className="text-muted">Required</span>
+            <label className="custom-toggle">
+              <input
+                type="checkbox"
+                id={"Require_" + this.props.index}
+                onChange={() => {
+                  this.props.ToogleRequireStateChange(this.props.index);
+                }}
+              />
+              <span className="custom-toggle-slider rounded-circle" />
+              <label htmlFor={"Require_" + this.props.index}>
+                <span className="text-muted text-required">Required</span>
+              </label>
             </label>
           </div>
         </li>

@@ -10462,9 +10462,11 @@ a.btn-icon-only {
   .custom-toggle input {
     display: none; }
     .custom-toggle input:checked + .custom-toggle-slider {
-      border: 1px solid #32325d; }
+      border: 1px solid #32325d; 
+      background: #32325d;
+      transition: 0.3s;}
       .custom-toggle input:checked + .custom-toggle-slider:before {
-        background: #32325d;
+        background: #ffffff;
         transform: translateX(1.625rem); }
     .custom-toggle input:disabled + .custom-toggle-slider {
       border: 1px solid #e9ecef; }

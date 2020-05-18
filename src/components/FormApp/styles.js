@@ -80,6 +80,12 @@ export const GlobalStyle = createGlobalStyle`
 }
 
 
+
+.text-required {
+  padding-left: 55px;
+  user-select: none; 
+}
+
 .card-bottom {
   position: absolute;
   width: 33%;

@@ -194,8 +194,8 @@ class FormApp extends React.Component {
         // if request fail
         alert(
           "Todolist id : " +
-            this.FormID +
-            " do not exist or you don't have the rights access... redirecting"
+          this.FormID +
+          " do not exist or you don't have the rights access... redirecting"
         );
         // redirect user to /question_list/new
         document.location.href = "/question_list/new";
@@ -204,8 +204,8 @@ class FormApp extends React.Component {
         // if access denied
         alert(
           "Todolist id : " +
-            this.FormID +
-            " do not exist or you don't have the rights access... redirecting"
+          this.FormID +
+          " do not exist or you don't have the rights access... redirecting"
         );
         // redirect user to /question_list/new
         document.location.href = "/question_list/new";
@@ -272,7 +272,6 @@ class FormApp extends React.Component {
     return (
       <>
         <GlobalStyle />
-
         <div id="main" className="fullCard bg-secondary shadow border-0">
           {this.CurrentUserRole === "2" || this.CurrentUserRole === "3" ? (
             <FormTitle
@@ -280,8 +279,8 @@ class FormApp extends React.Component {
               title={this.state.FormName}
             />
           ) : (
-            <Input value={this.state.FormName} disabled></Input>
-          )}
+              <Input value={this.state.FormName} disabled></Input>
+            )}
           <QuestionList
             userole={this.CurrentUserRole}
             items={formitems}
@@ -299,8 +298,8 @@ class FormApp extends React.Component {
             {this.isNew && <SaveForm save={this.saveItem} />}
             {(this.isNew !== true) & (this.CurrentUserRole === "3")
               ? {
-                  /* update form */
-                }
+                /* update form */
+              }
               : null}
           </div>
         </div>
