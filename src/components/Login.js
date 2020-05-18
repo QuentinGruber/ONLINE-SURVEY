@@ -33,8 +33,10 @@ class Login extends React.Component {
           if (this.responseText !== "false") {
             if (Keep_logged) {
               alert("Logged in !");
+              document.location.href = "/form";
             } else {
               alert("Logged in !");
+              document.location.href = "/form";
             }
           } else {
             alert("Wrong username/password !");

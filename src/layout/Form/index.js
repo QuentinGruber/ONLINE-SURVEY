@@ -5,7 +5,15 @@ import routes from "../../routes.js";
 
 import { GlobalStyle } from "./styles";
 
+import Axios from "axios";
+
+import Myform_item from "./components/Myform_item";
+
 class Form extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { items: [] };
+  }
   // Get layout's routes
   getRoutes = (routes) => {
     return routes.map((prop, key) => {
@@ -34,6 +42,30 @@ class Form extends React.Component {
     }
     return "Brand";
   };
+  async componentDidMount() {
+    try {
+      // create an entry in our db
+      let myform_list_promise = await Axios({
+        method: "get",
+        url: process.env.REACT_APP_API_URL + "/myform",
+        withCredentials: true,
+      });
+      if (myform_list_promise.data != false) {
+        let items = [];
+        for (let i = 0; i < myform_list_promise.data.length; i++) {
+          items.push(
+            <Myform_item key={i} data={myform_list_promise.data[i]} />
+          );
+        }
+        this.setState({ items: items });
+      } else {
+        document.location.href = "/auth/";
+        alert("You need to be connected !");
+      }
+    } catch (e) {
+      console.error("Error while fetching user's forms! " + e);
+    }
+  }
   render() {
     return (
       <>
@@ -45,10 +77,9 @@ class Form extends React.Component {
           <div className="boxTextSlogan">Your forms, made simple</div>
         </div>
 
-        <Switch>
-          {this.getRoutes(routes)}
-          <Redirect from="*" to="/form/new" />
-        </Switch>
+        <Switch>{this.getRoutes(routes)}</Switch>
+
+        <div>{this.state.items}</div>
       </>
     );
   }
