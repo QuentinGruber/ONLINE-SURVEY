@@ -32,6 +32,7 @@ export const GlobalStyle = createGlobalStyle`
   .card-question{
     margin: 5px 0px !important;
     padding: 5px 15px;
+    min-height: 100px;
   }
 
   .question { /* titre de la question */
@@ -79,12 +80,23 @@ export const GlobalStyle = createGlobalStyle`
   right: 2px;
 }
 
-
+.box-required {
+  position: absolute;
+  height: 40px;
+  right: 10px;
+  bottom: 0;
+}
 
 .text-required {
-  padding-left: 55px;
   user-select: none; 
+  padding: 0px 10px 50px 0px;
 }
+
+.custom-toggle {
+  display: inline-block;
+  top: 6px;
+}
+
 
 .card-bottom {
   position: absolute;
