@@ -31,7 +31,7 @@ export const GlobalStyle = createGlobalStyle`
 
   .card-question{
     margin: 5px 0px !important;
-    padding: 5px 15px;
+    padding: 10px 15px;
     min-height: 100px;
   }
 
@@ -72,7 +72,10 @@ export const GlobalStyle = createGlobalStyle`
     color: #999;
     content:attr(data-placeholder);
   }
-
+  .show>.dropdown-menu {
+    display: block;
+    position: absolute;
+  }
 
 .delete-question {
   position: absolute;
@@ -82,14 +85,16 @@ export const GlobalStyle = createGlobalStyle`
 
 .box-required {
   position: absolute;
-  height: 40px;
+  height: 0;
   right: 10px;
-  bottom: 0;
+  bottom: 40px;
 }
 
 .text-required {
+  display:inline-block;
   user-select: none; 
   padding: 0px 10px 50px 0px;
+  height: 0 !important;
 }
 
 .custom-toggle {

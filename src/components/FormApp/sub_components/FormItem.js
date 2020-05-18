@@ -12,7 +12,9 @@ class FormItem extends React.Component {
     var index = parseInt(this.props.index); // get item index
     this.props.removeItem(index); // remove it
   }
+
   render() {
+
     return (
       <>
         <li className="list-group-item card-question">
@@ -38,9 +40,13 @@ class FormItem extends React.Component {
             <span aria-hidden="true">&times;</span>
           </button>
 
+
+
+
           <select
             name="QuestionType"
-            className="type-select selectpicker"
+            className="type-select selectpicker form-control"
+            id="sel1"
             value={this.props.item.type}
             onChange={(e) => {
               this.props.item.p_answer = ""; // reset premade answer
@@ -50,18 +56,16 @@ class FormItem extends React.Component {
               );
             }}
           >
-            <option value="nothing" disabled>
-              Question Type
-            </option>
-            <option value="text">text</option>
-            <option value="radio">radio</option>
+            <option value="nothing">choisir type</option>
+            <option value="text">Texte</option>
+            <option value="radio">Choix unique</option>
+            <option value="text">Choix multiples</option>
           </select>
+
           {/* type de reponse */}
 
           {(() => {
             switch (this.props.item.type) {
-              case "nothing":
-                return null;
               case "text":
                 return (
                   <input
@@ -97,8 +101,8 @@ class FormItem extends React.Component {
           })()}
 
           <div className="box-required">
+            <span className="text-muted text-required">Required</span>
             <label htmlFor={"Require_" + this.props.index}>
-              <label className="text-muted text-required">Required</label>
               <span className="custom-toggle">
                 <input
                   type="checkbox"
