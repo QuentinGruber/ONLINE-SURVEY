@@ -38,6 +38,7 @@ class RadioQuestion extends React.Component {
     return (
       <>
         <h3>{this.props.data.title}</h3>
+        {this.props.data.required && <label>required</label>}
         {items}
       </>
     );
