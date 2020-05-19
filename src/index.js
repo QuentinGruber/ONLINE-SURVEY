@@ -21,36 +21,39 @@ ReactGA.initialize("UA-160982162-1");
 ReactGA.pageview(window.location.pathname + window.location.search);
 
 if (localStorage.AcceptCookies === "true") {
-  if (IsLogin()) {
+  IsLogin().then((result) => {
     // Private route
-    ReactDOM.render(
-      <BrowserRouter>
-        <Switch>
-          <Route exact path="/linkedin" component={LinkedInPopUp} />
-          <Route path="/dev" render={(props) => <DevLayout {...props} />} />
-          <Route path="/auth" render={(props) => <AuthLayout {...props} />} />
-          <Route path="/form" render={(props) => <Form {...props} />} />
-          <Route path="/legal" render={(props) => <Legal {...props} />} />
-          <Redirect from="/" to="/auth" />
-        </Switch>
-      </BrowserRouter>,
-      document.getElementById("root")
-    );
-  } else {
-    // Public route
-    ReactDOM.render(
-      <BrowserRouter>
-        <Switch>
-          <Route exact path="/linkedin" component={LinkedInPopUp} />
-          <Route path="/dev" render={(props) => <DevLayout {...props} />} />
-          <Route path="/auth" render={(props) => <AuthLayout {...props} />} />
-          <Route path="/legal" render={(props) => <Legal {...props} />} />
-          <Redirect from="/" to="/auth" />
-        </Switch>
-      </BrowserRouter>,
-      document.getElementById("root")
-    );
-  }
+    if (result == true) {
+      console.log(result);
+      ReactDOM.render(
+        <BrowserRouter>
+          <Switch>
+            <Route exact path="/linkedin" component={LinkedInPopUp} />
+            <Route path="/dev" render={(props) => <DevLayout {...props} />} />
+            <Route path="/auth" render={(props) => <AuthLayout {...props} />} />
+            <Route path="/form" render={(props) => <Form {...props} />} />
+            <Route path="/legal" render={(props) => <Legal {...props} />} />
+            <Redirect from="/" to="/auth" />
+          </Switch>
+        </BrowserRouter>,
+        document.getElementById("root")
+      );
+    } else {
+      console.log("feux", result);
+      // Public route
+      ReactDOM.render(
+        <BrowserRouter>
+          <Switch>
+            <Route exact path="/linkedin" component={LinkedInPopUp} />
+            <Route path="/auth" render={(props) => <AuthLayout {...props} />} />
+            <Route path="/legal" render={(props) => <Legal {...props} />} />
+            <Redirect from="/" to="/auth" />
+          </Switch>
+        </BrowserRouter>,
+        document.getElementById("root")
+      );
+    }
+  });
 } else {
   ReactDOM.render(<CookiesNeeded />, document.getElementById("root"));
 }

@@ -51,6 +51,12 @@ app.get("/welcome", function (req, res) {
   else res.send(req.session.name);
 });
 
+app.get("/islogin", function (req, res) {
+  // get name of a logged user
+  if (req.session.user_id === undefined) res.send(false);
+  else res.send(true);
+});
+
 /* User form*/
 
 app.get("/myform", function (req, res) {
