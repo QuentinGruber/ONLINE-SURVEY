@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import * as serviceWorker from "./serviceWorker";
-
+import IsLogin from "./utils/islogin";
 // import Layout / Route
 import DevLayout from "./layout/Dev.js";
 import AuthLayout from "./layout/Auth/";
@@ -21,19 +21,36 @@ ReactGA.initialize("UA-160982162-1");
 ReactGA.pageview(window.location.pathname + window.location.search);
 
 if (localStorage.AcceptCookies === "true") {
-  ReactDOM.render(
-    <BrowserRouter>
-      <Switch>
-        <Route exact path="/linkedin" component={LinkedInPopUp} />
-        <Route path="/dev" render={(props) => <DevLayout {...props} />} />
-        <Route path="/auth" render={(props) => <AuthLayout {...props} />} />
-        <Route path="/form" render={(props) => <Form {...props} />} />
-        <Route path="/legal" render={(props) => <Legal {...props} />} />
-        <Redirect from="/" to="/auth" />
-      </Switch>
-    </BrowserRouter>,
-    document.getElementById("root")
-  );
+  if (IsLogin()) {
+    // Private route
+    ReactDOM.render(
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/linkedin" component={LinkedInPopUp} />
+          <Route path="/dev" render={(props) => <DevLayout {...props} />} />
+          <Route path="/auth" render={(props) => <AuthLayout {...props} />} />
+          <Route path="/form" render={(props) => <Form {...props} />} />
+          <Route path="/legal" render={(props) => <Legal {...props} />} />
+          <Redirect from="/" to="/auth" />
+        </Switch>
+      </BrowserRouter>,
+      document.getElementById("root")
+    );
+  } else {
+    // Public route
+    ReactDOM.render(
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/linkedin" component={LinkedInPopUp} />
+          <Route path="/dev" render={(props) => <DevLayout {...props} />} />
+          <Route path="/auth" render={(props) => <AuthLayout {...props} />} />
+          <Route path="/legal" render={(props) => <Legal {...props} />} />
+          <Redirect from="/" to="/auth" />
+        </Switch>
+      </BrowserRouter>,
+      document.getElementById("root")
+    );
+  }
 } else {
   ReactDOM.render(<CookiesNeeded />, document.getElementById("root"));
 }
