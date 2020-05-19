@@ -12,11 +12,12 @@ class RadioAnswer extends React.Component {
             type="radio"
             name={"Q_radio_" + this.props.index}
             disabled="disabled"
+            className="radio-type-radio"
           ></input>
           <label
             className="radio-answer-input"
             contentEditable="true"
-            data-placeholder="Exemple de réponse"
+            data-placeholder="Option"
             suppressContentEditableWarning={true}
             onBlur={(e) => {
               this.props.HandleRadioTextChange(
@@ -36,13 +37,11 @@ class RadioAnswer extends React.Component {
               document.execCommand("insertText", false, text);
             }}
           ></label>
-          <button
+          <div class="remove-option"
             onClick={() => {
               this.props.RemoveRadioButton(this.props.id);
             }}
-          >
-            -
-          </button>
+          />
         </div>
       </>
     );
