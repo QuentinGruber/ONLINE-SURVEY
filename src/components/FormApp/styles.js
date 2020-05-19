@@ -55,7 +55,7 @@ export const GlobalStyle = createGlobalStyle`
 
   .type-select {
     right: 0;
-    top: 0px;
+    top: 0;
     display: inline-block;
     width: 130px;
     margin-left: 10px;
@@ -70,22 +70,22 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   .radio-answer-input {
-    min-width: 300px;
-    max-width: 90%;
+    display: inline-block;
+    width: calc(100% - 150px);
     padding: 5px;
     margin: 5px 10px;
     border: 1px solid #999;
-    border-radius: 3px;
     color: black;
+    outline: 0;
+    border-width: 0 0 1px;
+    border-radius: 0 !important;
+    border-color: #cad1d7;
+    background: transparent;
   }
   
   .radio-answer-input:empty:not(:focus):before{
     color: #999;
     content:attr(data-placeholder);
-  }
-  .show>.dropdown-menu {
-    display: block;
-    position: absolute;
   }
 
 .delete-question {
