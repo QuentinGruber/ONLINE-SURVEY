@@ -73,7 +73,6 @@ class FormApp extends React.Component {
     let temp_formitems = this.state.formitems;
     switch (type) {
       case "text":
-        temp_formitems[idx].p_answer = NewValue;
         break;
       case "radio":
         console.log(NewValue);
