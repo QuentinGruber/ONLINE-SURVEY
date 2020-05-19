@@ -39,10 +39,13 @@ export const GlobalStyle = createGlobalStyle`
     display: inline-block;
     width: calc(100% - 150px);
     padding: 5px 0px;
+    margin-bottom: 20px;
     font-weight: 549;
     font-size: 18px;
     color: black;
-    border: none;
+    outline: 0;
+    border-width: 0 0 2px;
+    border-radius: 0 !important;
     background: transparent;
   }
   .question:focus {
@@ -56,6 +59,14 @@ export const GlobalStyle = createGlobalStyle`
     display: inline-block;
     width: 130px;
     margin-left: 10px;
+  }
+
+  .text-answer-input {
+    width: calc(100% - 150px);
+  }
+
+  .text-answer-input:focus {
+    border-color: #cad1d7;
   }
 
   .radio-answer-input {

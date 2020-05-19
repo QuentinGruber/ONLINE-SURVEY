@@ -68,18 +68,14 @@ class FormItem extends React.Component {
             switch (this.props.item.type) {
               case "text":
                 return (
-                  <input
-                    type="text"
-                    value={this.props.item.p_answer}
-                    onChange={(e) =>
-                      this.props.HandlePremadeAnswerChange(
-                        this.props.index,
-                        e.target.type,
-                        e.target.value
-                      )
-                    }
-                    placeholder="exemple de réponse"
-                  ></input>
+
+                  <input readonly="readonly" type="text" class="form-control text-answer-input" value={this.props.item.p_answer} placeholder="Réponse libre" onChange={(e) =>
+                    this.props.HandlePremadeAnswerChange(
+                      this.props.index,
+                      e.target.type,
+                      e.target.value
+                    )
+                  }></input>
                 );
               case "radio":
                 return (
