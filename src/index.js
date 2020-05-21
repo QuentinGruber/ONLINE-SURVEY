@@ -33,19 +33,20 @@ if (localStorage.AcceptCookies === "true") {
             <Route path="/auth" render={(props) => <AuthLayout {...props} />} />
             <Route path="/form" render={(props) => <Form {...props} />} />
             <Route path="/legal" render={(props) => <Legal {...props} />} />
-            <Redirect from="/" to="/auth" />
+            <Redirect from="/" to="/form" />
           </Switch>
         </BrowserRouter>,
         document.getElementById("root")
       );
     } else {
-      console.log("feux", result);
       // Public route
       ReactDOM.render(
         <BrowserRouter>
           <Switch>
             <Route exact path="/linkedin" component={LinkedInPopUp} />
+            <Route path="/dev" render={(props) => <DevLayout {...props} />} />
             <Route path="/auth" render={(props) => <AuthLayout {...props} />} />
+            <Route path="/form" render={(props) => <Form {...props} />} />
             <Route path="/legal" render={(props) => <Legal {...props} />} />
             <Redirect from="/" to="/auth" />
           </Switch>
