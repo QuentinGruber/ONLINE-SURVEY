@@ -23,7 +23,7 @@ ReactGA.pageview(window.location.pathname + window.location.search);
 if (localStorage.AcceptCookies === "true") {
   IsLogin().then((result) => {
     // Private route
-    if (result == true) {
+    if (result === true) {
       console.log(result);
       ReactDOM.render(
         <BrowserRouter>

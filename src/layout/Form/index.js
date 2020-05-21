@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Switch, Redirect } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 
 import routes from "../../routes.js";
 
@@ -7,7 +7,7 @@ import { GlobalStyle } from "./styles";
 
 import Axios from "axios";
 
-import Myform_item from "./components/Myform_item";
+import MyFormItem from "./components/Myform_item";
 
 class Form extends React.Component {
   constructor(props) {
@@ -50,12 +50,10 @@ class Form extends React.Component {
         url: process.env.REACT_APP_API_URL + "/myform",
         withCredentials: true,
       });
-      if (myform_list_promise.data != false) {
+      if (myform_list_promise.data !== false) {
         let items = [];
         for (let i = 0; i < myform_list_promise.data.length; i++) {
-          items.push(
-            <Myform_item key={i} data={myform_list_promise.data[i]} />
-          );
+          items.push(<MyFormItem key={i} data={myform_list_promise.data[i]} />);
         }
         this.setState({ items: items });
       } else {
@@ -80,7 +78,7 @@ class Form extends React.Component {
         <Switch>{this.getRoutes(routes)}</Switch>
         {document.location.href.substr(
           document.location.href.lastIndexOf("/")
-        ) == "/form" && <div>{this.state.items}</div>}
+        ) === "/form" && <div>{this.state.items}</div>}
       </>
     );
   }

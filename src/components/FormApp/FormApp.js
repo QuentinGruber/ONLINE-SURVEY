@@ -40,7 +40,7 @@ class FormApp extends React.Component {
             content: this.state.formitems,
           },
         });
-        if (createList_promise.data == true) {
+        if (createList_promise.data === true) {
           alert("Form created !");
         }
         // if succeed redirect user to the question_list page
@@ -148,6 +148,8 @@ class FormApp extends React.Component {
     // update state
     this.setState({ formitems: formitems });
   }
+
+  /*
   async removeItem(itemIndex) {
     if (!this.isNew) {
       // if this isn't a new question_list
@@ -164,6 +166,7 @@ class FormApp extends React.Component {
     //update state
     this.setState({ formitems: formitems });
   }
+  */
 
   async componentWillMount() {
     var pageURL = window.location.href;

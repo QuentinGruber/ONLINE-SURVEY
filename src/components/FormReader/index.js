@@ -33,6 +33,9 @@ class FormReader extends React.Component {
             });
           }
           break;
+        default:
+          console.error("Unknown answer type : " + inputs[i].type);
+          break;
       }
     }
 
@@ -69,6 +72,12 @@ class FormReader extends React.Component {
             break;
           case "radio":
             items.push(<RadioQuestion key={i} data={FormContent.content[i]} />);
+            break;
+
+          default:
+            console.error(
+              "Unknown question type : " + FormContent.content[i].type
+            );
             break;
         }
       }
