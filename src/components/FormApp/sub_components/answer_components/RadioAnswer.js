@@ -1,8 +1,5 @@
 import React from "react";
 class RadioAnswer extends React.Component {
-  constructor(props) {
-    super(props);
-  }
   render() {
     if (this.props.checked) {
       return (
