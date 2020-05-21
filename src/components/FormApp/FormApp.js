@@ -19,7 +19,7 @@ class FormApp extends React.Component {
     this.HandlePremadeAnswerChange = this.HandlePremadeAnswerChange.bind(this);
     this.ToogleRequireStateChange = this.ToogleRequireStateChange.bind(this);
     this.addItem = this.addItem.bind(this);
-    this.removeItem = this.removeItem.bind(this);
+    //    this.removeItem = this.removeItem.bind(this);
     this.saveItem = this.saveItem.bind(this);
     this.CurrentUserRole = "1";
     this.state = { formitems: formitems, mode: "all", FormName: "" };
