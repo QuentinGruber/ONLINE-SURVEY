@@ -58,8 +58,9 @@ class FormItem extends React.Component {
           >
             <option value="nothing">choisir type</option>
             <option value="text">Texte</option>
+            <option value="text">Chiffres</option>
             <option value="radio">Choix unique</option>
-            <option value="text">Choix multiples</option>
+            <option value="radio">Choix multiples</option>
           </select>
 
           {/* type de reponse */}
@@ -90,7 +91,7 @@ class FormItem extends React.Component {
           })()}
 
           <div className="box-required">
-            <span className="text-muted text-required">Obligatoire</span>
+            <span className="text-muted text-required">obligatoire</span>
             <label htmlFor={"Require_" + this.props.index}>
               <span className="custom-toggle">
                 <input
