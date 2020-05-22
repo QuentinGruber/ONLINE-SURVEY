@@ -9,7 +9,7 @@ class SaveForm extends React.Component {
         color="default"
         onClick={this.props.save}
       >
-        Save
+        Enregistrer
       </Button>
     );
   }

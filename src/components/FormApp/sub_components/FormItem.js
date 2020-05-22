@@ -90,7 +90,7 @@ class FormItem extends React.Component {
           })()}
 
           <div className="box-required">
-            <span className="text-muted text-required">Required</span>
+            <span className="text-muted text-required">Obligatoire</span>
             <label htmlFor={"Require_" + this.props.index}>
               <span className="custom-toggle">
                 <input
