@@ -4,7 +4,6 @@ import QuestionList from "./sub_components/QuestionList";
 import NewQuestion from "./sub_components/NewQuestion";
 import SaveForm from "./sub_components/SaveForm";
 import Axios from "axios";
-import { Input } from "reactstrap";
 
 import { GlobalStyle } from "./styles";
 
@@ -24,7 +23,6 @@ class FormApp extends React.Component {
     this.addItem = this.addItem.bind(this);
     this.removeItem = this.removeItem.bind(this);
     this.saveItem = this.saveItem.bind(this);
-    this.CurrentUserRole = "1";
     this.state = { formitems: formitems, mode: "all", FormName: "" };
   }
 
@@ -152,6 +150,7 @@ class FormApp extends React.Component {
   }
 
   async removeItem(itemIndex) {
+    /*
     if (!this.isNew) {
       // if this isn't a new question_list
       // delete the item entry in FormItem
@@ -163,6 +162,7 @@ class FormApp extends React.Component {
       });
       */
     }
+    */
     // delete the item from formitems array
     formitems.splice(itemIndex, 1);
 
@@ -175,8 +175,7 @@ class FormApp extends React.Component {
     var lastURLSegment = pageURL.substr(pageURL.lastIndexOf("/") + 1);
     this.FormID = lastURLSegment;
     if (lastURLSegment === "new") {
-      // if it's a new question list
-      this.CurrentUserRole = "3"; // make current user the owner of the list
+      // if it's a new form
       formitems.push({
         index: 1,
         title: "",
@@ -251,16 +250,6 @@ class FormApp extends React.Component {
           formitems.push(item); // add it to the formitems array (state)
         }
       }
-      try {
-        var CurrentUserRole_promise = await Axios({
-          method: "get",
-          url:
-            "http://127.0.0.1:8000/api/ToDoListUser/" + this.FormID + "/role",
-        });
-        this.CurrentUserRole = CurrentUserRole_promise.data;
-      } catch (e) {
-        console.error("error while trying to get current user role ! " + e);
-      }
 
       // update question_list title & question_list content
       this.setState({
@@ -275,16 +264,11 @@ class FormApp extends React.Component {
       <>
         <GlobalStyle />
         <div id="main" className="fullCard bg-secondary shadow border-0">
-          {this.CurrentUserRole === "2" || this.CurrentUserRole === "3" ? (
-            <FormTitle
-              handleChangeTitle={this.handleChangeTitle}
-              title={this.state.FormName}
-            />
-          ) : (
-            <Input value={this.state.FormName} disabled></Input>
-          )}
+          <FormTitle
+            handleChangeTitle={this.handleChangeTitle}
+            title={this.state.FormName}
+          />
           <QuestionList
-            userole={this.CurrentUserRole}
             items={formitems}
             ToogleRequireStateChange={this.ToogleRequireStateChange}
             removeItem={this.removeItem}
@@ -292,13 +276,11 @@ class FormApp extends React.Component {
             HandleQuestionTypeChange={this.HandleQuestionTypeChange}
             HandlePremadeAnswerChange={this.HandlePremadeAnswerChange}
           />
-          {this.CurrentUserRole === "2" || this.CurrentUserRole === "3" ? (
-            <NewQuestion addItem={this.addItem} />
-          ) : null}
+          <NewQuestion addItem={this.addItem} />
 
           <div className="card-bottom">
             {this.isNew && <SaveForm save={this.saveItem} />}
-            {(this.isNew !== true) & (this.CurrentUserRole === "3")
+            {this.isNew !== true
               ? {
                   /* update form */
                 }
