@@ -1,6 +1,11 @@
 import React from "react";
 import { Input } from "reactstrap";
 import RadioAnswerList from "./answer_components/RadioAnswerList";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
+
+library.add(faTrashAlt);
 
 class FormItem extends React.Component {
   constructor(props) {
@@ -31,15 +36,6 @@ class FormItem extends React.Component {
             }
           />
 
-          <button
-            type="button"
-            className="close delete-question"
-            aria-label="Close"
-            onClick={this.onClickDelete}
-          >
-            <span aria-hidden="true">&times;</span>
-          </button>
-
 
 
 
@@ -62,7 +58,6 @@ class FormItem extends React.Component {
             <option value="radio">Choix unique</option>
             <option value="radio">Choix multiples</option>
           </select>
-
           {/* type de reponse */}
 
           {(() => {
@@ -90,20 +85,35 @@ class FormItem extends React.Component {
             }
           })()}
 
-          <div className="box-required">
-            <span className="text-muted text-required">obligatoire</span>
-            <label htmlFor={"Require_" + this.props.index}>
-              <span className="custom-toggle">
-                <input
-                  type="checkbox"
-                  id={"Require_" + this.props.index}
-                  onChange={() => {
-                    this.props.ToogleRequireStateChange(this.props.index);
-                  }}
-                />
-                <span className="custom-toggle-slider rounded-circle" />
-              </span>
-            </label>
+
+          <div className="question-footer">
+
+            <div className="box-delete-question">
+              <button
+                type="button"
+                className="close delete-question"
+                aria-label="Close"
+                onClick={this.onClickDelete}
+              >
+                <FontAwesomeIcon icon="trash-alt" className="fa-xs" />
+              </button>
+            </div>
+
+            <div className="box-required">
+              <span className="text-muted text-required">obligatoire</span>
+              <label htmlFor={"Require_" + this.props.index}>
+                <span className="custom-toggle">
+                  <input
+                    type="checkbox"
+                    id={"Require_" + this.props.index}
+                    onChange={() => {
+                      this.props.ToogleRequireStateChange(this.props.index);
+                    }}
+                  />
+                  <span className="custom-toggle-slider rounded-circle" />
+                </span>
+              </label>
+            </div>
           </div>
         </li>
       </>

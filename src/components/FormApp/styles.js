@@ -264,19 +264,30 @@ export const GlobalStyle = createGlobalStyle`
     margin-left: 4%;
   }
 
-.delete-question {
+
+
+.question-footer {
+  bottom: 0px;
+  height: 33px;
+  width: 100%;
+  border: 1px solid #cad1d7;
+  margin-top: 15px;
+
+  border-width: 1px 0 0;
+  border-radius: 0 !important;
+  border-color: #cad1d7;
+
+}
+
+
+.box-delete-question {
   position: absolute;
-  top: 2px;
-  right: 2px;
+  height: 0;
+  right: 175px;
+  width: 10px;
+  bottom: 35px;
+  color: #32325d !important;
 }
-
-.delete-question:hover {
-  color: #32325d;
-}
-
-
-
-
 
 .box-required {
   position: absolute;
