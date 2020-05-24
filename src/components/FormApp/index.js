@@ -160,7 +160,6 @@ class FormApp extends React.Component {
         url:
           "http://127.0.0.1:8000/api/ToDoList/items/" + formitems[itemIndex].id,
       });
-      */
     }
     */
     // delete the item from formitems array
