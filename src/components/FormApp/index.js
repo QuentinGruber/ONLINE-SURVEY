@@ -22,7 +22,7 @@ class FormApp extends React.Component {
     this.HandlePremadeAnswerChange = this.HandlePremadeAnswerChange.bind(this);
     this.ToogleRequireStateChange = this.ToogleRequireStateChange.bind(this);
     this.addItem = this.addItem.bind(this);
-    //    this.removeItem = this.removeItem.bind(this);
+    this.removeItem = this.removeItem.bind(this);
     this.saveItem = this.saveItem.bind(this);
     this.CurrentUserRole = "1";
     this.state = { formitems: formitems, mode: "all", FormName: "" };
@@ -151,7 +151,6 @@ class FormApp extends React.Component {
     this.setState({ formitems: formitems });
   }
 
-  /*
   async removeItem(itemIndex) {
     if (!this.isNew) {
       // if this isn't a new question_list
@@ -168,7 +167,6 @@ class FormApp extends React.Component {
     //update state
     this.setState({ formitems: formitems });
   }
-  */
 
   async componentWillMount() {
     var pageURL = window.location.href;
@@ -196,8 +194,8 @@ class FormApp extends React.Component {
         // if request fail
         alert(
           "Todolist id : " +
-          this.FormID +
-          " do not exist or you don't have the rights access... redirecting"
+            this.FormID +
+            " do not exist or you don't have the rights access... redirecting"
         );
         // redirect user to /question_list/new
         document.location.href = "/question_list/new";
@@ -206,8 +204,8 @@ class FormApp extends React.Component {
         // if access denied
         alert(
           "Todolist id : " +
-          this.FormID +
-          " do not exist or you don't have the rights access... redirecting"
+            this.FormID +
+            " do not exist or you don't have the rights access... redirecting"
         );
         // redirect user to /question_list/new
         document.location.href = "/question_list/new";
@@ -273,7 +271,6 @@ class FormApp extends React.Component {
   render() {
     return (
       <>
-
         <GlobalStyle />
         <div id="main" className="fullCard bg-secondary shadow border-0">
           {this.CurrentUserRole === "2" || this.CurrentUserRole === "3" ? (
@@ -282,8 +279,8 @@ class FormApp extends React.Component {
               title={this.state.FormName}
             />
           ) : (
-              <Input value={this.state.FormName} disabled></Input>
-            )}
+            <Input value={this.state.FormName} disabled></Input>
+          )}
           <QuestionList
             userole={this.CurrentUserRole}
             items={formitems}
@@ -301,8 +298,8 @@ class FormApp extends React.Component {
             {this.isNew && <SaveForm save={this.saveItem} />}
             {(this.isNew !== true) & (this.CurrentUserRole === "3")
               ? {
-                /* update form */
-              }
+                  /* update form */
+                }
               : null}
           </div>
         </div>
