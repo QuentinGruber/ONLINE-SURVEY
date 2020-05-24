@@ -134,7 +134,7 @@ class FormApp extends React.Component {
         index: formitems.length + 1,
         title: Item.newItemValue,
         required: false,
-        type: "text",
+        type: "radio",
       });
     } else {
       // if this is a new question_list
@@ -143,7 +143,7 @@ class FormApp extends React.Component {
         index: formitems.length + 1,
         title: Item.newItemValue,
         required: false,
-        type: "nothing",
+        type: "radio",
         p_answer: "",
       });
     }
@@ -181,7 +181,7 @@ class FormApp extends React.Component {
         index: 1,
         title: "",
         required: false,
-        type: "nothing",
+        type: "radio",
         p_answer: "",
       });
       this.setState({ formitems: formitems });
