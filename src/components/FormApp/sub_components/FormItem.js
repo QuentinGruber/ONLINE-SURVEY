@@ -1,7 +1,7 @@
 import React from "react";
 import { Input } from "reactstrap";
 import RadioAnswerList from "./answer_components/RadioAnswerList";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 
@@ -19,11 +19,11 @@ class FormItem extends React.Component {
   }
 
   render() {
-
     return (
       <>
         <li className="list-group-item card-question">
           <Input
+            autoFocus
             className="question"
             type="text"
             placeholder="Titre de la question"
@@ -35,9 +35,6 @@ class FormItem extends React.Component {
               )
             }
           />
-
-
-
 
           <select
             name="QuestionType"
@@ -52,11 +49,10 @@ class FormItem extends React.Component {
               );
             }}
           >
-            <option value="nothing">choisir type</option>
-            <option value="text">Texte</option>
-            <option value="text">Chiffres</option>
             <option value="radio">Choix unique</option>
-            <option value="radio">Choix multiples</option>
+            <option value="radio">Choix multiples / A FAIRE</option>
+            <option value="text">Texte</option>
+            <option value="text">Chiffres / A FAIRE</option>
           </select>
           {/* type de reponse */}
 
@@ -64,7 +60,13 @@ class FormItem extends React.Component {
             switch (this.props.item.type) {
               case "text":
                 return (
-                  <input readonly="readonly" type="text" class="form-control text-answer-input" value={this.props.item.p_answer} placeholder="Réponse libre"></input>
+                  <input
+                    readonly="readonly"
+                    type="text"
+                    class="form-control text-answer-input"
+                    value={this.props.item.p_answer}
+                    placeholder="Réponse libre"
+                  ></input>
                 );
               case "radio":
                 return (
@@ -85,9 +87,7 @@ class FormItem extends React.Component {
             }
           })()}
 
-
           <div className="question-footer">
-
             <div className="box-delete-question">
               <button
                 type="button"
