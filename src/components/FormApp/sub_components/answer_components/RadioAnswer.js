@@ -1,16 +1,20 @@
 import React from "react";
+
 class RadioAnswer extends React.Component {
   render() {
-    if (this.props.checked) {
-      return (
-        <>
+    return (
+      <>
+        <div className="radio-answer">
           <input
             type="radio"
             name={"Q_radio_" + this.props.index}
-            defaultChecked
+            disabled="disabled"
+            className="radio-type-radio"
           ></input>
           <label
+            className="radio-answer-input"
             contentEditable="true"
+            data-placeholder="Option"
             suppressContentEditableWarning={true}
             onBlur={(e) => {
               this.props.HandleRadioTextChange(
@@ -18,44 +22,26 @@ class RadioAnswer extends React.Component {
                 e.target.innerText
               );
             }}
-          >
-            {this.props.value}
-          </label>
-          <button
+            onKeyPress={(evt) => {
+              if (evt.which === 13) {
+                evt.preventDefault();
+              }
+            }}
+            onPaste={(e) => {
+              e.preventDefault();
+              var text = e.clipboardData.getData("text/plain");
+              text = text.replace(/(?:\r\n|\r|\n)/g, " ");
+              document.execCommand("insertText", false, text);
+            }}
+          ></label>
+          <div class="remove-option"
             onClick={() => {
               this.props.RemoveRadioButton(this.props.id);
             }}
-          >
-            -
-          </button>
-        </>
-      );
-    } else {
-      return (
-        <>
-          <input type="radio" name={"Q_radio_" + this.props.index}></input>
-          <label
-            contentEditable="true"
-            suppressContentEditableWarning={true}
-            onBlur={(e) => {
-              this.props.HandleRadioTextChange(
-                this.props.id,
-                e.target.innerText
-              );
-            }}
-          >
-            {this.props.value}
-          </label>
-          <button
-            onClick={() => {
-              this.props.RemoveRadioButton(this.props.id);
-            }}
-          >
-            -
-          </button>
-        </>
-      );
-    }
+          />
+        </div>
+      </>
+    );
   }
 }
 

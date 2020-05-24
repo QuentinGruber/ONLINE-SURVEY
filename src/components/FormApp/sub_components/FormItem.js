@@ -1,6 +1,11 @@
 import React from "react";
-import { Button, Input } from "reactstrap";
+import { Input } from "reactstrap";
 import RadioAnswerList from "./answer_components/RadioAnswerList";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
+
+library.add(faTrashAlt);
 
 class FormItem extends React.Component {
   constructor(props) {
@@ -12,10 +17,12 @@ class FormItem extends React.Component {
     var index = parseInt(this.props.index); // get item index
     this.props.removeItem(index); // remove it
   }
+
   render() {
+
     return (
       <>
-        <li className="list-group-item card">
+        <li className="list-group-item card-question">
           <Input
             className="question"
             type="text"
@@ -28,24 +35,36 @@ class FormItem extends React.Component {
               )
             }
           />
+
+
+
+
+          <select
+            name="QuestionType"
+            className="type-select selectpicker form-control"
+            id="sel1"
+            value={this.props.item.type}
+            onChange={(e) => {
+              this.props.item.p_answer = ""; // reset premade answer
+              this.props.HandleQuestionTypeChange(
+                this.props.index,
+                e.target.value
+              );
+            }}
+          >
+            <option value="nothing">choisir type</option>
+            <option value="text">Texte</option>
+            <option value="text">Chiffres</option>
+            <option value="radio">Choix unique</option>
+            <option value="radio">Choix multiples</option>
+          </select>
+          {/* type de reponse */}
+
           {(() => {
             switch (this.props.item.type) {
-              case "nothing":
-                return null;
               case "text":
                 return (
-                  <input
-                    type="text"
-                    value={this.props.item.p_answer}
-                    onChange={(e) =>
-                      this.props.HandlePremadeAnswerChange(
-                        this.props.index,
-                        e.target.type,
-                        e.target.value
-                      )
-                    }
-                    placeholder="exemple de réponse"
-                  ></input>
+                  <input readonly="readonly" type="text" class="form-control text-answer-input" value={this.props.item.p_answer} placeholder="Réponse libre"></input>
                 );
               case "radio":
                 return (
@@ -65,36 +84,37 @@ class FormItem extends React.Component {
                 break;
             }
           })()}
-          <select
-            name="QuestionType"
-            id="type-select"
-            value={this.props.item.type}
-            onChange={(e) => {
-              this.props.item.p_answer = ""; // reset premade answer
-              this.props.HandleQuestionTypeChange(
-                this.props.index,
-                e.target.value
-              );
-            }}
-          >
-            <option value="nothing" disabled>
-              --Please choose a question type--
-            </option>
-            <option value="text">text</option>
-            <option value="radio">radio</option>
-          </select>
-          {/* type de reponse */}
-          <input
-            id={"Require_" + this.props.index}
-            type="checkbox"
-            onChange={() => {
-              this.props.ToogleRequireStateChange(this.props.index);
-            }}
-          />
-          <label for={"Require_" + this.props.index}>required</label>
-          <Button type="button" className="close" onClick={this.onClickDelete}>
-            Delete Question
-          </Button>
+
+
+          <div className="question-footer">
+
+            <div className="box-delete-question">
+              <button
+                type="button"
+                className="close delete-question"
+                aria-label="Close"
+                onClick={this.onClickDelete}
+              >
+                <FontAwesomeIcon icon="trash-alt" className="fa-xs" />
+              </button>
+            </div>
+
+            <div className="box-required">
+              <span className="text-muted text-required">obligatoire</span>
+              <label htmlFor={"Require_" + this.props.index}>
+                <span className="custom-toggle">
+                  <input
+                    type="checkbox"
+                    id={"Require_" + this.props.index}
+                    onChange={() => {
+                      this.props.ToogleRequireStateChange(this.props.index);
+                    }}
+                  />
+                  <span className="custom-toggle-slider rounded-circle" />
+                </span>
+              </label>
+            </div>
+          </div>
         </li>
       </>
     );

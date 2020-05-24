@@ -26,10 +26,10 @@ class NewQuestion extends React.Component {
           type="text"
           ref="itemName"
           className="form-control input-add"
-          placeholder="add a new question..."
+          placeholder="Nouvelle question"
         />
         <button type="submit" className="btn btn-secondary button-add">
-          Add
+          Ajouter
         </button>
       </form>
     );

@@ -1653,7 +1653,6 @@ textarea.form-control {
 
 .btn {
   display: inline-block;
-  font-weight: 600;
   text-align: center;
   white-space: nowrap;
   vertical-align: middle;
@@ -4116,15 +4115,15 @@ input[type="button"].btn-block {
   font-size: 1.5rem;
   font-weight: 600;
   line-height: 1;
-  color: rgba(0, 0, 0, 0.6);
+  color: #cad1d7;
   text-shadow: none;
-  opacity: .5; }
+  opacity: 1; }
   .close:not(:disabled):not(.disabled) {
     cursor: pointer; }
     .close:not(:disabled):not(.disabled):hover, .close:not(:disabled):not(.disabled):focus {
-      color: rgba(0, 0, 0, 0.6);
+      color: #32325d;
       text-decoration: none;
-      opacity: .75; }
+      opacity: 1; }
 
 button.close {
   padding: 0;
@@ -10462,9 +10461,11 @@ a.btn-icon-only {
   .custom-toggle input {
     display: none; }
     .custom-toggle input:checked + .custom-toggle-slider {
-      border: 1px solid #32325d; }
+      border: 1px solid #32325d; 
+      background: #32325d;
+      transition: 0.3s;}
       .custom-toggle input:checked + .custom-toggle-slider:before {
-        background: #32325d;
+        background: #ffffff;
         transform: translateX(1.625rem); }
     .custom-toggle input:disabled + .custom-toggle-slider {
       border: 1px solid #e9ecef; }

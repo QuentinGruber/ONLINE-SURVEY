@@ -1,5 +1,7 @@
 import React from "react";
 import RadioAnswer from "./RadioAnswer";
+import { Button } from "reactstrap";
+
 class RadioAnswerList extends React.Component {
   constructor(props) {
     super(props);
@@ -8,10 +10,7 @@ class RadioAnswerList extends React.Component {
     } else {
       console.log(typeof this.props.answers);
       this.state = {
-        answers: [
-          { text: "réponse1", checked: true },
-          { text: "réponse2", checked: false },
-        ],
+        answers: [{ checked: false }, { checked: false }],
       };
     }
     this.AddRadioButton = this.AddRadioButton.bind(this);
@@ -30,7 +29,7 @@ class RadioAnswerList extends React.Component {
     );
   }
 
-  HandleRadioCheckChange(id, NewText) {}
+  HandleRadioCheckChange(id, NewText) { }
 
   AddRadioButton() {
     let temp_answers = this.state.answers;
@@ -76,7 +75,10 @@ class RadioAnswerList extends React.Component {
             HandleRadioTextChange={this.HandleRadioTextChange}
           />
         ))}
-        <button onClick={this.AddRadioButton}>+</button>
+
+        <Button color="default" outline type="button" className="button-add-option" onClick={this.AddRadioButton}>
+          Ajouter une option
+        </Button>
       </>
     );
   }

@@ -5,6 +5,9 @@ import NewQuestion from "./sub_components/NewQuestion";
 import SaveForm from "./sub_components/SaveForm";
 import Axios from "axios";
 import { Input } from "reactstrap";
+
+import { GlobalStyle } from "./styles";
+
 var formitems = [];
 
 class FormApp extends React.Component {
@@ -70,7 +73,6 @@ class FormApp extends React.Component {
     let temp_formitems = this.state.formitems;
     switch (type) {
       case "text":
-        temp_formitems[idx].p_answer = NewValue;
         break;
       case "radio":
         console.log(NewValue);
@@ -177,7 +179,7 @@ class FormApp extends React.Component {
       this.CurrentUserRole = "3"; // make current user the owner of the list
       formitems.push({
         index: 1,
-        title: "Exemple de question",
+        title: "",
         required: false,
         type: "nothing",
         p_answer: "",
@@ -194,8 +196,8 @@ class FormApp extends React.Component {
         // if request fail
         alert(
           "Todolist id : " +
-            this.FormID +
-            " do not exist or you don't have the rights access... redirecting"
+          this.FormID +
+          " do not exist or you don't have the rights access... redirecting"
         );
         // redirect user to /question_list/new
         document.location.href = "/question_list/new";
@@ -204,8 +206,8 @@ class FormApp extends React.Component {
         // if access denied
         alert(
           "Todolist id : " +
-            this.FormID +
-            " do not exist or you don't have the rights access... redirecting"
+          this.FormID +
+          " do not exist or you don't have the rights access... redirecting"
         );
         // redirect user to /question_list/new
         document.location.href = "/question_list/new";
@@ -270,34 +272,41 @@ class FormApp extends React.Component {
 
   render() {
     return (
-      <div id="main" className="card">
-        {this.CurrentUserRole === "2" || this.CurrentUserRole === "3" ? (
-          <FormTitle
-            handleChangeTitle={this.handleChangeTitle}
-            title={this.state.FormName}
+      <>
+
+        <GlobalStyle />
+        <div id="main" className="fullCard bg-secondary shadow border-0">
+          {this.CurrentUserRole === "2" || this.CurrentUserRole === "3" ? (
+            <FormTitle
+              handleChangeTitle={this.handleChangeTitle}
+              title={this.state.FormName}
+            />
+          ) : (
+              <Input value={this.state.FormName} disabled></Input>
+            )}
+          <QuestionList
+            userole={this.CurrentUserRole}
+            items={formitems}
+            ToogleRequireStateChange={this.ToogleRequireStateChange}
+            removeItem={this.removeItem}
+            handleChangeQuestionTitle={this.handleChangeQuestionTitle}
+            HandleQuestionTypeChange={this.HandleQuestionTypeChange}
+            HandlePremadeAnswerChange={this.HandlePremadeAnswerChange}
           />
-        ) : (
-          <Input value={this.state.FormName} disabled></Input>
-        )}
-        <QuestionList
-          userole={this.CurrentUserRole}
-          items={formitems}
-          ToogleRequireStateChange={this.ToogleRequireStateChange}
-          removeItem={this.removeItem}
-          handleChangeQuestionTitle={this.handleChangeQuestionTitle}
-          HandleQuestionTypeChange={this.HandleQuestionTypeChange}
-          HandlePremadeAnswerChange={this.HandlePremadeAnswerChange}
-        />
-        {this.CurrentUserRole === "2" || this.CurrentUserRole === "3" ? (
-          <NewQuestion addItem={this.addItem} />
-        ) : null}
-        {this.isNew && <SaveForm save={this.saveItem} />}
-        {(this.isNew !== true) & (this.CurrentUserRole === "3")
-          ? {
-              /* update form */
-            }
-          : null}
-      </div>
+          {this.CurrentUserRole === "2" || this.CurrentUserRole === "3" ? (
+            <NewQuestion addItem={this.addItem} />
+          ) : null}
+
+          <div className="card-bottom">
+            {this.isNew && <SaveForm save={this.saveItem} />}
+            {(this.isNew !== true) & (this.CurrentUserRole === "3")
+              ? {
+                /* update form */
+              }
+              : null}
+          </div>
+        </div>
+      </>
     );
   }
 }

@@ -2,15 +2,15 @@ import { createGlobalStyle } from "styled-components";
 import backgroundImage from "../../assets/img/backgrounds/background-stars.jpg";
 export const GlobalStyle = createGlobalStyle`
 body{
-  background: url(${backgroundImage}) no-repeat center center fixed; 
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-    }
-  
+    background: url(${backgroundImage}) no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  }
+
   .whiteDiv {
-    position: relative;
+    position: fixed;
     width: 100%;
     height: 600px;
     top: -400px;
@@ -35,7 +35,7 @@ body{
   .boxText {
     position: absolute;
     width : 20%;
-    right: 6%;
+    right: 3%;
     top : 50%;
     transform: translateY(-50%);
     color: white;
@@ -49,7 +49,7 @@ body{
   
   /* ON MOBILE */
   
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 1200px) {
   
     .whiteDiv {
       display: none;
