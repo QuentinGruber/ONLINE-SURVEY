@@ -23,6 +23,7 @@ class FormItem extends React.Component {
       <>
         <li className="list-group-item card-question">
           <Input
+            autoFocus
             className="question"
             type="text"
             placeholder="Titre de la question"
