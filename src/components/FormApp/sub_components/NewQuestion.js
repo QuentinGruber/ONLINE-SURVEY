@@ -13,7 +13,7 @@ class NewQuestion extends React.Component {
   render() {
     return (
       <button
-        onClick={this.CreateItem()}
+        onClick={this.CreateItem}
         className="btn btn-secondary button-add"
       >
         +

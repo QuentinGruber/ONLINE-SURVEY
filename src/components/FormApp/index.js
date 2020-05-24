@@ -155,11 +155,13 @@ class FormApp extends React.Component {
     if (!this.isNew) {
       // if this isn't a new question_list
       // delete the item entry in FormItem
+      /*
       var deleteItem_promise = await Axios({
         method: "delete",
         url:
           "http://127.0.0.1:8000/api/ToDoList/items/" + formitems[itemIndex].id,
       });
+      */
     }
     // delete the item from formitems array
     formitems.splice(itemIndex, 1);
