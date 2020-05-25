@@ -1,4 +1,5 @@
-import React from "react";
+import React, { Component } from "react";
+import Select from "react-select";
 import { Input } from "reactstrap";
 import RadioAnswerList from "./answer_components/RadioAnswerList";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -19,6 +20,28 @@ class FormItem extends React.Component {
   }
 
   render() {
+    const questionTypes = [
+      { value: "radio", label: "Choix unique" },
+      { value: "checkbox", label: "Choix multiples // A FAIRE" },
+      { value: "text", label: "Texte" },
+      { value: "numbers", label: "Chiffres // A FAIRE" },
+    ];
+
+    const SelectType = () => (
+      <Select
+        options={questionTypes}
+        defaultValue={questionTypes[2]}
+        name="QuestionType"
+        className="type-select"
+        id="sel1"
+        value={this.props.item.type}
+        onChange={(e) => {
+          this.props.item.p_answer = ""; // reset premade answer
+          this.props.HandleQuestionTypeChange(this.props.index, e.value);
+        }}
+      />
+    );
+
     return (
       <>
         <li className="list-group-item card-question">
@@ -36,25 +59,7 @@ class FormItem extends React.Component {
             }
           />
 
-          <select
-            name="QuestionType"
-            className="type-select form-control"
-            id="sel1"
-            value={this.props.item.type}
-            onChange={(e) => {
-              this.props.item.p_answer = ""; // reset premade answer
-              this.props.HandleQuestionTypeChange(
-                this.props.index,
-                e.target.value
-              );
-            }}
-          >
-            <option value="radio">Choix unique</option>
-            <option value="radio">Choix multiples / A FAIRE</option>
-            <option value="text">Texte</option>
-            <option value="text">Chiffres / A FAIRE</option>
-          </select>
-          {/* type de reponse */}
+          <SelectType />
 
           {(() => {
             switch (this.props.item.type) {
@@ -64,7 +69,7 @@ class FormItem extends React.Component {
                     readonly="readonly"
                     type="text"
                     class="form-control text-answer-input"
-                    value={this.props.item.p_answer}
+                    value={"test"}
                     placeholder="Réponse libre"
                   ></input>
                 );
