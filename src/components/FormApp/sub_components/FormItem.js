@@ -38,7 +38,7 @@ class FormItem extends React.Component {
 
           <select
             name="QuestionType"
-            className="type-select selectpicker form-control"
+            className="type-select form-control"
             id="sel1"
             value={this.props.item.type}
             onChange={(e) => {
