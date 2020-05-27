@@ -97,7 +97,7 @@ class FormReader extends React.Component {
         {this.state.FormContent != null ? (
           <>
             <Form id="Form" className="fullCard bg-secondary shadow border-0">
-              <h1> {this.state.FormContent.title} </h1>
+              <div className="form-title"> {this.state.FormContent.title} </div>
               {this.state.items}
               <div>
                 <Button
