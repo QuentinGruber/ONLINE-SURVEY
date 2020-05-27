@@ -29,7 +29,7 @@ class RadioAnswerList extends React.Component {
     );
   }
 
-  HandleRadioCheckChange(id, NewText) { }
+  HandleRadioCheckChange(id, NewText) {}
 
   AddRadioButton() {
     let temp_answers = this.state.answers;
@@ -76,7 +76,13 @@ class RadioAnswerList extends React.Component {
           />
         ))}
 
-        <Button color="default" outline type="button" className="button-add-option" onClick={this.AddRadioButton}>
+        <Button
+          color="default"
+          outline
+          type="button"
+          className="button-add-option"
+          onClick={this.AddRadioButton}
+        >
           Ajouter une option
         </Button>
       </>

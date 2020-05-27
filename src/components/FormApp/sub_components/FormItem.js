@@ -30,7 +30,6 @@ class FormItem extends React.Component {
     const SelectType = () => (
       <Select
         options={questionTypes}
-        defaultValue={questionTypes[2]}
         name="QuestionType"
         className="type-select"
         id="sel1"
