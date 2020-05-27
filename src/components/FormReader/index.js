@@ -96,8 +96,8 @@ class FormReader extends React.Component {
         <GlobalStyle />
         {this.state.FormContent != null ? (
           <>
-            <h1> {this.state.FormContent.title} </h1>
-            <Form id="Form">
+            <Form id="Form" className="fullCard bg-secondary shadow border-0">
+              <h1> {this.state.FormContent.title} </h1>
               {this.state.items}
               <div>
                 <Button
@@ -106,7 +106,9 @@ class FormReader extends React.Component {
                       this.SendAnswers();
                   }}
                   value="Send"
-                ></Button>
+                >
+                  send
+                </Button>
               </div>
             </Form>
           </>
