@@ -353,14 +353,4 @@ export const GlobalStyle = createGlobalStyle`
     width: 95%;
   }
 
-
-
-/* RADIO - CHECKBOXES */
-
-
-  
-  
-
-
 `;
-
