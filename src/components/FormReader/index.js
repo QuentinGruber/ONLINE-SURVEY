@@ -4,6 +4,8 @@ import TextQuestion from "./TextQuestion";
 import RadioQuestion from "./RadioQuestion";
 import { Form, Button } from "reactstrap";
 
+import { GlobalStyle } from "./styles";
+
 class FormReader extends React.Component {
   constructor(props) {
     super(props);
@@ -91,6 +93,7 @@ class FormReader extends React.Component {
   render() {
     return (
       <>
+        <GlobalStyle />
         {this.state.FormContent != null ? (
           <>
             <h1> {this.state.FormContent.title} </h1>
