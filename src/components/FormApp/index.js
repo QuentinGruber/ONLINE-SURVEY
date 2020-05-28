@@ -47,21 +47,27 @@ class FormApp extends React.Component {
         // if succeed redirect user to the question_list page
         // document.location.href = "/question_list/" + createList_promise.data.id;
       } catch (e) {
-        console.error("Error while saving a new question_list ! " + e);
+        console.error("Error while saving a new form ! " + e);
       }
     } else {
       // if this isn't a new question_list
       if (this.state.FormName !== "") {
-        // and his title isn't empty
-        // update the current question_list
-        Axios({
-          method: "put",
-          url: "http://127.0.0.1:8000/api/ToDoList/" + this.FormID,
-          data: {
-            title: this.state.FormName,
-            closed: "0",
-          },
-        });
+        try {
+          let createList_promise = await Axios({
+            method: "put",
+            url: process.env.REACT_APP_API_URL + "/form/" + this.FormID,
+            withCredentials: true,
+            data: {
+              title: this.state.FormName,
+              content: this.state.formitems,
+            },
+          });
+          if (createList_promise.data === true) {
+            alert("Form created !");
+          }
+        } catch (e) {
+          console.error("Error while saving a form ! " + e);
+        }
       }
     }
   }
@@ -73,7 +79,6 @@ class FormApp extends React.Component {
       case "text":
         break;
       case "radio":
-        console.log(NewValue);
         temp_formitems[idx].p_answer = NewValue;
         break;
       default:
@@ -115,57 +120,15 @@ class FormApp extends React.Component {
   }
 
   async addItem(Item) {
-    if (!this.isNew) {
-      // if this isn't a new question_list
-      // add a new entry in FormItem
-      var createItem_promise = await Axios({
-        method: "post",
-        url: "/api/ToDoList/" + this.FormID + "/items",
-        data: {
-          id: this.FormID,
-          content: Item.newItemValue,
-        },
-      });
-      // add the item to formitems array
-      formitems.push({
-        id: createItem_promise.data, // add him is id
-        index: formitems.length + 1,
-        title: Item.newItemValue,
-        required: false,
-        type: "radio",
-      });
-    } else {
-      // if this is a new question_list
-      // add the item to formitems array
-      formitems.push({
-        index: formitems.length + 1,
-        title: Item.newItemValue,
-        required: false,
-        type: "radio",
-        p_answer: "",
-      });
-    }
+    // add the item to formitems array
+    formitems.push({
+      index: formitems.length + 1,
+      title: Item.newItemValue,
+      required: false,
+      type: "radio",
+      p_answer: "",
+    });
     // update state
-    this.setState({ formitems: formitems });
-  }
-
-  async removeItem(itemIndex) {
-    /*
-    if (!this.isNew) {
-      // if this isn't a new question_list
-      // delete the item entry in FormItem
-      /*
-      var deleteItem_promise = await Axios({
-        method: "delete",
-        url:
-          "http://127.0.0.1:8000/api/ToDoList/items/" + formitems[itemIndex].id,
-      });
-    }
-    */
-    // delete the item from formitems array
-    formitems.splice(itemIndex, 1);
-
-    //update state
     this.setState({ formitems: formitems });
   }
 
@@ -199,8 +162,6 @@ class FormApp extends React.Component {
         // redirect user to /form/new
         document.location.href = "/form/new";
       }
-      console.log(this.FormID);
-      console.log(question_list);
 
       // setup vars
       var form_data = question_list.data.content; // shortcut for easier reading
@@ -212,9 +173,7 @@ class FormApp extends React.Component {
         for (let y = 0; y < form_data[i].p_answer.length; y++) {
           p_answer.push(form_data[i].p_answer[y]);
         }
-        console.log("fok ", p_answer);
         if (p_answer.length === 1) {
-          console.log("TEEEEEEEEEXTE");
           p_answer = p_answer[0].text;
         }
         let item = {
@@ -228,7 +187,6 @@ class FormApp extends React.Component {
       }
 
       // update question_list title & question_list content
-      console.log("fin : ", question_list.data.title, "   ", formitems);
       this.setState({
         FormName: question_list.data.title,
         formitems: formitems,
@@ -256,7 +214,7 @@ class FormApp extends React.Component {
           <NewQuestion addItem={this.addItem} />
 
           <div className="card-bottom">
-            {this.isNew && <SaveForm save={this.saveItem} />}
+            <SaveForm save={this.saveItem} />
           </div>
         </div>
       </>
