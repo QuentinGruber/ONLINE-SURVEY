@@ -63,6 +63,12 @@ app.get("/myform", function (req, res) {
   FormsController.get_user_form_content(req, res, connection);
 });
 
+/* MODIFY FORM CONTENT */
+
+app.put("/form/*", function (req, res) {
+  FormsController.modify_form(req, res, connection);
+});
+
 /* GET FORM CONTENT */
 
 app.get("/form/*", function (req, res) {
