@@ -28,7 +28,7 @@ var routes = [
     layout: "/form",
   },
   {
-    path: "/*/*",
+    path: "/*/edit",
     component: FormApp,
     layout: "/form",
   },

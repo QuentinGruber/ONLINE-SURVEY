@@ -170,10 +170,9 @@ class FormApp extends React.Component {
   }
 
   async componentWillMount() {
-    var pageURL = window.location.href;
-    var lastURLSegment = pageURL.substr(pageURL.lastIndexOf("/") + 1);
-    this.FormID = lastURLSegment;
-    if (lastURLSegment === "new") {
+    var pathArray = window.location.pathname.split("/");
+    this.FormID = pathArray[2];
+    if (this.FormID === "new") {
       // if it's a new form
       formitems.push({
         index: 1,
@@ -188,69 +187,48 @@ class FormApp extends React.Component {
       try {
         var question_list = await Axios({
           method: "get",
-          url: "http://127.0.0.1:8000/api/ToDoList/" + this.FormID,
+          url: process.env.REACT_APP_API_URL + "/form/" + this.FormID,
         });
       } catch (e) {
         // if request fail
         alert(
-          "Todolist id : " +
+          "form id : " +
             this.FormID +
             " do not exist or you don't have the rights access... redirecting"
         );
-        // redirect user to /question_list/new
-        document.location.href = "/question_list/new";
+        // redirect user to /form/new
+        document.location.href = "/form/new";
       }
-      if (question_list.data === "Access Denied") {
-        // if access denied
-        alert(
-          "Todolist id : " +
-            this.FormID +
-            " do not exist or you don't have the rights access... redirecting"
-        );
-        // redirect user to /question_list/new
-        document.location.href = "/question_list/new";
-      }
+      console.log(this.FormID);
+      console.log(question_list);
+
       // setup vars
-      var contentList = []; // list of our content to push to formitems state
-      var form_data = question_list.data.question; // shortcut for easier reading
+      var form_data = question_list.data.content; // shortcut for easier reading
 
       // check for any not done question
       for (let i = 0; i < form_data.length; i++) {
-        if (form_data[i].state === 0) {
-          // if the current item isn't done
-          let item = {
-            id: form_data[i].id,
-            index: i,
-            value: form_data[i].content,
-            done: form_data[i].state,
-          };
-          formitems.push(item); // add it to the formitems array (state)
+        // if the current item isn't done
+        let p_answer = [];
+        for (let y = 0; y < form_data[i].p_answer.length; y++) {
+          p_answer.push(form_data[i].p_answer[y]);
         }
-      }
-      // add "done" separator to the formitems array (state)
-      formitems.push({
-        index: contentList.length + 1,
-        value: "Done",
-        title: "true",
-        done: "true",
-      });
-
-      // check for any done question
-      for (let i = 0; i < form_data.length; i++) {
-        let index = i + contentList.length;
-        if (form_data[i].state === 1) {
-          // if the current item is done
-          let item = {
-            id: form_data[i].id,
-            index: index,
-            value: form_data[i].content,
-            done: form_data[i].state,
-          };
-          formitems.push(item); // add it to the formitems array (state)
+        console.log("fok ", p_answer);
+        if (p_answer.length === 1) {
+          console.log("TEEEEEEEEEXTE");
+          p_answer = p_answer[0].text;
         }
+        let item = {
+          index: i,
+          title: form_data[i].title,
+          required: form_data[i].required,
+          type: form_data[i].type,
+          p_answer: p_answer,
+        };
+        formitems.push(item); // add it to the formitems array (state)
       }
 
       // update question_list title & question_list content
+      console.log("fin : ", question_list.data.title, "   ", formitems);
       this.setState({
         FormName: question_list.data.title,
         formitems: formitems,
@@ -279,11 +257,6 @@ class FormApp extends React.Component {
 
           <div className="card-bottom">
             {this.isNew && <SaveForm save={this.saveItem} />}
-            {this.isNew !== true
-              ? {
-                  /* update form */
-                }
-              : null}
           </div>
         </div>
       </>

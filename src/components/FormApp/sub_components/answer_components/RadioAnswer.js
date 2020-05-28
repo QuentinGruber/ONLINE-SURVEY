@@ -34,7 +34,8 @@ class RadioAnswer extends React.Component {
               document.execCommand("insertText", false, text);
             }}
           ></label>
-          <div class="remove-option"
+          <div
+            className="remove-option"
             onClick={() => {
               this.props.RemoveRadioButton(this.props.id);
             }}

@@ -72,10 +72,10 @@ class FormItem extends React.Component {
               case "text":
                 return (
                   <input
-                    readonly="readonly"
+                    readOnly="readonly"
                     type="text"
-                    class="form-control text-answer-input"
-                    value={"test"}
+                    className="form-control text-answer-input"
+                    value={this.props.item.p_answer}
                     placeholder="Réponse libre"
                   ></input>
                 );
