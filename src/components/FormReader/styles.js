@@ -53,11 +53,11 @@ export const GlobalStyle = createGlobalStyle`
 
   .checkbox-type-checkbox,
   .radio-type-radio {
-    --active: #275EFE;
+    --active: #32325d;
     --active-inner: #fff;
-    --focus: 2px rgba(39, 94, 254, .3);
+    --focus: 2px rgba(50, 50, 93, .3);
     --border: #32325d;
-    --border-hover: #275EFE;
+    --border-hover: #32325d;
     --background: #fff;
     --disabled: #fff;
     --disabled-inner: #fff;
@@ -70,14 +70,14 @@ export const GlobalStyle = createGlobalStyle`
     position: relative;
     margin: 0;
     cursor: pointer;
-    border: 1px solid var(--bc, var(--border));
+    border: 2px solid var(--bc, var(--border));
     background: var(--b, var(--background));
     transition: background .3s, border-color .3s, box-shadow .2s;
     &:after {
       content: '';
       display: block;
-      left: 0;
-      top: 0;
+      left: -1px;
+      top: -1px;
       position: absolute;
       transition: transform var(--d-t, .3s) var(--d-t-e, ease), opacity var(--d-o, .2s);
     }
