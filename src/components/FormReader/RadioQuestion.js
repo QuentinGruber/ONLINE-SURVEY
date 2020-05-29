@@ -39,7 +39,9 @@ class RadioQuestion extends React.Component {
       <>
         <div className="list-group-item card-question">
           <div className="question">{this.props.data.title}</div>
-          {this.props.data.required && <label>required</label>}
+          {this.props.data.required && (
+            <label className="text-required">required</label>
+          )}
           {items}
         </div>
       </>

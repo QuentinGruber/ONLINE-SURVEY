@@ -6,6 +6,9 @@ class TextQuestion extends React.Component {
       <>
         <div className="list-group-item card-question">
           <div className="question">{this.props.data.title}</div>
+          {this.props.data.required && (
+            <label className="text-required">required</label>
+          )}
           <input
             questionid={this.props.data.id}
             id={this.props.data.p_answer[0].id}
@@ -13,7 +16,6 @@ class TextQuestion extends React.Component {
             placeholder={this.props.data.p_answer[0].text}
             required={true}
           ></input>
-          {this.props.data.required && <label>required</label>}
         </div>
       </>
     );
