@@ -363,4 +363,3 @@ export const GlobalStyle = createGlobalStyle`
 
 
 `;
-
