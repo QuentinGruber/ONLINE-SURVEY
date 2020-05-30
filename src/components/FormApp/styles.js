@@ -23,7 +23,7 @@ export const GlobalStyle = createGlobalStyle`
     background: transparent;
   }
 
-  .form-title:empty:not(:focus):before{
+  .form-title:empty:before{
     color: #999;
     content:attr(data-placeholder);
   }
@@ -85,7 +85,7 @@ export const GlobalStyle = createGlobalStyle`
     background: transparent;
   }
   
-  .radio-answer-input:empty:not(:focus):before{
+  .radio-answer-input:empty:before{
     color: #999;
     content:attr(data-placeholder);
   }
@@ -352,5 +352,14 @@ export const GlobalStyle = createGlobalStyle`
   .question { /* titre de la question */
     width: 95%;
   }
+
+
+
+/* RADIO - CHECKBOXES */
+
+
+  
+  
+
 
 `;
