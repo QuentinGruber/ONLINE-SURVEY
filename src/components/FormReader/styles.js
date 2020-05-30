@@ -24,7 +24,7 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   .card-question{
-    margin: 5px 0px !important;
+    margin: 10px 0px !important;
     padding: 10px 15px;
     min-height: 100px;
     border-radius: 0.375rem;
@@ -41,14 +41,23 @@ export const GlobalStyle = createGlobalStyle`
     display: inline-block;
     width: 100%;
     padding: 5px 0px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     font-weight: 549;
-    font-size: 18px;
+    font-size: 20px;
     color: black;
     outline: 0;
     border-width: 0 0 2px;
     border-radius: 0 !important;
     background: transparent;
+  }
+
+  .radio-answer {
+    margin-bottom: 15px;
+  }
+
+  .radio-label {
+    padding-left: 10px !important;
+    font-size: 16px !important;
   }
 
   .checkbox-type-checkbox,

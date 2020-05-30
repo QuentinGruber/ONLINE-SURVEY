@@ -33,7 +33,10 @@ class RadioQuestion extends React.Component {
                 name={this.props.data.title}
                 className="radio-type-radio"
               />
-              <label htmlFor={this.props.data.p_answer[i].id}>
+              <label
+                htmlFor={this.props.data.p_answer[i].id}
+                className="radio-label"
+              >
                 {this.props.data.p_answer[i].text}
               </label>
             </div>
