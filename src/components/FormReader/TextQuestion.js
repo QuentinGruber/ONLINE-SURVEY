@@ -14,10 +14,11 @@ class TextQuestion extends React.Component {
         >
           <div className="question">{this.props.data.title}</div>
           <input
+            className="text-input"
             questionid={this.props.data.id}
             id={this.props.data.p_answer[0].id}
             type="text"
-            placeholder={this.props.data.p_answer[0].text}
+            placeholder="Réponse libre"
             required={true}
           ></input>
         </div>

@@ -51,6 +51,19 @@ export const GlobalStyle = createGlobalStyle`
     background: transparent;
   }
 
+  .text-input {
+    display: inline-block;
+    width: calc(100%);
+    margin-bottom: 10px;
+    border: 1px solid #999;
+    color: black;
+    outline: 0;
+    border-width: 0 0 1px;
+    border-radius: 0 !important;
+    border-color: #cad1d7;
+    background: transparent;
+  }
+
   .radio-answer {
     margin-bottom: 15px;
   }
