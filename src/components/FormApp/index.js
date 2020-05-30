@@ -55,9 +55,10 @@ class FormApp extends React.Component {
         try {
           let createList_promise = await Axios({
             method: "put",
-            url: process.env.REACT_APP_API_URL + "/form/" + this.FormID,
+            url: process.env.REACT_APP_API_URL + "/editform/",
             withCredentials: true,
             data: {
+              id: this.FormID,
               title: this.state.FormName,
               content: this.state.formitems,
             },

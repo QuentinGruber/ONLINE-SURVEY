@@ -65,7 +65,7 @@ app.get("/myform", function (req, res) {
 
 /* MODIFY FORM CONTENT */
 
-app.put("/form/*", function (req, res) {
+app.put("/editform/", function (req, res) {
   FormsController.modify_form(req, res, connection);
 });
 

@@ -89,15 +89,11 @@ exports.modify_form = async function (req, res, connection) {
   connection.getConnection(function (err, connection) {
     // Create form
     connection.query(
-      "UPDATE forms (users_id,name) SET  (" +
-        "'" +
-        req.session.user_id +
-        "'" +
-        "," +
-        "'" +
+      "UPDATE forms SET name='" +
         req.body.title +
-        "'" +
-        ");",
+        "' WHERE id=" +
+        req.body.id +
+        ";",
       function (sql_error, results, fields) {
         // If some error occurs, we throw an error.
         if (sql_error) {
@@ -107,15 +103,21 @@ exports.modify_form = async function (req, res, connection) {
         for (let i = 0; i < req.body.content.length; i++) {
           // Create question linked to form
           connection.query(
-            "INSERT INTO questions (forms_id, text, type, required) VALUES ( '" +
+            "UPDATE questions SET " +
+            "forms_id=" +
             results.insertId +
             "', '" +
+            "text=" +
             req.body.content[i].title +
             "', '" +
+            "type=" +
             req.body.content[i].type +
             "', '" +
-            +req.body.content[i].required + // use "+" to change type from boolean to int
-              "');",
+            +"required=" +
+            req.body.content[i].required + // use "+" to change type from boolean to int
+              " WHERE id=" +
+              req.body.id +
+              ";",
             function (sql_error, results, fields) {
               // If some error occurs, we throw an error.
               if (sql_error) {
@@ -127,11 +129,13 @@ exports.modify_form = async function (req, res, connection) {
 
               if (req.body.content[i].type === "text") {
                 connection.query(
-                  "INSERT INTO answers ( question_id, text , checked) VALUES ( '" +
+                  "UPDATE answers SET'" +
+                    "question_id=" +
                     results.insertId +
                     "', '" +
+                    "text=" +
                     req.body.content[i].p_answer +
-                    "','1');",
+                    "',);",
                   function (sql_error, results, fields) {
                     // If some error occurs, we throw an error.
                     if (sql_error) {
@@ -145,11 +149,14 @@ exports.modify_form = async function (req, res, connection) {
               if (req.body.content[i].type === "radio") {
                 for (let j = 0; j < req.body.content[i].p_answer.length; j++) {
                   connection.query(
-                    "INSERT INTO answers ( question_id, text , checked) VALUES ( '" +
+                    "UPDATE answers SET ( question_id, text , checked) VALUES ( '" +
+                      "question_id=" +
                       results.insertId +
                       "', '" +
+                      "text=" +
                       req.body.content[i].p_answer[j].text +
                       "','" +
+                      "checked=" +
                       (req.body.content[i].p_answer[j].checked | 0) +
                       "');",
                     function (sql_error, results, fields) {
