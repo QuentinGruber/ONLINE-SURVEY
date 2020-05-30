@@ -132,6 +132,11 @@ class FormApp extends React.Component {
     this.setState({ formitems: formitems });
   }
 
+  async removeItem(itemIndex) {
+    formitems.splice(itemIndex, 1);
+    this.setState({ formitems: formitems });
+  }
+
   async componentWillMount() {
     var pathArray = window.location.pathname.split("/");
     this.FormID = pathArray[2];
