@@ -308,17 +308,19 @@ export const GlobalStyle = createGlobalStyle`
   top: 6px;
 }
 
+.button-add {
+  margin-bottom: 60px;
+}
 
 .card-bottom {
   position: absolute;
-  width: 33%;
-  bottom: 15px;;
+  width: 175px;
+  bottom: 15px;
   left: 50%;
   transform: translateX(-50%);
 }
 .save-form-button {
   width: 100%;
-  color: white; 
 }
 
 /* ON SMALL SCREENS */
