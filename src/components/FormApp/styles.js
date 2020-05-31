@@ -316,7 +316,7 @@ export const GlobalStyle = createGlobalStyle`
   left: 50%;
   transform: translateX(-50%);
 }
-.SaveFormButton {
+.save-form-button {
   width: 100%;
   color: white; 
 }

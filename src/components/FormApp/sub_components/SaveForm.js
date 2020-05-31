@@ -5,7 +5,7 @@ class SaveForm extends React.Component {
   render() {
     return (
       <Button
-        className="btn-icon SaveFormButton"
+        className="btn-icon save-form-button"
         color="default"
         onClick={this.props.save}
       >
