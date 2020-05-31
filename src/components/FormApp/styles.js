@@ -39,7 +39,7 @@ export const GlobalStyle = createGlobalStyle`
     display: inline-block;
     width: calc(100% - 185px);
     padding: 5px 0px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     font-weight: 549;
     font-size: 18px;
     color: black;
@@ -60,11 +60,13 @@ export const GlobalStyle = createGlobalStyle`
     display: inline-block;
     width: 175px;
     margin-left: 10px;
+    margin-bottom: 10px;
   }
 
   .text-answer-input {
     width:100%;
     border-color: #32325d;
+    margin-top: 5px;
   }
 
   .text-answer-input:focus {
@@ -262,6 +264,7 @@ export const GlobalStyle = createGlobalStyle`
 
   .button-add-option {
     margin-left: 4%;
+    margin-top: 5px;
   }
 
 
@@ -323,6 +326,17 @@ export const GlobalStyle = createGlobalStyle`
   width: 100%;
 }
 
+.css-1pahdxg-control {
+  border: 1px #32325d solid !important;
+  border-radius: 4px;
+  box-shadow: 0 0 0 1px #32325d !important;
+}
+
+.css-1pahdxg-control:hover {
+  border-color: #32325d !important;
+}
+
+
 /* ON SMALL SCREENS */
 
 @media screen and (max-width: 1200px) {
@@ -352,16 +366,20 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   .question { /* titre de la question */
-    width: 95%;
+    width: 100%;
   }
 
-
-
-/* RADIO - CHECKBOXES */
-
-
+  .type-select {
+    width: 100%;
+    margin-left: initial;
+  }
   
-  
-
-
+  .radio-answer-input {
+    width: calc(100% - 75px);
+  }
+  .remove-option {
+    width: 25px;
+    height: 25px;
+    padding: 0;
+  }
 `;
