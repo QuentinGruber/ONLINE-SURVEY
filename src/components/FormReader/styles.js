@@ -207,6 +207,20 @@ export const GlobalStyle = createGlobalStyle`
     }
   }
 
+
+  .card-bottom {
+    position: absolute;
+    width: 33%;
+    bottom: 15px;;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .send-form-button {
+    width: 100%;
+    color: white; 
+  }
+
+
   /* ON SMALL SCREENS */
 
   @media screen and (max-width: 1200px) {

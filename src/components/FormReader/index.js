@@ -99,15 +99,17 @@ class FormReader extends React.Component {
             <Form id="Form" className="fullCard bg-secondary shadow border-0">
               <div className="form-title"> {this.state.FormContent.title} </div>
               {this.state.items}
-              <div>
+              <div className="card-bottom">
                 <Button
+                  className="btn-icon send-form-button"
+                  color="default"
                   onClick={() => {
                     if (document.forms["Form"].reportValidity())
                       this.SendAnswers();
                   }}
                   value="Send"
                 >
-                  send
+                  Envoyer
                 </Button>
               </div>
             </Form>
