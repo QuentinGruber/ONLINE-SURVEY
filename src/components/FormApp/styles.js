@@ -37,7 +37,7 @@ export const GlobalStyle = createGlobalStyle`
 
   .question { /* titre de la question */
     display: inline-block;
-    width: calc(100% - 150px);
+    width: calc(100% - 185px);
     padding: 5px 0px;
     margin-bottom: 20px;
     font-weight: 549;
@@ -58,12 +58,12 @@ export const GlobalStyle = createGlobalStyle`
     right: 0;
     top: 0;
     display: inline-block;
-    width: 130px;
+    width: 175px;
     margin-left: 10px;
   }
 
   .text-answer-input {
-    width: calc(100% - 150px);
+    width:100%;
     border-color: #32325d;
   }
 

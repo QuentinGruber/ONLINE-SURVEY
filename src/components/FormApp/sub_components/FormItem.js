@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import Select from "react-select";
 import { Input } from "reactstrap";
 import RadioAnswerList from "./answer_components/RadioAnswerList";
@@ -7,6 +7,13 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 
 library.add(faTrashAlt);
+
+const questionTypes = [
+  { value: "radio", label: "Choix unique" },
+  { value: "checkbox", label: "Choix multiples // A FAIRE" },
+  { value: "text", label: "Texte" },
+  { value: "numbers", label: "Chiffres // A FAIRE" },
+];
 
 class FormItem extends React.Component {
   constructor(props) {
@@ -19,27 +26,18 @@ class FormItem extends React.Component {
     this.props.removeItem(index); // remove it
   }
 
-  render() {
-    const questionTypes = [
-      { value: "radio", label: "Choix unique" },
-      { value: "checkbox", label: "Choix multiples // A FAIRE" },
-      { value: "text", label: "Texte" },
-      { value: "numbers", label: "Chiffres // A FAIRE" },
-    ];
+  state = {
+    selectedOption: "text",
+  };
+  handleChange = (selectedOption) => {
+    this.setState({ selectedOption });
+  };
 
-    const SelectType = () => (
-      <Select
-        options={questionTypes}
-        name="QuestionType"
-        className="type-select"
-        id="sel1"
-        value={this.props.item.type}
-        onChange={(e) => {
-          this.props.item.p_answer = ""; // reset premade answer
-          this.props.HandleQuestionTypeChange(this.props.index, e.value);
-        }}
-      />
-    );
+  render() {
+    const { selectedOption } = this.state;
+
+    console.log("oui");
+    console.log(selectedOption);
 
     return (
       <>
@@ -58,7 +56,18 @@ class FormItem extends React.Component {
             }
           />
 
-          <SelectType />
+          <Select
+            options={questionTypes}
+            name="QuestionType"
+            className="type-select"
+            id="sel1"
+            value={selectedOption}
+            onChange={(e) => {
+              this.handleChange();
+              this.props.item.p_answer = ""; // reset premade answer
+              this.props.HandleQuestionTypeChange(this.props.index, e.value);
+            }}
+          />
 
           {(() => {
             switch (this.props.item.type) {
