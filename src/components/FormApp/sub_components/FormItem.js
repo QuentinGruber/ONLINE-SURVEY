@@ -27,7 +27,7 @@ class FormItem extends React.Component {
   }
 
   state = {
-    selectedOption: "text",
+    selectedOption: "Choix unique",
   };
   handleChange = (selectedOption) => {
     this.setState({ selectedOption });
@@ -35,9 +35,6 @@ class FormItem extends React.Component {
 
   render() {
     const { selectedOption } = this.state;
-
-    console.log("oui");
-    console.log(selectedOption);
 
     return (
       <>
@@ -57,6 +54,7 @@ class FormItem extends React.Component {
           />
 
           <Select
+            placeholder={"Choix unique"}
             options={questionTypes}
             name="QuestionType"
             className="type-select"
