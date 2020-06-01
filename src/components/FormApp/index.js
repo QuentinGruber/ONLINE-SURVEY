@@ -121,24 +121,6 @@ class FormApp extends React.Component {
   }
 
   async addItem(Item) {
-    /*
-    console.log(this.FormID);
-    if (this.FormID !== "new") {
-      var createItem_promise = await Axios({
-        method: "post",
-        url: process.env.REACT_APP_API_URL + "/send_item",
-        withCredentials: true,
-        data: {
-          id: this.FormID,
-          title: " ",
-          content: " ",
-        },
-      });
-      if (createItem_promise.data === false) {
-        alert("error while adding question !");
-      }
-    }
-    */
     // add the item to formitems array
     formitems.push({
       index: formitems.length + 1,
