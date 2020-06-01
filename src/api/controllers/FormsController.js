@@ -210,7 +210,7 @@ exports.modify_form = async function (req, res, connection) {
                       "'," +
                       "checked=" +
                       "'" +
-                      req.body.content[i].p_answer[j].checked +
+                      (req.body.content[i].p_answer[j].checked | 0) +
                       "'" +
                       "WHERE id=" +
                       "'" +
