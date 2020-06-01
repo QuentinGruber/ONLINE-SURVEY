@@ -104,19 +104,21 @@ exports.modify_form = async function (req, res, connection) {
           // Create question linked to form
           connection.query(
             "UPDATE questions SET " +
-            "forms_id=" +
-            results.insertId +
-            "', '" +
-            "text=" +
-            req.body.content[i].title +
-            "', '" +
-            "type=" +
-            req.body.content[i].type +
-            "', '" +
-            +"required=" +
-            req.body.content[i].required + // use "+" to change type from boolean to int
-              " WHERE id=" +
-              req.body.id +
+              "text=" +
+              "'" +
+              req.body.content[i].title +
+              "', " +
+              "type=" +
+              "'" +
+              req.body.content[i].type +
+              "', " +
+              "required=" +
+              "'" +
+              (req.body.content[i].required | 0) +
+              "' WHERE id=" +
+              "'" +
+              req.body.content[i].id +
+              "'" +
               ";",
             function (sql_error, results, fields) {
               // If some error occurs, we throw an error.
@@ -129,13 +131,10 @@ exports.modify_form = async function (req, res, connection) {
 
               if (req.body.content[i].type === "text") {
                 connection.query(
-                  "UPDATE answers SET'" +
-                    "question_id=" +
-                    results.insertId +
-                    "', '" +
-                    "text=" +
+                  "UPDATE answers SET " +
+                    "text='" +
                     req.body.content[i].p_answer +
-                    "',);",
+                    "';",
                   function (sql_error, results, fields) {
                     // If some error occurs, we throw an error.
                     if (sql_error) {
@@ -149,16 +148,18 @@ exports.modify_form = async function (req, res, connection) {
               if (req.body.content[i].type === "radio") {
                 for (let j = 0; j < req.body.content[i].p_answer.length; j++) {
                   connection.query(
-                    "UPDATE answers SET ( question_id, text , checked) VALUES ( '" +
-                      "question_id=" +
-                      results.insertId +
-                      "', '" +
-                      "text=" +
+                    "UPDATE answers SET " +
+                      "text='" +
                       req.body.content[i].p_answer[j].text +
-                      "','" +
-                      "checked=" +
+                      "'," +
+                      "checked='" +
                       (req.body.content[i].p_answer[j].checked | 0) +
-                      "');",
+                      +"'" +
+                      "' WHERE id=" +
+                      "'" +
+                      req.body.content[i].id +
+                      "'" +
+                      ";",
                     function (sql_error, results, fields) {
                       // If some error occurs, we throw an error.
                       if (sql_error) {

@@ -64,7 +64,7 @@ class FormApp extends React.Component {
             },
           });
           if (createList_promise.data === true) {
-            alert("Form created !");
+            alert("Form updated !");
           }
         } catch (e) {
           console.error("Error while saving a form ! " + e);
@@ -184,6 +184,7 @@ class FormApp extends React.Component {
         }
         let item = {
           index: i,
+          id: form_data[i].id,
           title: form_data[i].title,
           required: form_data[i].required,
           type: form_data[i].type,
