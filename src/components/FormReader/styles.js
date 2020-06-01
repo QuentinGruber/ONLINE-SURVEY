@@ -30,18 +30,15 @@ export const GlobalStyle = createGlobalStyle`
     border-radius: 0.375rem;
   }
 
-  .question-required {
-    border: 1px #32325d solid; 
+  .text-required {
+    font-size: 20px;
+    color: #CC0000;
   }
-  
-  .question-not-required {
-  }
-  
+
+
   .question { /* titre de la question */
-    display: inline-block;
-    width: 100%;
-    padding: 5px 0px;
-    margin-bottom: 10px;
+    display: inline;
+    padding-right: 5px;
     font-weight: 549;
     font-size: 20px;
     color: black;
@@ -54,7 +51,7 @@ export const GlobalStyle = createGlobalStyle`
   .text-input {
     display: inline-block;
     width: calc(100%);
-    margin-bottom: 10px;
+    margin-top: 10px;
     border: 1px solid #999;
     color: black;
     outline: 0;
@@ -65,7 +62,7 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   .radio-answer {
-    margin-bottom: 15px;
+    margin-top: 15px;
   }
 
   .radio-label {
