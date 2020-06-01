@@ -85,6 +85,55 @@ exports.create_new_form = async function (req, res, connection) {
   });
 };
 
+exports.add_item = function (req, res, connection) {
+  connection.getConnection(function (err, connection) {
+    // Create form
+    connection.query(
+      "INSERT INTO questions (forms_id,text,type,required) VALUES (" +
+        "'" +
+        req.body.id +
+        "'" +
+        "," +
+        "'" +
+        req.body.title +
+        "'" +
+        "," +
+        "'" +
+        "radio" +
+        "'" +
+        "," +
+        "'" +
+        0 +
+        "'" +
+        ");",
+      function (sql_error, results, fields) {
+        // If some error occurs, we throw an error.
+        if (sql_error) {
+          res.send("false");
+          connection.release();
+        }
+
+        connection.query(
+          "INSERT INTO answers ( question_id, text , checked) VALUES ( '" +
+            results.insertId +
+            "', '" +
+            " " +
+            "','1');",
+          function (sql_error, results, fields) {
+            // If some error occurs, we throw an error.
+            if (sql_error) {
+              res.send("false");
+              connection.release();
+            }
+            res.send({ id: results.insertId });
+            connection.release();
+          }
+        );
+      }
+    );
+  });
+};
+
 exports.modify_form = async function (req, res, connection) {
   connection.getConnection(function (err, connection) {
     // Create form
@@ -132,9 +181,15 @@ exports.modify_form = async function (req, res, connection) {
               if (req.body.content[i].type === "text") {
                 connection.query(
                   "UPDATE answers SET " +
-                    "text='" +
+                    "text=" +
+                    "'" +
                     req.body.content[i].p_answer +
-                    "';",
+                    "'" +
+                    "WHERE id=" +
+                    "'" +
+                    req.body.content[i].id +
+                    "'" +
+                    ";",
                   function (sql_error, results, fields) {
                     // If some error occurs, we throw an error.
                     if (sql_error) {
@@ -149,13 +204,15 @@ exports.modify_form = async function (req, res, connection) {
                 for (let j = 0; j < req.body.content[i].p_answer.length; j++) {
                   connection.query(
                     "UPDATE answers SET " +
-                      "text='" +
+                      "text=" +
+                      "'" +
                       req.body.content[i].p_answer[j].text +
                       "'," +
-                      "checked='" +
-                      (req.body.content[i].p_answer[j].checked | 0) +
-                      +"'" +
-                      "' WHERE id=" +
+                      "checked=" +
+                      "'" +
+                      req.body.content[i].p_answer[j].checked +
+                      "'" +
+                      "WHERE id=" +
                       "'" +
                       req.body.content[i].id +
                       "'" +

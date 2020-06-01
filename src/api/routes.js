@@ -81,6 +81,12 @@ app.post("/send_form/*", function (req, res) {
   FormsController.register_answer(req, res, connection);
 });
 
+/* Register new item */
+
+app.post("/send_item/", function (req, res) {
+  FormsController.add_item(req, res, connection);
+});
+
 /*  NEW FORM  */
 app.post("/new_form", function (req, res) {
   FormsController.create_new_form(req, res, connection);
