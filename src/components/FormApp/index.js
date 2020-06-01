@@ -121,6 +121,7 @@ class FormApp extends React.Component {
   }
 
   async addItem(Item) {
+    /*
     console.log(this.FormID);
     if (this.FormID !== "new") {
       var createItem_promise = await Axios({
@@ -137,9 +138,9 @@ class FormApp extends React.Component {
         alert("error while adding question !");
       }
     }
+    */
     // add the item to formitems array
     formitems.push({
-      id: createItem_promise.data.id,
       index: formitems.length + 1,
       title: Item.newItemValue,
       required: false,
