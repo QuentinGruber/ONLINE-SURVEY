@@ -1,4 +1,5 @@
 import React from "react";
+import Select from "react-select";
 import { Input } from "reactstrap";
 import RadioAnswerList from "./answer_components/RadioAnswerList";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -6,6 +7,13 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 
 library.add(faTrashAlt);
+
+const questionTypes = [
+  { value: "radio", label: "Choix unique" },
+  { value: "checkbox", label: "Choix multiples // A FAIRE" },
+  { value: "text", label: "Texte" },
+  { value: "numbers", label: "Chiffres // A FAIRE" },
+];
 
 class FormItem extends React.Component {
   constructor(props) {
@@ -18,7 +26,16 @@ class FormItem extends React.Component {
     this.props.removeItem(index); // remove it
   }
 
+  state = {
+    selectedOption: "Choix unique",
+  };
+  handleChange = (selectedOption) => {
+    this.setState({ selectedOption });
+  };
+
   render() {
+    const { selectedOption } = this.state;
+
     return (
       <>
         <li className="list-group-item card-question">
@@ -36,25 +53,19 @@ class FormItem extends React.Component {
             }
           />
 
-          <select
+          <Select
+            placeholder={"Choix unique"}
+            options={questionTypes}
             name="QuestionType"
-            className="type-select selectpicker form-control"
+            className="type-select"
             id="sel1"
-            value={this.props.item.type}
+            value={selectedOption}
             onChange={(e) => {
+              this.handleChange();
               this.props.item.p_answer = ""; // reset premade answer
-              this.props.HandleQuestionTypeChange(
-                this.props.index,
-                e.target.value
-              );
+              this.props.HandleQuestionTypeChange(this.props.index, e.value);
             }}
-          >
-            <option value="radio">Choix unique</option>
-            <option value="radio">Choix multiples / A FAIRE</option>
-            <option value="text">Texte</option>
-            <option value="text">Chiffres / A FAIRE</option>
-          </select>
-          {/* type de reponse */}
+          />
 
           {(() => {
             switch (this.props.item.type) {
@@ -64,7 +75,7 @@ class FormItem extends React.Component {
                     readonly="readonly"
                     type="text"
                     class="form-control text-answer-input"
-                    value={this.props.item.p_answer}
+                    value={"test"}
                     placeholder="Réponse libre"
                   ></input>
                 );

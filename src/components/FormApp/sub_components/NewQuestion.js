@@ -1,4 +1,5 @@
 import React from "react";
+import { Button } from "reactstrap";
 
 class NewQuestion extends React.Component {
   constructor(props) {
@@ -12,12 +13,15 @@ class NewQuestion extends React.Component {
   }
   render() {
     return (
-      <button
+      <Button
+        color="default"
+        outline
+        type="button"
+        className="button-add"
         onClick={this.CreateItem}
-        className="btn btn-secondary button-add"
       >
-        +
-      </button>
+        Nouvelle question
+      </Button>
     );
   }
 }

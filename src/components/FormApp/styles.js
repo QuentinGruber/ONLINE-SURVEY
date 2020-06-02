@@ -23,7 +23,7 @@ export const GlobalStyle = createGlobalStyle`
     background: transparent;
   }
 
-  .form-title:empty:not(:focus):before{
+  .form-title:empty:before{
     color: #999;
     content:attr(data-placeholder);
   }
@@ -37,9 +37,9 @@ export const GlobalStyle = createGlobalStyle`
 
   .question { /* titre de la question */
     display: inline-block;
-    width: calc(100% - 150px);
+    width: calc(100% - 185px);
     padding: 5px 0px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     font-weight: 549;
     font-size: 18px;
     color: black;
@@ -58,13 +58,15 @@ export const GlobalStyle = createGlobalStyle`
     right: 0;
     top: 0;
     display: inline-block;
-    width: 130px;
+    width: 175px;
     margin-left: 10px;
+    margin-bottom: 10px;
   }
 
   .text-answer-input {
-    width: calc(100% - 150px);
+    width:100%;
     border-color: #32325d;
+    margin-top: 5px;
   }
 
   .text-answer-input:focus {
@@ -85,7 +87,7 @@ export const GlobalStyle = createGlobalStyle`
     background: transparent;
   }
   
-  .radio-answer-input:empty:not(:focus):before{
+  .radio-answer-input:empty:before{
     color: #999;
     content:attr(data-placeholder);
   }
@@ -262,6 +264,7 @@ export const GlobalStyle = createGlobalStyle`
 
   .button-add-option {
     margin-left: 4%;
+    margin-top: 5px;
   }
 
 
@@ -308,18 +311,31 @@ export const GlobalStyle = createGlobalStyle`
   top: 6px;
 }
 
+.button-add {
+  margin-bottom: 60px;
+}
 
 .card-bottom {
   position: absolute;
-  width: 33%;
-  bottom: 15px;;
+  width: 175px;
+  bottom: 15px;
   left: 50%;
   transform: translateX(-50%);
 }
-.SaveFormButton {
+.save-form-button {
   width: 100%;
-  color: white; 
 }
+
+.css-1pahdxg-control {
+  border: 1px #32325d solid !important;
+  border-radius: 4px;
+  box-shadow: 0 0 0 1px #32325d !important;
+}
+
+.css-1pahdxg-control:hover {
+  border-color: #32325d !important;
+}
+
 
 /* ON SMALL SCREENS */
 
@@ -350,17 +366,20 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   .question { /* titre de la question */
-    width: 95%;
+    width: 100%;
   }
 
-
-
-/* RADIO - CHECKBOXES */
-
-
+  .type-select {
+    width: 100%;
+    margin-left: initial;
+  }
   
-  
-
-
+  .radio-answer-input {
+    width: calc(100% - 75px);
+  }
+  .remove-option {
+    width: 25px;
+    height: 25px;
+    padding: 0;
+  }
 `;
-
