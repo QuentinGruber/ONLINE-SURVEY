@@ -4,6 +4,8 @@ import TextQuestion from "./TextQuestion";
 import RadioQuestion from "./RadioQuestion";
 import { Form, Button } from "reactstrap";
 
+import { GlobalStyle } from "./styles";
+
 class FormReader extends React.Component {
   constructor(props) {
     super(props);
@@ -91,19 +93,24 @@ class FormReader extends React.Component {
   render() {
     return (
       <>
+        <GlobalStyle />
         {this.state.FormContent != null ? (
           <>
-            <h1> {this.state.FormContent.title} </h1>
-            <Form id="Form">
+            <Form id="Form" className="fullCard bg-secondary shadow border-0">
+              <div className="form-title"> {this.state.FormContent.title} </div>
               {this.state.items}
-              <div>
+              <div className="card-bottom">
                 <Button
+                  className="btn-icon send-form-button"
+                  color="default"
                   onClick={() => {
                     if (document.forms["Form"].reportValidity())
                       this.SendAnswers();
                   }}
                   value="Send"
-                ></Button>
+                >
+                  Envoyer
+                </Button>
               </div>
             </Form>
           </>

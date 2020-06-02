@@ -7,39 +7,52 @@ class RadioQuestion extends React.Component {
       if (this.props.data.p_answer[i].checked) {
         items.push(
           <>
-            <input
-              questionid={this.props.data.id}
-              id={this.props.data.p_answer[i].id}
-              type="radio"
-              name={this.props.data.title}
-              defaultChecked
-            />
-            <label htmlFor={this.props.data.p_answer[i].id}>
-              {this.props.data.p_answer[i].text}
-            </label>
+            <div className="radio-answer">
+              <input
+                questionid={this.props.data.id}
+                id={this.props.data.p_answer[i].id}
+                type="radio"
+                name={this.props.data.title}
+                defaultChecked
+                className="radio-type-radio"
+              />
+              <label htmlFor={this.props.data.p_answer[i].id}>
+                {this.props.data.p_answer[i].text}
+              </label>
+            </div>
           </>
         );
       } else {
         items.push(
           <>
-            <input
-              questionid={this.props.data.id}
-              id={this.props.data.p_answer[i].id}
-              type="radio"
-              name={this.props.data.title}
-            />
-            <label htmlFor={this.props.data.p_answer[i].id}>
-              {this.props.data.p_answer[i].text}
-            </label>
+            <div className="radio-answer">
+              <input
+                questionid={this.props.data.id}
+                id={this.props.data.p_answer[i].id}
+                type="radio"
+                name={this.props.data.title}
+                className="radio-type-radio"
+              />
+              <label
+                htmlFor={this.props.data.p_answer[i].id}
+                className="radio-label"
+              >
+                {this.props.data.p_answer[i].text}
+              </label>
+            </div>
           </>
         );
       }
     }
     return (
       <>
-        <h3>{this.props.data.title}</h3>
-        {this.props.data.required && <label>required</label>}
-        {items}
+        <div className="list-group-item card-question">
+          <div className="question">{this.props.data.title}</div>
+          {this.props.data.required ? (
+            <span className="text-required">*</span>
+          ) : null}
+          {items}
+        </div>
       </>
     );
   }
