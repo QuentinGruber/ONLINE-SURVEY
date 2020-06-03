@@ -114,13 +114,25 @@ class FormItem extends React.Component {
               <span className="text-muted text-required">Obligatoire</span>
               <label htmlFor={"Require_" + this.props.index}>
                 <span className="custom-toggle">
-                  <input
-                    type="checkbox"
-                    id={"Require_" + this.props.index}
-                    onChange={() => {
-                      this.props.ToogleRequireStateChange(this.props.index);
-                    }}
-                  />
+                  {this.props.item.required === 1 ? (
+                    <input
+                      type="checkbox"
+                      id={"Require_" + this.props.index}
+                      onChange={() => {
+                        this.props.ToogleRequireStateChange(this.props.index);
+                      }}
+                      defaultChecked
+                    />
+                  ) : (
+                    <input
+                      type="checkbox"
+                      id={"Require_" + this.props.index}
+                      onChange={() => {
+                        this.props.ToogleRequireStateChange(this.props.index);
+                      }}
+                    />
+                  )}
+
                   <span className="custom-toggle-slider rounded-circle" />
                 </span>
               </label>
