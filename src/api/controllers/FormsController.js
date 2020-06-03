@@ -87,7 +87,7 @@ exports.create_new_form = async function (req, res, connection) {
 
 exports.modify_form = async function (req, res, connection) {
   connection.getConnection(function (err, connection) {
-    // Create form
+    // updt form name
     connection.query(
       "UPDATE forms SET name='" +
         req.body.title +
@@ -218,11 +218,11 @@ exports.modify_form = async function (req, res, connection) {
                 "'" +
                 "," +
                 "'" +
-                "radio" +
+                req.body.content[i].type +
                 "'" +
                 "," +
                 "'" +
-                0 +
+                req.body.content[i].required +
                 "'" +
                 ");",
               function (sql_error, results, fields) {
