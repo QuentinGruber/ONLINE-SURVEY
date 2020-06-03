@@ -28,60 +28,64 @@ class FormApp extends React.Component {
   }
 
   async saveItem() {
-    if (this.isNew) {
-      // if this is a new question_list
-      // register it
-      try {
-        // create an entry in our db
-        let createList_promise = await Axios({
-          method: "post",
-          url: process.env.REACT_APP_API_URL + "/new_form",
-          withCredentials: true,
-          data: {
-            title: this.state.FormName,
-            content: this.state.formitems,
-          },
-        });
-        if (createList_promise.data === true) {
-          alert("Form created !");
-        }
-        // if succeed redirect user to the question_list page
-        // document.location.href = "/question_list/" + createList_promise.data.id;
-      } catch (e) {
-        console.error("Error while saving a new form ! " + e);
-      }
-    } else {
-      // if this isn't a new question_list
-      if (this.state.FormName !== "") {
+    if (this.state.formitems.length != 0) {
+      if (this.isNew) {
+        // if this is a new question_list
+        // register it
         try {
-          for (let i = 0; i < this.ItemsToDelete.length; i++) {
-            let delete_item_promise = await Axios({
-              method: "delete",
-              url: process.env.REACT_APP_API_URL + "/form_item/",
-              data: {
-                id: this.ItemsToDelete[i],
-              },
-            });
-          }
+          // create an entry in our db
           let createList_promise = await Axios({
-            method: "put",
-            url: process.env.REACT_APP_API_URL + "/editform/",
+            method: "post",
+            url: process.env.REACT_APP_API_URL + "/new_form",
             withCredentials: true,
             data: {
-              id: this.FormID,
               title: this.state.FormName,
               content: this.state.formitems,
             },
           });
           if (createList_promise.data === true) {
-            alert("Form updated !");
+            alert("Form created !");
           }
+          // if succeed redirect user to the question_list page
+          // document.location.href = "/question_list/" + createList_promise.data.id;
         } catch (e) {
-          console.error("Error while saving a form ! " + e);
+          console.error("Error while saving a new form ! " + e);
         }
       } else {
-        alert("Title empty !");
+        // if this isn't a new question_list
+        if (this.state.FormName !== "") {
+          try {
+            for (let i = 0; i < this.ItemsToDelete.length; i++) {
+              let delete_item_promise = await Axios({
+                method: "delete",
+                url: process.env.REACT_APP_API_URL + "/form_item/",
+                data: {
+                  id: this.ItemsToDelete[i],
+                },
+              });
+            }
+            let createList_promise = await Axios({
+              method: "put",
+              url: process.env.REACT_APP_API_URL + "/editform/",
+              withCredentials: true,
+              data: {
+                id: this.FormID,
+                title: this.state.FormName,
+                content: this.state.formitems,
+              },
+            });
+            if (createList_promise.data === true) {
+              alert("Form updated !");
+            }
+          } catch (e) {
+            console.error("Error while saving a form ! " + e);
+          }
+        } else {
+          alert("Title empty !");
+        }
       }
+    } else {
+      alert("A form need at least one question to exist !");
     }
   }
 
