@@ -27,15 +27,16 @@ class FormItem extends React.Component {
   }
 
   state = {
-    selectedOption: "Choix unique",
+    selectedOption:
+      questionTypes[
+        questionTypes.findIndex((x) => x.value === this.props.item.type)
+      ].label,
   };
   handleChange = (selectedOption) => {
     this.setState({ selectedOption });
   };
 
   render() {
-    const { selectedOption } = this.state;
-
     return (
       <>
         <li className="list-group-item card-question">
@@ -54,12 +55,12 @@ class FormItem extends React.Component {
           />
 
           <Select
-            placeholder={"Choix unique"}
+            placeholder={this.state.selectedOption}
             options={questionTypes}
             name="QuestionType"
             className="type-select"
             id="sel1"
-            value={selectedOption}
+            value={this.state.selectedOption}
             onChange={(e) => {
               this.handleChange();
               this.props.item.p_answer = ""; // reset premade answer
