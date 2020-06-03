@@ -133,7 +133,16 @@ class FormApp extends React.Component {
     this.setState({ formitems: formitems });
   }
 
-  async removeItem(itemIndex) {
+  async removeItem(itemIndex, itemID) {
+    if (this.FormID !== "new") {
+      var delete_item_promise = await Axios({
+        method: "delete",
+        url: process.env.REACT_APP_API_URL + "/form_item/",
+        data: {
+          id: itemID,
+        },
+      });
+    }
     formitems.splice(itemIndex, 1);
     this.setState({ formitems: formitems });
   }

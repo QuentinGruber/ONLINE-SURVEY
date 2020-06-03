@@ -65,6 +65,12 @@ app.get("/myform", function (req, res) {
 
 /* MODIFY FORM CONTENT */
 
+app.delete("/form_item/", function (req, res) {
+  FormsController.delete_item(req, res, connection);
+});
+
+/* MODIFY FORM CONTENT */
+
 app.put("/editform/", function (req, res) {
   FormsController.modify_form(req, res, connection);
 });

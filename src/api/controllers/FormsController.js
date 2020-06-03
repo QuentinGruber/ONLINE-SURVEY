@@ -258,6 +258,22 @@ exports.modify_form = async function (req, res, connection) {
   });
 };
 
+exports.delete_item = function (req, res, connection) {
+  connection.getConnection(function (err, connection) {
+    // Create form
+    connection.query(
+      "DELETE FROM questions WHERE questions.id = " + req.body.id + " ;",
+      function (sql_error, results, fields) {
+        if (sql_error) {
+          res.send("false");
+          connection.release();
+        }
+        res.send("true");
+        connection.release();
+      }
+    );
+  });
+};
 exports.get_form_content = async function (req, res, connection) {
   var Formcontent = { title: "", content: [] };
   var FormID = req.path.substr(req.path.lastIndexOf("/") + 1);

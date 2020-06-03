@@ -23,7 +23,7 @@ class FormItem extends React.Component {
 
   onClickDelete() {
     var index = parseInt(this.props.index); // get item index
-    this.props.removeItem(index); // remove it
+    this.props.removeItem(index, parseInt(this.props.item.id)); // remove it
   }
 
   state = {
