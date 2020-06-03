@@ -28,7 +28,7 @@ class FormApp extends React.Component {
   }
 
   async saveItem() {
-    if (this.state.formitems.length != 0) {
+    if (this.state.formitems.length != 0 && this.state.FormName != "") {
       if (this.isNew) {
         // if this is a new question_list
         // register it
@@ -59,7 +59,9 @@ class FormApp extends React.Component {
               let delete_item_promise = await Axios({
                 method: "delete",
                 url: process.env.REACT_APP_API_URL + "/form_item/",
+                withCredentials: true,
                 data: {
+                  FormID: this.FormID,
                   id: this.ItemsToDelete[i],
                 },
               });
@@ -69,7 +71,7 @@ class FormApp extends React.Component {
               url: process.env.REACT_APP_API_URL + "/editform/",
               withCredentials: true,
               data: {
-                id: this.FormID,
+                FormID: this.FormID,
                 title: this.state.FormName,
                 content: this.state.formitems,
               },
@@ -85,7 +87,7 @@ class FormApp extends React.Component {
         }
       }
     } else {
-      alert("A form need at least one question to exist !");
+      alert("A form need at least a name & one question to exist !");
     }
   }
 
