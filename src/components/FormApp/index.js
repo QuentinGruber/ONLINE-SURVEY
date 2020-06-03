@@ -23,6 +23,7 @@ class FormApp extends React.Component {
     this.addItem = this.addItem.bind(this);
     this.removeItem = this.removeItem.bind(this);
     this.saveItem = this.saveItem.bind(this);
+    this.ItemsToDelete = [];
     this.state = { formitems: formitems, mode: "all", FormName: "" };
   }
 
@@ -53,6 +54,15 @@ class FormApp extends React.Component {
       // if this isn't a new question_list
       if (this.state.FormName !== "") {
         try {
+          for (let i = 0; i < this.ItemsToDelete.length; i++) {
+            let delete_item_promise = await Axios({
+              method: "delete",
+              url: process.env.REACT_APP_API_URL + "/form_item/",
+              data: {
+                id: this.ItemsToDelete[i],
+              },
+            });
+          }
           let createList_promise = await Axios({
             method: "put",
             url: process.env.REACT_APP_API_URL + "/editform/",
@@ -69,6 +79,8 @@ class FormApp extends React.Component {
         } catch (e) {
           console.error("Error while saving a form ! " + e);
         }
+      } else {
+        alert("Title empty !");
       }
     }
   }
@@ -135,14 +147,9 @@ class FormApp extends React.Component {
 
   async removeItem(itemIndex, itemID) {
     if (this.FormID !== "new") {
-      var delete_item_promise = await Axios({
-        method: "delete",
-        url: process.env.REACT_APP_API_URL + "/form_item/",
-        data: {
-          id: itemID,
-        },
-      });
+      this.ItemsToDelete.push(itemID);
     }
+
     formitems.splice(itemIndex, 1);
     this.setState({ formitems: formitems });
   }
