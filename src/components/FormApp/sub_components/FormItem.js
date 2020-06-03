@@ -75,7 +75,6 @@ class FormItem extends React.Component {
                     readOnly="readonly"
                     type="text"
                     className="form-control text-answer-input"
-                    value={this.props.item.p_answer}
                     placeholder="Réponse libre"
                   ></input>
                 );
