@@ -12,7 +12,7 @@ class TextQuestion extends React.Component {
           <input
             className="text-input"
             questionid={this.props.data.id}
-            id={this.props.data.p_answer[0].id}
+            id={this.props.data.p_answer.id}
             type="text"
             placeholder="Réponse libre"
             autocomplete="off"
