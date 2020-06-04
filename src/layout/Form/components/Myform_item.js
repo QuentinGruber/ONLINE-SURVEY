@@ -6,6 +6,7 @@ class FormTitle extends React.Component {
     return (
       <Card className="form-list-card-form">
         <div className="form-list-title">{this.props.data.name}</div>
+
         <div
           className="div-edit-form"
           onClick={() =>
@@ -14,6 +15,7 @@ class FormTitle extends React.Component {
         >
           Éditer le formulaire
         </div>
+
         <div
           className="div-stats-form"
           onClick={() =>

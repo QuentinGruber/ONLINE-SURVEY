@@ -69,17 +69,29 @@ class Form extends React.Component {
     return (
       <>
         <GlobalStyle />
-        <div className="whiteDiv"></div>
-
-        <div className="boxText">
-          <div className="boxTextTitre">Online Survey</div>
-          <div className="boxTextSlogan">Your forms, made simple</div>
-        </div>
-
         <Switch>{this.getRoutes(routes)}</Switch>
         {document.location.href.substr(
           document.location.href.lastIndexOf("/")
-        ) === "/form" && <Card className="form-list">{this.state.items}</Card>}
+        ) === "/form" ? (
+          <>
+            <div className="boxTextFormList">
+              <div className="boxTextTitreFormList">Online Survey</div>
+              <div className="boxTextSloganFormList">
+                Your forms, made simple
+              </div>
+            </div>
+            <Card className="form-list-card">{this.state.items}</Card>
+          </>
+        ) : (
+          <>
+            <div className="whiteDiv"></div>
+
+            <div className="boxText">
+              <div className="boxTextTitre">Online Survey</div>
+              <div className="boxTextSlogan">Your forms, made simple</div>
+            </div>
+          </>
+        )}
       </>
     );
   }

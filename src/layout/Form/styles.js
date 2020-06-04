@@ -49,11 +49,33 @@ body{
   .boxTextTitre {
     font-size: 40px;
   }
+
+  .boxTextFormList {
+    position: absolute;
+    width : 100%;
+    top : 10px;
+    height: 75px;
+    left: 0;
+    color: white;
+    text-align: center;
+    font-size: 16px;
+
+  }
+  
+  .boxTextTitreFormList {
+    font-size: 32px;
+  }
   
 
   /* FORM LIST */
 
-
+  .form-list-card {
+    position: absolute;
+    width: 35%;
+    min-height: 80%;
+    left: 5%;
+    top: 10%;
+  }
 
 
 
