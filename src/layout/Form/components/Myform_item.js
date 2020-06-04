@@ -6,8 +6,24 @@ class FormTitle extends React.Component {
     return (
       <Card className="form-list-card-form">
         <div className="form-list-title">{this.props.data.name}</div>
-        <div className="div-edit-form">Éditer le formulaire</div>
-        <div className="div-stats-form">Résultats et statistiques</div>
+        <div
+          className="div-edit-form"
+          onClick={() =>
+            console.log(`Éditer le formulaire "${this.props.data.name}"`)
+          }
+        >
+          Éditer le formulaire
+        </div>
+        <div
+          className="div-stats-form"
+          onClick={() =>
+            console.log(
+              `Consulter les statistiques du formulaire "${this.props.data.name}"`
+            )
+          }
+        >
+          Résultats et statistiques
+        </div>
       </Card>
     );
   }
