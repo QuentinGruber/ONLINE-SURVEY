@@ -78,7 +78,7 @@ class Form extends React.Component {
         <Switch>{this.getRoutes(routes)}</Switch>
         {document.location.href.substr(
           document.location.href.lastIndexOf("/")
-        ) === "/form" && <div>{this.state.items}</div>}
+        ) === "/form" && <div className="form-list">{this.state.items}</div>}
       </>
     );
   }
