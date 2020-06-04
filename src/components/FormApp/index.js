@@ -28,7 +28,7 @@ class FormApp extends React.Component {
   }
 
   async saveItem() {
-    if (this.state.formitems.length != 0 && this.state.FormName != "") {
+    if (this.state.formitems.length !== 0 && this.state.FormName !== "") {
       if (this.isNew) {
         // if this is a new question_list
         // register it
@@ -56,7 +56,7 @@ class FormApp extends React.Component {
         if (this.state.FormName !== "") {
           try {
             for (let i = 0; i < this.ItemsToDelete.length; i++) {
-              let delete_item_promise = await Axios({
+              await Axios({
                 method: "delete",
                 url: process.env.REACT_APP_API_URL + "/form_item/",
                 withCredentials: true,

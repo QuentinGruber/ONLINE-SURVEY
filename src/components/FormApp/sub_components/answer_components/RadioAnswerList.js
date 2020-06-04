@@ -8,7 +8,6 @@ class RadioAnswerList extends React.Component {
     if (typeof this.props.answers == Array) {
       this.state = { answers: this.props.answers };
     } else {
-      console.log(typeof this.props.answers);
       this.state = {
         answers: [{ checked: false }, { checked: false }],
       };
