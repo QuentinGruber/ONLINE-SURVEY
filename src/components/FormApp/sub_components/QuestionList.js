@@ -7,7 +7,6 @@ class QuestionList extends React.Component {
       return (
         <div className="no-transition" id="question">
           <FormItem
-            userole={this.props.userole}
             key={index}
             item={item}
             index={index}

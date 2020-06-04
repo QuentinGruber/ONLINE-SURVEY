@@ -28,6 +28,11 @@ var routes = [
     layout: "/form",
   },
   {
+    path: "/*/edit",
+    component: FormApp,
+    layout: "/form",
+  },
+  {
     path: "/*",
     component: FormReader,
     layout: "/form",

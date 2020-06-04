@@ -63,6 +63,18 @@ app.get("/myform", function (req, res) {
   FormsController.get_user_form_content(req, res, connection);
 });
 
+/* MODIFY FORM CONTENT */
+
+app.delete("/form_item/", function (req, res) {
+  FormsController.delete_item(req, res, connection);
+});
+
+/* MODIFY FORM CONTENT */
+
+app.put("/editform/", function (req, res) {
+  FormsController.modify_form(req, res, connection);
+});
+
 /* GET FORM CONTENT */
 
 app.get("/form/*", function (req, res) {
@@ -73,6 +85,12 @@ app.get("/form/*", function (req, res) {
 
 app.post("/send_form/*", function (req, res) {
   FormsController.register_answer(req, res, connection);
+});
+
+/* Register new item */
+
+app.post("/send_item/", function (req, res) {
+  FormsController.add_item(req, res, connection);
 });
 
 /*  NEW FORM  */

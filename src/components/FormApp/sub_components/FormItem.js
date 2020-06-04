@@ -23,19 +23,20 @@ class FormItem extends React.Component {
 
   onClickDelete() {
     var index = parseInt(this.props.index); // get item index
-    this.props.removeItem(index); // remove it
+    this.props.removeItem(index, parseInt(this.props.item.id)); // remove it
   }
 
   state = {
-    selectedOption: "Choix unique",
+    selectedOption:
+      questionTypes[
+        questionTypes.findIndex((x) => x.value === this.props.item.type)
+      ].label,
   };
   handleChange = (selectedOption) => {
     this.setState({ selectedOption });
   };
 
   render() {
-    const { selectedOption } = this.state;
-
     return (
       <>
         <li className="list-group-item card-question">
@@ -54,12 +55,12 @@ class FormItem extends React.Component {
           />
 
           <Select
-            placeholder={"Choix unique"}
+            placeholder={this.state.selectedOption}
             options={questionTypes}
             name="QuestionType"
             className="type-select"
             id="sel1"
-            value={selectedOption}
+            value={this.state.selectedOption}
             onChange={(e) => {
               this.handleChange();
               this.props.item.p_answer = ""; // reset premade answer
@@ -72,10 +73,9 @@ class FormItem extends React.Component {
               case "text":
                 return (
                   <input
-                    readonly="readonly"
+                    readOnly="readonly"
                     type="text"
-                    class="form-control text-answer-input"
-                    value={"test"}
+                    className="form-control text-answer-input"
                     placeholder="Réponse libre"
                   ></input>
                 );
@@ -114,13 +114,25 @@ class FormItem extends React.Component {
               <span className="text-muted text-required">Obligatoire</span>
               <label htmlFor={"Require_" + this.props.index}>
                 <span className="custom-toggle">
-                  <input
-                    type="checkbox"
-                    id={"Require_" + this.props.index}
-                    onChange={() => {
-                      this.props.ToogleRequireStateChange(this.props.index);
-                    }}
-                  />
+                  {this.props.item.required === 1 ? (
+                    <input
+                      type="checkbox"
+                      id={"Require_" + this.props.index}
+                      onChange={() => {
+                        this.props.ToogleRequireStateChange(this.props.index);
+                      }}
+                      defaultChecked
+                    />
+                  ) : (
+                    <input
+                      type="checkbox"
+                      id={"Require_" + this.props.index}
+                      onChange={() => {
+                        this.props.ToogleRequireStateChange(this.props.index);
+                      }}
+                    />
+                  )}
+
                   <span className="custom-toggle-slider rounded-circle" />
                 </span>
               </label>
