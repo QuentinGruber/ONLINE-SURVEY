@@ -8,6 +8,7 @@ import { GlobalStyle } from "./styles";
 import Axios from "axios";
 
 import MyFormItem from "./components/Myform_item";
+import { Card } from "reactstrap";
 
 class Form extends React.Component {
   constructor(props) {
@@ -78,7 +79,7 @@ class Form extends React.Component {
         <Switch>{this.getRoutes(routes)}</Switch>
         {document.location.href.substr(
           document.location.href.lastIndexOf("/")
-        ) === "/form" && <div className="form-list">{this.state.items}</div>}
+        ) === "/form" && <Card className="form-list">{this.state.items}</Card>}
       </>
     );
   }

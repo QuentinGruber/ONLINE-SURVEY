@@ -1,11 +1,12 @@
 import React from "react";
+import { Card, Button } from "reactstrap";
 
 class FormTitle extends React.Component {
   render() {
     return (
-      <div>
-        <h2>{this.props.data.name}</h2>
-      </div>
+      <Card id="form-list-card-form">
+        <div id="form-list-title">{this.props.data.name}</div>
+      </Card>
     );
   }
 }

@@ -1,6 +1,9 @@
 import { createGlobalStyle } from "styled-components";
 import backgroundImage from "../../assets/img/backgrounds/background-stars.jpg";
 export const GlobalStyle = createGlobalStyle`
+
+/* BACKGROUND */
+
 body{
     background: url(${backgroundImage}) no-repeat center center fixed; 
     -webkit-background-size: cover;
@@ -47,10 +50,22 @@ body{
     font-size: 40px;
   }
   
+
+  /* FORM LIST */
+
+
+
+
+
+
+
+
   /* ON MOBILE */
   
   @media screen and (max-width: 1200px) {
   
+    /* BACKGROUND */
+
     .whiteDiv {
       display: none;
     }
@@ -69,5 +84,10 @@ body{
     .boxTextTitre {
       font-size: 32px;
     }
+
+    /* FORM LIST */
+
+
   }
+
 `;
