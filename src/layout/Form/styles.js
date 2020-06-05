@@ -93,10 +93,12 @@ body{
 
   .div-answers-form {
     width: 30%;
+    display: inline;
   }
 
   .div-share-form {
     width: 30%;
+    display: inline;
   }
 
 
