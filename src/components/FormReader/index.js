@@ -57,15 +57,13 @@ class FormReader extends React.Component {
   async componentDidMount() {
     var pageURL = window.location.href;
     this.FormID = pageURL.substr(pageURL.lastIndexOf("/") + 1);
-    /*
+
     let Check_validation_promise = await Axios({
       method: "get",
       url: process.env.REACT_APP_API_URL + "/HasAnswered/" + this.FormID,
       withCredentials: true,
     });
-    */
 
-    let Check_validation_promise = false; // DEBUG
     if (!Check_validation_promise) {
       // get Form content from FormID
 

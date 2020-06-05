@@ -75,6 +75,12 @@ app.put("/editform/", function (req, res) {
   FormsController.modify_form(req, res, connection);
 });
 
+/* RETURN IF USER AS ALREADY ANSWER A GIVEN FORM */
+
+app.get("/HasAnswered/*", function (req, res) {
+  FormsController.HasAnswered(req, res, connection);
+});
+
 /* GET FORM CONTENT */
 
 app.get("/form/*", function (req, res) {

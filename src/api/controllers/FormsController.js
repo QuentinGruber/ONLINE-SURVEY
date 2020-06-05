@@ -394,6 +394,27 @@ exports.get_form_content = async function (req, res, connection) {
   });
 };
 
+exports.HasAnswered = async function (req, res, connection) {
+  connection.getConnection(function (err, connection) {
+    if (!req.session.user_id) {
+      // if not connected
+      res.send(false);
+      connection.release();
+      return;
+    }
+    // Create form
+    connection.query("", function (sql_error, results, fields) {
+      // If some error occurs, we throw an error.
+      if (sql_error) {
+        res.send("false");
+        connection.release();
+      }
+      res.send(true);
+      connection.release();
+    });
+  });
+};
+
 exports.register_answer = async function (req, res, connection) {
   connection.getConnection(function (err, connection) {
     if (!req.session.user_id) {
