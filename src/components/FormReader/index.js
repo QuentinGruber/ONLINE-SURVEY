@@ -21,11 +21,13 @@ class FormReader extends React.Component {
     for (let i = 0; i < inputs.length - 1; i++) {
       switch (inputs[i].type) {
         case "text":
-          inputs_data.push({
-            answerid: inputs[i].id,
-            questionid: inputs[i].attributes[1].nodeValue,
-            value: inputs[i].value,
-          });
+          if (inputs[i].value != "") {
+            inputs_data.push({
+              answerid: inputs[i].id,
+              questionid: inputs[i].attributes[1].nodeValue,
+              value: inputs[i].value,
+            });
+          }
           break;
         case "radio":
           if (inputs[i].checked) {
