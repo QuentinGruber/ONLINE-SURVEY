@@ -423,11 +423,11 @@ exports.register_answer = async function (req, res, connection) {
             res.send("false");
             connection.release();
           }
-          res.send(true);
-          connection.release();
         }
       );
     }
+    res.send(true);
+    connection.release();
   });
 };
 
