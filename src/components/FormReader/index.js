@@ -22,7 +22,7 @@ class FormReader extends React.Component {
         case "text":
           inputs_data.push({
             answerid: inputs[i].id,
-            questionid: inputs[i].attributes[0].nodeValue,
+            questionid: inputs[i].attributes[1].nodeValue,
             value: inputs[i].value,
           });
           break;
@@ -30,7 +30,7 @@ class FormReader extends React.Component {
           if (inputs[i].checked) {
             inputs_data.push({
               answerid: inputs[i].id,
-              questionid: inputs[i].attributes[0].nodeValue,
+              questionid: inputs[i].attributes[1].nodeValue,
               value: inputs[i].labels[0].textContent,
             });
           }
@@ -40,7 +40,6 @@ class FormReader extends React.Component {
           break;
       }
     }
-
     let SendAnswer_promise = await Axios({
       method: "post",
       url: process.env.REACT_APP_API_URL + "/send_form/" + this.FormID,
