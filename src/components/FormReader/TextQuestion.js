@@ -15,7 +15,7 @@ class TextQuestion extends React.Component {
             id={this.props.data.p_answer[0].id}
             type="text"
             placeholder="Réponse libre"
-            autocomplete="off"
+            autoComplete="off"
             required={this.props.data.required}
           ></input>
         </div>
