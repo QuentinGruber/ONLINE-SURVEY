@@ -77,7 +77,27 @@ body{
     top: 10%;
   }
 
+  .form-list-card-form {
+    min-height: 150px;
+    display:inline-block;
+    padding: 10px;
+    margin: 15px;
+  }
 
+  .div-title-form {
+    width: 100%;
+    text-align: center;
+    font-size: 25px;
+    color: black;
+  }
+
+  .div-answers-form {
+    width: 30%;
+  }
+
+  .div-share-form {
+    width: 30%;
+  }
 
 
 

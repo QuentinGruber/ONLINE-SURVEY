@@ -1,11 +1,29 @@
 import React from "react";
-import { Card, Button } from "reactstrap";
+import { Card } from "reactstrap";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faShareAlt } from "@fortawesome/free-solid-svg-icons";
+
+library.add(faShareAlt);
 
 class FormTitle extends React.Component {
   render() {
     return (
       <Card className="form-list-card-form">
-        <div className="form-list-title">{this.props.data.name}</div>
+        <div className="div-title-form">{this.props.data.name}</div>
+
+        <div className="div-answers-form">{0} Réponses</div>
+
+        <div
+          className="div-share-form"
+          onClick={() =>
+            console.log(`Partager le formulaire "${this.props.data.name}"`)
+          }
+        >
+          Partager
+          <FontAwesomeIcon icon="share-alt" className="fa-s" />
+        </div>
 
         <div
           className="div-edit-form"
