@@ -30,7 +30,7 @@ class FormReader extends React.Component {
           if (inputs[i].checked) {
             inputs_data.push({
               answerid: inputs[i].id,
-              questionid: inputs[i].attributes[1].nodeValue,
+              questionid: inputs[i].attributes[0].nodeValue,
               value: inputs[i].labels[0].textContent,
             });
           }
