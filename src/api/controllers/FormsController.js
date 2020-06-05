@@ -403,7 +403,11 @@ exports.HasAnswered = async function (req, res, connection) {
       return;
     }
     // Create form
-    connection.query("", function (sql_error, results, fields) {
+    connection.query("select * from FORMS;", function (
+      sql_error,
+      results,
+      fields
+    ) {
       // If some error occurs, we throw an error.
       if (sql_error) {
         res.send("false");
