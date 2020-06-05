@@ -64,7 +64,7 @@ class FormReader extends React.Component {
       withCredentials: true,
     });
 
-    if (!Check_validation_promise) {
+    if (!Check_validation_promise.data) {
       // get Form content from FormID
 
       let GetFormPromise = await Axios({
