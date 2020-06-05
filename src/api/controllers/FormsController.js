@@ -402,20 +402,34 @@ exports.HasAnswered = async function (req, res, connection) {
       connection.release();
       return;
     }
-    // Create form
-    connection.query("select * from FORMS;", function (
-      sql_error,
-      results,
-      fields
-    ) {
-      // If some error occurs, we throw an error.
-      if (sql_error) {
-        res.send("false");
-        connection.release();
+    connection.query(
+      "SELECT * FROM forms where EXISTS (SELECT forms.id, answers_users.user_id FROM forms INNER JOIN answers_users ON forms.users_id=answers_users.user_id WHERE users_id = '" +
+        req.session.user_id +
+        "')",
+      function (sql_error, results, fields) {
+        // If some error occurs, we throw an error.
+        if (sql_error) {
+          res.send("false");
+          connection.release();
+        }
+
+        var FormID = req.path.substr(req.path.lastIndexOf("/") + 1); // get current form id
+        let HasAnswered = false;
+        results.forEach((element) => {
+          // if user has answered the form
+          if (element.id === parseInt(FormID)) {
+            HasAnswered = true;
+            res.send(true);
+            connection.release();
+          }
+        });
+        if (!HasAnswered) {
+          // if not
+          res.send(false);
+          connection.release();
+        }
       }
-      res.send(false); // DEBUG
-      connection.release();
-    });
+    );
   });
 };
 
