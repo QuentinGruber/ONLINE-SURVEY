@@ -91,6 +91,13 @@ body{
     color: black;
   }
 
+  .div-trash-icon {
+    display: inline;
+    position: absolute;
+    top: 5px;
+    right: 10px;
+  }
+
   .div-answers-form {
     display: inline;
     width: 30%;
