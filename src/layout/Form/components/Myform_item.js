@@ -4,8 +4,10 @@ import { Card } from "reactstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faShareAlt } from "@fortawesome/free-solid-svg-icons";
+import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 
 library.add(faShareAlt);
+library.add(faTrashAlt);
 
 class FormTitle extends React.Component {
   render() {
@@ -13,6 +15,9 @@ class FormTitle extends React.Component {
       <Card className="form-list-card-form">
         <div className="div-title-form">{this.props.data.name}</div>
 
+        <div className="div-trash-icon">
+          <FontAwesomeIcon icon="trash-alt" className="fa-s trash-icon" />
+        </div>
         <div className="div-answers-form">{0} Réponses</div>
 
         <div
