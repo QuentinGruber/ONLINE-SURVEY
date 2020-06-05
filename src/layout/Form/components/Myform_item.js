@@ -22,7 +22,7 @@ class FormTitle extends React.Component {
           }
         >
           Partager
-          <FontAwesomeIcon icon="share-alt" className="fa-s" />
+          <FontAwesomeIcon icon="share-alt" className="fa-s share-icon" />
         </div>
 
         <div

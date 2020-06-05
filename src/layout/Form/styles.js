@@ -92,15 +92,19 @@ body{
   }
 
   .div-answers-form {
-    width: 30%;
     display: inline;
+    width: 30%;
   }
 
   .div-share-form {
-    width: 30%;
     display: inline;
+    width: 30%;
   }
 
+  .share-icon {
+    margin-left : 5px;
+    
+  }
 
 
 
