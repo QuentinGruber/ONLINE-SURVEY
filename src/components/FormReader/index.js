@@ -5,11 +5,12 @@ import RadioQuestion from "./RadioQuestion";
 import { Form, Button } from "reactstrap";
 
 import { GlobalStyle } from "./styles";
+import FormValidation from "../FormValidation";
 
 class FormReader extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { FormContent: null, items: [] };
+    this.state = { FormContent: null, items: [], HasAnswered: false };
     this.FormID = null;
     this.SendAnswers = this.SendAnswers.bind(this);
   }
@@ -56,66 +57,90 @@ class FormReader extends React.Component {
   async componentDidMount() {
     var pageURL = window.location.href;
     this.FormID = pageURL.substr(pageURL.lastIndexOf("/") + 1);
-    // get Form content from FormID
-
-    let GetFormPromise = await Axios({
+    /*
+    let Check_validation_promise = await Axios({
       method: "get",
-      url: process.env.REACT_APP_API_URL + "/form/" + this.FormID,
+      url: process.env.REACT_APP_API_URL + "/HasAnswered/" + this.FormID,
       withCredentials: true,
     });
-    let FormContent = await GetFormPromise.data;
-    if (FormContent) {
-      let items = [];
-      for (let i = 0; i < FormContent.content.length; i++) {
-        switch (FormContent.content[i].type) {
-          case "text":
-            items.push(<TextQuestion key={i} data={FormContent.content[i]} />);
-            break;
-          case "radio":
-            items.push(<RadioQuestion key={i} data={FormContent.content[i]} />);
-            break;
+    */
 
-          default:
-            console.error(
-              "Unknown question type : " + FormContent.content[i].type
-            );
-            break;
+    let Check_validation_promise = false; // DEBUG
+    if (!Check_validation_promise) {
+      // get Form content from FormID
+
+      let GetFormPromise = await Axios({
+        method: "get",
+        url: process.env.REACT_APP_API_URL + "/form/" + this.FormID,
+        withCredentials: true,
+      });
+      let FormContent = await GetFormPromise.data;
+      if (FormContent) {
+        let items = [];
+        for (let i = 0; i < FormContent.content.length; i++) {
+          switch (FormContent.content[i].type) {
+            case "text":
+              items.push(
+                <TextQuestion key={i} data={FormContent.content[i]} />
+              );
+              break;
+            case "radio":
+              items.push(
+                <RadioQuestion key={i} data={FormContent.content[i]} />
+              );
+              break;
+
+            default:
+              console.error(
+                "Unknown question type : " + FormContent.content[i].type
+              );
+              break;
+          }
         }
+        this.setState({ FormContent: FormContent, items: items });
+      } else {
+        alert("You don't have access to this Form or he doesn't exist !");
+        document.location.href = "/form/new";
       }
-      this.setState({ FormContent: FormContent, items: items });
     } else {
-      alert("You don't have access to this Form or he doesn't exist !");
-      document.location.href = "/form/new";
+      this.setState({ HasAnswered: true });
     }
   }
 
   render() {
-    return (
-      <>
-        <GlobalStyle />
-        {this.state.FormContent != null ? (
-          <>
-            <Form id="Form" className="fullCard bg-secondary shadow border-0">
-              <div className="form-title"> {this.state.FormContent.title} </div>
-              {this.state.items}
-              <div className="card-bottom">
-                <Button
-                  className="btn-icon send-form-button"
-                  color="default"
-                  onClick={() => {
-                    if (document.forms["Form"].reportValidity())
-                      this.SendAnswers();
-                  }}
-                  value="Send"
-                >
-                  Envoyer
-                </Button>
-              </div>
-            </Form>
-          </>
-        ) : null}
-      </>
-    );
+    if (!this.state.HasAnswered) {
+      return (
+        <>
+          <GlobalStyle />
+          {this.state.FormContent != null ? (
+            <>
+              <Form id="Form" className="fullCard bg-secondary shadow border-0">
+                <div className="form-title">
+                  {" "}
+                  {this.state.FormContent.title}{" "}
+                </div>
+                {this.state.items}
+                <div className="card-bottom">
+                  <Button
+                    className="btn-icon send-form-button"
+                    color="default"
+                    onClick={() => {
+                      if (document.forms["Form"].reportValidity())
+                        this.SendAnswers();
+                    }}
+                    value="Send"
+                  >
+                    Envoyer
+                  </Button>
+                </div>
+              </Form>
+            </>
+          ) : null}
+        </>
+      );
+    } else {
+      return <FormValidation FormID={this.FormID} />;
+    }
   }
 }
 

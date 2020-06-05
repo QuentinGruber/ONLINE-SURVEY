@@ -4,23 +4,22 @@ import Axios from "axios";
 class FormValidation extends React.Component {
   constructor(props) {
     super(props);
-    this.FormID = null;
-    this.FormContent = null;
+    this.state = { FormContent: { title: "" } };
   }
 
-  componentDidMount() {
-    var pageURL = window.location.href;
-    this.FormID = pageURL.substr(pageURL.lastIndexOf("/") + 1);
+  async componentDidMount() {
     let GetFormPromise = await Axios({
-        method: "get",
-        url: process.env.REACT_APP_API_URL + "/form/" + this.FormID,
-        withCredentials: true,
-      });
-      this.FormContent = await GetFormPromise.data;
+      method: "get",
+      url: process.env.REACT_APP_API_URL + "/form/" + this.props.FormID,
+      withCredentials: true,
+    });
+    this.setState({ FormContent: GetFormPromise.data });
   }
 
   render() {
-    return <h2>You've already respond to form "{this.FormContent.title}" </h2>;
+    return (
+      <h2>You've already respond to form "{this.state.FormContent.title}" </h2>
+    );
   }
 }
 
