@@ -143,5 +143,5 @@ app.post("/linkedin", function (req, res) {
 
 // Starting our server.
 app.listen(3001, () => {
-  console.log("Routes.js running !");
+  console.log("API server running !");
 });
