@@ -409,7 +409,7 @@ exports.HasAnswered = async function (req, res, connection) {
         res.send("false");
         connection.release();
       }
-      res.send(true);
+      res.send(false); // DEBUG
       connection.release();
     });
   });
