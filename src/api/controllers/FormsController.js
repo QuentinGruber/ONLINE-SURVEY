@@ -405,8 +405,9 @@ exports.register_answer = async function (req, res, connection) {
     // Create form
     for (let i = 0; i < req.body.length; i++) {
       connection.query(
-        "INSERT INTO `answers_users` (`id`, `answers_id`, `question_id`, `text`, `user_id`) VALUES (NULL, " +
+        "INSERT INTO `answers_users` (`answers_id`, `question_id`, `text`, `user_id`) VALUES ('" +
           req.body[i].answerid +
+          "'" +
           ", '" +
           req.body[i].questionid +
           "', '" +
