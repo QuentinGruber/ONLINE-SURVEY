@@ -111,38 +111,48 @@ body{
 
   .div-share-form {
     display: inline;
-    width: 30%;
     cursor: pointer;
-  }
-  
-  .div-share-form:hover {
-    color: #32325d;
-    transition: 0.2s;
-    text-decoration: underline;
   }
 
   .share-icon {
     margin-left : 5px;
+  }
+  
+  .div-share-form:hover {
+    color: #32325d;
+    text-decoration: underline;
   }
 
   .div-edit-form {
     position: absolute;
     bottom: 10px;
     left: 10px;
+    cursor: pointer;
   }
 
   .edit-icon {
     margin-right : 5px;
+  }
+  
+  .div-edit-form:hover {
+    color: #32325d;
+    text-decoration: underline;
   }
 
   .div-stats-form {
     position: absolute;
     bottom: 10px;
     right: 10px;
+    cursor: pointer;
   }
 
   .stats-icon {
     margin-left : 5px;
+  }
+  
+  .div-stats-form:hover {
+    color: #32325d;
+    text-decoration: underline;
   }
 
 
