@@ -55,7 +55,45 @@ exports.create_new_form = async function (req, res, connection) {
                 );
               }
 
+              if (req.body.content[i].type === "number") {
+                connection.query(
+                  "INSERT INTO answers ( question_id, text , checked) VALUES ( '" +
+                    results.insertId +
+                    "', '" +
+                    req.body.content[i].p_answer +
+                    "','1');",
+                  function (sql_error, results, fields) {
+                    // If some error occurs, we throw an error.
+                    if (sql_error) {
+                      res.send("false");
+                      connection.release();
+                    }
+                  }
+                );
+              }
+
               if (req.body.content[i].type === "radio") {
+                for (let j = 0; j < req.body.content[i].p_answer.length; j++) {
+                  connection.query(
+                    "INSERT INTO answers ( question_id, text , checked) VALUES ( '" +
+                      results.insertId +
+                      "', '" +
+                      req.body.content[i].p_answer[j].text +
+                      "','" +
+                      (req.body.content[i].p_answer[j].checked | 0) +
+                      "');",
+                    function (sql_error, results, fields) {
+                      // If some error occurs, we throw an error.
+                      if (sql_error) {
+                        res.send("false");
+                        connection.release();
+                      }
+                    }
+                  );
+                }
+              }
+
+              if (req.body.content[i].type === "checkbox") {
                 for (let j = 0; j < req.body.content[i].p_answer.length; j++) {
                   connection.query(
                     "INSERT INTO answers ( question_id, text , checked) VALUES ( '" +
@@ -177,6 +215,79 @@ exports.modify_form = async function (req, res, connection) {
                         }
                       }
                     );
+                  }
+
+                  if (req.body.content[i].type === "number") {
+                    connection.query(
+                      "UPDATE answers SET " +
+                        "text=" +
+                        "'" +
+                        req.body.content[i].p_answer +
+                        "'" +
+                        "WHERE id=" +
+                        "'" +
+                        req.body.content[i].id +
+                        "'" +
+                        ";",
+                      function (sql_error, results, fields) {
+                        // If some error occurs, we throw an error.
+                        if (sql_error) {
+                          res.send("false");
+                          connection.release();
+                        }
+                      }
+                    );
+                  }
+
+                  if (req.body.content[i].type === "checkbox") {
+                    for (
+                      let j = 0;
+                      j < req.body.content[i].p_answer.length;
+                      j++
+                    ) {
+                      if (req.body.content[i].p_answer[j].id != undefined) {
+                        connection.query(
+                          "UPDATE answers SET " +
+                            "text=" +
+                            "'" +
+                            req.body.content[i].p_answer[j].text +
+                            "'," +
+                            "checked=" +
+                            "'" +
+                            (req.body.content[i].p_answer[j].checked | 0) +
+                            "'" +
+                            "WHERE id=" +
+                            "'" +
+                            req.body.content[i].id +
+                            "'" +
+                            ";",
+                          function (sql_error, results, fields) {
+                            // If some error occurs, we throw an error.
+                            if (sql_error) {
+                              res.send("false");
+                              connection.release();
+                            }
+                          }
+                        );
+                      }
+                      // if answers isn't already in the db
+                      else {
+                        connection.query(
+                          "INSERT INTO answers ( question_id, text , checked) VALUES ( '" +
+                            req.body.content[i].id +
+                            "', '" +
+                            req.body.content[i].p_answer[j].text +
+                            "','1');",
+                          function (sql_error, results, fields) {
+                            // If some error occurs, we throw an error.
+                            if (sql_error) {
+                              res.send("false");
+                              connection.release();
+                            }
+                          }
+                        );
+                      }
+                    }
                   }
 
                   if (req.body.content[i].type === "radio") {

@@ -13,7 +13,7 @@ const questionTypes = [
   { value: "radio", label: "Choix unique" },
   { value: "checkbox", label: "Choix multiples" },
   { value: "text", label: "Texte" },
-  { value: "numbers", label: "Chiffres" },
+  { value: "number", label: "Chiffres" },
 ];
 
 class FormItem extends React.Component {
@@ -80,7 +80,7 @@ class FormItem extends React.Component {
                     placeholder="Réponse libre"
                   ></input>
                 );
-              case "numbers":
+              case "number":
                 return (
                   <input
                     readOnly="readonly"

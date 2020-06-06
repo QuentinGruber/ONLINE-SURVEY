@@ -6,7 +6,7 @@ class CheckboxAnswer extends React.Component {
       <>
         <div className="radio-answer">
           <input
-            type="Checkbox"
+            type="checkbox"
             name={"Q_radio_" + this.props.index}
             disabled="disabled"
             className="radio-type-radio"

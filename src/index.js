@@ -11,13 +11,10 @@ import Legal from "./components/Legal";
 import Form from "./layout/Form";
 import CookiesNeeded from "./components/CookiesNeeded.js";
 
-
-
-
 // import css
 import "./assets/css/argon-dashboard-react.css";
 
-import 'bootstrap/dist/js/bootstrap.js';
+import "bootstrap/dist/js/bootstrap.js";
 
 // init Google Analytics
 import ReactGA from "react-ga";
@@ -29,7 +26,6 @@ if (localStorage.AcceptCookies === "true") {
   IsLogin().then((result) => {
     // Private route
     if (result === true) {
-      console.log(result);
       ReactDOM.render(
         <BrowserRouter>
           <Switch>
