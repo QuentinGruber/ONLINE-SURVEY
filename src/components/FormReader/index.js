@@ -2,6 +2,8 @@ import React from "react";
 import Axios from "axios";
 import TextQuestion from "./TextQuestion";
 import RadioQuestion from "./RadioQuestion";
+import CheckBoxQuestion from "./CheckBoxQuestion";
+import NumberQuestion from "./NumberQuestion";
 import { Form, Button } from "reactstrap";
 
 import { GlobalStyle } from "./styles";
@@ -21,7 +23,7 @@ class FormReader extends React.Component {
     for (let i = 0; i < inputs.length - 1; i++) {
       switch (inputs[i].type) {
         case "text":
-          if (inputs[i].value != "") {
+          if (inputs[i].value !== "") {
             inputs_data.push({
               answerid: inputs[i].id,
               questionid: inputs[i].attributes[1].nodeValue,
@@ -35,6 +37,24 @@ class FormReader extends React.Component {
               answerid: inputs[i].id,
               questionid: inputs[i].attributes[0].nodeValue,
               value: inputs[i].labels[0].textContent,
+            });
+          }
+          break;
+        case "checkbox":
+          if (inputs[i].checked) {
+            inputs_data.push({
+              answerid: inputs[i].id,
+              questionid: inputs[i].attributes[0].nodeValue,
+              value: inputs[i].labels[0].textContent,
+            });
+          }
+          break;
+        case "number":
+          if (inputs[i].value !== "") {
+            inputs_data.push({
+              answerid: inputs[i].id,
+              questionid: inputs[i].attributes[1].nodeValue,
+              value: inputs[i].value,
             });
           }
           break;
@@ -89,6 +109,16 @@ class FormReader extends React.Component {
             case "radio":
               items.push(
                 <RadioQuestion key={i} data={FormContent.content[i]} />
+              );
+              break;
+            case "checkbox":
+              items.push(
+                <CheckBoxQuestion key={i} data={FormContent.content[i]} />
+              );
+              break;
+            case "number":
+              items.push(
+                <NumberQuestion key={i} data={FormContent.content[i]} />
               );
               break;
 
