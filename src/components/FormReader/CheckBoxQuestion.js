@@ -4,26 +4,7 @@ class CheckBoxQuestion extends React.Component {
   render() {
     var items = [];
     for (let i = 0; i < this.props.data.p_answer.length; i++) {
-      if (this.props.data.p_answer[i].checked) {
-        items.push(
-          <>
-            <div className="radio-answer">
-              <input
-                questionid={this.props.data.id}
-                id={this.props.data.p_answer[i].id}
-                type="checkbox"
-                name={this.props.data.title}
-                defaultChecked
-                className="radio-type-radio"
-                required={this.props.data.required}
-              />
-              <label htmlFor={this.props.data.p_answer[i].id}>
-                {this.props.data.p_answer[i].text}
-              </label>
-            </div>
-          </>
-        );
-      } else {
+      if (this.props.data.p_answer[i].text != "") {
         items.push(
           <>
             <div className="radio-answer">
