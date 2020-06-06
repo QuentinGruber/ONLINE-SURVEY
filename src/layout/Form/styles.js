@@ -103,9 +103,6 @@ body{
     font-size: 1rem;
   }
 
-
-
-
   .div-answers-form {
     display: inline;
     width: 30%;
@@ -114,6 +111,13 @@ body{
   .div-share-form {
     display: inline;
     width: 30%;
+    cursor: pointer;
+  }
+  
+  .div-share-form:hover {
+    color: #32325d;
+    transition: 0.2s;
+    text-decoration: underline;
   }
 
   .share-icon {
