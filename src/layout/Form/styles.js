@@ -66,9 +66,10 @@ body{
   .boxTextTitreFormList {
     font-size: 32px;
   }
-  
+
 
   /* FORM LIST */
+
 
   .form-list-card {
     position: absolute;
@@ -86,11 +87,9 @@ body{
   }
 
   .div-title-form {
-    width: 80%;
-    text-align: center;
+    width: 95%;
     font-size: 25px;
     color: black;
-    margin: auto;
   }
 
   .div-trash-icon {

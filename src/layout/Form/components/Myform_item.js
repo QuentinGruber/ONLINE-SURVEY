@@ -27,7 +27,7 @@ class FormTitle extends React.Component {
             <FontAwesomeIcon icon="trash-alt" className="fa-s trash-icon" />
           </button>
         </div>
-        <div className="div-answers-form">{0} Réponses</div>
+        <div className="div-answers-form">{0} Réponses - </div>
 
         <div
           className="div-share-form"
