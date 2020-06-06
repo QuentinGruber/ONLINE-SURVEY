@@ -72,6 +72,7 @@ body{
 
 
   .form-list-card {
+    font-size: 16px;
     position: absolute;
     width: 35%;
     min-height: 80%;
@@ -122,9 +123,27 @@ body{
 
   .share-icon {
     margin-left : 5px;
-    
   }
 
+  .div-edit-form {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+  }
+
+  .edit-icon {
+    margin-right : 5px;
+  }
+
+  .div-stats-form {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+  }
+
+  .stats-icon {
+    margin-left : 5px;
+  }
 
 
   /* ON MOBILE */

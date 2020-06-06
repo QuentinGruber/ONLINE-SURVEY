@@ -4,10 +4,10 @@ import { Card } from "reactstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faShareAlt } from "@fortawesome/free-solid-svg-icons";
-import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
+import { faEdit } from "@fortawesome/free-solid-svg-icons";
+import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 
-library.add(faShareAlt);
-library.add(faTrashAlt);
+library.add(faShareAlt, faEdit, faChevronRight);
 
 class FormTitle extends React.Component {
   render() {
@@ -45,6 +45,7 @@ class FormTitle extends React.Component {
             console.log(`Éditer le formulaire "${this.props.data.name}"`)
           }
         >
+          <FontAwesomeIcon icon="edit" className="fa-s edit-icon" />
           Éditer le formulaire
         </div>
 
@@ -57,6 +58,7 @@ class FormTitle extends React.Component {
           }
         >
           Résultats et statistiques
+          <FontAwesomeIcon icon="chevron-right" className="fa-xl stats-icon" />
         </div>
       </Card>
     );
