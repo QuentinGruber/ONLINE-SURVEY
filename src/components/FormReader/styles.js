@@ -24,7 +24,7 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   .card-question{
-    margin: 10px 0px !important;
+    margin-top: 10px !important;
     padding: 10px 15px;
     min-height: 100px;
     border-radius: 0.375rem;
@@ -206,11 +206,10 @@ export const GlobalStyle = createGlobalStyle`
 
 
   .card-bottom {
-    position: absolute;
+    position: relative;
     width: 33%;
-    bottom: 15px;;
-    left: 50%;
-    transform: translateX(-50%);
+    margin:auto;
+    margin-top: 15px;
   }
   .send-form-button {
     width: 100%;
