@@ -1,6 +1,7 @@
 import React from "react";
 import Select from "react-select";
 import { Input } from "reactstrap";
+import CheckboxAnswerList from "./answer_components/CheckboxAnswerList";
 import RadioAnswerList from "./answer_components/RadioAnswerList";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -10,9 +11,9 @@ library.add(faTrashAlt);
 
 const questionTypes = [
   { value: "radio", label: "Choix unique" },
-  { value: "checkbox", label: "Choix multiples // A FAIRE" },
+  { value: "checkbox", label: "Choix multiples" },
   { value: "text", label: "Texte" },
-  { value: "numbers", label: "Chiffres // A FAIRE" },
+  { value: "numbers", label: "Chiffres" },
 ];
 
 class FormItem extends React.Component {
@@ -79,9 +80,29 @@ class FormItem extends React.Component {
                     placeholder="Réponse libre"
                   ></input>
                 );
+              case "numbers":
+                return (
+                  <input
+                    readOnly="readonly"
+                    type="text"
+                    className="form-control text-answer-input"
+                    placeholder="Réponse libre contenant uniquement un nombre"
+                  ></input>
+                );
               case "radio":
                 return (
                   <RadioAnswerList
+                    key={this.props.index}
+                    HandlePremadeAnswerChange={
+                      this.props.HandlePremadeAnswerChange
+                    }
+                    index={this.props.index}
+                    answers={this.props.item.p_answer}
+                  />
+                );
+              case "checkbox":
+                return (
+                  <CheckboxAnswerList
                     key={this.props.index}
                     HandlePremadeAnswerChange={
                       this.props.HandlePremadeAnswerChange
