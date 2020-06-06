@@ -258,16 +258,34 @@ exports.modify_form = async function (req, res, connection) {
                     res.send("false");
                     connection.release();
                   }
-                  for (
-                    let j = 0;
-                    j < req.body.content[i].p_answer.length;
-                    j++
-                  ) {
+
+                  if (req.body.content[i].p_answer.length > 0) {
+                    for (
+                      let j = 0;
+                      j < req.body.content[i].p_answer.length;
+                      j++
+                    ) {
+                      connection.query(
+                        "INSERT INTO answers ( question_id, text , checked) VALUES ( '" +
+                          results.insertId +
+                          "', '" +
+                          req.body.content[i].p_answer[j].text +
+                          "','0');",
+                        function (sql_error, results, fields) {
+                          // If some error occurs, we throw an error.
+                          if (sql_error) {
+                            res.send("false");
+                            connection.release();
+                          }
+                        }
+                      );
+                    }
+                  } else {
                     connection.query(
                       "INSERT INTO answers ( question_id, text , checked) VALUES ( '" +
                         results.insertId +
                         "', '" +
-                        req.body.content[i].p_answer[j].text +
+                        req.body.content[i].p_answer +
                         "','0');",
                       function (sql_error, results, fields) {
                         // If some error occurs, we throw an error.
