@@ -16,7 +16,16 @@ class FormTitle extends React.Component {
         <div className="div-title-form">{this.props.data.name}</div>
 
         <div className="div-trash-icon">
-          <FontAwesomeIcon icon="trash-alt" className="fa-s trash-icon" />
+          <button
+            type="button"
+            className="close button-delete-form"
+            aria-label="Close"
+            onClick={() =>
+              console.log(`Supprimer le formulaire "${this.props.data.name}"`)
+            }
+          >
+            <FontAwesomeIcon icon="trash-alt" className="fa-s trash-icon" />
+          </button>
         </div>
         <div className="div-answers-form">{0} Réponses</div>
 

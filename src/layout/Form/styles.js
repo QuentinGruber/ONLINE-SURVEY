@@ -85,18 +85,26 @@ body{
   }
 
   .div-title-form {
-    width: 100%;
+    width: 80%;
     text-align: center;
     font-size: 25px;
     color: black;
+    margin: auto;
   }
 
   .div-trash-icon {
     display: inline;
     position: absolute;
-    top: 5px;
+    top: 10px;
     right: 10px;
   }
+
+  .button-delete-form {
+    font-size: 1rem;
+  }
+
+
+
 
   .div-answers-form {
     display: inline;
