@@ -15,6 +15,7 @@ class RadioQuestion extends React.Component {
                 name={this.props.data.title}
                 defaultChecked
                 className="radio-type-radio"
+                required={this.props.data.required}
               />
               <label htmlFor={this.props.data.p_answer[i].id}>
                 {this.props.data.p_answer[i].text}
@@ -32,6 +33,7 @@ class RadioQuestion extends React.Component {
                 type="radio"
                 name={this.props.data.title}
                 className="radio-type-radio"
+                required={this.props.data.required}
               />
               <label
                 htmlFor={this.props.data.p_answer[i].id}

@@ -258,16 +258,34 @@ exports.modify_form = async function (req, res, connection) {
                     res.send("false");
                     connection.release();
                   }
-                  for (
-                    let j = 0;
-                    j < req.body.content[i].p_answer.length;
-                    j++
-                  ) {
+
+                  if (req.body.content[i].p_answer.length > 0) {
+                    for (
+                      let j = 0;
+                      j < req.body.content[i].p_answer.length;
+                      j++
+                    ) {
+                      connection.query(
+                        "INSERT INTO answers ( question_id, text , checked) VALUES ( '" +
+                          results.insertId +
+                          "', '" +
+                          req.body.content[i].p_answer[j].text +
+                          "','0');",
+                        function (sql_error, results, fields) {
+                          // If some error occurs, we throw an error.
+                          if (sql_error) {
+                            res.send("false");
+                            connection.release();
+                          }
+                        }
+                      );
+                    }
+                  } else {
                     connection.query(
                       "INSERT INTO answers ( question_id, text , checked) VALUES ( '" +
                         results.insertId +
                         "', '" +
-                        req.body.content[i].p_answer[j].text +
+                        req.body.content[i].p_answer +
                         "','0');",
                       function (sql_error, results, fields) {
                         // If some error occurs, we throw an error.
@@ -394,6 +412,45 @@ exports.get_form_content = async function (req, res, connection) {
   });
 };
 
+exports.HasAnswered = async function (req, res, connection) {
+  connection.getConnection(function (err, connection) {
+    if (!req.session.user_id) {
+      // if not connected
+      res.send(false);
+      connection.release();
+      return;
+    }
+    connection.query(
+      "SELECT * FROM forms where EXISTS (SELECT forms.id, answers_users.user_id FROM forms INNER JOIN answers_users ON forms.users_id=answers_users.user_id WHERE users_id = '" +
+        req.session.user_id +
+        "')",
+      function (sql_error, results, fields) {
+        // If some error occurs, we throw an error.
+        if (sql_error) {
+          res.send("false");
+          connection.release();
+        }
+
+        var FormID = req.path.substr(req.path.lastIndexOf("/") + 1); // get current form id
+        let HasAnswered = false;
+        results.forEach((element) => {
+          // if user has answered the form
+          if (element.id === parseInt(FormID)) {
+            HasAnswered = true;
+            res.send(true);
+            connection.release();
+          }
+        });
+        if (!HasAnswered) {
+          // if not
+          res.send(false);
+          connection.release();
+        }
+      }
+    );
+  });
+};
+
 exports.register_answer = async function (req, res, connection) {
   connection.getConnection(function (err, connection) {
     if (!req.session.user_id) {
@@ -405,8 +462,9 @@ exports.register_answer = async function (req, res, connection) {
     // Create form
     for (let i = 0; i < req.body.length; i++) {
       connection.query(
-        "INSERT INTO `answers_users` (`id`, `answers_id`, `question_id`, `text`, `user_id`) VALUES (NULL, " +
+        "INSERT INTO `answers_users` (`answers_id`, `question_id`, `text`, `user_id`) VALUES ('" +
           req.body[i].answerid +
+          "'" +
           ", '" +
           req.body[i].questionid +
           "', '" +
@@ -422,11 +480,11 @@ exports.register_answer = async function (req, res, connection) {
             res.send("false");
             connection.release();
           }
-          res.send(true);
-          connection.release();
         }
       );
     }
+    res.send(true);
+    connection.release();
   });
 };
 
