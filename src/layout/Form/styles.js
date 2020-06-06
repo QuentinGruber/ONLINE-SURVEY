@@ -18,6 +18,7 @@ body{
     height: 600px;
     top: -400px;
     background: rgba(255,255,255,0);
+    z-index: -100;
   }
   
   .whiteDiv:after {
