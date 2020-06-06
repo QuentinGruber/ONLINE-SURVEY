@@ -72,9 +72,9 @@ body{
 
 
   .form-list-card {
-    font-size: 16px;
+    font-size: 18px;
     position: absolute;
-    width: 35%;
+    width: 42.5%;
     min-height: 80%;
     left: 5%;
     top: 10%;
@@ -154,6 +154,32 @@ body{
     color: #32325d;
     text-decoration: underline;
   }
+
+
+  /* STATS */
+
+  .stats-card {
+    font-size: 18px;
+    position: absolute;
+    width: 42.5%;
+    min-height: 80%;
+    right: 5%;
+    top: 10%;
+  }
+
+  .placeholder-stats-div{
+    font-size: 24px;
+    position: absolute;
+    text-align: center;
+    color: #999;
+    width: 60%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+  }
+
+
+
 
 
   /* ON MOBILE */

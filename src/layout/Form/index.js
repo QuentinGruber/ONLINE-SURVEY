@@ -81,6 +81,12 @@ class Form extends React.Component {
               </div>
             </div>
             <Card className="form-list-card">{this.state.items}</Card>
+            <Card className="stats-card">
+              <div className="placeholder-stats-div">
+                Cliquez sur "Résultats et statistiques" pour consulter les
+                statistiques du formulaire
+              </div>
+            </Card>
           </>
         ) : (
           <>
