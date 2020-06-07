@@ -64,7 +64,6 @@ class FormItem extends React.Component {
             value={this.state.selectedOption}
             onChange={(e) => {
               this.handleChange();
-              this.props.item.p_answer = ""; // reset premade answer
               this.props.HandleQuestionTypeChange(this.props.index, e.value);
             }}
           />
