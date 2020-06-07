@@ -56,33 +56,48 @@ class FormApp extends React.Component {
       } else {
         // if this isn't a new question_list
         try {
-          for (let i = 0; i < this.ItemsToDelete.length; i++) {
-            await Axios({
-              method: "delete",
-              url: process.env.REACT_APP_API_URL + "/form_item/",
+            // Delete removed options from db
+            for (let i = 0; i < this.OptionsToDelete.length; i++) {
+              await Axios({
+                method: "delete",
+                url: process.env.REACT_APP_API_URL + "/question_option/",
+                withCredentials: true,
+                data: {
+                  FormID: this.FormID,
+                  id: this.OptionsToDelete[i],
+                },
+              });
+            }
+
+            // Delete removed questions from db
+            for (let i = 0; i < this.ItemsToDelete.length; i++) {
+              await Axios({
+                method: "delete",
+                url: process.env.REACT_APP_API_URL + "/form_item/",
+                withCredentials: true,
+                data: {
+                  FormID: this.FormID,
+                  id: this.ItemsToDelete[i],
+                },
+              });
+            }
+            let createList_promise = await Axios({
+              method: "put",
+              url: process.env.REACT_APP_API_URL + "/editform/",
               withCredentials: true,
               data: {
                 FormID: this.FormID,
-                id: this.ItemsToDelete[i],
+                title: this.state.FormName,
+                content: this.state.formitems,
               },
             });
+            if (createList_promise.data === true) {
+              alert("Form updated !");
+            }
+          } catch (e) {
+            console.error("Error while saving a form ! " + e);
           }
-          let createList_promise = await Axios({
-            method: "put",
-            url: process.env.REACT_APP_API_URL + "/editform/",
-            withCredentials: true,
-            data: {
-              FormID: this.FormID,
-              title: this.state.FormName,
-              content: this.state.formitems,
-            },
-          });
-          if (createList_promise.data === true) {
-            alert("Form updated !");
-          }
-        } catch (e) {
-          console.error("Error while saving a form ! " + e);
-        }
+          
       }
     } else {
       alert("A form need at least a name & one question to exist !");
