@@ -327,7 +327,7 @@ exports.modify_form = async function (req, res, connection) {
                             "'," +
                             "WHERE id=" +
                             "'" +
-                            req.body.content[i].id +
+                            req.body.content[i].p_answer[j].id +
                             "'" +
                             ";",
                           function (sql_error, results, fields) {
