@@ -52,6 +52,17 @@ class CheckboxAnswerList extends React.Component {
     );
   }
 
+  componentDidMount() {
+    let Answers = [];
+    for (let index = 0; index < this.props.answers.length; index++) {
+      let element = this.props.answers[index];
+      if (element.text !== "") {
+        Answers.push(element);
+      }
+    }
+    this.setState({ answers: Answers });
+  }
+
   render() {
     var items = [];
     for (var i = 0; i < this.state.answers.length; i++) {
