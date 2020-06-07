@@ -4,12 +4,12 @@ class CheckboxAnswer extends React.Component {
   render() {
     return (
       <>
-        <div className="radio-answer">
+        <div className="checkbox-answer">
           <input
             type="checkbox"
-            name={"Q_radio_" + this.props.index}
+            name={"Q_checkbox_" + this.props.index}
             disabled="disabled"
-            className="radio-type-radio"
+            className="checkbox-type-checkbox"
           ></input>
           <label
             className="radio-answer-input"

@@ -13,7 +13,7 @@ class CheckBoxQuestion extends React.Component {
                 id={this.props.data.p_answer[i].id}
                 type="checkbox"
                 name={this.props.data.title}
-                className="radio-type-radio"
+                className="checkbox-type-checkbox"
                 required={this.props.data.required}
               />
               <label
