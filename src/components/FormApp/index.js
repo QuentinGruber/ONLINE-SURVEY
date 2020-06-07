@@ -141,7 +141,10 @@ class FormApp extends React.Component {
       title: Item.newItemValue,
       required: false,
       type: "radio",
-      p_answer: "",
+      p_answer: [
+        { text: " ", checked: false },
+        { text: " ", checked: false },
+      ],
     });
     // update state
     this.setState({ formitems: formitems });
@@ -167,7 +170,7 @@ class FormApp extends React.Component {
     if (this.FormID === "new") {
       // if it's a new form
       formitems.push({
-        index: 1,
+        index: formitems.length + 1,
         title: "",
         required: false,
         type: "radio",
