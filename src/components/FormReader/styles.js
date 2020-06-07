@@ -203,7 +203,10 @@ export const GlobalStyle = createGlobalStyle`
       --s: .5;
     }
   }
-
+  
+  input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+  }
 
   .card-bottom {
     position: relative;
