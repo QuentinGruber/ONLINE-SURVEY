@@ -93,6 +93,7 @@ class FormItem extends React.Component {
                 return (
                   <RadioAnswerList
                     key={this.props.index}
+                    removeOption={this.props.removeOption}
                     HandlePremadeAnswerChange={
                       this.props.HandlePremadeAnswerChange
                     }
@@ -104,6 +105,7 @@ class FormItem extends React.Component {
                 return (
                   <CheckboxAnswerList
                     key={this.props.index}
+                    removeOption={this.props.removeOption}
                     HandlePremadeAnswerChange={
                       this.props.HandlePremadeAnswerChange
                     }

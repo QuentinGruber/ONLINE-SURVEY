@@ -22,8 +22,10 @@ class FormApp extends React.Component {
     this.ToogleRequireStateChange = this.ToogleRequireStateChange.bind(this);
     this.addItem = this.addItem.bind(this);
     this.removeItem = this.removeItem.bind(this);
+    this.removeOption = this.removeOption.bind(this);
     this.saveItem = this.saveItem.bind(this);
     this.ItemsToDelete = [];
+    this.OptionsToDelete = [];
     this.state = { formitems: formitems, mode: "all", FormName: "" };
   }
 
@@ -88,12 +90,14 @@ class FormApp extends React.Component {
   }
 
   HandlePremadeAnswerChange(idx, type, NewValue) {
-    // TODO: add type inside
     let temp_formitems = this.state.formitems;
     switch (type) {
       case "text":
         break;
       case "radio":
+        temp_formitems[idx].p_answer = NewValue;
+        break;
+      case "checkbox":
         temp_formitems[idx].p_answer = NewValue;
         break;
       default:
@@ -150,6 +154,11 @@ class FormApp extends React.Component {
     this.setState({ formitems: formitems });
   }
 
+  async removeOption(itemID) {
+    if (this.FormID !== "new") {
+      this.OptionsToDelete.push(itemID);
+    }
+  }
   async removeItem(itemIndex, itemID) {
     if (this.FormID !== "new") {
       this.ItemsToDelete.push(itemID);
@@ -241,6 +250,7 @@ class FormApp extends React.Component {
           />
           <QuestionList
             items={formitems}
+            removeOption={this.removeOption}
             ToogleRequireStateChange={this.ToogleRequireStateChange}
             removeItem={this.removeItem}
             handleChangeQuestionTitle={this.handleChangeQuestionTitle}
