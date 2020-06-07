@@ -17,6 +17,11 @@ class TextQuestion extends React.Component {
             placeholder="Réponse libre"
             autoComplete="off"
             required={this.props.data.required}
+            onKeyPress={(evt) => {
+              if (evt.which === 13) {
+                evt.preventDefault();
+              }
+            }}
           ></input>
         </div>
       </>
