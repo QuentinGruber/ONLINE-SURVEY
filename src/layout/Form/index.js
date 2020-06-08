@@ -9,7 +9,7 @@ import Axios from "axios";
 
 import MyFormItem from "./components/Myform_item";
 import { Card } from "reactstrap";
-import Form_result from "./components/form_result.js";
+import FormResult from "./components/FormResult.js";
 
 class Form extends React.Component {
   constructor(props) {
@@ -108,10 +108,10 @@ class Form extends React.Component {
               </div>
             </div>
             <Card className="form-list-card">{this.state.items}</Card>
-            {this.state.selected_item != undefined ? (
-              <Form_result form_data={"data"} />
+            {this.state.selected_item !== undefined ? (
+              <FormResult form_data={"data"} />
             ) : (
-              <Form_result form_data={undefined} />
+              <FormResult form_data={undefined} />
             )}
           </>
         ) : (
