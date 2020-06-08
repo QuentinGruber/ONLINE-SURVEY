@@ -163,6 +163,11 @@ class FormApp extends React.Component {
   async componentWillMount() {
     var pathArray = window.location.pathname.split("/");
     this.FormID = pathArray[2];
+
+    if (formitems.length != 0) {
+      formitems = [];
+    }
+
     if (this.FormID === "new") {
       // if it's a new form
       formitems.push({
