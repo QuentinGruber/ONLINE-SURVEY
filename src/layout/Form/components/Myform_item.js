@@ -22,11 +22,11 @@ class FormTitle extends React.Component {
   async componentDidMount() {
     let nb_answer_promise = await Axios({
       method: "get",
-      url: process.env.REACT_APP_API_URL + "/numberofanswer/",
+      url:
+        process.env.REACT_APP_API_URL + "/numberofanswer/" + this.props.data.id,
       withCredentials: true,
       data: { FormID: this.props.data.id },
     });
-    console.log(nb_answer_promise.data);
     this.setState({
       nb_answer: nb_answer_promise.data,
       FormID: this.props.data.id,

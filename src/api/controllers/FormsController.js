@@ -125,24 +125,23 @@ exports.create_new_form = async function (req, res, connection) {
 
 exports.get_number_of_answers = function (req, res, connection) {
   connection.getConnection(async function (err, connection) {
-    var auth_check = await Check_auth(req, connection);
+    let FormID = req.path.substr(req.path.lastIndexOf("/") + 1);
+    var auth_check = await Check_auth(req, connection, FormID);
 
     if (auth_check) {
-      /*
       connection.query(
-        "DELETE FROM forms WHERE `id` = " + req.body.FormID + " ;",
+        "SELECT distinct(answers_users.user_id) FROM `answers_users` JOIN `questions` ON answers_users.question_id=questions.id WHERE questions.forms_id = " +
+          FormID +
+          "",
         function (sql_error, results, fields) {
           if (sql_error) {
             res.send("false");
             connection.release();
           }
-          res.send("true");
+          res.send(JSON.stringify(results.length));
           connection.release();
         }
       );
-      */
-      res.send(4);
-      connection.release();
     } else {
       res.sendStatus(401); // Unauthorized
       connection.release();

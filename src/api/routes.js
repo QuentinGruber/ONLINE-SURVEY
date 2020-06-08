@@ -59,7 +59,7 @@ app.get("/islogin", function (req, res) {
 
 /* Return number of answers */
 
-app.get("/numberofanswer", function (req, res) {
+app.get("/numberofanswer/*", function (req, res) {
   FormsController.get_number_of_answers(req, res, connection);
 });
 
