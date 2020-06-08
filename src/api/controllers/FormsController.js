@@ -123,6 +123,33 @@ exports.create_new_form = async function (req, res, connection) {
   });
 };
 
+exports.get_number_of_answers = function (req, res, connection) {
+  connection.getConnection(async function (err, connection) {
+    var auth_check = await Check_auth(req, connection);
+
+    if (auth_check) {
+      /*
+      connection.query(
+        "DELETE FROM forms WHERE `id` = " + req.body.FormID + " ;",
+        function (sql_error, results, fields) {
+          if (sql_error) {
+            res.send("false");
+            connection.release();
+          }
+          res.send("true");
+          connection.release();
+        }
+      );
+      */
+      res.send(4);
+      connection.release();
+    } else {
+      res.sendStatus(401); // Unauthorized
+      connection.release();
+    }
+  });
+};
+
 async function Check_auth(req, connection) {
   return new Promise((resolve, reject) => {
     if (req.body.FormID !== undefined) {

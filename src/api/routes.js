@@ -57,6 +57,12 @@ app.get("/islogin", function (req, res) {
   else res.send(true);
 });
 
+/* Return number of answers */
+
+app.get("/numberofanswer", function (req, res) {
+  FormsController.get_number_of_answers(req, res, connection);
+});
+
 /* User form */
 
 app.get("/myform", function (req, res) {

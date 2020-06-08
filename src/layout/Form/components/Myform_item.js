@@ -14,6 +14,21 @@ import Axios from "axios";
 library.add(faShareAlt, faEdit, faChevronRight);
 
 class FormTitle extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { nb_answer: 0 };
+  }
+
+  async componentDidMount() {
+    let nb_answer_promise = await Axios({
+      method: "get",
+      url: process.env.REACT_APP_API_URL + "/numberofanswer/",
+      withCredentials: true,
+      data: { FormID: this.props.data.id },
+    });
+    console.log(nb_answer_promise.data);
+    this.setState({ nb_answer: nb_answer_promise.data });
+  }
   render() {
     new ClipboardJS(".div-share-form");
     return (
@@ -37,7 +52,9 @@ class FormTitle extends React.Component {
             <FontAwesomeIcon icon="trash-alt" className="fa-s trash-icon" />
           </button>
         </div>
-        <div className="div-answers-form">{0} Réponses - </div>
+        <div className="div-answers-form">
+          {this.state.nb_answer} Réponses -{" "}
+        </div>
         <div
           className="div-share-form"
           data-clipboard-text={this.props.FormLink}
