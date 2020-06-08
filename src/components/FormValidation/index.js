@@ -2,6 +2,7 @@ import React from "react";
 import Axios from "axios";
 import { Card, Button } from "reactstrap";
 import CheckImg from "../../../src/assets/img/icons/common/check.svg";
+import { Link } from "react-router-dom";
 class FormValidation extends React.Component {
   constructor(props) {
     super(props);
@@ -30,17 +31,16 @@ class FormValidation extends React.Component {
           {this.state.FormContent.title}".
         </div>
         <div className="box-btn-retour">
-          <Button
-            color="default"
-            outline
-            type="button"
-            className="btn-retour"
-            onClick={() => {
-              console.log("redirection vers /form mais je sais pas faire mdr");
-            }}
-          >
-            Retour
-          </Button>
+          <Link to="/form">
+            <Button
+              color="default"
+              outline
+              type="button"
+              className="btn-retour"
+            >
+              Retour
+            </Button>
+          </Link>
         </div>
       </Card>
     );
