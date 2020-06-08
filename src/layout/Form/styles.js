@@ -120,12 +120,30 @@ body{
 
   .form-list-card {
     font-size: 18px;
+    overflow-y: scroll;
     position: absolute;
     width: 42.5%;
-    min-height: 80%;
+    height: calc(80vh - 80px);
     left: 5%;
     top: 10%;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
   }
+
+  .add-form-card {
+    position: absolute;
+    width: 42.5%;
+    height: 80px;
+    top: calc(90vh - 80px);
+    left: 5%;
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+  }
+
+  .container-button-new-form {
+    margin:auto;
+  }
+
 
   .form-list-card-form {
     min-height: 150px;
