@@ -422,6 +422,30 @@ exports.modify_form = async function (req, res, connection) {
   });
 };
 
+exports.delete_form = function (req, res, connection) {
+  connection.getConnection(async function (err, connection) {
+    var auth_check = await Check_auth(req, connection);
+
+    if (auth_check) {
+      // Create form
+      connection.query(
+        "DELETE FROM forms WHERE `id` = " + req.body.FormID + " ;",
+        function (sql_error, results, fields) {
+          if (sql_error) {
+            res.send("false");
+            connection.release();
+          }
+          res.send("true");
+          connection.release();
+        }
+      );
+    } else {
+      res.sendStatus(401); // Unauthorized
+      connection.release();
+    }
+  });
+};
+
 exports.delete_item = function (req, res, connection) {
   connection.getConnection(async function (err, connection) {
     var auth_check = await Check_auth(req, connection);

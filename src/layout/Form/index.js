@@ -14,6 +14,7 @@ class Form extends React.Component {
   constructor(props) {
     super(props);
     this.state = { items: [] };
+    this.remove_form = this.remove_form.bind(this);
   }
   // Get layout's routes
   getRoutes = (routes) => {
@@ -43,6 +44,13 @@ class Form extends React.Component {
     }
     return "Brand";
   };
+
+  remove_form(idx) {
+    let temp_item = this.state.items;
+    temp_item.splice(idx, 1);
+    this.setState({ items: temp_item });
+  }
+
   async componentDidMount() {
     try {
       // create an entry in our db
@@ -57,6 +65,9 @@ class Form extends React.Component {
           items.push(
             <MyFormItem
               key={i}
+              idx={i}
+              remove_form={this.remove_form}
+              id={myform_list_promise.data[i].id}
               FormLink={
                 "https://www.online-survey.app/form/" +
                 myform_list_promise.data[i].id

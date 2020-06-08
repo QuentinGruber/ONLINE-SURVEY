@@ -57,13 +57,19 @@ app.get("/islogin", function (req, res) {
   else res.send(true);
 });
 
-/* User form*/
+/* User form */
 
 app.get("/myform", function (req, res) {
   FormsController.get_user_form_content(req, res, connection);
 });
 
-/* MODIFY FORM CONTENT */
+/* DELETE FORM */
+
+app.delete("/form/", function (req, res) {
+  FormsController.delete_form(req, res, connection);
+});
+
+/* DELETE FORMITEM CONTENT */
 
 app.delete("/form_item/", function (req, res) {
   FormsController.delete_item(req, res, connection);

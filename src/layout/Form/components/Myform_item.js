@@ -7,6 +7,7 @@ import { faShareAlt } from "@fortawesome/free-solid-svg-icons";
 import { faEdit } from "@fortawesome/free-solid-svg-icons";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import ClipboardJS from "clipboard";
+import Axios from "axios";
 
 library.add(faShareAlt, faEdit, faChevronRight);
 
@@ -22,9 +23,15 @@ class FormTitle extends React.Component {
             type="button"
             className="close button-delete-form"
             aria-label="Close"
-            onClick={() =>
-              console.log(`Supprimer le formulaire "${this.props.data.name}"`)
-            }
+            onClick={async () => {
+              await Axios({
+                method: "delete",
+                url: process.env.REACT_APP_API_URL + "/form/",
+                withCredentials: true,
+                data: { FormID: this.props.data.id },
+              });
+              this.props.remove_form(this.props.idx);
+            }}
           >
             <FontAwesomeIcon icon="trash-alt" className="fa-s trash-icon" />
           </button>
