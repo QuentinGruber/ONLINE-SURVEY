@@ -9,6 +9,7 @@ import Axios from "axios";
 
 import MyFormItem from "./components/Myform_item";
 import { Card } from "reactstrap";
+import Form_result from "./components/form_result.js";
 
 class Form extends React.Component {
   constructor(props) {
@@ -101,12 +102,7 @@ class Form extends React.Component {
               </div>
             </div>
             <Card className="form-list-card">{this.state.items}</Card>
-            <Card className="stats-card">
-              <div className="placeholder-stats-div">
-                Cliquez sur "Résultats et statistiques" pour consulter les
-                statistiques du formulaire
-              </div>
-            </Card>
+            <Form_result />
           </>
         ) : (
           <>
