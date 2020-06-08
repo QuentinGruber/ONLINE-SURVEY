@@ -150,37 +150,36 @@ exports.get_number_of_answers = function (req, res, connection) {
   });
 };
 
-async function Check_auth(req, connection) {
+async function Check_auth(req, connection, FormID) {
   return new Promise((resolve, reject) => {
-    if (req.body.FormID !== undefined) {
-      let FormID = req.body.FormID;
-    } else {
+    if (FormID == undefined) {
       resolve(false);
+    } else {
+      connection.query(
+        "SELECT * FROM `forms` WHERE id = " + FormID + "; ",
+        function (sql_error, results, fields) {
+          // If some error occurs, we throw an error.
+          if (sql_error) {
+            resolve(false);
+          }
+          let UserID;
+          if (req.session != undefined) {
+            UserID = req.session.user_id;
+          }
+          if (UserID != undefined && UserID === results[0].users_id) {
+            resolve(true);
+          } else {
+            resolve(false);
+          }
+        }
+      );
     }
-    connection.query(
-      "SELECT * FROM `forms` WHERE id = " + FormID + "; ",
-      function (sql_error, results, fields) {
-        // If some error occurs, we throw an error.
-        if (sql_error) {
-          resolve(false);
-        }
-        let UserID;
-        if (req.session != undefined) {
-          UserID = req.session.user_id;
-        }
-        if (UserID != undefined && UserID === results[0].users_id) {
-          resolve(true);
-        } else {
-          resolve(false);
-        }
-      }
-    );
   });
 }
 
 exports.modify_form = async function (req, res, connection) {
   connection.getConnection(async function (err, connection) {
-    var auth_check = await Check_auth(req, connection);
+    var auth_check = await Check_auth(req, connection, req.body.FormID);
 
     if (auth_check) {
       // updt form name
@@ -455,7 +454,7 @@ exports.modify_form = async function (req, res, connection) {
 
 exports.delete_form = function (req, res, connection) {
   connection.getConnection(async function (err, connection) {
-    var auth_check = await Check_auth(req, connection);
+    var auth_check = await Check_auth(req, connection, req.body.FormID);
 
     if (auth_check) {
       // Create form
@@ -479,7 +478,7 @@ exports.delete_form = function (req, res, connection) {
 
 exports.delete_item = function (req, res, connection) {
   connection.getConnection(async function (err, connection) {
-    var auth_check = await Check_auth(req, connection);
+    var auth_check = await Check_auth(req, connection, req.body.FormID);
 
     if (auth_check) {
       // Create form
