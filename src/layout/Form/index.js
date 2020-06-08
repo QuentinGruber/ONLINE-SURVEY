@@ -8,6 +8,7 @@ import { GlobalStyle } from "./styles";
 import Axios from "axios";
 
 import MyFormItem from "./components/Myform_item";
+import { Card } from "reactstrap";
 
 class Form extends React.Component {
   constructor(props) {
@@ -68,17 +69,35 @@ class Form extends React.Component {
     return (
       <>
         <GlobalStyle />
-        <div className="whiteDiv"></div>
-
-        <div className="boxText">
-          <div className="boxTextTitre">Online Survey</div>
-          <div className="boxTextSlogan">Your forms, made simple</div>
-        </div>
-
         <Switch>{this.getRoutes(routes)}</Switch>
         {document.location.href.substr(
           document.location.href.lastIndexOf("/")
-        ) === "/form" && <div>{this.state.items}</div>}
+        ) === "/form" ? (
+          <>
+            <div className="boxTextFormList">
+              <div className="boxTextTitreFormList">Online Survey</div>
+              <div className="boxTextSloganFormList">
+                Your forms, made simple
+              </div>
+            </div>
+            <Card className="form-list-card">{this.state.items}</Card>
+            <Card className="stats-card">
+              <div className="placeholder-stats-div">
+                Cliquez sur "Résultats et statistiques" pour consulter les
+                statistiques du formulaire
+              </div>
+            </Card>
+          </>
+        ) : (
+          <>
+            <div className="whiteDiv"></div>
+
+            <div className="boxText">
+              <div className="boxTextTitre">Online Survey</div>
+              <div className="boxTextSlogan">Your forms, made simple</div>
+            </div>
+          </>
+        )}
       </>
     );
   }
