@@ -532,9 +532,11 @@ exports.HasAnswered = async function (req, res, connection) {
       return;
     }
     connection.query(
-      "SELECT * FROM forms where EXISTS (SELECT forms.id, answers_users.user_id FROM forms INNER JOIN answers_users ON forms.users_id=answers_users.user_id WHERE users_id = '" +
+      "SELECT * FROM forms WHERE (users_id = " +
         req.session.user_id +
-        "')",
+        ") AND (EXISTS (SELECT forms.id, answers_users.user_id FROM forms INNER JOIN answers_users ON forms.users_id=answers_users.user_id WHERE users_id = " +
+        req.session.user_id +
+        "))",
       function (sql_error, results, fields) {
         // If some error occurs, we throw an error.
         if (sql_error) {
