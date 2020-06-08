@@ -6,11 +6,13 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import { faShareAlt } from "@fortawesome/free-solid-svg-icons";
 import { faEdit } from "@fortawesome/free-solid-svg-icons";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
+import ClipboardJS from "clipboard";
 
 library.add(faShareAlt, faEdit, faChevronRight);
 
 class FormTitle extends React.Component {
   render() {
+    new ClipboardJS(".div-share-form");
     return (
       <Card className="form-list-card-form">
         <div className="div-title-form">{this.props.data.name}</div>
@@ -29,12 +31,7 @@ class FormTitle extends React.Component {
         </div>
         <div className="div-answers-form">{0} Réponses - </div>
 
-        <div
-          className="div-share-form"
-          onClick={() =>
-            console.log(`Partager le formulaire "${this.props.data.name}"`)
-          }
-        >
+        <div className="div-share-form" data-clipboard-text="basic">
           Partager
           <FontAwesomeIcon icon="share-alt" className="fa-s share-icon" />
         </div>
