@@ -1,6 +1,8 @@
 import React from "react";
 import { Card } from "reactstrap";
 
+import { Link } from "react-router-dom";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faShareAlt } from "@fortawesome/free-solid-svg-icons";
@@ -17,7 +19,6 @@ class FormTitle extends React.Component {
     return (
       <Card className="form-list-card-form">
         <div className="div-title-form">{this.props.data.name}</div>
-
         <div className="div-trash-icon">
           <button
             type="button"
@@ -37,7 +38,6 @@ class FormTitle extends React.Component {
           </button>
         </div>
         <div className="div-answers-form">{0} Réponses - </div>
-
         <div
           className="div-share-form"
           data-clipboard-text={this.props.FormLink}
@@ -45,17 +45,13 @@ class FormTitle extends React.Component {
           Partager
           <FontAwesomeIcon icon="share-alt" className="fa-s share-icon" />
         </div>
-
-        <div
+        <Link
+          to={"form/" + this.props.data.id + "/edit"}
           className="div-edit-form"
-          onClick={() =>
-            console.log(`Éditer le formulaire "${this.props.data.name}"`)
-          }
         >
           <FontAwesomeIcon icon="edit" className="fa-s edit-icon" />
           Éditer le formulaire
-        </div>
-
+        </Link>
         <div
           className="div-stats-form"
           onClick={() =>
