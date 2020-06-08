@@ -532,11 +532,9 @@ exports.HasAnswered = async function (req, res, connection) {
       return;
     }
     connection.query(
-      "SELECT * FROM forms WHERE (users_id = " +
+      "SELECT distinct(questions.forms_id) FROM answers_users JOIN questions ON answers_users.question_id=questions.id WHERE answers_users.user_id = " +
         req.session.user_id +
-        ") AND (EXISTS (SELECT forms.id, answers_users.user_id FROM forms INNER JOIN answers_users ON forms.users_id=answers_users.user_id WHERE users_id = " +
-        req.session.user_id +
-        "))",
+        "",
       function (sql_error, results, fields) {
         // If some error occurs, we throw an error.
         if (sql_error) {
@@ -548,7 +546,7 @@ exports.HasAnswered = async function (req, res, connection) {
         let HasAnswered = false;
         results.forEach((element) => {
           // if user has answered the form
-          if (element.id === parseInt(FormID)) {
+          if (element.forms_id === parseInt(FormID)) {
             HasAnswered = true;
             res.send(true);
             connection.release();
