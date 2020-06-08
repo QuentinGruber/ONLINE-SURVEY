@@ -68,6 +68,34 @@ body{
   }
 
 
+  /* ANSWERS SAVED */
+
+  .card-form-saved {
+    min-width: 500px !important;
+    min-height: 80% !important;
+    width: 50% !important;
+    position: absolute !important;
+    margin-bottom: 50px;
+    top: 10% !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    padding: 20px;
+    border-radius: 5px;
+  }
+
+  .check-aswered {
+    position:absolute;
+    height: 50%;
+    width: 50%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .div-form-saved {
+
+  }
+
+
   /* FORM LIST */
 
 
