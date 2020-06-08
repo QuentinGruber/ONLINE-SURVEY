@@ -71,14 +71,14 @@ body{
   /* ANSWERS SAVED */
 
   .card-form-saved {
-    min-width: 500px !important;
-    min-height: 80% !important;
-    width: 50% !important;
-    position: absolute !important;
+    min-width: 500px;
+    min-height: 80%;
+    width: 50%;
+    position: absolute;
     margin-bottom: 50px;
-    top: 10% !important;
-    left: 50% !important;
-    transform: translateX(-50%) !important;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
     padding: 20px;
     border-radius: 5px;
   }
@@ -89,10 +89,17 @@ body{
     width: 50%;
     left: 50%;
     transform: translateX(-50%);
+    top: 10%;
   }
 
   .div-form-saved {
-
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 70%;
+    font-size: 22px;
   }
 
 
@@ -235,9 +242,27 @@ body{
       font-size: 32px;
     }
 
-    /* FORM LIST */
 
+    /* ON MOBILE */
+  
 
   }
+  @media screen and (max-width: 600px) {
 
+
+    /* ANSWERS SAVED */
+
+    .card-form-saved {
+      min-width: 300px !important;
+      width: 95% !important;
+      top: 90px !important;
+      transform: translate(-50%, 0) !important;
+      margin-bottom: 15px;
+      padding: 10px;
+    }
+
+
+    /* FORM LIST */
+
+    }
 `;
