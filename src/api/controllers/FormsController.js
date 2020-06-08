@@ -123,33 +123,62 @@ exports.create_new_form = async function (req, res, connection) {
   });
 };
 
-async function Check_auth(req, connection) {
+exports.get_number_of_answers = function (req, res, connection) {
+  connection.getConnection(async function (err, connection) {
+    let FormID = req.path.substr(req.path.lastIndexOf("/") + 1);
+    var auth_check = await Check_auth(req, connection, FormID);
+
+    if (auth_check) {
+      connection.query(
+        "SELECT distinct(answers_users.user_id) FROM `answers_users` JOIN `questions` ON answers_users.question_id=questions.id WHERE questions.forms_id = " +
+          FormID +
+          "",
+        function (sql_error, results, fields) {
+          if (sql_error) {
+            res.send("false");
+            connection.release();
+          }
+          res.send(JSON.stringify(results.length));
+          connection.release();
+        }
+      );
+    } else {
+      res.sendStatus(401); // Unauthorized
+      connection.release();
+    }
+  });
+};
+
+async function Check_auth(req, connection, FormID) {
   return new Promise((resolve, reject) => {
-    let FormID = req.body.FormID;
-    connection.query(
-      "SELECT * FROM `forms` WHERE id = " + FormID + "; ",
-      function (sql_error, results, fields) {
-        // If some error occurs, we throw an error.
-        if (sql_error) {
-          resolve(false);
+    if (FormID == undefined) {
+      resolve(false);
+    } else {
+      connection.query(
+        "SELECT * FROM `forms` WHERE id = " + FormID + "; ",
+        function (sql_error, results, fields) {
+          // If some error occurs, we throw an error.
+          if (sql_error) {
+            resolve(false);
+          }
+          let UserID;
+          if (req.session != undefined) {
+            UserID = req.session.user_id;
+          }
+          if (UserID != undefined && UserID === results[0].users_id) {
+            resolve(true);
+          } else {
+            resolve(false);
+          }
         }
-        let UserID;
-        if (req.session != undefined) {
-          UserID = req.session.user_id;
-        }
-        if (UserID != undefined && UserID === results[0].users_id) {
-          resolve(true);
-        } else {
-          resolve(false);
-        }
-      }
-    );
+      );
+    }
   });
 }
 
 exports.modify_form = async function (req, res, connection) {
   connection.getConnection(async function (err, connection) {
-    var auth_check = await Check_auth(req, connection);
+    var auth_check = await Check_auth(req, connection, req.body.FormID);
 
     if (auth_check) {
       // updt form name
@@ -422,9 +451,33 @@ exports.modify_form = async function (req, res, connection) {
   });
 };
 
+exports.delete_form = function (req, res, connection) {
+  connection.getConnection(async function (err, connection) {
+    var auth_check = await Check_auth(req, connection, req.body.FormID);
+
+    if (auth_check) {
+      // Create form
+      connection.query(
+        "DELETE FROM forms WHERE `id` = " + req.body.FormID + " ;",
+        function (sql_error, results, fields) {
+          if (sql_error) {
+            res.send("false");
+            connection.release();
+          }
+          res.send("true");
+          connection.release();
+        }
+      );
+    } else {
+      res.sendStatus(401); // Unauthorized
+      connection.release();
+    }
+  });
+};
+
 exports.delete_item = function (req, res, connection) {
   connection.getConnection(async function (err, connection) {
-    var auth_check = await Check_auth(req, connection);
+    var auth_check = await Check_auth(req, connection, req.body.FormID);
 
     if (auth_check) {
       // Create form

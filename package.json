@@ -16,6 +16,7 @@
     "axios": "^0.19.2",
     "bootstrap": "^4.5.0",
     "bootstrap-select": "^1.13.17",
+    "clipboard": "^2.0.6",
     "cors": "^2.8.5",
     "db-migrate": "^0.11.6",
     "db-migrate-mysql": "^2.1.1",

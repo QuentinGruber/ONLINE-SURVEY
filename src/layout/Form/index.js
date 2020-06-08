@@ -9,11 +9,14 @@ import Axios from "axios";
 
 import MyFormItem from "./components/Myform_item";
 import { Card } from "reactstrap";
+import FormResult from "./components/FormResult.js";
 
 class Form extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { items: [] };
+    this.state = { items: [], selected_item: undefined };
+    this.remove_form = this.remove_form.bind(this);
+    this.updt_selected_form_card = this.updt_selected_form_card.bind(this);
   }
   // Get layout's routes
   getRoutes = (routes) => {
@@ -43,6 +46,17 @@ class Form extends React.Component {
     }
     return "Brand";
   };
+
+  remove_form(idx) {
+    let temp_item = this.state.items;
+    temp_item.splice(idx, 1);
+    this.setState({ items: temp_item });
+  }
+
+  updt_selected_form_card(NewItem) {
+    this.setState({ selected_item: NewItem });
+  }
+
   async componentDidMount() {
     try {
       // create an entry in our db
@@ -54,7 +68,20 @@ class Form extends React.Component {
       if (myform_list_promise.data !== false) {
         let items = [];
         for (let i = 0; i < myform_list_promise.data.length; i++) {
-          items.push(<MyFormItem key={i} data={myform_list_promise.data[i]} />);
+          items.push(
+            <MyFormItem
+              key={i}
+              idx={i}
+              updt_selected_form_card={this.updt_selected_form_card}
+              remove_form={this.remove_form}
+              id={myform_list_promise.data[i].id}
+              FormLink={
+                "https://www.online-survey.app/form/" +
+                myform_list_promise.data[i].id
+              }
+              data={myform_list_promise.data[i]}
+            />
+          );
         }
         this.setState({ items: items });
       } else {
@@ -81,12 +108,11 @@ class Form extends React.Component {
               </div>
             </div>
             <Card className="form-list-card">{this.state.items}</Card>
-            <Card className="stats-card">
-              <div className="placeholder-stats-div">
-                Cliquez sur "Résultats et statistiques" pour consulter les
-                statistiques du formulaire
-              </div>
-            </Card>
+            {this.state.selected_item !== undefined ? (
+              <FormResult form_data={"data"} />
+            ) : (
+              <FormResult form_data={undefined} />
+            )}
           </>
         ) : (
           <>
