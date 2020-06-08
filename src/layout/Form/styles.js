@@ -102,6 +102,18 @@ body{
     font-size: 22px;
   }
 
+  .box-btn-retour {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 33%;
+    text-align: center;
+    bottom: 20px;
+  }
+  
+  .btn-retour {
+    width: 100%;
+  }
 
   /* FORM LIST */
 
@@ -261,6 +273,11 @@ body{
       padding: 10px;
     }
 
+    .check-aswered {
+      height: 70%;
+      width: 70%;
+      top: 0;
+    }
 
     /* FORM LIST */
 

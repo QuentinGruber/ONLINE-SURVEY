@@ -1,6 +1,6 @@
 import React from "react";
 import Axios from "axios";
-import { Card } from "reactstrap";
+import { Card, Button } from "reactstrap";
 import CheckImg from "../../../src/assets/img/icons/common/check.svg";
 class FormValidation extends React.Component {
   constructor(props) {
@@ -28,6 +28,19 @@ class FormValidation extends React.Component {
         <div className="div-form-saved">
           Nous avons enregistré votre réponse au formulaire "
           {this.state.FormContent.title}".
+        </div>
+        <div className="box-btn-retour">
+          <Button
+            color="default"
+            outline
+            type="button"
+            className="btn-retour"
+            onClick={() => {
+              console.log("redirection vers /form mais je sais pas faire mdr");
+            }}
+          >
+            Retour
+          </Button>
         </div>
       </Card>
     );
