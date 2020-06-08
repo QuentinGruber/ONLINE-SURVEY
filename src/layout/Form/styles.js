@@ -68,6 +68,53 @@ body{
   }
 
 
+  /* ANSWERS SAVED */
+
+  .card-form-saved {
+    min-width: 500px;
+    min-height: 80%;
+    width: 50%;
+    position: absolute;
+    margin-bottom: 50px;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 20px;
+    border-radius: 5px;
+  }
+
+  .check-aswered {
+    position:absolute;
+    height: 50%;
+    width: 50%;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 10%;
+  }
+
+  .div-form-saved {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 70%;
+    font-size: 22px;
+  }
+
+  .box-btn-retour {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 33%;
+    text-align: center;
+    bottom: 20px;
+  }
+  
+  .btn-retour {
+    width: 100%;
+  }
+
   /* FORM LIST */
 
 
@@ -207,9 +254,32 @@ body{
       font-size: 32px;
     }
 
-    /* FORM LIST */
 
+    /* ON MOBILE */
+  
 
   }
+  @media screen and (max-width: 600px) {
 
+
+    /* ANSWERS SAVED */
+
+    .card-form-saved {
+      min-width: 300px !important;
+      width: 95% !important;
+      top: 90px !important;
+      transform: translate(-50%, 0) !important;
+      margin-bottom: 15px;
+      padding: 10px;
+    }
+
+    .check-aswered {
+      height: 70%;
+      width: 70%;
+      top: 0;
+    }
+
+    /* FORM LIST */
+
+    }
 `;

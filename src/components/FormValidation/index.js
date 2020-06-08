@@ -1,6 +1,8 @@
 import React from "react";
 import Axios from "axios";
-
+import { Card, Button } from "reactstrap";
+import CheckImg from "../../../src/assets/img/icons/common/check.svg";
+import { Link } from "react-router-dom";
 class FormValidation extends React.Component {
   constructor(props) {
     super(props);
@@ -18,7 +20,29 @@ class FormValidation extends React.Component {
 
   render() {
     return (
-      <h2>You've already respond to form "{this.state.FormContent.title}" </h2>
+      <Card className="card-form-saved">
+        <img
+          className="check-aswered"
+          src={CheckImg}
+          alt='Icône "validé"'
+        ></img>
+        <div className="div-form-saved">
+          Nous avons enregistré votre réponse au formulaire "
+          {this.state.FormContent.title}".
+        </div>
+        <div className="box-btn-retour">
+          <Link to="/form">
+            <Button
+              color="default"
+              outline
+              type="button"
+              className="btn-retour"
+            >
+              Retour
+            </Button>
+          </Link>
+        </div>
+      </Card>
     );
   }
 }
