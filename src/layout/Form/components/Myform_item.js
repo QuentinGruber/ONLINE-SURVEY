@@ -31,7 +31,10 @@ class FormTitle extends React.Component {
         </div>
         <div className="div-answers-form">{0} Réponses - </div>
 
-        <div className="div-share-form" data-clipboard-text="basic">
+        <div
+          className="div-share-form"
+          data-clipboard-text={this.props.FormLink}
+        >
           Partager
           <FontAwesomeIcon icon="share-alt" className="fa-s share-icon" />
         </div>
