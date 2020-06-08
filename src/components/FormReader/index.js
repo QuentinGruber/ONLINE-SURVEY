@@ -70,7 +70,7 @@ class FormReader extends React.Component {
       data: inputs_data,
     });
     if (SendAnswer_promise.data) {
-      alert("Succesfully send answers");
+      this.setState({ HasAnswered: true });
     } else {
       alert("Something went wrong , your maybe disconnected ?");
     }
