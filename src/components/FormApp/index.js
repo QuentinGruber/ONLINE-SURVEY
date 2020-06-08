@@ -164,7 +164,7 @@ class FormApp extends React.Component {
     var pathArray = window.location.pathname.split("/");
     this.FormID = pathArray[2];
 
-    if (formitems.length != 0) {
+    if (formitems.length !== 0) {
       formitems = [];
     }
 
