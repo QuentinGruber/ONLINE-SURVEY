@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Link } from "react-router-dom";
 
 import routes from "../../routes.js";
 
@@ -8,7 +8,7 @@ import { GlobalStyle } from "./styles";
 import Axios from "axios";
 
 import MyFormItem from "./components/Myform_item";
-import { Card } from "reactstrap";
+import { Card, Button } from "reactstrap";
 import FormResult from "./components/FormResult.js";
 
 class Form extends React.Component {
@@ -108,6 +108,21 @@ class Form extends React.Component {
               </div>
             </div>
             <Card className="form-list-card">{this.state.items}</Card>
+            <Card className="add-form-card">
+              <div className="container-button-new-form">
+                <Link to="/form/new">
+                  <Button
+                    color="default"
+                    outline
+                    type="button"
+                    className="button-new-form"
+                  >
+                    Nouveau formulaire
+                  </Button>
+                </Link>
+              </div>
+            </Card>
+
             {this.state.selected_item !== undefined ? (
               <FormResult form_data={"data"} />
             ) : (
