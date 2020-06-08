@@ -14,8 +14,9 @@ import Form_result from "./components/form_result.js";
 class Form extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { items: [] };
+    this.state = { items: [], selected_item: undefined };
     this.remove_form = this.remove_form.bind(this);
+    this.updt_selected_form_card = this.updt_selected_form_card.bind(this);
   }
   // Get layout's routes
   getRoutes = (routes) => {
@@ -52,6 +53,10 @@ class Form extends React.Component {
     this.setState({ items: temp_item });
   }
 
+  updt_selected_form_card(NewItem) {
+    this.setState({ selected_item: NewItem });
+  }
+
   async componentDidMount() {
     try {
       // create an entry in our db
@@ -67,6 +72,7 @@ class Form extends React.Component {
             <MyFormItem
               key={i}
               idx={i}
+              updt_selected_form_card={this.updt_selected_form_card}
               remove_form={this.remove_form}
               id={myform_list_promise.data[i].id}
               FormLink={
@@ -102,7 +108,11 @@ class Form extends React.Component {
               </div>
             </div>
             <Card className="form-list-card">{this.state.items}</Card>
-            <Form_result />
+            {this.state.selected_item != undefined ? (
+              <Form_result form_data={"data"} />
+            ) : (
+              <Form_result form_data={undefined} />
+            )}
           </>
         ) : (
           <>

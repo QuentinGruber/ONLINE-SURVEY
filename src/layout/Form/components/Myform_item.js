@@ -16,7 +16,7 @@ library.add(faShareAlt, faEdit, faChevronRight);
 class FormTitle extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { nb_answer: 0 };
+    this.state = { nb_answer: 0, FormID: undefined };
   }
 
   async componentDidMount() {
@@ -27,7 +27,10 @@ class FormTitle extends React.Component {
       data: { FormID: this.props.data.id },
     });
     console.log(nb_answer_promise.data);
-    this.setState({ nb_answer: nb_answer_promise.data });
+    this.setState({
+      nb_answer: nb_answer_promise.data,
+      FormID: this.props.data.id,
+    });
   }
   render() {
     new ClipboardJS(".div-share-form");
@@ -71,11 +74,9 @@ class FormTitle extends React.Component {
         </Link>
         <div
           className="div-stats-form"
-          onClick={() =>
-            console.log(
-              `Consulter les statistiques du formulaire "${this.props.data.name}"`
-            )
-          }
+          onClick={() => {
+            this.props.updt_selected_form_card("FormData here");
+          }}
         >
           Résultats et statistiques
           <FontAwesomeIcon icon="chevron-right" className="fa-xl stats-icon" />
