@@ -144,6 +144,12 @@ body{
     margin:auto;
   }
 
+  .button-new-form {
+    
+    font-size: 16px;
+  }
+
+
 
   .form-list-card-form {
     min-height: 150px;
@@ -192,6 +198,7 @@ body{
     position: absolute;
     bottom: 10px;
     left: 10px;
+    color: inherit;
     cursor: pointer;
   }
 
