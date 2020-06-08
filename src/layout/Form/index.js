@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Link } from "react-router-dom";
 
 import routes from "../../routes.js";
 
@@ -110,19 +110,16 @@ class Form extends React.Component {
             <Card className="form-list-card">{this.state.items}</Card>
             <Card className="add-form-card">
               <div className="container-button-new-form">
-                <Button
-                  color="default"
-                  outline
-                  type="button"
-                  className="button-new-form"
-                  onClick={() => {
-                    console.log(
-                      "redirection vers /form/new jsais tjrs pas faire dsl"
-                    );
-                  }}
-                >
-                  Nouveau formulaire
-                </Button>
+                <Link to="/form/new">
+                  <Button
+                    color="default"
+                    outline
+                    type="button"
+                    className="button-new-form"
+                  >
+                    Nouveau formulaire
+                  </Button>
+                </Link>
               </div>
             </Card>
 

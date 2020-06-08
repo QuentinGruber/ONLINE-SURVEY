@@ -4,13 +4,18 @@ export const GlobalStyle = createGlobalStyle`
 
 /* BACKGROUND */
 
-body{
+  body{
     background: url(${backgroundImage}) no-repeat center center fixed; 
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
   }
+
+  a {
+    color: inherit;
+  }
+
 
   .whiteDiv {
     position: fixed;
@@ -198,7 +203,6 @@ body{
     position: absolute;
     bottom: 10px;
     left: 10px;
-    color: inherit;
     cursor: pointer;
   }
 
