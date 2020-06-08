@@ -125,7 +125,11 @@ exports.create_new_form = async function (req, res, connection) {
 
 async function Check_auth(req, connection) {
   return new Promise((resolve, reject) => {
-    let FormID = req.body.FormID;
+    if (req.body.FormID !== undefined) {
+      let FormID = req.body.FormID;
+    } else {
+      resolve(false);
+    }
     connection.query(
       "SELECT * FROM `forms` WHERE id = " + FormID + "; ",
       function (sql_error, results, fields) {
