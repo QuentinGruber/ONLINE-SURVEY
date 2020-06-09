@@ -490,7 +490,7 @@ exports.delete_item = function (req, res, connection) {
 
 exports.delete_option = function (req, res, connection) {
   connection.getConnection(async function (err, connection) {
-    var auth_check = await Check_auth(req, connection);
+    var auth_check = await Check_auth(req, connection, req.body.FormID);
 
     if (auth_check) {
       // Create form
