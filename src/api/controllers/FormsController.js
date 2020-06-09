@@ -40,11 +40,11 @@ exports.create_new_form = async function (req, res, connection) {
 
               if (req.body.content[i].type === "text") {
                 connection.query(
-                  "INSERT INTO answers ( question_id, text , checked) VALUES ( '" +
+                  "INSERT INTO answers ( question_id, text) VALUES ( '" +
                     results.insertId +
                     "', '" +
                     req.body.content[i].p_answer +
-                    "','1');",
+                    "');",
                   function (sql_error, results, fields) {
                     // If some error occurs, we throw an error.
                     if (sql_error) {
@@ -57,11 +57,11 @@ exports.create_new_form = async function (req, res, connection) {
 
               if (req.body.content[i].type === "number") {
                 connection.query(
-                  "INSERT INTO answers ( question_id, text , checked) VALUES ( '" +
+                  "INSERT INTO answers ( question_id, text ) VALUES ( '" +
                     results.insertId +
                     "', '" +
                     req.body.content[i].p_answer +
-                    "','1');",
+                    "');",
                   function (sql_error, results, fields) {
                     // If some error occurs, we throw an error.
                     if (sql_error) {
@@ -75,12 +75,10 @@ exports.create_new_form = async function (req, res, connection) {
               if (req.body.content[i].type === "radio") {
                 for (let j = 0; j < req.body.content[i].p_answer.length; j++) {
                   connection.query(
-                    "INSERT INTO answers ( question_id, text , checked) VALUES ( '" +
+                    "INSERT INTO answers ( question_id, text) VALUES ( '" +
                       results.insertId +
                       "', '" +
                       req.body.content[i].p_answer[j].text +
-                      "','" +
-                      (req.body.content[i].p_answer[j].checked | 0) +
                       "');",
                     function (sql_error, results, fields) {
                       // If some error occurs, we throw an error.
@@ -96,12 +94,11 @@ exports.create_new_form = async function (req, res, connection) {
               if (req.body.content[i].type === "checkbox") {
                 for (let j = 0; j < req.body.content[i].p_answer.length; j++) {
                   connection.query(
-                    "INSERT INTO answers ( question_id, text , checked) VALUES ( '" +
+                    "INSERT INTO answers ( question_id, text) VALUES ( '" +
                       results.insertId +
                       "', '" +
                       req.body.content[i].p_answer[j].text +
                       "','" +
-                      (req.body.content[i].p_answer[j].checked | 0) +
                       "');",
                     function (sql_error, results, fields) {
                       // If some error occurs, we throw an error.
@@ -281,10 +278,6 @@ exports.modify_form = async function (req, res, connection) {
                             "'" +
                             req.body.content[i].p_answer[j].text +
                             "'," +
-                            "checked=" +
-                            "'" +
-                            (req.body.content[i].p_answer[j].checked | 0) +
-                            "'" +
                             "WHERE id=" +
                             "'" +
                             req.body.content[i].id +
@@ -302,11 +295,11 @@ exports.modify_form = async function (req, res, connection) {
                       // if answers isn't already in the db
                       else {
                         connection.query(
-                          "INSERT INTO answers ( question_id, text , checked) VALUES ( '" +
+                          "INSERT INTO answers ( question_id, text) VALUES ( '" +
                             req.body.content[i].id +
                             "', '" +
                             req.body.content[i].p_answer[j].text +
-                            "','1');",
+                            "');",
                           function (sql_error, results, fields) {
                             // If some error occurs, we throw an error.
                             if (sql_error) {
@@ -332,10 +325,6 @@ exports.modify_form = async function (req, res, connection) {
                             "'" +
                             req.body.content[i].p_answer[j].text +
                             "'," +
-                            "checked=" +
-                            "'" +
-                            (req.body.content[i].p_answer[j].checked | 0) +
-                            "'" +
                             "WHERE id=" +
                             "'" +
                             req.body.content[i].id +
@@ -353,11 +342,11 @@ exports.modify_form = async function (req, res, connection) {
                       // if answers isn't already in the db
                       else {
                         connection.query(
-                          "INSERT INTO answers ( question_id, text , checked) VALUES ( '" +
+                          "INSERT INTO answers ( question_id, text) VALUES ( '" +
                             req.body.content[i].id +
                             "', '" +
                             req.body.content[i].p_answer[j].text +
-                            "','1');",
+                            "');",
                           function (sql_error, results, fields) {
                             // If some error occurs, we throw an error.
                             if (sql_error) {
@@ -406,11 +395,11 @@ exports.modify_form = async function (req, res, connection) {
                       j++
                     ) {
                       connection.query(
-                        "INSERT INTO answers ( question_id, text , checked) VALUES ( '" +
+                        "INSERT INTO answers ( question_id, text) VALUES ( '" +
                           results.insertId +
                           "', '" +
                           req.body.content[i].p_answer[j].text +
-                          "','0');",
+                          "');",
                         function (sql_error, results, fields) {
                           // If some error occurs, we throw an error.
                           if (sql_error) {
@@ -422,11 +411,11 @@ exports.modify_form = async function (req, res, connection) {
                     }
                   } else {
                     connection.query(
-                      "INSERT INTO answers ( question_id, text , checked) VALUES ( '" +
+                      "INSERT INTO answers ( question_id, text) VALUES ( '" +
                         results.insertId +
                         "', '" +
                         req.body.content[i].p_answer +
-                        "','0');",
+                        "');",
                       function (sql_error, results, fields) {
                         // If some error occurs, we throw an error.
                         if (sql_error) {
@@ -559,7 +548,6 @@ exports.get_form_content = async function (req, res, connection) {
                     Formcontent.content[i].p_answer.push({
                       id: results[j].id,
                       text: results[j].text,
-                      checked: results[j].checked,
                     });
                   }
                   if (i + 1 == nb_questions) {
