@@ -55,22 +55,25 @@ class FormTitle extends React.Component {
             <FontAwesomeIcon icon="trash-alt" className="fa-s trash-icon" />
           </button>
         </div>
-        <div className="div-answers-form">
-          {this.state.nb_answer} Réponses -{" "}
-        </div>
-        <div
-          className="div-share-form"
-          data-clipboard-text={this.props.FormLink}
-        >
-          Partager
-          <FontAwesomeIcon icon="share-alt" className="fa-s share-icon" />
+        <div className="div-answers-share">
+          <div className="div-answers-form">
+            {this.state.nb_answer} Réponses -{" "}
+          </div>
+          <div
+            className="div-share-form"
+            data-clipboard-text={this.props.FormLink}
+          >
+            Partager
+            <FontAwesomeIcon icon="share-alt" className="fa-s share-icon" />
+          </div>
         </div>
         <Link
           to={"form/" + this.props.data.id + "/edit"}
           className="div-edit-form"
         >
-          <FontAwesomeIcon icon="edit" className="fa-s edit-icon" />
+          <FontAwesomeIcon icon="edit" className="fa-s edit-icon icon-gauche" />
           Éditer le formulaire
+          <FontAwesomeIcon icon="edit" className="fa-s edit-icon icon-droite" />
         </Link>
         <div
           className="div-stats-form"
