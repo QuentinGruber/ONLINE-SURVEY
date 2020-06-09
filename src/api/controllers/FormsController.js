@@ -193,7 +193,7 @@ exports.get_question_answers = function (req, res, connection) {
     let QuestionID = req.path.substr(req.path.lastIndexOf("/") + 1);
 
     connection.query(
-      "SELECT * FROM `answers_users` JOIN `questions` ON answers_users.question_id=questions.id WHERE answers_users.question_id = " +
+      "SELECT answers_users.text FROM `answers_users` JOIN `questions` ON answers_users.question_id=questions.id WHERE answers_users.question_id = " +
         QuestionID +
         " ;",
       function (sql_error, results, fields) {

@@ -55,10 +55,14 @@ class FormTitle extends React.Component {
           withCredentials: true,
         });
 
+        let answers = [];
+        answers_promise.data.forEach((element) => {
+          answers.push(element.text);
+        });
         stats.push({
           type: question_info_promise.data.type,
           name: question_info_promise.data.text,
-          answers: ["1", "2"], //answers_promise.data[0]
+          answers: answers,
         });
         item_processed++;
         if (item_processed == question_list_promise.data.length) {
