@@ -5,9 +5,9 @@ class Legal extends React.Component {
     return (
       <div style={{ margin: "10%" }}>
         {/*L'html s'écrit ici*/}
-        <a href id="presentation">
+        <div id="presentation">
           <h2>I. Présentation du site internet. </h2>{" "}
-        </a>
+        </div>
         <br /> <br />
         En vertu de l'<i>
           article 6 de la loi n° 2004-575 du 21 juin 2004
@@ -34,12 +34,12 @@ class Legal extends React.Component {
         280120@supinfo.com
         <br />
         <br />
-        <a href id="cgu">
+        <div id="cgu">
           <h2>
             II. Conditions générales d’utilisation du site et des services
             proposés.
           </h2>
-        </a>
+        </div>
         Le Site constitue une œuvre de l’esprit protégée par les dispositions du
         Code de la Propriété Intellectuelle et des Réglementations
         Internationales applicables. Le Client ne peut en aucune manière
@@ -66,9 +66,9 @@ class Legal extends React.Component {
         possible afin d’en prendre connaissance.
         <br />
         <br />
-        <a href id="services">
+        <div id="services">
           <h2>III. Description des services fournis.</h2>
-        </a>
+        </div>
         Le site internet{" "}
         <a href="https://www.online-survey.app">
           https://www.online-survey.app
@@ -121,9 +121,9 @@ class Legal extends React.Component {
         matériel informatique et de téléphonie liée notamment à l’encombrement
         du réseau empêchant l’accès au serveur.
         <br />
-        <a href id="intellectual_property">
+        <div id="intellectual_property">
           <h2>V. Propriété intellectuelle et contrefaçons.</h2>
-        </a>
+        </div>
         Online Survey est propriétaire des droits de propriété intellectuelle et
         détient les droits d’usage sur tous les éléments accessibles sur le site
         internet, notamment les textes, images, graphismes, logos, vidéos,
@@ -136,16 +136,16 @@ class Legal extends React.Component {
         poursuivie conformément aux dispositions des <i>articles L.335-2</i> et
         suivants du Code de Propriété Intellectuelle.
         <br />
-        <a href id="responsabilities">
+        <div id="responsabilities">
           <h2>VI. Limitations de responsabilité.</h2>
-        </a>
+        </div>
         BigBrother agit en tant qu’éditeur du site et est responsable de la
         qualité et de la véracité du contenu qu’il publie. BigBrother ne pourra
         être tenu responsable des dommages directs et indirects causés au
         matériel de l’utilisateur, lors de l’accès au site internet{" "}
-        <a href="https://www.online-survey.app">
+        <div href="https://www.online-survey.app">
           https://www.online-survey.app
-        </a>
+        </div>
         , et résultant soit de l’utilisation d’un matériel ne répondant pas aux
         spécifications indiquées au point 4, soit de l’apparition d’un bug ou
         d’une incompatibilité. BigBrother ne pourra également être tenu
@@ -163,17 +163,17 @@ class Legal extends React.Component {
         support utilisé (texte, photographie …).
         <br />
         <br />
-        <a href id="data_gestion">
+        <div id="data_gestion">
           <h2>VII. Gestion des données personnelles.</h2>
-        </a>
+        </div>
         Le Client est informé des réglementations concernant la communication
         marketing, la loi du 21 Juin 2014 pour la confiance dans l’Economie
         Numérique, la Loi Informatique et Liberté du 06 Août 2004 ainsi que du
         Règlement Général sur la Protection des Données (RGPD : n° 2016-679).
         <br />
-        <a href id="data_collection">
+        <div id="data_collection">
           <h2>VII-1 Responsables de la collecte des données personnelles</h2>
-        </a>
+        </div>
         Pour les Données Personnelles collectées dans le cadre de la création du
         compte personnel de l’Utilisateur et de sa navigation sur le Site, le
         responsable du traitement des Données Personnelles est : BigBrother.
@@ -191,9 +191,9 @@ class Legal extends React.Component {
         Survey les traite.
         <br />
         <br />
-        <a href id="data_use">
+        <div id="data_use">
           <h2>IV-2 Finalité des données collectées</h2>
-        </a>
+        </div>
         Online Survey est susceptible de traiter tout ou partie des données : •
         Pour permettre la navigation sur le Site et la gestion et la traçabilité
         des prestations et services commandés par l’utilisateur : données de
@@ -210,9 +210,9 @@ class Legal extends React.Component {
         ne commercialise pas vos données personnelles qui sont donc uniquement
         utilisées par nécessité ou à des fins statistiques et d’analyses.
         <br />
-        <a href id="access">
+        <div id="access">
           <h2>VII-3 Droit d’accès, de rectification et d’opposition</h2>
-        </a>
+        </div>
         Conformément à la réglementation européenne en vigueur, les Utilisateurs
         de Online Survey disposent des droits suivants : • Droit d'accès (
         <i>article 15 RGPD</i>) et de rectification (<i>article 16 RGPD</i>), de
@@ -255,9 +255,9 @@ class Legal extends React.Component {
         autorités de contrôle, et notamment de la CNIL
         (https://www.cnil.fr/fr/plaintes).
         <br />
-        <a href id="privacy">
+        <div id="privacy">
           <h2>VII-4 Non-communication des données personnelles. </h2>
-        </a>
+        </div>
         Online Survey s’interdit de traiter, héberger ou transférer les
         Informations collectées sur ses Clients vers un pays situé en dehors de
         l’Union européenne ou reconnu comme « non adéquat » par la Commission
@@ -286,9 +286,9 @@ class Legal extends React.Component {
         Utilisateurs de Online Survey sont principalement les agents de notre
         service client.
         <br />
-        <a href id="types_data">
+        <div id="types_data">
           <h2>VII-5 Types de données collectées</h2>
-        </a>
+        </div>
         Concernant les utilisateurs du site Online Survey, nous collectons les
         données suivantes qui sont indispensables au fonctionnement du service,
         et qui seront conservées pendant une période maximale de 9 mois après la
@@ -298,9 +298,9 @@ class Legal extends React.Component {
         Ces données sont conservées pour une période maximale de 1 mois après la
         fin de la relation contractuelle
         <br />
-        <a href id="incidents">
+        <div id="incidents">
           <h2>VIII. Notification d’incident</h2>
-        </a>
+        </div>
         Quels que soient les efforts fournis, aucune méthode de transmission sur
         Internet et aucune méthode de stockage électronique n'est complètement
         sûre. Nous ne pouvons en conséquence pas garantir une sécurité absolue.
@@ -331,11 +331,11 @@ class Legal extends React.Component {
         utilisation détournée, accès non autorisé, divulgation, altération ou
         destruction.
         <br />
-        <a href id="hypertext">
+        <div id="hypertext">
           <h2>
             IX-1. Liens hypertextes « cookies » et balises (“tags”) internet
           </h2>
-        </a>
+        </div>
         Le site{" "}
         <a href="https://www.online-survey.app">
           https://www.online-survey.app
@@ -351,9 +351,9 @@ class Legal extends React.Component {
         empêcher l’accessibilité à tout ou partie des Services proposés par le
         site.
         <br />
-        <a href id="cookies">
+        <div id="cookies">
           <h2>IX-2. « COOKIES »</h2>
-        </a>
+        </div>
         Un « cookie » est un petit fichier d’information envoyé sur le
         navigateur de l’Utilisateur et enregistré au sein du terminal de
         l’Utilisateur (ex : ordinateur, smartphone), (ci-après « Cookies »). Ce
@@ -423,9 +423,9 @@ class Legal extends React.Component {
         . À tout moment, l’Utilisateur peut néanmoins revenir sur son
         consentement à ce que Online Survey dépose ce type de cookies.
         <br />
-        <a href id="tags">
+        <div id="tags">
           <h2>XI-3. BALISES (“TAGS”) INTERNET</h2>
-        </a>
+        </div>
         Online Survey peut employer occasionnellement des balises Internet
         (également appelées « tags », ou balises d’action, GIF à un pixel, GIF
         transparents, GIF invisibles et GIF un à un) et les déployer par
@@ -444,9 +444,9 @@ class Legal extends React.Component {
         BigBrother, et fournir d’autres services relatifs à l’utilisation de
         celui-ci et d’Internet.
         <br />
-        <a href id="application">
+        <div id="application">
           <h2>X. Droit applicable et attribution de juridiction.</h2>
-        </a>
+        </div>
         Tout litige en relation avec l’utilisation du site{" "}
         <a href="https://www.online-survey.app">
           https://www.online-survey.app

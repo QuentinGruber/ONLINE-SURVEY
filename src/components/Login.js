@@ -25,19 +25,14 @@ class Login extends React.Component {
       // get our input values
       var username = document.getElementById("Login_name").value;
       var password = document.getElementById("Login_pass").value;
-      var Keep_logged = document.getElementById("check_login").checked;
+      // var Keep_logged = document.getElementById("check_login").checked;
       var xhttp = new XMLHttpRequest();
       xhttp.onreadystatechange = function () {
         // handle request response
         if (this.readyState === 4 && this.status === 200) {
           if (this.responseText !== "false") {
-            if (Keep_logged) {
-              alert("Logged in !");
-              document.location.href = "/form";
-            } else {
-              alert("Logged in !");
-              document.location.href = "/form";
-            }
+            alert("Logged in !");
+            document.location.href = "/form";
           } else {
             alert("Wrong username/password !");
           }
