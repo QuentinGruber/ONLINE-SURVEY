@@ -6,36 +6,40 @@ export default class Polar extends Component {
 
   componentDidMount() {
     const myChartRef = this.chartRef.current.getContext("2d");
+    var randomHexColor = require("random-hex-color");
+    let color_array = [];
+    let label_array = [];
+    let data_array = [];
+    var count = require("count-array-values");
+    let data = count(this.props.data);
+    data.forEach((element) => {
+      color_array.push(randomHexColor());
+      label_array.push("entrée " + element.value);
+      data_array.push(element.count);
+    });
 
     new Chart(myChartRef, {
       type: "polarArea",
       data: {
         //Bring in data
-        labels: [
-          "Asia",
-          "Africa",
-          "Europe",
-          "South America",
-          "North America",
-          "Oceania",
-        ],
+        labels: label_array,
         datasets: [
           {
-            label: this.props.datalabel,
-            data: [
-              this.props.data.Asia,
-              this.props.data.Africa,
-              this.props.data.Europe,
-              this.props.data.South_America,
-              this.props.data.North_America,
-              this.props.data.Oceania,
-            ],
-            backgroundColor: this.props.color,
+            data: data_array,
+            backgroundColor: color_array,
           },
         ],
       },
       options: {
-        //Customize chart options
+        scales: {
+          yAxes: [
+            {
+              ticks: {
+                beginAtZero: true,
+              },
+            },
+          ],
+        },
       },
     });
   }

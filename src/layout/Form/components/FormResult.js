@@ -1,6 +1,6 @@
 import React from "react";
 import { Card } from "reactstrap";
-import Piechart from "../../../components/ChartComponents/PieChart";
+import Polar from "../../../components/ChartComponents/Polar";
 class form_result extends React.Component {
   render() {
     if (true) {
@@ -8,7 +8,7 @@ class form_result extends React.Component {
       return (
         <Card className="stats-card">
           <div className="placeholder-stats-div">{this.props.form_data}</div>
-          <Piechart data={[1, 5, 3, 4, 6, 4, 5, 2]} />
+          <Polar data={["1", "5", "5", "3", "4", "6", "4", "5", "2"]} />
         </Card>
       );
     } else {
