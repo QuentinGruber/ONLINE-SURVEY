@@ -9,7 +9,7 @@ class RadioAnswerList extends React.Component {
       this.state = { answers: this.props.answers };
     } else {
       this.state = {
-        answers: [{ checked: false }, { checked: false }],
+        answers: [{ text: "" }, { text: "" }],
       };
     }
     this.AddRadioButton = this.AddRadioButton.bind(this);
@@ -32,7 +32,7 @@ class RadioAnswerList extends React.Component {
 
   AddRadioButton() {
     let temp_answers = this.state.answers;
-    temp_answers.push({ text: "new", checked: false });
+    temp_answers.push({ text: "new" });
     this.setState({ answers: temp_answers });
     this.props.HandlePremadeAnswerChange(
       this.props.index,
@@ -58,7 +58,6 @@ class RadioAnswerList extends React.Component {
       items.push({
         id: i,
         value: this.state.answers[i].text,
-        checked: this.state.answers[i].checked,
       });
     }
     return (
@@ -69,7 +68,6 @@ class RadioAnswerList extends React.Component {
             key={RadioAnswerItem.id}
             index={this.props.index}
             value={RadioAnswerItem.value}
-            checked={RadioAnswerItem.checked}
             RemoveRadioButton={this.RemoveRadioButton}
             HandleRadioTextChange={this.HandleRadioTextChange}
           />
