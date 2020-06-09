@@ -3,6 +3,7 @@ import { Card } from "reactstrap";
 import Piechart from "../../../components/ChartComponents/PieChart";
 import Barchart from "../../../components/ChartComponents/BarChart";
 import Doughnut from "../../../components/ChartComponents/Doughnut";
+import List from "../../../components/ChartComponents/List";
 class form_result extends React.Component {
   render() {
     if (true) {
@@ -10,9 +11,9 @@ class form_result extends React.Component {
       return (
         <Card className="stats-card">
           <div className="placeholder-stats-div">{this.props.form_data}</div>
-          {/*<Piechart data={["1", "5", "3", "4", "6", "4", "5", "2"]/>*/} >
+          {/*<Piechart data={["1", "5", "3", "4", "6", "4", "5", "2"]/>*/}
           {/*<Barchart data={["1", "5", "3", "4", "6", "4", "5", "2"]>*/}
-          <Doughnut data={["1", "5", "3", "4", "6", "4", "5", "2"]} />
+          <List data={["1", "5", "3", "4", "6", "4", "5", "2"]} />
         </Card>
       );
     } else {

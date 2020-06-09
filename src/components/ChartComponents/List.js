@@ -10,16 +10,20 @@ export default class List extends Component {
     let color_array = [];
     let label_array = [];
     let data_array = [];
+    let list_item = [];
     var count = require("count-array-values");
     let data = count(this.props.data);
+
     data.forEach((element) => {
       color_array.push(randomHexColor());
       label_array.push("Nombre d'entrées " + element.value);
       data_array.push(element.count);
+
+      list_item.push(
+        <li>{element.value + " qui a été appeletos : " + element.count}</li>
+      );
     });
 
-    let list_item = [];
-    list_item.push(<p>pd</p>);
     this.setState({ list_item: list_item });
   }
   render() {
