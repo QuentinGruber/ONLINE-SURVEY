@@ -20,7 +20,12 @@ export default class List extends Component {
       data_array.push(element.count);
 
       list_item.push(
-        <li>{element.value + " qui a été appeletos : " + element.count}</li>
+        <>
+          <div>
+            <dt>{element.value} : </dt> <dd>{element.count} réponse(s).</dd>{" "}
+            <br />
+          </div>
+        </>
       );
     });
 
