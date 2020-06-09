@@ -31,6 +31,41 @@ class FormTitle extends React.Component {
       nb_answer: nb_answer_promise.data,
     });
   }
+
+  async send_stats() {
+    let question_list_promise = await Axios({
+      method: "get",
+      url: process.env.REACT_APP_API_URL + "/question_list/",
+      withCredentials: true,
+    });
+    let stats = [];
+    question_list_promise.forEach((question) => {
+      let question_info_promise = await Axios({
+        method: "get",
+        url: process.env.REACT_APP_API_URL + "/question_info/" + question.id,
+        withCredentials: true,
+      });
+  
+      let answers_promise = await Axios({
+        method: "get",
+        url: process.env.REACT_APP_API_URL + "/question_answers/" + question.id,
+        withCredentials: true,
+      });
+
+
+      stats.push({
+        type: question_info_promise.data.type,
+        name: question_info_promise.data.name,
+        answers: answers_promise.data,
+      });
+    });
+
+    this.props.updt_selected_form_card([
+      { type: "numbers", name: "pipi", answers: ["1", "4", "1"] },
+      { type: "text", name: "caca", answers: ["1", "4", "1"] },
+    ]);
+  }
+
   render() {
     new ClipboardJS(".div-share-form");
     return (
@@ -74,10 +109,7 @@ class FormTitle extends React.Component {
         <div
           className="div-stats-form"
           onClick={() => {
-            this.props.updt_selected_form_card([
-              { type: "numbers", name: "pipi", answers: ["1", "4", "1"] },
-              { type: "text", name: "caca", answers: ["1", "4", "1"] },
-            ]);
+            this.send_stats();
           }}
         >
           Résultats et statistiques
