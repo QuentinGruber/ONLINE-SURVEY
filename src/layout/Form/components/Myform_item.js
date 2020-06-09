@@ -75,7 +75,10 @@ class FormTitle extends React.Component {
         <div
           className="div-stats-form"
           onClick={() => {
-            this.props.updt_selected_form_card("FormData here");
+            this.props.updt_selected_form_card([
+              { type: "numbers", name: "pipi", answers: ["1", "4", "1"] },
+              { type: "text", name: "caca", answers: ["1", "4", "1"] },
+            ]);
           }}
         >
           Résultats et statistiques
