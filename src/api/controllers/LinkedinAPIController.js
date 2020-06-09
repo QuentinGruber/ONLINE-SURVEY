@@ -1,5 +1,4 @@
 var jwt = require("jsonwebtoken");
-var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 const Axios = require("axios");
 
 async function RetrieveUserInfo(access_token, req, res) {

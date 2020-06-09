@@ -5,7 +5,7 @@ class QuestionList extends React.Component {
     // display all items
     var items = this.props.items.map((item, index) => {
       return (
-        <div className="no-transition" id="question">
+        <div key={index} className="no-transition" id="question">
           <FormItem
             key={index}
             item={item}
