@@ -22,8 +22,10 @@ class FormApp extends React.Component {
     this.ToogleRequireStateChange = this.ToogleRequireStateChange.bind(this);
     this.addItem = this.addItem.bind(this);
     this.removeItem = this.removeItem.bind(this);
+    this.removeOption = this.removeOption.bind(this);
     this.saveItem = this.saveItem.bind(this);
     this.ItemsToDelete = [];
+    this.OptionsToDelete = [];
     this.state = { formitems: formitems, mode: "all", FormName: "" };
   }
 
@@ -54,6 +56,20 @@ class FormApp extends React.Component {
       } else {
         // if this isn't a new question_list
         try {
+          // Delete removed options from db
+          for (let i = 0; i < this.OptionsToDelete.length; i++) {
+            await Axios({
+              method: "delete",
+              url: process.env.REACT_APP_API_URL + "/question_option/",
+              withCredentials: true,
+              data: {
+                FormID: this.FormID,
+                id: this.OptionsToDelete[i],
+              },
+            });
+          }
+
+          // Delete removed questions from db
           for (let i = 0; i < this.ItemsToDelete.length; i++) {
             await Axios({
               method: "delete",
@@ -88,12 +104,14 @@ class FormApp extends React.Component {
   }
 
   HandlePremadeAnswerChange(idx, type, NewValue) {
-    // TODO: add type inside
     let temp_formitems = this.state.formitems;
     switch (type) {
       case "text":
         break;
       case "radio":
+        temp_formitems[idx].p_answer = NewValue;
+        break;
+      case "checkbox":
         temp_formitems[idx].p_answer = NewValue;
         break;
       default:
@@ -141,12 +159,20 @@ class FormApp extends React.Component {
       title: Item.newItemValue,
       required: false,
       type: "radio",
-      p_answer: "",
+      p_answer: [
+        { text: " ", checked: false },
+        { text: " ", checked: false },
+      ],
     });
     // update state
     this.setState({ formitems: formitems });
   }
 
+  async removeOption(itemID) {
+    if (this.FormID !== "new") {
+      this.OptionsToDelete.push(itemID);
+    }
+  }
   async removeItem(itemIndex, itemID) {
     if (this.FormID !== "new") {
       this.ItemsToDelete.push(itemID);
@@ -167,11 +193,14 @@ class FormApp extends React.Component {
     if (this.FormID === "new") {
       // if it's a new form
       formitems.push({
-        index: 1,
+        index: formitems.length + 1,
         title: "",
         required: false,
         type: "radio",
-        p_answer: "",
+        p_answer: [
+          { text: " ", checked: false },
+          { text: " ", checked: false },
+        ],
       });
       this.setState({ formitems: formitems });
     } else {
@@ -235,6 +264,7 @@ class FormApp extends React.Component {
           />
           <QuestionList
             items={formitems}
+            removeOption={this.removeOption}
             ToogleRequireStateChange={this.ToogleRequireStateChange}
             removeItem={this.removeItem}
             handleChangeQuestionTitle={this.handleChangeQuestionTitle}

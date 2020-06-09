@@ -386,10 +386,10 @@ exports.modify_form = async function (req, res, connection) {
                             "text=" +
                             "'" +
                             req.body.content[i].p_answer[j].text +
-                            "'," +
+                            "'" +
                             "WHERE id=" +
                             "'" +
-                            req.body.content[i].id +
+                            req.body.content[i].p_answer[j].id +
                             "'" +
                             ";",
                           function (sql_error, results, fields) {
@@ -549,6 +549,31 @@ exports.delete_item = function (req, res, connection) {
     }
   });
 };
+
+exports.delete_option = function (req, res, connection) {
+  connection.getConnection(async function (err, connection) {
+    var auth_check = await Check_auth(req, connection, req.body.FormID);
+
+    if (auth_check) {
+      // Create form
+      connection.query(
+        "DELETE FROM answers WHERE answers.id = " + req.body.id + " ;",
+        function (sql_error, results, fields) {
+          if (sql_error) {
+            res.send("false");
+            connection.release();
+          }
+          res.send("true");
+          connection.release();
+        }
+      );
+    } else {
+      res.sendStatus(401); // Unauthorized
+      connection.release();
+    }
+  });
+};
+
 exports.get_form_content = async function (req, res, connection) {
   var Formcontent = { title: "", content: [] };
   var FormID = req.path.substr(req.path.lastIndexOf("/") + 1);

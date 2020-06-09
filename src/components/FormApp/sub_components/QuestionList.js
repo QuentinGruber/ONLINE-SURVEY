@@ -10,6 +10,7 @@ class QuestionList extends React.Component {
             key={index}
             item={item}
             index={index}
+            removeOption={this.props.removeOption}
             removeItem={this.props.removeItem}
             ToogleRequireStateChange={this.props.ToogleRequireStateChange}
             handleChangeQuestionTitle={this.props.handleChangeQuestionTitle}

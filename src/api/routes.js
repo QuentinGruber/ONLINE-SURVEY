@@ -93,7 +93,10 @@ app.delete("/form/", function (req, res) {
   FormsController.delete_form(req, res, connection);
 });
 
-/* DELETE FORMITEM CONTENT */
+/* DELETE A QUESTION */
+app.delete("/question_option/", function (req, res) {
+  FormsController.delete_option(req, res, connection);
+});
 
 app.delete("/form_item/", function (req, res) {
   FormsController.delete_item(req, res, connection);

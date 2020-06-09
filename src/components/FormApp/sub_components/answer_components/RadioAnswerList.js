@@ -17,6 +17,17 @@ class RadioAnswerList extends React.Component {
     this.HandleRadioTextChange = this.HandleRadioTextChange.bind(this);
   }
 
+  componentDidMount() {
+    let Answers = [];
+    for (let index = 0; index < this.props.answers.length; index++) {
+      let element = this.props.answers[index];
+      if (element.text !== "") {
+        Answers.push(element);
+      }
+    }
+    this.setState({ answers: Answers });
+  }
+
   HandleRadioTextChange(id, NewText) {
     let temp_answers = this.state.answers;
     temp_answers[id].text = NewText;
@@ -43,6 +54,7 @@ class RadioAnswerList extends React.Component {
 
   RemoveRadioButton(id) {
     let temp_answers = this.state.answers;
+    this.props.removeOption(temp_answers[id].id);
     temp_answers.splice(id, 1);
     this.setState({ answers: temp_answers });
     this.props.HandlePremadeAnswerChange(

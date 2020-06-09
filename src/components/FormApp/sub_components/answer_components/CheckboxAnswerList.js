@@ -32,7 +32,7 @@ class CheckboxAnswerList extends React.Component {
 
   AddRadioButton() {
     let temp_answers = this.state.answers;
-    temp_answers.push({ text: "new" });
+    temp_answers.push({ text: "" });
     this.setState({ answers: temp_answers });
     this.props.HandlePremadeAnswerChange(
       this.props.index,
@@ -43,6 +43,7 @@ class CheckboxAnswerList extends React.Component {
 
   RemoveRadioButton(id) {
     let temp_answers = this.state.answers;
+    this.props.removeOption(temp_answers[id].id);
     temp_answers.splice(id, 1);
     this.setState({ answers: temp_answers });
     this.props.HandlePremadeAnswerChange(
@@ -50,6 +51,17 @@ class CheckboxAnswerList extends React.Component {
       "radio",
       this.state.answers
     );
+  }
+
+  componentDidMount() {
+    let Answers = [];
+    for (let index = 0; index < this.props.answers.length; index++) {
+      let element = this.props.answers[index];
+      if (element.text !== "") {
+        Answers.push(element);
+      }
+    }
+    this.setState({ answers: Answers });
   }
 
   render() {
