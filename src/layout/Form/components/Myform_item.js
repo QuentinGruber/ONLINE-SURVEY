@@ -33,37 +33,41 @@ class FormTitle extends React.Component {
   }
 
   async send_stats() {
-    let question_list_promise = await Axios({
-      method: "get",
-      url: process.env.REACT_APP_API_URL + "/question_list/",
-      withCredentials: true,
-    });
-    let stats = [];
-    question_list_promise.forEach((question) => {
-      let question_info_promise = await Axios({
+    try {
+      let question_list_promise = await Axios({
         method: "get",
-        url: process.env.REACT_APP_API_URL + "/question_info/" + question.id,
+        url: process.env.REACT_APP_API_URL + "/question_list/" + this.props.id,
         withCredentials: true,
       });
-  
-      let answers_promise = await Axios({
-        method: "get",
-        url: process.env.REACT_APP_API_URL + "/question_answers/" + question.id,
-        withCredentials: true,
+      let stats = [];
+      question_list_promise.data.forEach(async (question) => {
+        let question_info_promise = await Axios({
+          method: "get",
+          url: process.env.REACT_APP_API_URL + "/question_info/" + question.id,
+          withCredentials: true,
+        });
+
+        let answers_promise = await Axios({
+          method: "get",
+          url:
+            process.env.REACT_APP_API_URL + "/question_answers/" + question.id,
+          withCredentials: true,
+        });
+
+        stats.push({
+          type: question_info_promise.data.type,
+          name: question_info_promise.data.text,
+          answers: answers_promise.data,
+        });
+        console.log(stats);
       });
-
-
-      stats.push({
-        type: question_info_promise.data.type,
-        name: question_info_promise.data.name,
-        answers: answers_promise.data,
-      });
-    });
-
-    this.props.updt_selected_form_card([
-      { type: "numbers", name: "pipi", answers: ["1", "4", "1"] },
-      { type: "text", name: "caca", answers: ["1", "4", "1"] },
-    ]);
+      this.props.updt_selected_form_card([
+        { type: "numbers", name: "pipi", answers: ["1", "4", "1"] },
+        { type: "text", name: "caca", answers: ["1", "4", "1"] },
+      ]);
+    } catch (e) {
+      console.error(e);
+    }
   }
 
   render() {

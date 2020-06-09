@@ -153,15 +153,13 @@ exports.get_question_list = function (req, res, connection) {
 
     if (auth_check) {
       connection.query(
-        "SELECT distinct(answers_users.user_id) FROM `answers_users` JOIN `questions` ON answers_users.question_id=questions.id WHERE questions.forms_id = " +
-          FormID +
-          "",
+        "SELECT * FROM questions WHERE forms_id=" + FormID + ";",
         function (sql_error, results, fields) {
           if (sql_error) {
             res.send("false");
             connection.release();
           }
-          res.send(JSON.stringify(results.length));
+          res.send(results);
           connection.release();
         }
       );
@@ -174,53 +172,39 @@ exports.get_question_list = function (req, res, connection) {
 
 exports.get_question_info = function (req, res, connection) {
   connection.getConnection(async function (err, connection) {
-    let FormID = req.path.substr(req.path.lastIndexOf("/") + 1);
-    var auth_check = await Check_auth(req, connection, FormID);
+    let QuestionID = req.path.substr(req.path.lastIndexOf("/") + 1);
 
-    if (auth_check) {
-      connection.query(
-        "SELECT distinct(answers_users.user_id) FROM `answers_users` JOIN `questions` ON answers_users.question_id=questions.id WHERE questions.forms_id = " +
-          FormID +
-          "",
-        function (sql_error, results, fields) {
-          if (sql_error) {
-            res.send("false");
-            connection.release();
-          }
-          res.send(JSON.stringify(results.length));
+    connection.query(
+      "SELECT * FROM questions WHERE id= " + QuestionID + "",
+      function (sql_error, results, fields) {
+        if (sql_error) {
+          res.send("false");
           connection.release();
         }
-      );
-    } else {
-      res.sendStatus(401); // Unauthorized
-      connection.release();
-    }
+        res.send(results[0]);
+        connection.release();
+      }
+    );
   });
 };
 
 exports.get_question_answers = function (req, res, connection) {
   connection.getConnection(async function (err, connection) {
-    let FormID = req.path.substr(req.path.lastIndexOf("/") + 1);
-    var auth_check = await Check_auth(req, connection, FormID);
+    let QuestionID = req.path.substr(req.path.lastIndexOf("/") + 1);
 
-    if (auth_check) {
-      connection.query(
-        "SELECT distinct(answers_users.user_id) FROM `answers_users` JOIN `questions` ON answers_users.question_id=questions.id WHERE questions.forms_id = " +
-          FormID +
-          "",
-        function (sql_error, results, fields) {
-          if (sql_error) {
-            res.send("false");
-            connection.release();
-          }
-          res.send(JSON.stringify(results.length));
+    connection.query(
+      "SELECT * FROM `answers_users` JOIN `questions` ON answers_users.question_id=questions.id WHERE answers_users.question_id = " +
+        QuestionID +
+        " ;",
+      function (sql_error, results, fields) {
+        if (sql_error) {
+          res.send("false");
           connection.release();
         }
-      );
-    } else {
-      res.sendStatus(401); // Unauthorized
-      connection.release();
-    }
+        res.send(results);
+        connection.release();
+      }
+    );
   });
 };
 
