@@ -13,8 +13,6 @@ var Promise;
  */
 exports.setup = function (options, seedLink) {
   dbm = options.dbmigrate;
-  type = dbm.dataType;
-  seed = seedLink;
   Promise = options.Promise;
 };
 
