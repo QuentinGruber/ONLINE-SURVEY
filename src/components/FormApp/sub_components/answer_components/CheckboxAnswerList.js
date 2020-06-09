@@ -32,7 +32,7 @@ class CheckboxAnswerList extends React.Component {
 
   AddRadioButton() {
     let temp_answers = this.state.answers;
-    temp_answers.push({ text: "new" });
+    temp_answers.push({ text: "" });
     this.setState({ answers: temp_answers });
     this.props.HandlePremadeAnswerChange(
       this.props.index,

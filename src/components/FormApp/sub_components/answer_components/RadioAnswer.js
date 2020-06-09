@@ -33,9 +33,7 @@ class RadioAnswer extends React.Component {
               text = text.replace(/(?:\r\n|\r|\n)/g, " ");
               document.execCommand("insertText", false, text);
             }}
-          >
-            {this.props.value}
-          </label>
+          ></label>
           <div
             className="remove-option"
             onClick={() => {
