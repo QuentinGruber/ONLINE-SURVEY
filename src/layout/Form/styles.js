@@ -125,7 +125,7 @@ export const GlobalStyle = createGlobalStyle`
 
   .form-list-card {
     font-size: 18px;
-    overflow-y: scroll;
+    overflow-y: auto;
     position: absolute;
     width: 42.5%;
     height: calc(80vh - 80px);
@@ -155,10 +155,7 @@ export const GlobalStyle = createGlobalStyle`
     font-size: 16px;
   }
 
-
-
   .form-list-card-form {
-    min-height: 150px;
     display:inline-block;
     padding: 10px;
     margin: 15px;
@@ -179,6 +176,10 @@ export const GlobalStyle = createGlobalStyle`
 
   .button-delete-form {
     font-size: 1rem;
+  }
+
+  .div-answers-share {
+    margin-bottom: 50px;
   }
 
   .div-answers-form {
@@ -209,8 +210,16 @@ export const GlobalStyle = createGlobalStyle`
 
   .edit-icon {
     margin-right : 5px;
+    margin-left: 0;
   }
-  
+
+  .icon-gauche {
+    display: inline
+  }
+  .icon-droite {
+    display: none
+  }
+
   .div-edit-form:hover {
     color: #32325d;
     text-decoration: underline;
@@ -260,7 +269,7 @@ export const GlobalStyle = createGlobalStyle`
 
 
 
-  /* ON MOBILE */
+  /* ON SMALL SCREENS */
   
   @media screen and (max-width: 1200px) {
   
@@ -288,12 +297,15 @@ export const GlobalStyle = createGlobalStyle`
     /* FORM LIST */
 
     .form-list-card {
+      top: 90px !important;
       width: 85%;
       left: 50%;
       transform: translateX(-50%);
     }
 
     .add-form-card {
+      
+      top: calc(80vh + 10px);
       width: 85%;
       left: 50%;
       transform: translateX(-50%);
@@ -306,17 +318,6 @@ export const GlobalStyle = createGlobalStyle`
       left: 50%;
       top: 95%;
       transform: translateX(-50%);
-    }
-  
-    .placeholder-stats-div{
-      font-size: 24px;
-      position: absolute;
-      text-align: center;
-      color: #999;
-      width: 60%;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%,-50%);
     }
 
 
@@ -347,6 +348,70 @@ export const GlobalStyle = createGlobalStyle`
     }
 
     /* FORM LIST */
+
+
+    .form-list-card {
+      width: 85%;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .add-form-card {
+      width: 85%;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .div-title-form {
+      font-size: 18px;
+    }
+
+    .div-answers-share {
+      text-align: center;
+      margin-bottom: 0;
+    }
+
+    .div-edit-form {
+      position: relative !important;
+      display: block;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      margin-top: 10px;
+      text-align: center;
+    }
+
+    .div-stats-form {
+      position: relative !important;
+      display: block;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      margin-top: 10px;
+      text-align: center;
+    }
+
+    .edit-icon {
+      margin-left: 5px;
+      margin-right: 0px;
+    }
+
+    .icon-gauche {
+      display: none
+    }
+    .icon-droite {
+      display: inline
+    }
+
+
+    /* STATS */
+
+    .stats-card {
+      width: 85%;
+      left: 50%;
+      top: 95%;
+      transform: translateX(-50%);
+    }
 
     }
 `;
