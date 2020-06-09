@@ -8,19 +8,24 @@ export default class BarChart extends Component {
     const myChartRef = this.chartRef.current.getContext("2d");
     var randomHexColor = require("random-hex-color");
     let color_array = [];
-    this.props.data.forEach((element) => {
+    let label_array = [];
+    let data_array = [];
+    var count = require("count-array-values");
+    let data = count(this.props.data);
+    data.forEach((element) => {
       color_array.push(randomHexColor());
+      label_array.push("entrée " + element.value);
+      data_array.push(element.count);
     });
 
     new Chart(myChartRef, {
       type: "bar",
       data: {
         //Bring in data
-        labels: ["testastos"],
+        labels: label_array,
         datasets: [
           {
-            label: "testastostestastos",
-            data: this.props.data,
+            data: data_array,
             backgroundColor: color_array,
           },
         ],
@@ -34,6 +39,9 @@ export default class BarChart extends Component {
               },
             },
           ],
+        },
+        legend: {
+          display: false,
         },
       },
     });

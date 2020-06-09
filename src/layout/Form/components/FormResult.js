@@ -10,7 +10,7 @@ class form_result extends React.Component {
         <Card className="stats-card">
           <div className="placeholder-stats-div">{this.props.form_data}</div>
           {/*<Piechart data={[1, 5, 3, 4, 6, 4, 5, 2]} />*/}
-          <Barchart data={[1, 5, 3, 4, 6, 4, 5, 2]} />
+          <Barchart data={["1", "5", "3", "4", "6", "4", "5", "2"]} />
         </Card>
       );
     } else {
