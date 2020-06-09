@@ -1,7 +1,7 @@
 var jwt = require("jsonwebtoken");
 const Axios = require("axios");
 
-async function RetrieveUserInfo(access_token, req, res) {
+async function RetrieveUserInfo(access_token, res) {
   // get basic info
   try {
     var profileInfo_promise = await Axios({
@@ -57,5 +57,5 @@ exports.LoginWithLinkedin = async function (req, res) {
   } catch (e) {
     console.log(e);
   }
-  RetrieveUserInfo(access_token_promise.data.access_token, req, res);
+  RetrieveUserInfo(access_token_promise.data.access_token, res);
 };
