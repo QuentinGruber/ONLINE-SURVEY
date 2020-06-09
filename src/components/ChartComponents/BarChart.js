@@ -6,22 +6,35 @@ export default class BarChart extends Component {
 
   componentDidMount() {
     const myChartRef = this.chartRef.current.getContext("2d");
+    var randomHexColor = require("random-hex-color");
+    let color_array = [];
+    this.props.data.forEach((element) => {
+      color_array.push(randomHexColor());
+    });
 
     new Chart(myChartRef, {
       type: "bar",
       data: {
         //Bring in data
-        labels: ["France", "Worldwide"],
+        labels: ["testastos"],
         datasets: [
           {
-            label: this.props.datalabel,
+            label: "testastostestastos",
             data: this.props.data,
-            backgroundColor: this.props.color,
+            backgroundColor: color_array,
           },
         ],
       },
       options: {
-        //Customize chart options
+        scales: {
+          yAxes: [
+            {
+              ticks: {
+                beginAtZero: true,
+              },
+            },
+          ],
+        },
       },
     });
   }
