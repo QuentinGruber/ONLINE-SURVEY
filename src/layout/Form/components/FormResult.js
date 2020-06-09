@@ -7,7 +7,7 @@ class form_result extends React.Component {
       var items = [];
       this.props.form_data.forEach((question) => {
         switch (question.type) {
-          case "numbers":
+          case "number":
             items.push(
               <QuestionStats
                 key={Math.random(10000)}

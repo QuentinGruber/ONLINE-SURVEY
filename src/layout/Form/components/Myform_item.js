@@ -39,7 +39,8 @@ class FormTitle extends React.Component {
         url: process.env.REACT_APP_API_URL + "/question_list/" + this.props.id,
         withCredentials: true,
       });
-      let stats = [];
+      var stats = [];
+      let item_processed = 0;
       question_list_promise.data.forEach(async (question) => {
         let question_info_promise = await Axios({
           method: "get",
@@ -57,14 +58,13 @@ class FormTitle extends React.Component {
         stats.push({
           type: question_info_promise.data.type,
           name: question_info_promise.data.text,
-          answers: answers_promise.data,
+          answers: ["1", "2"], //answers_promise.data[0]
         });
-        console.log(stats);
+        item_processed++;
+        if (item_processed == question_list_promise.data.length) {
+          this.props.updt_selected_form_card(stats);
+        }
       });
-      this.props.updt_selected_form_card([
-        { type: "numbers", name: "pipi", answers: ["1", "4", "1"] },
-        { type: "text", name: "caca", answers: ["1", "4", "1"] },
-      ]);
     } catch (e) {
       console.error(e);
     }
