@@ -20,7 +20,7 @@ export default class List extends Component {
       data_array.push(element.count);
 
       list_item.push(
-        <div key={Math.random(10000)}>
+        <div key={Math.random() * 10000}>
           <dt>{element.value} : </dt> <dd>{element.count} réponse(s).</dd>{" "}
           <br />
         </div>

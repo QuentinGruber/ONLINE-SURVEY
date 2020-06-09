@@ -10,7 +10,7 @@ class form_result extends React.Component {
           case "number":
             items.push(
               <QuestionStats
-                key={Math.random(10000)}
+                key={Math.random() * 10000}
                 questionTypes={[
                   { value: "Polar", label: "Polar Graph" },
                   { value: "LineChart", label: "LineChart" },
@@ -24,7 +24,7 @@ class form_result extends React.Component {
           case "text":
             items.push(
               <QuestionStats
-                key={Math.random(10000)}
+                key={Math.random() * 10000}
                 questionTypes={[{ value: "List", label: "List" }]}
                 data={question.answers}
                 name={question.name}
@@ -34,7 +34,7 @@ class form_result extends React.Component {
           case "radio":
             items.push(
               <QuestionStats
-                key={Math.random(10000)}
+                key={Math.random() * 10000}
                 questionTypes={[
                   { value: "Polar", label: "Polar Graph" },
                   { value: "PieChart", label: "PieChart" },
@@ -49,7 +49,7 @@ class form_result extends React.Component {
           case "checkbox":
             items.push(
               <QuestionStats
-                key={Math.random(10000)}
+                key={Math.random() * 10000}
                 questionTypes={[
                   { value: "Polar", label: "Polar Graph" },
                   { value: "PieChart", label: "PieChart" },
