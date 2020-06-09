@@ -146,6 +146,84 @@ exports.get_number_of_answers = function (req, res, connection) {
   });
 };
 
+exports.get_question_list = function (req, res, connection) {
+  connection.getConnection(async function (err, connection) {
+    let FormID = req.path.substr(req.path.lastIndexOf("/") + 1);
+    var auth_check = await Check_auth(req, connection, FormID);
+
+    if (auth_check) {
+      connection.query(
+        "SELECT distinct(answers_users.user_id) FROM `answers_users` JOIN `questions` ON answers_users.question_id=questions.id WHERE questions.forms_id = " +
+          FormID +
+          "",
+        function (sql_error, results, fields) {
+          if (sql_error) {
+            res.send("false");
+            connection.release();
+          }
+          res.send(JSON.stringify(results.length));
+          connection.release();
+        }
+      );
+    } else {
+      res.sendStatus(401); // Unauthorized
+      connection.release();
+    }
+  });
+};
+
+exports.get_question_info = function (req, res, connection) {
+  connection.getConnection(async function (err, connection) {
+    let FormID = req.path.substr(req.path.lastIndexOf("/") + 1);
+    var auth_check = await Check_auth(req, connection, FormID);
+
+    if (auth_check) {
+      connection.query(
+        "SELECT distinct(answers_users.user_id) FROM `answers_users` JOIN `questions` ON answers_users.question_id=questions.id WHERE questions.forms_id = " +
+          FormID +
+          "",
+        function (sql_error, results, fields) {
+          if (sql_error) {
+            res.send("false");
+            connection.release();
+          }
+          res.send(JSON.stringify(results.length));
+          connection.release();
+        }
+      );
+    } else {
+      res.sendStatus(401); // Unauthorized
+      connection.release();
+    }
+  });
+};
+
+exports.get_question_answers = function (req, res, connection) {
+  connection.getConnection(async function (err, connection) {
+    let FormID = req.path.substr(req.path.lastIndexOf("/") + 1);
+    var auth_check = await Check_auth(req, connection, FormID);
+
+    if (auth_check) {
+      connection.query(
+        "SELECT distinct(answers_users.user_id) FROM `answers_users` JOIN `questions` ON answers_users.question_id=questions.id WHERE questions.forms_id = " +
+          FormID +
+          "",
+        function (sql_error, results, fields) {
+          if (sql_error) {
+            res.send("false");
+            connection.release();
+          }
+          res.send(JSON.stringify(results.length));
+          connection.release();
+        }
+      );
+    } else {
+      res.sendStatus(401); // Unauthorized
+      connection.release();
+    }
+  });
+};
+
 async function Check_auth(req, connection, FormID) {
   return new Promise((resolve, reject) => {
     if (FormID == undefined) {

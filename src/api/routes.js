@@ -63,6 +63,24 @@ app.get("/numberofanswer/*", function (req, res) {
   FormsController.get_number_of_answers(req, res, connection);
 });
 
+/* Return question_list */
+
+app.get("/question_list/*", function (req, res) {
+  FormsController.get_question_list(req, res, connection);
+});
+
+/* Return question_info */
+
+app.get("/question_info/*", function (req, res) {
+  FormsController.get_question_info(req, res, connection);
+});
+
+/* Return answers of a given question*/
+
+app.get("/question_answers/*", function (req, res) {
+  FormsController.get_question_answers(req, res, connection);
+});
+
 /* User form */
 
 app.get("/myform", function (req, res) {
