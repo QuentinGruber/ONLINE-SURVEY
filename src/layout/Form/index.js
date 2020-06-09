@@ -124,7 +124,7 @@ class Form extends React.Component {
             </Card>
 
             {this.state.selected_item !== undefined ? (
-              <FormResult form_data={"data"} />
+              <FormResult form_data={this.state.selected_item} />
             ) : (
               <FormResult form_data={undefined} />
             )}

@@ -5,11 +5,17 @@ import FormApp from "./components/FormApp";
 import App from "./App";
 import Login from "./components/Login";
 import Register from "./components/Register";
+import FormResult from "./layout/Form/components/FormResult";
 
 var routes = [
   {
     path: "/all_component",
     component: App,
+    layout: "/dev",
+  },
+  {
+    path: "/graph",
+    component: FormResult,
     layout: "/dev",
   },
   {

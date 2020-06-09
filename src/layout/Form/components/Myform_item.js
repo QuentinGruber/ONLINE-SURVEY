@@ -16,7 +16,7 @@ library.add(faShareAlt, faEdit, faChevronRight);
 class FormTitle extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { nb_answer: 0, FormID: undefined };
+    this.state = { nb_answer: 0 };
   }
 
   async componentDidMount() {
@@ -29,9 +29,51 @@ class FormTitle extends React.Component {
     });
     this.setState({
       nb_answer: nb_answer_promise.data,
-      FormID: this.props.data.id,
     });
   }
+
+  async send_stats() {
+    try {
+      let question_list_promise = await Axios({
+        method: "get",
+        url: process.env.REACT_APP_API_URL + "/question_list/" + this.props.id,
+        withCredentials: true,
+      });
+      var stats = [];
+      let item_processed = 0;
+      question_list_promise.data.forEach(async (question) => {
+        let question_info_promise = await Axios({
+          method: "get",
+          url: process.env.REACT_APP_API_URL + "/question_info/" + question.id,
+          withCredentials: true,
+        });
+
+        let answers_promise = await Axios({
+          method: "get",
+          url:
+            process.env.REACT_APP_API_URL + "/question_answers/" + question.id,
+          withCredentials: true,
+        });
+
+        let answers = [];
+        answers_promise.data.forEach((element) => {
+          answers.push(element.text);
+        });
+        stats.push({
+          type: question_info_promise.data.type,
+          name: question_info_promise.data.text,
+          answers: answers,
+        });
+        item_processed++;
+        if (item_processed == question_list_promise.data.length) {
+          this.props.updt_selected_form_card(stats);
+        }
+      });
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
   render() {
     new ClipboardJS(".div-share-form");
     return (
@@ -78,7 +120,7 @@ class FormTitle extends React.Component {
         <div
           className="div-stats-form"
           onClick={() => {
-            this.props.updt_selected_form_card("FormData here");
+            this.send_stats();
           }}
         >
           Résultats et statistiques
