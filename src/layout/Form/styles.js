@@ -133,6 +133,7 @@ export const GlobalStyle = createGlobalStyle`
     top: 10%;
     border-bottom-right-radius: 0;
     border-bottom-left-radius: 0;
+    margin-bottom: 5%;
   }
 
   .add-form-card {
@@ -241,6 +242,7 @@ export const GlobalStyle = createGlobalStyle`
     min-height: 80%;
     right: 5%;
     top: 10%;
+    margin-bottom: 5%;
   }
 
   .placeholder-stats-div{
@@ -283,11 +285,47 @@ export const GlobalStyle = createGlobalStyle`
       font-size: 32px;
     }
 
+    /* FORM LIST */
 
-    /* ON MOBILE */
+    .form-list-card {
+      width: 85%;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .add-form-card {
+      width: 85%;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    /* STATS */
+
+    .stats-card {
+      width: 85%;
+      left: 50%;
+      top: 95%;
+      transform: translateX(-50%);
+    }
   
+    .placeholder-stats-div{
+      font-size: 24px;
+      position: absolute;
+      text-align: center;
+      color: #999;
+      width: 60%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%,-50%);
+    }
+
 
   }
+
+
+  /* ON MOBILE */
+
+
   @media screen and (max-width: 600px) {
 
 
