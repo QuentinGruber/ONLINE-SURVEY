@@ -30,7 +30,7 @@ export default class List extends Component {
     this.setState({ list_item: list_item });
   }
   render() {
-    if (this.state.list_item != undefined) {
+    if (this.state.list_item !== undefined) {
       return <>{this.state.list_item}</>;
     } else {
       return null;
