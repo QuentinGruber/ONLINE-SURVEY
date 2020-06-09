@@ -16,7 +16,7 @@ library.add(faShareAlt, faEdit, faChevronRight);
 class FormTitle extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { nb_answer: 0, FormID: undefined };
+    this.state = { nb_answer: 0 };
   }
 
   async componentDidMount() {
@@ -29,7 +29,6 @@ class FormTitle extends React.Component {
     });
     this.setState({
       nb_answer: nb_answer_promise.data,
-      FormID: this.props.data.id,
     });
   }
   render() {
