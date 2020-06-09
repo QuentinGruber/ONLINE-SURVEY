@@ -1,13 +1,16 @@
 import React from "react";
 import { Card } from "reactstrap";
+import Piechart from "../../../components/ChartComponents/PieChart";
 class form_result extends React.Component {
   render() {
-    if (this.props.form_data !== undefined) {
+    if (true) {
+      // if (this.props.form_data !== undefined) {
       return (
         <Card className="stats-card">
           <div className="placeholder-stats-div">{this.props.form_data}</div>
+          <Piechart data={[1, 5, 3, 4, 6, 4, 5, 2]} />
         </Card>
-      ); // for graph & shit
+      );
     } else {
       return (
         <Card className="stats-card">
@@ -20,5 +23,4 @@ class form_result extends React.Component {
     }
   }
 }
-
 export default form_result;
