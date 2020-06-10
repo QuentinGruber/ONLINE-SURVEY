@@ -78,7 +78,9 @@ class FormTitle extends React.Component {
     new ClipboardJS(".div-share-form");
     return (
       <Card className="form-list-card-form">
-        <div className="div-title-form">{this.props.data.name}</div>
+        <div className="div-title-form">
+          {this.props.data.name.replace(/[&]nbsp[;]/gi, " ")}
+        </div>
         <div className="div-trash-icon">
           <button
             type="button"
