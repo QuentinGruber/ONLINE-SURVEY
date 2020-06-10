@@ -41,7 +41,7 @@ function Register_user(user_data, registration_type, registration_type_name) {
     if (this.readyState === 4 && this.status === 200) {
       if (this.responseText === "true") {
         alert("register via " + registration_type_name + " succesful !");
-        document.location.href = "/auth";
+        document.location.href = "/form";
       } else {
         alert("Fail to register via " + registration_type_name + "...sorry");
       }
