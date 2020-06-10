@@ -120,8 +120,13 @@ class FormApp extends React.Component {
       }
     } else {
       let button = document.getElementsByClassName("save-form-button")[0];
+      let title = document.getElementsByClassName("form-title")[0];
       button.classList.toggle("red-bg", true);
       button.innerHTML = "Erreur";
+
+      if (title.innerHTML == "") {
+        title.classList.toggle("red-border", true);
+      }
 
       setTimeout(() => {
         button.classList.toggle("red-bg", false);
@@ -170,6 +175,9 @@ class FormApp extends React.Component {
   handleChangeTitle(title) {
     // change title in component state
     this.setState({ FormName: title });
+
+    let elementTitle = document.getElementsByClassName("form-title")[0];
+    elementTitle.classList.toggle("red-border", false);
   }
 
   handleChangeQuestionTitle(title, idx) {
