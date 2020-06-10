@@ -28,6 +28,11 @@ export const GlobalStyle = createGlobalStyle`
     content:attr(data-placeholder);
   }
 
+  .red-border {
+    border: 2px #BB0B0B solid !important;
+    border-radius: 10px !important;
+  }
+
 
   .card-question{
     margin: 5px 0px !important;
