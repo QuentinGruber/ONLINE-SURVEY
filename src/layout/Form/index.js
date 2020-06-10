@@ -47,7 +47,13 @@ class Form extends React.Component {
     return "Brand";
   };
 
-  remove_form(idx) {
+  remove_form(idx, id) {
+    Axios({
+      method: "delete",
+      url: process.env.REACT_APP_API_URL + "/form/",
+      withCredentials: true,
+      data: { FormID: id },
+    });
     let temp_item = this.state.items;
     temp_item.splice(idx, 1);
     this.setState({ items: temp_item });
