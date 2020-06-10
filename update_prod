@@ -9,6 +9,7 @@ wait
 sudo mkdir ../../../var/www/html/
 wait
 sudo cp -r build/* ../../../var/www/html/
+sudo cp build/.htaccess ../../../var/www/html/
 wait
 pm2 restart routes
 wait
