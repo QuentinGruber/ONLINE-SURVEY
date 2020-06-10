@@ -1,5 +1,3 @@
-import Sidebar from "./components/Sidebar";
-import Userpanel from "./components/UserPanel";
 import FormReader from "./components/FormReader";
 import FormApp from "./components/FormApp";
 import App from "./App";
@@ -16,16 +14,6 @@ var routes = [
   {
     path: "/graph",
     component: FormResult,
-    layout: "/dev",
-  },
-  {
-    path: "/sidebar",
-    component: Sidebar,
-    layout: "/dev",
-  },
-  {
-    path: "/userpanel",
-    component: Userpanel,
     layout: "/dev",
   },
   {
