@@ -79,7 +79,11 @@ class FormTitle extends React.Component {
     return (
       <Card className="form-list-card-form">
         <div className="div-title-form">
-          {this.props.data.name.replace(/[&]nbsp[;]/gi, " ")}
+          {(() => {
+            let FormName = this.props.data.name.replace(/[&]nbsp[;]/gi, " ");
+            FormName = FormName.replace(/[<]br[^>]*[>]/gi, "");
+            return FormName;
+          })()}
         </div>
         <div className="div-trash-icon">
           <button
