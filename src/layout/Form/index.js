@@ -68,7 +68,7 @@ class Form extends React.Component {
       if (myform_list_promise.data !== false) {
         let items = [];
         for (let i = 0; i < myform_list_promise.data.length; i++) {
-          items.push(
+          items.unshift(
             <MyFormItem
               key={i}
               idx={i}
