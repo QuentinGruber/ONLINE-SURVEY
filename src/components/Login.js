@@ -122,15 +122,7 @@ class Login extends React.Component {
               </div>
             </Form>
             <Row className="mt-3">
-              <Col xs="6">
-                <a
-                  className="text-light"
-                  href="#pablo"
-                  onClick={(e) => e.preventDefault()}
-                >
-                  <small>Mot de passe oublié ?</small>
-                </a>
-              </Col>
+              <Col xs="6"></Col>
               <Col className="text-right" xs="6">
                 <NavLink to="/auth/register" tag={Link}>
                   <small className="text-light">Créer un compte</small>
