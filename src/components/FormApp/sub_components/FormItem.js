@@ -46,7 +46,7 @@ class FormItem extends React.Component {
             className="question"
             type="text"
             placeholder="Titre de la question"
-            value={this.props.item.title}
+            value={this.props.item.title.replace(/[<]br[^>]*[>]/gi, "")}
             onChange={(e) =>
               this.props.handleChangeQuestionTitle(
                 e.target.value,
