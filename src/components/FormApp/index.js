@@ -177,9 +177,10 @@ class FormApp extends React.Component {
     if (this.FormID !== "new") {
       this.ItemsToDelete.push(itemID);
     }
-
-    formitems.splice(itemIndex, 1);
-    this.setState({ formitems: formitems });
+    if (this.state.formitems.length > 1) {
+      formitems.splice(itemIndex, 1);
+      this.setState({ formitems: formitems });
+    }
   }
 
   async componentWillMount() {
