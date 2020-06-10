@@ -286,6 +286,11 @@ class Legal extends React.Component {
         Utilisateurs de Online Survey sont principalement les agents de notre
         service client.
         <br />
+        En cas de demande de suppression des données personnelles d'un
+        utilisateur, veuillez contacter l'administrateur du site grâce à
+        l'adresse : contact@online-survey.app, vos données seront supprimées
+        sous un délai d'une semaine.
+        <br />
         <div id="types_data">
           <h2>VII-5 Types de données collectées</h2>
         </div>
