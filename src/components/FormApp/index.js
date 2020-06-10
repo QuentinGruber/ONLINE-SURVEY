@@ -27,13 +27,6 @@ class FormApp extends React.Component {
     this.ItemsToDelete = [];
     this.OptionsToDelete = [];
     this.state = { formitems: formitems, mode: "all", FormName: "" };
-    this.DefaultFormItem = {
-      index: formitems.length + 1,
-      title: "",
-      required: false,
-      type: "radio",
-      p_answer: [{ text: " " }, { text: " " }],
-    };
   }
 
   async saveItem() {
@@ -189,7 +182,16 @@ class FormApp extends React.Component {
 
   async addItem(Item) {
     // add the item to formitems array
-    formitems.push(this.DefaultFormItem);
+    formitems.push({
+      index: formitems.length + 1,
+      title: Item.newItemValue,
+      required: false,
+      type: "radio",
+      p_answer: [
+        { text: " ", checked: false },
+        { text: " ", checked: false },
+      ],
+    });
     // update state
     this.setState({ formitems: formitems });
   }
