@@ -65,7 +65,7 @@ class FormTitle extends React.Component {
           answers: answers,
         });
         item_processed++;
-        if (item_processed == question_list_promise.data.length) {
+        if (item_processed === question_list_promise.data.length) {
           this.props.updt_selected_form_card(stats);
         }
       });
