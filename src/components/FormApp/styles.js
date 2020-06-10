@@ -322,9 +322,37 @@ export const GlobalStyle = createGlobalStyle`
   left: 50%;
   transform: translateX(-50%);
 }
+
 .save-form-button {
   width: 100%;
 }
+
+.green-bg {
+  background-color: #088008;
+  border-color: #088008;
+}
+.green-bg:active {
+  background-color: #066006 !important;
+  border-color: #066006 !important;
+}
+.green-bg:hover {
+  background-color: #088008;
+  border-color: #088008;
+}
+
+.red-bg {
+  background-color: #BB0B0B;
+  border-color: #BB0B0B;
+}
+.red-bg:active {
+  background-color: #990909 !important;
+  border-color: #990909 !important;
+}
+.red-bg:hover {
+  background-color: #BB0B0B;
+  border-color: #BB0B0B;
+}
+
 
 .css-1pahdxg-control {
   border: 1px #32325d solid !important;
