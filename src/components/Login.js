@@ -36,11 +36,11 @@ class Login extends React.Component {
         // handle request response
         if (this.readyState === 4 && this.status === 200) {
           if (this.responseText !== "false") {
-            alert("Logged in !");
             document.location.href = "/form";
           } else {
             let password = document.getElementById("Login_pass");
             let username = document.getElementById("Login_name");
+            password.value = "";
             password.classList.toggle("red-border", true);
             username.classList.toggle("red-border", true);
           }
