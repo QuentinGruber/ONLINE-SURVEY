@@ -121,7 +121,13 @@ class Form extends React.Component {
               {this.state.myform_list.length > 0 ? (
                 <>{items}</>
               ) : (
-                <div>page creer un orm</div>
+                <div>
+                  {" "}
+                  <div className="placeholder-forms-div">
+                    Vous n'avez aucun formulaire. Cliquez sur le bouton
+                    ci-dessous pour en créer un.
+                  </div>
+                </div>
               )}
             </Card>
             <Card className="add-form-card">
