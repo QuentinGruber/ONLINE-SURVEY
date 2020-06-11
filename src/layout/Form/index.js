@@ -112,7 +112,18 @@ class Form extends React.Component {
                 Your forms, made simple
               </div>
             </div>
-            <Card className="form-list-card">{items}</Card>
+            <Card
+              className="form-list-card"
+              onClick={() => {
+                console.log(this.state.myform_list.length);
+              }}
+            >
+              {this.state.myform_list.length > 0 ? (
+                <>{items}</>
+              ) : (
+                <div>page creer un orm</div>
+              )}
+            </Card>
             <Card className="add-form-card">
               <div className="container-button-new-form">
                 <Link to="/form/new">
