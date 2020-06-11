@@ -40,7 +40,7 @@ function Register_user(user_data, registration_type, registration_type_name) {
     // handle request response
     if (this.readyState === 4 && this.status === 200) {
       if (this.responseText === "true") {
-        document.location.href = "/auth";
+        document.location.href = "/form";
       } else {
         alert("Registration with " + registration_type_name + "failed");
       }

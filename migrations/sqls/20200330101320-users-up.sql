@@ -5,8 +5,7 @@ CREATE TABLE `users` (
   `last_name` varchar(50) DEFAULT NULL,
   `mail` varchar(255) NOT NULL,
   `pass` varchar(255) DEFAULT NULL,
-  `registration_type` bigint(20) NOT NULL,
-  `attempts` bigint(20) DEFAULT '1'
+  `registration_type` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 

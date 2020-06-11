@@ -245,7 +245,7 @@ export const GlobalStyle = createGlobalStyle`
   /* STATS */
 
   .stats-card {
-    overflow-y: scroll;
+    overflow-y: auto;
     font-size: 18px;
     position: absolute;
     width: 42.5%;

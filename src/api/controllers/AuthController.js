@@ -210,7 +210,7 @@ exports.login = function (req, res, connection) {
     if (data.Registration_type == "0") {
       // user creation
       connection.query(
-        "SELECT pass FROM users WHERE username='" + data.Username + "';",
+        "SELECT * FROM users WHERE username='" + data.Username + "';",
         function (sql_error, results, fields) {
           // If some error occurs, we throw an error.
           if (sql_error) res.send("false");
@@ -242,7 +242,7 @@ exports.login = function (req, res, connection) {
           if (Stored_pass == data.Password) {
             // if the Submit pass is the same as storage pass
             // store the user_id in session
-            req.session.user_id = results.insertId;
+            req.session.user_id = results[0].id;
             res.send("true");
             connection.release();
           } else {
