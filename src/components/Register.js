@@ -69,18 +69,24 @@ class Register extends React.Component {
     }
 
     function Check_Username() {
-      // Check if Username is not already taken
-      var xhttp = new XMLHttpRequest();
-      xhttp.onreadystatechange = function () {
-        // handle request response
-        if (this.readyState === 4 && this.status === 200) {
-          // response format is a rowdatapacket so it was needed to do like that.
-          if (this.response === "0")
-            // next step check if provided email isn't already in our database
-            Check_Email();
-          else alert("Username already taken !");
+      console.log("test");
+      document
+        .getElementById("Register_name")
+        .setCustomValidity("Ce nom d'utilisateur est déjà utilisé");
+    }
+    console.log("test2");
+    // Check if Username is not already taken
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+      // handle request response
+      if (this.readyState === 4 && this.status === 200) {
+        // response format is a rowdatapacket so it was needed to do like that.
+        if (this.response === "0")
+          // next step check if provided email isn't already in our database
+          Check_Email();
+        else {
         }
-      };
+      }
       // Send a post request
       var jwt_token = jwt.sign(
         { username: document.getElementById("Register_name").value },
@@ -96,7 +102,7 @@ class Register extends React.Component {
       );
       xhttp.withCredentials = true;
       xhttp.send();
-    }
+    };
 
     function Check_Email() {
       // Check if provided email is not already in our database
