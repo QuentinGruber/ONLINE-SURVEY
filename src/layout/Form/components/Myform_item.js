@@ -114,7 +114,7 @@ class FormTitle extends React.Component {
           >
             Partager
             <FontAwesomeIcon icon="share-alt" className="fa-s share-icon" />
-            <span class="popup-share">Lien copié !</span>
+            <span className="popup-share">Lien copié !</span>
           </div>
         </div>
         <Link
