@@ -226,10 +226,7 @@ class FormApp extends React.Component {
         title: "",
         required: false,
         type: "radio",
-        p_answer: [
-          { text: " ", checked: false },
-          { text: " ", checked: false },
-        ],
+        p_answer: [{ text: " " }, { text: " " }],
       });
       this.setState({ formitems: formitems });
     } else {
