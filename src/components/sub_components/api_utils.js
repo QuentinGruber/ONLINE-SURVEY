@@ -40,10 +40,9 @@ function Register_user(user_data, registration_type, registration_type_name) {
     // handle request response
     if (this.readyState === 4 && this.status === 200) {
       if (this.responseText === "true") {
-        alert("register via " + registration_type_name + " succesful !");
         document.location.href = "/auth";
       } else {
-        alert("Fail to register via " + registration_type_name + "...sorry");
+        alert("Registration with " + registration_type_name + "failed");
       }
     }
   };
@@ -92,16 +91,9 @@ exports.Login = function (
                   // handle request response
                   if (this.readyState === 4 && this.status === 200) {
                     if (this.responseText !== "false") {
-                      alert(
-                        "Login with " + registration_type_name + " succeed !"
-                      );
                       document.location.href = "/form";
                     } else {
-                      alert(
-                        "Error happend when trying to log in with " +
-                          registration_type_name +
-                          "!"
-                      );
+                      alert("Login with " + registration_type_name + "failed");
                     }
                   }
                 };
@@ -129,7 +121,7 @@ exports.Login = function (
                 alert(
                   "The email adress linked to this " +
                     registration_type_name +
-                    " account is already registered !"
+                    " account is already registered"
                 );
               }
             }
@@ -150,7 +142,7 @@ exports.Login = function (
           xhttp.send();
         }
       } else {
-        alert("Wrong username/password !");
+        alert("Wrong username/password");
       }
     }
   };

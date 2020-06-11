@@ -72,7 +72,7 @@ class FormReader extends React.Component {
     if (SendAnswer_promise.data) {
       this.setState({ HasAnswered: true });
     } else {
-      alert("Something went wrong , your maybe disconnected ?");
+      alert("Something went wrong. You may be disconnected");
     }
   }
 
@@ -129,8 +129,8 @@ class FormReader extends React.Component {
         }
         this.setState({ FormContent: FormContent, items: items });
       } else {
-        alert("You don't have access to this Form or he doesn't exist !");
-        document.location.href = "/form/new";
+        alert("This form doesn't exist !");
+        document.location.href = "/form";
       }
     } else {
       this.setState({ HasAnswered: true });

@@ -239,13 +239,9 @@ class FormApp extends React.Component {
         });
       } catch (e) {
         // if request fail
-        alert(
-          "form id : " +
-            this.FormID +
-            " do not exist or you don't have the rights access... redirecting"
-        );
+        alert("You don't have access to this form !");
         // redirect user to /form/new
-        document.location.href = "/form/new";
+        document.location.href = "/form";
       }
 
       // setup vars

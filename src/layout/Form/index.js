@@ -85,8 +85,8 @@ class Form extends React.Component {
         }
         this.setState({ items: items });
       } else {
+        alert("You need to be logged in");
         document.location.href = "/auth/";
-        alert("You need to be connected !");
       }
     } catch (e) {
       console.error("Error while fetching user's forms! " + e);
