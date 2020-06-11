@@ -139,17 +139,37 @@ class FormReader extends React.Component {
 
   Validity() {
     if (document.forms["Form"].reportValidity()) {
-      console.log(document.forms["Form"].getElementsByTagName("input"));
       // browse all inputs to find if there is checkboxes
       var inputs = document.forms["Form"].getElementsByTagName("input");
+      var can_send_answers = true;
+      var Validity_error = false;
       for (let index = 0; index < inputs.length; index++) {
         const element = inputs[index];
+        // if find a checkbox
         if (
           element.matches('[type="checkbox"]') &&
           element.matches('[isrequired="1"]')
         ) {
-          console.log("checkboxbb");
+          // there maybe a validity error so
+          let input_family = document.getElementsByName(element.name);
+          Validity_error = true;
+          // check if any of the checkboxes of the same family has been checked
+          for (let index = 0; index < input_family.length; index++) {
+            const element = input_family[index];
+            if (element.checked) {
+              // if at least one is checked there is no validity error
+              Validity_error = false;
+            }
+          }
         }
+        if (Validity_error) {
+          can_send_answers = false;
+          // validity error on checkboxes
+          // custom validity here
+        }
+      }
+      if (can_send_answers) {
+        this.SendAnswers();
       }
     }
   }
