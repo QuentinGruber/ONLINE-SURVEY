@@ -90,14 +90,8 @@ class FormTitle extends React.Component {
             type="button"
             className="close button-delete-form"
             aria-label="Close"
-            onClick={async () => {
-              await Axios({
-                method: "delete",
-                url: process.env.REACT_APP_API_URL + "/form/",
-                withCredentials: true,
-                data: { FormID: this.props.data.id },
-              });
-              this.props.remove_form(this.props.idx);
+            onClick={() => {
+              this.props.remove_form(this.props.idx, this.props.id);
             }}
           >
             <FontAwesomeIcon icon="trash-alt" className="fa-s trash-icon" />

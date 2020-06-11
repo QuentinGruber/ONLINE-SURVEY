@@ -224,7 +224,11 @@ async function Check_auth(req, connection, FormID) {
           if (req.session != undefined) {
             UserID = req.session.user_id;
           }
-          if (UserID != undefined && UserID === results[0].users_id) {
+          if (
+            UserID != undefined &&
+            results[0] != undefined &&
+            UserID === results[0].users_id
+          ) {
             resolve(true);
           } else {
             resolve(false);
