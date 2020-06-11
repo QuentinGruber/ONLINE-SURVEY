@@ -124,7 +124,7 @@ class FormApp extends React.Component {
       button.classList.toggle("red-bg", true);
       button.innerHTML = "Erreur";
 
-      if (title.innerHTML == "") {
+      if (title.innerHTML === "") {
         title.classList.toggle("red-border", true);
       }
 
