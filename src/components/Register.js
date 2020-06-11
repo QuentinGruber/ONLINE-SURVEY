@@ -166,10 +166,9 @@ class Register extends React.Component {
         // handle request response
         if (this.readyState === 4 && this.status === 200) {
           if (this.responseText === "true") {
-            alert("Registered succesfully!");
-            document.location.href = "/auth";
+            document.location.href = "/form";
           } else {
-            alert("Fail to register...sorry");
+            alert("Failed to register");
           }
         }
       };
