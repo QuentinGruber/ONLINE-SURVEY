@@ -14,7 +14,7 @@ class CheckBoxQuestion extends React.Component {
                 type="checkbox"
                 name={this.props.data.title}
                 className="checkbox-type-checkbox"
-                required={this.props.data.required}
+                isrequired={this.props.data.required}
               />
               <label
                 htmlFor={this.props.data.p_answer[i].id}

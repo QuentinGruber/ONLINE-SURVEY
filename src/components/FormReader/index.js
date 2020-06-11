@@ -137,6 +137,23 @@ class FormReader extends React.Component {
     }
   }
 
+  Validity() {
+    if (document.forms["Form"].reportValidity()) {
+      console.log(document.forms["Form"].getElementsByTagName("input"));
+      // browse all inputs to find if there is checkboxes
+      var inputs = document.forms["Form"].getElementsByTagName("input");
+      for (let index = 0; index < inputs.length; index++) {
+        const element = inputs[index];
+        if (
+          element.matches('[type="checkbox"]') &&
+          element.matches('[isrequired="1"]')
+        ) {
+          console.log("checkboxbb");
+        }
+      }
+    }
+  }
+
   render() {
     if (!this.state.HasAnswered) {
       return (
@@ -155,8 +172,7 @@ class FormReader extends React.Component {
                     className="btn-icon send-form-button"
                     color="default"
                     onClick={() => {
-                      if (document.forms["Form"].reportValidity())
-                        this.SendAnswers();
+                      this.Validity();
                     }}
                     value="Send"
                   >
