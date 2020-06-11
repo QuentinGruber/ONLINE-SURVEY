@@ -9,8 +9,6 @@ import {
   FormGroup,
   Form,
   Input,
-  InputGroupAddon,
-  InputGroupText,
   InputGroup,
   Row,
   Col,
@@ -186,11 +184,6 @@ class Register extends React.Component {
             <Form role="form" id="registerBox">
               <FormGroup>
                 <InputGroup className="input-group-alternative mb-3">
-                  <InputGroupAddon addonType="prepend">
-                    <InputGroupText>
-                      <i className="ni ni-hat-3" />
-                    </InputGroupText>
-                  </InputGroupAddon>
                   <Input
                     id="Register_name"
                     name="username"
@@ -203,11 +196,6 @@ class Register extends React.Component {
               </FormGroup>
               <FormGroup>
                 <InputGroup className="input-group-alternative mb-3">
-                  <InputGroupAddon addonType="prepend">
-                    <InputGroupText>
-                      <i className="ni ni-email-83" />
-                    </InputGroupText>
-                  </InputGroupAddon>
                   <Input
                     type="text"
                     id="Register_email"
@@ -221,11 +209,6 @@ class Register extends React.Component {
               </FormGroup>
               <FormGroup>
                 <InputGroup className="input-group-alternative">
-                  <InputGroupAddon addonType="prepend">
-                    <InputGroupText>
-                      <i className="ni ni-lock-circle-open" />
-                    </InputGroupText>
-                  </InputGroupAddon>
                   <Input
                     type="password"
                     id="Register_pass"
@@ -241,11 +224,6 @@ class Register extends React.Component {
               </FormGroup>
               <FormGroup>
                 <InputGroup className="input-group-alternative">
-                  <InputGroupAddon addonType="prepend">
-                    <InputGroupText>
-                      <i className="ni ni-lock-circle-open" />
-                    </InputGroupText>
-                  </InputGroupAddon>
                   <Input
                     type="password"
                     id="Register_confirm_pass"
