@@ -5535,8 +5535,7 @@ input[type="button"].btn-block {
 .close:not(:disabled):not(.disabled) {
   cursor: pointer;
 }
-.close:not(:disabled):not(.disabled):hover,
-.close:not(:disabled):not(.disabled):focus {
+.close:not(:disabled):not(.disabled):hover{
   color: #32325d;
   text-decoration: none;
   opacity: 1;
@@ -13901,16 +13900,6 @@ a.btn-icon-only {
   font-size: 1.25rem;
   display: block;
   transition: all 0.15s ease;
-}
-.close:hover,
-.close:focus {
-  background-color: transparent;
-  color: rgba(0, 0, 0, 0.9);
-  outline: none;
-}
-.close:hover span:not(.sr-only),
-.close:focus span:not(.sr-only) {
-  background-color: transparent;
 }
 
 .main-content {
