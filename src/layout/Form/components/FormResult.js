@@ -76,7 +76,7 @@ class form_result extends React.Component {
         <Card className="stats-card">
           <div className="placeholder-stats-div">
             Cliquez sur "Résultats et statistiques" pour consulter les
-            statistiques du formulaire
+            statistiques du formulaire.
           </div>
         </Card>
       );

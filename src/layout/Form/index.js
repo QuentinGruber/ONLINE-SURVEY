@@ -54,7 +54,6 @@ class Form extends React.Component {
       withCredentials: true,
       data: { FormID: id },
     });
-    console.log("recieve id : " + id + " idx : " + idx);
     let temp_item = this.state.myform_list;
     temp_item.splice(idx, 1);
     this.setState({ myform_list: temp_item });
@@ -113,7 +112,24 @@ class Form extends React.Component {
                 Your forms, made simple
               </div>
             </div>
-            <Card className="form-list-card">{items}</Card>
+            <Card
+              className="form-list-card"
+              onClick={() => {
+                console.log(this.state.myform_list.length);
+              }}
+            >
+              {this.state.myform_list.length > 0 ? (
+                <>{items}</>
+              ) : (
+                <div>
+                  {" "}
+                  <div className="placeholder-forms-div">
+                    Vous n'avez aucun formulaire. Cliquez sur le bouton
+                    ci-dessous pour en créer un.
+                  </div>
+                </div>
+              )}
+            </Card>
             <Card className="add-form-card">
               <div className="container-button-new-form">
                 <Link to="/form/new">

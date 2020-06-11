@@ -266,6 +266,16 @@ export const GlobalStyle = createGlobalStyle`
     transform: translate(-50%,-50%);
   }
 
+  .placeholder-forms-div{
+    font-size: 24px;
+    position: absolute;
+    text-align: center;
+    color: #999;
+    width: 60%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,calc(-50% + 40px));
+  }
 
 
 
