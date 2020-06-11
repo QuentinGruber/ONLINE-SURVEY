@@ -42,7 +42,9 @@ function Register_user(user_data, registration_type, registration_type_name) {
       if (this.responseText === "true") {
         document.location.href = "/form";
       } else {
-        alert("Registration with " + registration_type_name + "failed");
+        alert(
+          "Erreur lors de l'inscription avec " + registration_type_name + "."
+        );
       }
     }
   };
@@ -93,7 +95,11 @@ exports.Login = function (
                     if (this.responseText !== "false") {
                       document.location.href = "/form";
                     } else {
-                      alert("Login with " + registration_type_name + "failed");
+                      alert(
+                        "Erreur lors de la connexion avec " +
+                          registration_type_name +
+                          "."
+                      );
                     }
                   }
                 };
@@ -119,9 +125,9 @@ exports.Login = function (
                 xhttp.send();
               } else {
                 alert(
-                  "The email adress linked to this " +
+                  "L'adresse email liée à ce compte " +
                     registration_type_name +
-                    " account is already registered"
+                    " est déjà enregistrée."
                 );
               }
             }
@@ -142,7 +148,7 @@ exports.Login = function (
           xhttp.send();
         }
       } else {
-        alert("Wrong username/password");
+        alert("Mauvais nom d'utilisateur / mot de passe.");
       }
     }
   };

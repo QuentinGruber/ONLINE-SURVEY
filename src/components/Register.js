@@ -168,7 +168,7 @@ class Register extends React.Component {
           if (this.responseText === "true") {
             document.location.href = "/form";
           } else {
-            alert("Failed to register");
+            alert("Erreur lors de l'inscription.");
           }
         }
       };

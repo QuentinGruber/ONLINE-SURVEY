@@ -75,7 +75,7 @@ class Form extends React.Component {
       if (myform_list_promise.data !== false) {
         this.setState({ myform_list: myform_list_promise.data });
       } else {
-        alert("You need to be logged in");
+        alert("Vous devez être connecté.");
         document.location.href = "/auth/";
       }
     } catch (e) {

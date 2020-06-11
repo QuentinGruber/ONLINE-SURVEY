@@ -11,7 +11,7 @@ class Disconnect extends React.Component {
           if (this.responseText !== "false") {
             window.location.reload();
           } else {
-            alert("Error while trying to disconnect !");
+            alert("Erreur lors de la déconnexion.");
           }
         }
       };

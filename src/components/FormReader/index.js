@@ -72,7 +72,7 @@ class FormReader extends React.Component {
     if (SendAnswer_promise.data) {
       this.setState({ HasAnswered: true });
     } else {
-      alert("Something went wrong. You may be disconnected");
+      alert("Quelque chose s'est mal passé. Vous êtes peut-être déconnecté.");
     }
   }
 
@@ -129,7 +129,7 @@ class FormReader extends React.Component {
         }
         this.setState({ FormContent: FormContent, items: items });
       } else {
-        alert("This form doesn't exist !");
+        alert("Ce formulaire n'existe pas.");
         document.location.href = "/form";
       }
     } else {

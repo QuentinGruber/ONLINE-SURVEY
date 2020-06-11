@@ -239,7 +239,7 @@ class FormApp extends React.Component {
         });
       } catch (e) {
         // if request fail
-        alert("You don't have access to this form !");
+        alert("Vous n'avez pas accès à ce formulaire.");
         // redirect user to /form/new
         document.location.href = "/form";
       }
