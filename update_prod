@@ -13,4 +13,6 @@ sudo cp build/.htaccess ../../../var/www/html/
 wait
 pm2 restart routes
 wait
+sudo rm crash.log
+wait
 echo " Server updated ! "
