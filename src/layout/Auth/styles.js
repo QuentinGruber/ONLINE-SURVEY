@@ -71,7 +71,7 @@ body{
 
   .red-border {
     border: 2px #BB0B0B solid !important;
-    border-radius: 10px !important;
+    border-radius: 5px !important;
   }
   
   /* ON MOBILE */

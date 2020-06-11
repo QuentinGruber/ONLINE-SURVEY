@@ -18,6 +18,14 @@ import FacebookLogin from "./sub_components/Facebook_login";
 import LinkedInLogin from "./sub_components/linkedin_login";
 
 class Register extends React.Component {
+  onChangeUsername() {
+    let username = document.getElementById("Register_name");
+    try {
+      username.setCustomValidity("");
+    } catch (e) {}
+    return;
+  }
+
   render() {
     var jwt = require("jsonwebtoken");
     const SECRET_KEY = process.env.REACT_APP_SECRET_KEY;
@@ -69,24 +77,23 @@ class Register extends React.Component {
     }
 
     function Check_Username() {
-      console.log("test");
-      document
-        .getElementById("Register_name")
-        .setCustomValidity("Ce nom d'utilisateur est déjà utilisé");
-    }
-    console.log("test2");
-    // Check if Username is not already taken
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function () {
-      // handle request response
-      if (this.readyState === 4 && this.status === 200) {
-        // response format is a rowdatapacket so it was needed to do like that.
-        if (this.response === "0")
-          // next step check if provided email isn't already in our database
-          Check_Email();
-        else {
+      // Check if Username is not already taken
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function () {
+        // handle request response
+        if (this.readyState === 4 && this.status === 200) {
+          // response format is a rowdatapacket so it was needed to do like that.
+          if (this.response === "0") {
+            // next step check if provided email isn't already in our database
+            Check_Email();
+          } else {
+            console.log("début else");
+            let username = document.getElementById("Register_name");
+            username.classList.toggle("red-border", true);
+            username.setCustomValidity("mauvais utilisateur");
+          }
         }
-      }
+      };
       // Send a post request
       var jwt_token = jwt.sign(
         { username: document.getElementById("Register_name").value },
@@ -102,7 +109,7 @@ class Register extends React.Component {
       );
       xhttp.withCredentials = true;
       xhttp.send();
-    };
+    }
 
     function Check_Email() {
       // Check if provided email is not already in our database
@@ -196,6 +203,9 @@ class Register extends React.Component {
                     placeholder="Nom d'utilisateur"
                     type="text"
                     pattern=".{3,16}"
+                    onChange={() => {
+                      this.onChangeUsername();
+                    }}
                     required
                   />
                 </InputGroup>
