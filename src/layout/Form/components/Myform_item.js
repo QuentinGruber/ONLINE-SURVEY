@@ -104,9 +104,17 @@ class FormTitle extends React.Component {
           <div
             className="div-share-form"
             data-clipboard-text={this.props.FormLink}
+            onClick={() => {
+              let popup = document.getElementsByClassName("popup-share")[0];
+              popup.classList.toggle("visible", true);
+              setTimeout(() => {
+                popup.classList.toggle("visible", false);
+              }, 2000);
+            }}
           >
             Partager
             <FontAwesomeIcon icon="share-alt" className="fa-s share-icon" />
+            <span className="popup-share">Lien copié !</span>
           </div>
         </div>
         <Link
