@@ -188,7 +188,8 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   .div-share-form {
-    display: inline;
+    position: relative;
+    display: inline-block;
     cursor: pointer;
   }
 
@@ -199,6 +200,42 @@ export const GlobalStyle = createGlobalStyle`
   .div-share-form:hover {
     color: #32325d;
     text-decoration: underline;
+  }
+
+                /*popup*/
+  
+  .div-share-form .popup-share {
+    visibility: hidden;
+    font-size: 14px;
+    width: 100px;
+    background-color: #172b4d;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -50px;
+    opacity: 0;
+    -webkit-transition: 0.2s;
+  }
+
+  .div-share-form .popup-share::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #172b4d transparent transparent transparent;
+  }
+
+  .visible {
+    visibility: visible !important;
+    opacity: 1 !important;
   }
 
   .div-edit-form {
