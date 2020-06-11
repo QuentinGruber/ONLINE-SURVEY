@@ -20,8 +20,18 @@ import LinkedInLogin from "./sub_components/linkedin_login";
 class Register extends React.Component {
   onChangeUsername() {
     let username = document.getElementById("Register_name");
+    username.classList.toggle("red-border", false);
     try {
       username.setCustomValidity("");
+    } catch (e) {}
+    return;
+  }
+
+  onChangeEmail() {
+    let email = document.getElementById("Register_email");
+    email.classList.toggle("red-border", false);
+    try {
+      email.setCustomValidity("");
     } catch (e) {}
     return;
   }
@@ -87,10 +97,11 @@ class Register extends React.Component {
             // next step check if provided email isn't already in our database
             Check_Email();
           } else {
-            console.log("début else");
             let username = document.getElementById("Register_name");
             username.classList.toggle("red-border", true);
-            username.setCustomValidity("mauvais utilisateur");
+            username.setCustomValidity(
+              "Ce nom d'utilisateur est déjà utilisé !"
+            );
           }
         }
       };
@@ -121,7 +132,11 @@ class Register extends React.Component {
           if (this.response === "0") {
             // information has been checked now we can register the user
             Register();
-          } else alert("An account already use this email address ! ");
+          } else {
+            let email = document.getElementById("Register_email");
+            email.classList.toggle("red-border", true);
+            email.setCustomValidity("Cette adresse email est déjà utilisée !");
+          }
         }
       };
       // Send a post request
@@ -219,6 +234,9 @@ class Register extends React.Component {
                     placeholder="Email"
                     pattern='^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$'
                     title="Doit respecter le format d'un email"
+                    onChange={() => {
+                      this.onChangeEmail();
+                    }}
                     required
                   />
                 </InputGroup>
