@@ -14,7 +14,7 @@ import FormResult from "./components/FormResult.js";
 class Form extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { items: [], selected_item: undefined };
+    this.state = { items: [], selected_item: undefined, myform_list: [] };
     this.remove_form = this.remove_form.bind(this);
     this.updt_selected_form_card = this.updt_selected_form_card.bind(this);
   }
@@ -54,9 +54,10 @@ class Form extends React.Component {
       withCredentials: true,
       data: { FormID: id },
     });
-    let temp_item = this.state.items;
+    console.log("recieve id : " + id + " idx : " + idx);
+    let temp_item = this.state.myform_list;
     temp_item.splice(idx, 1);
-    this.setState({ items: temp_item });
+    this.setState({ myform_list: temp_item });
   }
 
   updt_selected_form_card(NewItem) {
@@ -72,24 +73,7 @@ class Form extends React.Component {
         withCredentials: true,
       });
       if (myform_list_promise.data !== false) {
-        let items = [];
-        for (let i = 0; i < myform_list_promise.data.length; i++) {
-          items.unshift(
-            <MyFormItem
-              key={i}
-              idx={i}
-              updt_selected_form_card={this.updt_selected_form_card}
-              remove_form={this.remove_form}
-              id={myform_list_promise.data[i].id}
-              FormLink={
-                "https://www.online-survey.app/form/" +
-                myform_list_promise.data[i].id
-              }
-              data={myform_list_promise.data[i]}
-            />
-          );
-        }
-        this.setState({ items: items });
+        this.setState({ myform_list: myform_list_promise.data });
       } else {
         document.location.href = "/auth/";
         alert("You need to be connected !");
@@ -99,6 +83,22 @@ class Form extends React.Component {
     }
   }
   render() {
+    let items = [];
+    for (let i = 0; i < this.state.myform_list.length; i++) {
+      items.unshift(
+        <MyFormItem
+          key={i}
+          idx={i}
+          updt_selected_form_card={this.updt_selected_form_card}
+          remove_form={this.remove_form}
+          id={this.state.myform_list[i].id}
+          FormLink={
+            "https://www.online-survey.app/form/" + this.state.myform_list[i].id
+          }
+          data={this.state.myform_list[i]}
+        />
+      );
+    }
     return (
       <>
         <GlobalStyle />
@@ -113,7 +113,7 @@ class Form extends React.Component {
                 Your forms, made simple
               </div>
             </div>
-            <Card className="form-list-card">{this.state.items}</Card>
+            <Card className="form-list-card">{items}</Card>
             <Card className="add-form-card">
               <div className="container-button-new-form">
                 <Link to="/form/new">
