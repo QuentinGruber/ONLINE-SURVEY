@@ -17,7 +17,7 @@ exports.create_new_form = async function (req, res, connection) {
         // If some error occurs, we throw an error.
         try {
           if (sql_error) {
-            throw console.error(sql_error);
+            log(JSON.stringify(sql_error), "crash.log");
           }
           for (let i = 0; i < req.body.content.length; i++) {
             // Create question linked to form
@@ -34,7 +34,7 @@ exports.create_new_form = async function (req, res, connection) {
               function (sql_error, results, fields) {
                 // If some error occurs, we throw an error.
                 if (sql_error) {
-                  throw console.error(sql_error);
+                  log(JSON.stringify(sql_error), "crash.log");
                 }
 
                 // Create answer linked to the current question
@@ -49,7 +49,7 @@ exports.create_new_form = async function (req, res, connection) {
                     function (sql_error, results, fields) {
                       // If some error occurs, we throw an error.
                       if (sql_error) {
-                        throw console.error(sql_error);
+                        log(JSON.stringify(sql_error), "crash.log");
                       }
                     }
                   );
@@ -65,7 +65,7 @@ exports.create_new_form = async function (req, res, connection) {
                     function (sql_error, results, fields) {
                       // If some error occurs, we throw an error.
                       if (sql_error) {
-                        throw console.error(sql_error);
+                        log(JSON.stringify(sql_error), "crash.log");
                       }
                     }
                   );
@@ -86,7 +86,7 @@ exports.create_new_form = async function (req, res, connection) {
                       function (sql_error, results, fields) {
                         // If some error occurs, we throw an error.
                         if (sql_error) {
-                          throw console.error(sql_error);
+                          log(JSON.stringify(sql_error), "crash.log");
                         }
                       }
                     );
@@ -109,7 +109,7 @@ exports.create_new_form = async function (req, res, connection) {
                       function (sql_error, results, fields) {
                         // If some error occurs, we throw an error.
                         if (sql_error) {
-                          throw console.error(sql_error);
+                          log(JSON.stringify(sql_error), "crash.log");
                         }
                       }
                     );
@@ -143,7 +143,7 @@ exports.get_number_of_answers = function (req, res, connection) {
         function (sql_error, results, fields) {
           try {
             if (sql_error) {
-              throw console.error(sql_error);
+              log(JSON.stringify(sql_error), "crash.log");
             }
             res.send(JSON.stringify(results.length));
             connection.release();
@@ -172,7 +172,7 @@ exports.get_question_list = function (req, res, connection) {
         function (sql_error, results, fields) {
           try {
             if (sql_error) {
-              throw console.error(sql_error);
+              log(JSON.stringify(sql_error), "crash.log");
             }
             res.send(results);
             connection.release();
@@ -199,7 +199,7 @@ exports.get_question_info = function (req, res, connection) {
       function (sql_error, results, fields) {
         try {
           if (sql_error) {
-            throw console.error(sql_error);
+            log(JSON.stringify(sql_error), "crash.log");
           }
           res.send(results[0]);
           connection.release();
@@ -224,7 +224,7 @@ exports.get_question_answers = function (req, res, connection) {
       function (sql_error, results, fields) {
         try {
           if (sql_error) {
-            throw console.error(sql_error);
+            log(JSON.stringify(sql_error), "crash.log");
           }
           res.send(results);
           connection.release();
@@ -286,7 +286,7 @@ exports.modify_form = async function (req, res, connection) {
           try {
             // If some error occurs, we throw an error.
             if (sql_error) {
-              throw console.error(sql_error);
+              log(JSON.stringify(sql_error), "crash.log");
             }
             for (let i = 0; i < req.body.content.length; i++) {
               if (req.body.content[i].id != undefined) {
@@ -312,7 +312,7 @@ exports.modify_form = async function (req, res, connection) {
                   function (sql_error, results, fields) {
                     // If some error occurs, we throw an error.
                     if (sql_error) {
-                      throw console.error(sql_error);
+                      log(JSON.stringify(sql_error), "crash.log");
                     }
 
                     // Create answer linked to the current question
@@ -332,7 +332,7 @@ exports.modify_form = async function (req, res, connection) {
                         function (sql_error, results, fields) {
                           // If some error occurs, we throw an error.
                           if (sql_error) {
-                            throw console.error(sql_error);
+                            log(JSON.stringify(sql_error), "crash.log");
                           }
                         }
                       );
@@ -353,7 +353,7 @@ exports.modify_form = async function (req, res, connection) {
                         function (sql_error, results, fields) {
                           // If some error occurs, we throw an error.
                           if (sql_error) {
-                            throw console.error(sql_error);
+                            log(JSON.stringify(sql_error), "crash.log");
                           }
                         }
                       );
@@ -380,7 +380,7 @@ exports.modify_form = async function (req, res, connection) {
                             function (sql_error, results, fields) {
                               // If some error occurs, we throw an error.
                               if (sql_error) {
-                                throw console.error(sql_error);
+                                log(JSON.stringify(sql_error), "crash.log");
                               }
                             }
                           );
@@ -396,7 +396,7 @@ exports.modify_form = async function (req, res, connection) {
                             function (sql_error, results, fields) {
                               // If some error occurs, we throw an error.
                               if (sql_error) {
-                                throw console.error(sql_error);
+                                log(JSON.stringify(sql_error), "crash.log");
                               }
                             }
                           );
@@ -425,7 +425,7 @@ exports.modify_form = async function (req, res, connection) {
                             function (sql_error, results, fields) {
                               // If some error occurs, we throw an error.
                               if (sql_error) {
-                                throw console.error(sql_error);
+                                log(JSON.stringify(sql_error), "crash.log");
                               }
                             }
                           );
@@ -441,7 +441,7 @@ exports.modify_form = async function (req, res, connection) {
                             function (sql_error, results, fields) {
                               // If some error occurs, we throw an error.
                               if (sql_error) {
-                                throw console.error(sql_error);
+                                log(JSON.stringify(sql_error), "crash.log");
                               }
                             }
                           );
@@ -474,7 +474,7 @@ exports.modify_form = async function (req, res, connection) {
                   function (sql_error, results, fields) {
                     // If some error occurs, we throw an error.
                     if (sql_error) {
-                      throw console.error(sql_error);
+                      log(JSON.stringify(sql_error), "crash.log");
                     }
 
                     if (req.body.content[i].p_answer.length > 0) {
@@ -492,7 +492,7 @@ exports.modify_form = async function (req, res, connection) {
                           function (sql_error, results, fields) {
                             // If some error occurs, we throw an error.
                             if (sql_error) {
-                              throw console.error(sql_error);
+                              log(JSON.stringify(sql_error), "crash.log");
                             }
                           }
                         );
@@ -507,7 +507,7 @@ exports.modify_form = async function (req, res, connection) {
                         function (sql_error, results, fields) {
                           // If some error occurs, we throw an error.
                           if (sql_error) {
-                            throw console.error(sql_error);
+                            log(JSON.stringify(sql_error), "crash.log");
                           }
                         }
                       );
@@ -543,7 +543,7 @@ exports.delete_form = function (req, res, connection) {
         function (sql_error, results, fields) {
           try {
             if (sql_error) {
-              throw console.error(sql_error);
+              log(JSON.stringify(sql_error), "crash.log");
             }
             res.send("true");
             connection.release();
@@ -572,7 +572,7 @@ exports.delete_item = function (req, res, connection) {
         function (sql_error, results, fields) {
           try {
             if (sql_error) {
-              throw console.error(sql_error);
+              log(JSON.stringify(sql_error), "crash.log");
             }
             res.send("true");
             connection.release();
@@ -601,7 +601,7 @@ exports.delete_option = function (req, res, connection) {
         function (sql_error, results, fields) {
           try {
             if (sql_error) {
-              throw console.error(sql_error);
+              log(JSON.stringify(sql_error), "crash.log");
             }
             res.send("true");
             connection.release();
@@ -630,7 +630,7 @@ exports.get_form_content = async function (req, res, connection) {
         try {
           // If some error occurs, we throw an error.
           if (sql_error) {
-            throw console.error(sql_error);
+            log(JSON.stringify(sql_error), "crash.log");
           }
           if (results.length == 0) {
             // if form doesn't exist
@@ -648,7 +648,7 @@ exports.get_form_content = async function (req, res, connection) {
             function (sql_error, results, fields) {
               // If some error occurs, we throw an error.
               if (sql_error) {
-                throw console.error(sql_error);
+                log(JSON.stringify(sql_error), "crash.log");
               }
               for (let i = 0; i < results.length; i++) {
                 // create new item
@@ -671,7 +671,7 @@ exports.get_form_content = async function (req, res, connection) {
                   function (sql_error, results, fields) {
                     // If some error occurs, we throw an error.
                     if (sql_error) {
-                      throw console.error(sql_error);
+                      log(JSON.stringify(sql_error), "crash.log");
                     }
                     Formcontent.content[i].p_answer = [];
                     for (let j = 0; j < results.length; j++) {
@@ -715,7 +715,7 @@ exports.HasAnswered = async function (req, res, connection) {
         // If some error occurs, we throw an error.
         try {
           if (sql_error) {
-            throw console.error(sql_error);
+            log(JSON.stringify(sql_error), "crash.log");
           }
 
           var FormID = req.path.substr(req.path.lastIndexOf("/") + 1); // get current form id
@@ -770,7 +770,7 @@ exports.register_answer = async function (req, res, connection) {
           // If some error occurs, we throw an error.
           try {
             if (sql_error) {
-              throw console.error(sql_error);
+              log(JSON.stringify(sql_error), "crash.log");
             }
           } catch (e) {
             res.send("false");
@@ -794,7 +794,7 @@ exports.get_user_form_content = async function (req, res, connection) {
           // If some error occurs, we throw an error.
           try {
             if (sql_error) {
-              throw console.error(sql_error);
+              log(JSON.stringify(sql_error), "crash.log");
             }
             res.send(results);
             connection.release();
