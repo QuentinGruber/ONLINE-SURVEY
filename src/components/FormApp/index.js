@@ -62,6 +62,7 @@ class FormApp extends React.Component {
         }
       } else {
         // if this isn't a new question_list
+        let button = document.getElementsByClassName("save-form-button")[0];
         try {
           // Delete removed options from db
           for (let i = 0; i < this.OptionsToDelete.length; i++) {
@@ -99,14 +100,38 @@ class FormApp extends React.Component {
             },
           });
           if (createList_promise.data === true) {
-            alert("Form updated !");
+            button.classList.toggle("green-bg", true);
+            button.innerHTML = "Enregistré !";
+
+            setTimeout(() => {
+              button.classList.toggle("green-bg", false);
+              button.innerHTML = "Enregistrer";
+            }, 2000);
           }
         } catch (e) {
-          console.error("Error while saving a form ! " + e);
+          button.classList.toggle("red-bg", true);
+          button.innerHTML = "Erreur";
+
+          setTimeout(() => {
+            button.classList.toggle("red-bg", false);
+            button.innerHTML = "Enregistrer";
+          }, 2000);
         }
       }
     } else {
-      alert("A form need at least a name & one question to exist !");
+      let button = document.getElementsByClassName("save-form-button")[0];
+      let title = document.getElementsByClassName("form-title")[0];
+      button.classList.toggle("red-bg", true);
+      button.innerHTML = "Erreur";
+
+      if (title.innerHTML === "") {
+        title.classList.toggle("red-border", true);
+      }
+
+      setTimeout(() => {
+        button.classList.toggle("red-bg", false);
+        button.innerHTML = "Enregistrer";
+      }, 2000);
     }
   }
 
@@ -150,6 +175,9 @@ class FormApp extends React.Component {
   handleChangeTitle(title) {
     // change title in component state
     this.setState({ FormName: title });
+
+    let elementTitle = document.getElementsByClassName("form-title")[0];
+    elementTitle.classList.toggle("red-border", false);
   }
 
   handleChangeQuestionTitle(title, idx) {
@@ -211,13 +239,9 @@ class FormApp extends React.Component {
         });
       } catch (e) {
         // if request fail
-        alert(
-          "form id : " +
-            this.FormID +
-            " do not exist or you don't have the rights access... redirecting"
-        );
+        alert("Vous n'avez pas accès à ce formulaire.");
         // redirect user to /form/new
-        document.location.href = "/form/new";
+        document.location.href = "/form";
       }
 
       // setup vars

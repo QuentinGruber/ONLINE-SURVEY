@@ -68,6 +68,11 @@ body{
   .boxTextTitre {
     font-size: 40px;
   }
+
+  .red-border {
+    border: 2px #BB0B0B solid !important;
+    border-radius: 5px !important;
+  }
   
   /* ON MOBILE */
   

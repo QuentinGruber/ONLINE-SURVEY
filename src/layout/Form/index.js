@@ -74,8 +74,8 @@ class Form extends React.Component {
       if (myform_list_promise.data !== false) {
         this.setState({ myform_list: myform_list_promise.data });
       } else {
+        alert("Vous devez être connecté.");
         document.location.href = "/auth/";
-        alert("You need to be connected !");
       }
     } catch (e) {
       console.error("Error while fetching user's forms! " + e);

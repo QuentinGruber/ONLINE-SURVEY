@@ -9,8 +9,6 @@ import {
   FormGroup,
   Form,
   Input,
-  InputGroupAddon,
-  InputGroupText,
   InputGroup,
   Row,
   Col,
@@ -20,6 +18,13 @@ import FacebookLogin from "./sub_components/Facebook_login";
 import LinkedInLogin from "./sub_components/linkedin_login";
 class Login extends React.Component {
   render() {
+    function keyPressed() {
+      let password = document.getElementById("Login_pass");
+      let username = document.getElementById("Login_name");
+      password.classList.toggle("red-border", false);
+      username.classList.toggle("red-border", false);
+    }
+
     const SECRET_KEY = process.env.REACT_APP_SECRET_KEY;
     function Login() {
       // get our input values
@@ -31,10 +36,13 @@ class Login extends React.Component {
         // handle request response
         if (this.readyState === 4 && this.status === 200) {
           if (this.responseText !== "false") {
-            alert("Logged in !");
             document.location.href = "/form";
           } else {
-            alert("Wrong username/password !");
+            let password = document.getElementById("Login_pass");
+            let username = document.getElementById("Login_name");
+            password.value = "";
+            password.classList.toggle("red-border", true);
+            username.classList.toggle("red-border", true);
           }
         }
       };
@@ -72,30 +80,22 @@ class Login extends React.Component {
             <Form role="form" id="loginBox">
               <FormGroup className="mb-4">
                 <InputGroup className="input-group-alternative">
-                  <InputGroupAddon addonType="prepend">
-                    <InputGroupText>
-                      <i className="ni ni-email-83" />
-                    </InputGroupText>
-                  </InputGroupAddon>
                   <Input
                     id="Login_name"
                     name="username"
                     placeholder="Nom d'utilisateur"
+                    onChange={keyPressed}
                   />
                 </InputGroup>
               </FormGroup>
               <FormGroup>
                 <InputGroup className="input-group-alternative">
-                  <InputGroupAddon addonType="prepend">
-                    <InputGroupText>
-                      <i className="ni ni-lock-circle-open" />
-                    </InputGroupText>
-                  </InputGroupAddon>
                   <Input
                     id="Login_pass"
                     name="password"
                     placeholder="Mot de passe"
                     type="password"
+                    onChange={keyPressed}
                   />
                 </InputGroup>
               </FormGroup>

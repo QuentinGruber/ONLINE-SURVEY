@@ -9,8 +9,6 @@ import {
   FormGroup,
   Form,
   Input,
-  InputGroupAddon,
-  InputGroupText,
   InputGroup,
   Row,
   Col,
@@ -20,6 +18,24 @@ import FacebookLogin from "./sub_components/Facebook_login";
 import LinkedInLogin from "./sub_components/linkedin_login";
 
 class Register extends React.Component {
+  onChangeUsername() {
+    let username = document.getElementById("Register_name");
+    username.classList.toggle("red-border", false);
+    try {
+      username.setCustomValidity("");
+    } catch (e) {}
+    return;
+  }
+
+  onChangeEmail() {
+    let email = document.getElementById("Register_email");
+    email.classList.toggle("red-border", false);
+    try {
+      email.setCustomValidity("");
+    } catch (e) {}
+    return;
+  }
+
   render() {
     var jwt = require("jsonwebtoken");
     const SECRET_KEY = process.env.REACT_APP_SECRET_KEY;
@@ -77,10 +93,16 @@ class Register extends React.Component {
         // handle request response
         if (this.readyState === 4 && this.status === 200) {
           // response format is a rowdatapacket so it was needed to do like that.
-          if (this.response === "0")
+          if (this.response === "0") {
             // next step check if provided email isn't already in our database
             Check_Email();
-          else alert("Username already taken !");
+          } else {
+            let username = document.getElementById("Register_name");
+            username.classList.toggle("red-border", true);
+            username.setCustomValidity(
+              "Ce nom d'utilisateur est déjà utilisé !"
+            );
+          }
         }
       };
       // Send a post request
@@ -110,7 +132,11 @@ class Register extends React.Component {
           if (this.response === "0") {
             // information has been checked now we can register the user
             Register();
-          } else alert("An account already use this email address ! ");
+          } else {
+            let email = document.getElementById("Register_email");
+            email.classList.toggle("red-border", true);
+            email.setCustomValidity("Cette adresse email est déjà utilisée !");
+          }
         }
       };
       // Send a post request
@@ -140,10 +166,9 @@ class Register extends React.Component {
         // handle request response
         if (this.readyState === 4 && this.status === 200) {
           if (this.responseText === "true") {
-            alert("Registered succesfully!");
             document.location.href = "/form";
           } else {
-            alert("Fail to register...sorry");
+            alert("Erreur lors de l'inscription.");
           }
         }
       };
@@ -186,28 +211,21 @@ class Register extends React.Component {
             <Form role="form" id="registerBox">
               <FormGroup>
                 <InputGroup className="input-group-alternative mb-3">
-                  <InputGroupAddon addonType="prepend">
-                    <InputGroupText>
-                      <i className="ni ni-hat-3" />
-                    </InputGroupText>
-                  </InputGroupAddon>
                   <Input
                     id="Register_name"
                     name="username"
                     placeholder="Nom d'utilisateur"
                     type="text"
                     pattern=".{3,16}"
+                    onChange={() => {
+                      this.onChangeUsername();
+                    }}
                     required
                   />
                 </InputGroup>
               </FormGroup>
               <FormGroup>
                 <InputGroup className="input-group-alternative mb-3">
-                  <InputGroupAddon addonType="prepend">
-                    <InputGroupText>
-                      <i className="ni ni-email-83" />
-                    </InputGroupText>
-                  </InputGroupAddon>
                   <Input
                     type="text"
                     id="Register_email"
@@ -215,17 +233,15 @@ class Register extends React.Component {
                     placeholder="Email"
                     pattern='^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$'
                     title="Doit respecter le format d'un email"
+                    onChange={() => {
+                      this.onChangeEmail();
+                    }}
                     required
                   />
                 </InputGroup>
               </FormGroup>
               <FormGroup>
                 <InputGroup className="input-group-alternative">
-                  <InputGroupAddon addonType="prepend">
-                    <InputGroupText>
-                      <i className="ni ni-lock-circle-open" />
-                    </InputGroupText>
-                  </InputGroupAddon>
                   <Input
                     type="password"
                     id="Register_pass"
@@ -241,11 +257,6 @@ class Register extends React.Component {
               </FormGroup>
               <FormGroup>
                 <InputGroup className="input-group-alternative">
-                  <InputGroupAddon addonType="prepend">
-                    <InputGroupText>
-                      <i className="ni ni-lock-circle-open" />
-                    </InputGroupText>
-                  </InputGroupAddon>
                   <Input
                     type="password"
                     id="Register_confirm_pass"
