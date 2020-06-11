@@ -54,7 +54,6 @@ class Form extends React.Component {
       withCredentials: true,
       data: { FormID: id },
     });
-    console.log("recieve id : " + id + " idx : " + idx);
     let temp_item = this.state.myform_list;
     temp_item.splice(idx, 1);
     this.setState({ myform_list: temp_item });
