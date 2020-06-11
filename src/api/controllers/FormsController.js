@@ -104,7 +104,6 @@ exports.create_new_form = async function (req, res, connection) {
                         results.insertId +
                         "', '" +
                         req.body.content[i].p_answer[j].text +
-                        "','" +
                         "');",
                       function (sql_error, results, fields) {
                         // If some error occurs, we throw an error.
