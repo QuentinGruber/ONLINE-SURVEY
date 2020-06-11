@@ -120,12 +120,16 @@ exports.create_new_form = async function (req, res, connection) {
           }
         } catch (e) {
           log(JSON.stringify(e), "crash.log");
-          res.send("false");
+          if (!res.headersSent) {
+            res.send("false");
+          }
           connection.release();
         }
       }
     );
-    res.send("true");
+    if (!res.headersSent) {
+      res.send("true");
+    }
     connection.release();
   });
 };
@@ -145,10 +149,14 @@ exports.get_number_of_answers = function (req, res, connection) {
             if (sql_error) {
               log(JSON.stringify(sql_error), "crash.log");
             }
-            res.send(JSON.stringify(results.length));
+            if (!res.headersSent) {
+              res.send(JSON.stringify(results.length));
+            }
             connection.release();
           } catch (e) {
-            res.send("false");
+            if (!res.headersSent) {
+              res.send("false");
+            }
             connection.release();
             log(JSON.stringify(e), "crash.log");
           }
@@ -174,10 +182,14 @@ exports.get_question_list = function (req, res, connection) {
             if (sql_error) {
               log(JSON.stringify(sql_error), "crash.log");
             }
-            res.send(results);
+            if (!res.headersSent) {
+              res.send(results);
+            }
             connection.release();
           } catch (e) {
-            res.send("false");
+            if (!res.headersSent) {
+              res.send("false");
+            }
             connection.release();
             log(JSON.stringify(e), "crash.log");
           }
@@ -201,10 +213,14 @@ exports.get_question_info = function (req, res, connection) {
           if (sql_error) {
             log(JSON.stringify(sql_error), "crash.log");
           }
-          res.send(results[0]);
+          if (!res.headersSent) {
+            res.send(results[0]);
+          }
           connection.release();
         } catch (e) {
-          res.send("false");
+          if (!res.headersSent) {
+            res.send("false");
+          }
           connection.release();
           log(JSON.stringify(e), "crash.log");
         }
@@ -226,10 +242,14 @@ exports.get_question_answers = function (req, res, connection) {
           if (sql_error) {
             log(JSON.stringify(sql_error), "crash.log");
           }
-          res.send(results);
+          if (!res.headersSent) {
+            res.send(results);
+          }
           connection.release();
         } catch (e) {
-          res.send("false");
+          if (!res.headersSent) {
+            res.send("false");
+          }
           connection.release();
           log(JSON.stringify(e), "crash.log");
         }
@@ -517,16 +537,22 @@ exports.modify_form = async function (req, res, connection) {
               }
             }
           } catch (e) {
-            res.send("false");
+            if (!res.headersSent) {
+              res.send("false");
+            }
             connection.release();
             log(JSON.stringify(e), "crash.log");
           }
         }
       );
-      res.send("true");
+      if (!res.headersSent) {
+        res.send("true");
+      }
       connection.release();
     } else {
-      res.send(401); // Unauthorized
+      if (!res.headersSent) {
+        res.send(401);
+      } // Unauthorized
       connection.release();
     }
   });
@@ -545,10 +571,14 @@ exports.delete_form = function (req, res, connection) {
             if (sql_error) {
               log(JSON.stringify(sql_error), "crash.log");
             }
-            res.send("true");
+            if (!res.headersSent) {
+              res.send("true");
+            }
             connection.release();
           } catch (e) {
-            res.send("false");
+            if (!res.headersSent) {
+              res.send("false");
+            }
             connection.release();
             log(JSON.stringify(e), "crash.log");
           }
@@ -574,10 +604,14 @@ exports.delete_item = function (req, res, connection) {
             if (sql_error) {
               log(JSON.stringify(sql_error), "crash.log");
             }
-            res.send("true");
+            if (!res.headersSent) {
+              res.send("true");
+            }
             connection.release();
           } catch (e) {
-            res.send("false");
+            if (!res.headersSent) {
+              res.send("false");
+            }
             connection.release();
             log(JSON.stringify(e), "crash.log");
           }
@@ -603,10 +637,14 @@ exports.delete_option = function (req, res, connection) {
             if (sql_error) {
               log(JSON.stringify(sql_error), "crash.log");
             }
-            res.send("true");
+            if (!res.headersSent) {
+              res.send("true");
+            }
             connection.release();
           } catch (e) {
-            res.send("false");
+            if (!res.headersSent) {
+              res.send("false");
+            }
             connection.release();
             log(JSON.stringify(e), "crash.log");
           }
@@ -634,7 +672,9 @@ exports.get_form_content = async function (req, res, connection) {
           }
           if (results.length == 0) {
             // if form doesn't exist
-            res.send("false");
+            if (!res.headersSent) {
+              res.send("false");
+            }
             connection.release();
             return;
           }
@@ -681,7 +721,9 @@ exports.get_form_content = async function (req, res, connection) {
                       });
                     }
                     if (i + 1 == nb_questions) {
-                      res.send(Formcontent);
+                      if (!res.headersSent) {
+                        res.send(Formcontent);
+                      }
                       connection.release();
                     }
                   }
@@ -690,7 +732,9 @@ exports.get_form_content = async function (req, res, connection) {
             }
           );
         } catch (e) {
-          res.send("false");
+          if (!res.headersSent) {
+            res.send("false");
+          }
           connection.release();
           log(JSON.stringify(e), "crash.log");
         }
@@ -703,7 +747,9 @@ exports.HasAnswered = async function (req, res, connection) {
   connection.getConnection(function (err, connection) {
     if (!req.session.user_id) {
       // if not connected
-      res.send(false);
+      if (!res.headersSent) {
+        res.send(false);
+      }
       connection.release();
       return;
     }
@@ -724,17 +770,23 @@ exports.HasAnswered = async function (req, res, connection) {
             // if user has answered the form
             if (element.forms_id === parseInt(FormID)) {
               HasAnswered = true;
-              res.send(true);
+              if (!res.headersSent) {
+                res.send(true);
+              }
               connection.release();
             }
           });
           if (!HasAnswered) {
             // if not
-            res.send(false);
+            if (!res.headersSent) {
+              res.send(false);
+            }
             connection.release();
           }
         } catch (e) {
-          res.send("false");
+          if (!res.headersSent) {
+            res.send("false");
+          }
           connection.release();
           log(JSON.stringify(e), "crash.log");
         }
@@ -747,7 +799,9 @@ exports.register_answer = async function (req, res, connection) {
   connection.getConnection(function (err, connection) {
     if (!req.session.user_id) {
       // if not connected
-      res.send(false);
+      if (!res.headersSent) {
+        res.send(false);
+      }
       connection.release();
       return;
     }
@@ -773,14 +827,18 @@ exports.register_answer = async function (req, res, connection) {
               log(JSON.stringify(sql_error), "crash.log");
             }
           } catch (e) {
-            res.send("false");
+            if (!res.headersSent) {
+              res.send("false");
+            }
             connection.release();
             log(JSON.stringify(e), "crash.log");
           }
         }
       );
     }
-    res.send(true);
+    if (!res.headersSent) {
+      res.send(true);
+    }
     connection.release();
   });
 };
@@ -796,10 +854,14 @@ exports.get_user_form_content = async function (req, res, connection) {
             if (sql_error) {
               log(JSON.stringify(sql_error), "crash.log");
             }
-            res.send(results);
+            if (!res.headersSent) {
+              res.send(results);
+            }
             connection.release();
           } catch (e) {
-            res.send("false");
+            if (!res.headersSent) {
+              res.send("false");
+            }
             connection.release();
             log(JSON.stringify(e), "crash.log");
           }
@@ -807,6 +869,8 @@ exports.get_user_form_content = async function (req, res, connection) {
       );
     });
   } else {
-    res.send(false);
+    if (!res.headersSent) {
+      res.send(false);
+    }
   }
 };

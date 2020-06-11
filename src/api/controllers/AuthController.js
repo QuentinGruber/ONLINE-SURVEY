@@ -42,7 +42,9 @@ exports.register = function (req, res, connection) {
           JSON.stringify("Password fail to encrypt : " + e.message),
           "crash.log"
         );
-        res.send("false");
+        if (!res.headersSent) {
+          res.send("false");
+        }
       }
     }
 
@@ -76,11 +78,15 @@ exports.register = function (req, res, connection) {
 
               // store the user_id in session
               req.session.user_id = results.insertId;
-              res.send("true");
+              if (!res.headersSent) {
+                res.send("true");
+              }
               connection.release();
             } catch (e) {
               log(JSON.stringify(e), "crash.log");
-              res.send("false");
+              if (!res.headersSent) {
+                res.send("false");
+              }
               connection.release();
             }
           }
@@ -117,10 +123,14 @@ exports.register = function (req, res, connection) {
               }
               // store the user_id in session
               req.session.user_id = results.insertId;
-              res.send("true");
+              if (!res.headersSent) {
+                res.send("true");
+              }
               connection.release();
             } catch (e) {
-              res.send("false");
+              if (!res.headersSent) {
+                res.send("false");
+              }
               connection.release();
               log(JSON.stringify(e), "crash.log");
             }
@@ -159,10 +169,14 @@ exports.register = function (req, res, connection) {
 
               // store the user_id in session
               req.session.user_id = results.insertId;
-              res.send("true");
+              if (!res.headersSent) {
+                res.send("true");
+              }
               connection.release();
             } catch (e) {
-              res.send("false");
+              if (!res.headersSent) {
+                res.send("false");
+              }
               connection.release();
               log(JSON.stringify(e), "crash.log");
             }
@@ -193,10 +207,14 @@ exports.register = function (req, res, connection) {
 
               // store the user_id in session
               req.session.user_id = results.insertId;
-              res.send("true");
+              if (!res.headersSent) {
+                res.send("true");
+              }
               connection.release();
             } catch (e) {
-              res.send("false");
+              if (!res.headersSent) {
+                res.send("false");
+              }
               connection.release();
               log(JSON.stringify(e), "crash.log");
             }
@@ -243,11 +261,16 @@ exports.login = function (req, res, connection) {
         "SELECT * FROM users WHERE username='" + data.Username + "';",
         function (sql_error, results, fields) {
           // If some error occurs, we throw an error.
-          if (sql_error) res.send("false");
+          if (sql_error)
+            if (!res.headersSent) {
+              res.send("false");
+            }
           if (results.length > 0) var Stored_pass = results[0].pass;
           // if provided username is in our database
           else {
-            res.send("false"); // if not send false
+            if (!res.headersSent) {
+              res.send("false");
+            } // if not send false
             connection.release();
             return; // and stop the connection.query
           }
@@ -281,10 +304,14 @@ exports.login = function (req, res, connection) {
             // if the Submit pass is the same as storage pass
             // store the user_id in session
             req.session.user_id = results[0].id;
-            res.send("true");
+            if (!res.headersSent) {
+              res.send("true");
+            }
             connection.release();
           } else {
-            res.send("false");
+            if (!res.headersSent) {
+              res.send("false");
+            }
             connection.release();
           }
         }
@@ -305,10 +332,14 @@ exports.login = function (req, res, connection) {
             }
             // store the user_id in session
             req.session.user_id = results[0].id;
-            res.send("true");
+            if (!res.headersSent) {
+              res.send("true");
+            }
             connection.release();
           } catch (e) {
-            res.send("false");
+            if (!res.headersSent) {
+              res.send("false");
+            }
             connection.release();
             log(JSON.stringify(e), "crash.log");
           }
@@ -339,10 +370,14 @@ exports.Check_Username = function (req, res, connection) {
           }
           // Getting the 'response' from the database and sending it to our route. This is were the data is.
           let result_converted = Object.values(results[0]);
-          res.send(JSON.stringify(result_converted[0]));
+          if (!res.headersSent) {
+            res.send(JSON.stringify(result_converted[0]));
+          }
           connection.release();
         } catch (e) {
-          res.send("false");
+          if (!res.headersSent) {
+            res.send("false");
+          }
           connection.release();
           log(JSON.stringify(e), "crash.log");
         }
@@ -368,10 +403,14 @@ exports.Check_Email = function (req, res, connection) {
           }
           // Getting the 'response' from the database and sending it to our route. This is were the data is.
           let result_converted = Object.values(results[0]);
-          res.send(JSON.stringify(result_converted[0]));
+          if (!res.headersSent) {
+            res.send(JSON.stringify(result_converted[0]));
+          }
           connection.release();
         } catch (e) {
-          res.send("false");
+          if (!res.headersSent) {
+            res.send("false");
+          }
           connection.release();
           log(JSON.stringify(e), "crash.log");
         }
@@ -399,10 +438,14 @@ exports.Check_RegistrationType = function (req, res, connection) {
           }
           // Getting the 'response' from the database and sending it to our route. This is were the data is.
           let result_converted = Object.values(results[0]);
-          res.send(JSON.stringify(result_converted[0]));
+          if (!res.headersSent) {
+            res.send(JSON.stringify(result_converted[0]));
+          }
           connection.release();
         } catch (e) {
-          res.send("false");
+          if (!res.headersSent) {
+            res.send("false");
+          }
           connection.release();
           log(JSON.stringify(e), "crash.log");
         }

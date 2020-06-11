@@ -37,7 +37,9 @@ async function RetrieveUserInfo(access_token, res) {
       familyName: User_LastName,
       email: User_email,
     };
-    res.send(user_data);
+    if (!res.headersSent) {
+      res.send(user_data);
+    }
   } catch (e) {
     log(JSON.stringify(e), "crash.log");
   }
