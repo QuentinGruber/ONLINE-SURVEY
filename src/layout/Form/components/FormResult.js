@@ -39,7 +39,6 @@ class form_result extends React.Component {
                   { value: "PieChart", label: "Circulaire" },
                   { value: "Polar", label: "Polaire" },
                   { value: "BarChart", label: "Barres" },
-                  { value: "Doughnut", label: "Doughnut" },
                 ]}
                 data={question.answers}
                 name={question.name}
@@ -54,7 +53,6 @@ class form_result extends React.Component {
                   { value: "PieChart", label: "Circulaire" },
                   { value: "Polar", label: "Polaire" },
                   { value: "BarChart", label: "Barres" },
-                  { value: "Doughnut", label: "Doughnut" },
                 ]}
                 data={question.answers}
                 name={question.name}

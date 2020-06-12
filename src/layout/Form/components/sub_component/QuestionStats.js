@@ -2,7 +2,6 @@ import React from "react";
 import Select from "react-select";
 import PieChart from "../../../../components/ChartComponents/PieChart";
 import Polar from "../../../../components/ChartComponents/Polar";
-import Doughnut from "../../../../components/ChartComponents/Doughnut";
 import BarChart from "../../../../components/ChartComponents/BarChart";
 import List from "../../../../components/ChartComponents/List";
 import LineChart from "../../../../components/ChartComponents/LineChart";
@@ -42,8 +41,6 @@ class QuestionStats extends React.Component {
                 return <Polar data={this.props.data} />;
               case "PieChart":
                 return <PieChart data={this.props.data} />;
-              case "Doughnut":
-                return <Doughnut data={this.props.data} />;
               case "BarChart":
                 return <BarChart data={this.props.data} />;
               case "List":
