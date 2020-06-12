@@ -31,6 +31,19 @@ body{
     width: 200px;
   }
   
+  .text-light {
+    font-size: 90%;
+  }
+
+  .to-register {
+    margin: auto;
+  }  
+
+  .to-login {
+    margin: auto;
+  }
+
+
   .whiteDiv {
     position: relative;
     width: 100%;
