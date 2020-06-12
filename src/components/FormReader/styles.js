@@ -156,8 +156,8 @@ export const GlobalStyle = createGlobalStyle`
         border: 2px solid var(--active-inner);
         border-top: 0;
         border-left: 0;
-        left: 7px;
-        top: 4px;
+        left: 6px;
+        top: 3px;
         transform: rotate(var(--r, 20deg));
       }
       &:checked {
