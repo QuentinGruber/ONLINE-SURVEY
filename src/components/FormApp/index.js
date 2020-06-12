@@ -169,8 +169,6 @@ class FormApp extends React.Component {
     this.setState({
       formitems: formitems,
     });
-
-    this.setState({ formitems: items });
   }
 
   HandlePremadeAnswerChange(idx, type, NewValue) {
