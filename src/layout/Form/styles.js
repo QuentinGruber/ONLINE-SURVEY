@@ -356,6 +356,8 @@ export const GlobalStyle = createGlobalStyle`
     margin-top: 10px;
   }
 
+  li {
+  }
 
 
 
