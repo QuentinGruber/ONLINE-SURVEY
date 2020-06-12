@@ -89,6 +89,7 @@ class Form extends React.Component {
         <MyFormItem
           key={i}
           idx={i}
+          reverse_idx={this.state.myform_list.length - i - 1}
           updt_selected_form_card={this.updt_selected_form_card}
           remove_form={this.remove_form}
           id={this.state.myform_list[i].id}
@@ -115,12 +116,7 @@ class Form extends React.Component {
                 Your forms, made simple
               </div>
             </div>
-            <Card
-              className="form-list-card"
-              onClick={() => {
-                console.log(this.state.myform_list.length);
-              }}
-            >
+            <Card className="form-list-card">
               {this.state.myform_list.length > 0 ? (
                 <>{items}</>
               ) : (

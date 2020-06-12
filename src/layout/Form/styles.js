@@ -251,6 +251,7 @@ export const GlobalStyle = createGlobalStyle`
                 /*popup*/
   
   .div-share-form .popup-share {
+    cursor: default;
     visibility: hidden;
     font-size: 14px;
     width: 100px;
