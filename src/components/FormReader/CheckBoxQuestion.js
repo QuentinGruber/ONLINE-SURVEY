@@ -1,6 +1,16 @@
 import React from "react";
 
 class CheckBoxQuestion extends React.Component {
+  onChangeCheckbox() {
+    let inputs = document.forms["Form"].getElementsByTagName("input");
+
+    for (var i = 0; i < inputs.length; i++) {
+      var currentinput = inputs[i];
+      currentinput.classList.toggle("red-border", false);
+    }
+    return;
+  }
+
   render() {
     var items = [];
     for (let i = 0; i < this.props.data.p_answer.length; i++) {
@@ -14,7 +24,7 @@ class CheckBoxQuestion extends React.Component {
                 type="checkbox"
                 name={this.props.data.title}
                 className="checkbox-type-checkbox"
-                required={this.props.data.required}
+                isrequired={this.props.data.required}
               />
               <label
                 htmlFor={this.props.data.p_answer[i].id}
@@ -29,7 +39,12 @@ class CheckBoxQuestion extends React.Component {
     }
     return (
       <>
-        <div className="list-group-item card-question">
+        <div
+          className="list-group-item card-question"
+          onChange={() => {
+            this.onChangeCheckbox();
+          }}
+        >
           <div className="question">{this.props.data.title}</div>
           {this.props.data.required ? (
             <span className="text-required">*</span>
