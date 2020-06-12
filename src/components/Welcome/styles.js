@@ -10,6 +10,8 @@ export const GlobalStyle = createGlobalStyle`
     background-size: cover;
 
     overflow: scroll;
+
+
   }
 
   .whiteDiv {
@@ -105,10 +107,15 @@ export const GlobalStyle = createGlobalStyle`
 
 
   /* SCROLL */
-  ::-webkit-scrollbar { /* Hide Scrollbar */
-    width: 0px;
-    height: 0px;
-    background: transparent;
+  body::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    background: transparent; /* Chrome/Safari/Webkit */
+  }
+
+  body {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;  /* IE 10+ */
   }
 
   .pave-scroll {
