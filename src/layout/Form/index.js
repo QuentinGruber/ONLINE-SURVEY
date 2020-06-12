@@ -10,6 +10,7 @@ import Axios from "axios";
 import MyFormItem from "./components/Myform_item";
 import { Card, Button } from "reactstrap";
 import FormResult from "./components/FormResult.js";
+import Disconnect from "./../../components/Disconnect";
 
 class Form extends React.Component {
   constructor(props) {
@@ -106,6 +107,8 @@ class Form extends React.Component {
           document.location.href.lastIndexOf("/")
         ) === "/form" ? (
           <>
+            <Disconnect />
+
             <div className="boxTextFormList">
               <div className="boxTextTitreFormList">Online Survey</div>
               <div className="boxTextSloganFormList">
