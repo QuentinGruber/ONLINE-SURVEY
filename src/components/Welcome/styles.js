@@ -182,6 +182,12 @@ export const GlobalStyle = createGlobalStyle`
   .container-logo {
     position: absolute;
     width: 512px;
+    height: 512px;
+  }
+
+  .logo {
+    max-width:100%;
+    height:auto;
   }
 
   .container-text {
@@ -200,6 +206,47 @@ export const GlobalStyle = createGlobalStyle`
 
   p {
     font-size : 18px;
+  }
+
+
+
+  /* ON SMALL SCREENS */
+
+  @media screen and (max-width: 1200px) {
+
+
+    .pave-scroll {
+      position: absolute;
+      top: 115%;
+      height: 60%;
+      width: 100%;
+    }
+
+    .container-logo {
+      position: relative;
+      margin: auto;
+      width: 256px;
+      height: 256px;
+    }
+
+
+    .container-text {
+      position: relative;
+      width: 100%;
+      text-align: justify;
+      padding: 0 40px;
+      color: #ddd;
+    }
+
+    .slogan {
+      font-size: 26px;
+      margin-bottom: 15px;
+    }
+  
+    p {
+      font-size : 16px;
+    }
+
   }
 
 `;

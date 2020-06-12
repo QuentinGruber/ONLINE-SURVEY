@@ -83,15 +83,6 @@ class Welcome extends React.Component {
         </div>
 
         <div className="pave-scroll">
-          <div className="container-logo">
-            <img
-              src={logo}
-              title="Online Survey"
-              alt="Logo de Online Survey"
-              width="512px"
-              height="512px"
-            ></img>
-          </div>
           <div className="container-text">
             <div className="slogan">Your forms, made simple</div>
             <p>
@@ -116,6 +107,16 @@ class Welcome extends React.Component {
               être plus compliqué que ça. Et avec Online Survey, ça ne l’est
               pas.
             </p>
+          </div>
+          <div className="container-logo">
+            <img
+              src={logo}
+              title="Online Survey"
+              alt="Logo de Online Survey"
+              className="logo"
+              width="512px"
+              height="512px"
+            ></img>
           </div>
         </div>
         {/* footer*/}
