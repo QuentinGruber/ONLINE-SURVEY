@@ -12,8 +12,8 @@ class form_result extends React.Component {
               <QuestionStats
                 key={Math.random() * 10000}
                 questionTypes={[
-                  { value: "Polar", label: "Polar Graph" },
                   { value: "LineChart", label: "LineChart" },
+                  { value: "Polar", label: "Polar Graph" },
                   { value: "BarChart", label: "BarChart" },
                 ]}
                 data={question.answers}
@@ -36,8 +36,8 @@ class form_result extends React.Component {
               <QuestionStats
                 key={Math.random() * 10000}
                 questionTypes={[
-                  { value: "Polar", label: "Polar Graph" },
                   { value: "PieChart", label: "PieChart" },
+                  { value: "Polar", label: "Polar Graph" },
                   { value: "BarChart", label: "BarChart" },
                   { value: "Doughnut", label: "Doughnut" },
                 ]}
@@ -51,8 +51,8 @@ class form_result extends React.Component {
               <QuestionStats
                 key={Math.random() * 10000}
                 questionTypes={[
-                  { value: "Polar", label: "Polar Graph" },
                   { value: "PieChart", label: "PieChart" },
+                  { value: "Polar", label: "Polar Graph" },
                   { value: "BarChart", label: "BarChart" },
                   { value: "Doughnut", label: "Doughnut" },
                 ]}
