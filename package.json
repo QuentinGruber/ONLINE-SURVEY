@@ -36,6 +36,7 @@
     "random-hex-color": "^1.0.1",
     "randomhexcolor": "^1.3.0",
     "react": "^16.12.0",
+    "react-beautiful-dnd": "^13.0.0",
     "react-contenteditable": "^3.3.4",
     "react-dom": "^16.12.0",
     "react-facebook-login": "^4.1.1",
