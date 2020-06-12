@@ -329,6 +329,7 @@ class FormApp extends React.Component {
             title={this.state.FormName}
           />
           <QuestionList
+            IsNew={this.FormID}
             items={formitems}
             ReorderQuestion={this.ReorderQuestion}
             removeOption={this.removeOption}
