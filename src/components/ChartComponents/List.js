@@ -19,11 +19,7 @@ export default class List extends Component {
       label_array.push("Nombre d'entrées " + element.value);
       data_array.push(element.count);
 
-      list_item.push(
-        <div key={Math.random() * 10000}>
-          <li>{element.value}</li>
-        </div>
-      );
+      list_item.push(<li>{element.value}</li>);
     });
 
     this.setState({ list_item: list_item });
