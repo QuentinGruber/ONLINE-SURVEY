@@ -19,7 +19,11 @@ export default class List extends Component {
       label_array.push(element.value);
       data_array.push(element.count);
 
-      list_item.push(<li>{element.value}</li>);
+      list_item.push(
+        <div key={Math.random() * 10000}>
+          <li>{element.value}</li>
+        </div>
+      );
     });
 
     this.setState({ list_item: list_item });
