@@ -1,22 +1,6 @@
 import React from "react";
 import FormItem from "./FormItem";
 import { Draggable, Droppable, DragDropContext } from "react-beautiful-dnd";
-// fake data generator
-const getItems = (count) =>
-  Array.from({ length: count }, (v, k) => k).map((k) => ({
-    id: `item-${k}`,
-    content: `item ${k}`,
-  }));
-
-// a little function to help us with reordering the result
-const reorder = (list, startIndex, endIndex) => {
-  const result = Array.from(list);
-  const [removed] = result.splice(startIndex, 1);
-  result.splice(endIndex, 0, removed);
-
-  return result;
-};
-
 class QuestionList extends React.Component {
   constructor(props) {
     super(props);
@@ -28,16 +12,9 @@ class QuestionList extends React.Component {
     if (!result.destination) {
       return;
     }
+    this.props.ReorderQuestion(result);
+  }
 
-    const items = reorder(
-      this.state.items,
-      result.source.index,
-      result.destination.index
-    );
-
-    this.setState({
-      items,
-    });
   }
   render() {
     // display all items

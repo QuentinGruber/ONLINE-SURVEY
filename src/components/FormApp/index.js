@@ -24,6 +24,7 @@ class FormApp extends React.Component {
     this.removeItem = this.removeItem.bind(this);
     this.removeOption = this.removeOption.bind(this);
     this.saveItem = this.saveItem.bind(this);
+    this.ReorderQuestion = this.ReorderQuestion.bind(this);
     this.ItemsToDelete = [];
     this.OptionsToDelete = [];
     this.state = { formitems: formitems, mode: "all", FormName: "" };
@@ -126,6 +127,25 @@ class FormApp extends React.Component {
         button.innerHTML = "Enregistrer";
       }, 2000);
     }
+  }
+
+  ReorderQuestion(result) {
+    // a little function to help us with reordering the result
+    const reorder = (list, startIndex, endIndex) => {
+      const result = Array.from(list);
+      const [removed] = result.splice(startIndex, 1);
+      result.splice(endIndex, 0, removed);
+
+      return result;
+    };
+
+    const items = reorder(
+      this.state.formitems,
+      result.source.index,
+      result.destination.index
+    );
+
+    this.setState({ formitems: items });
   }
 
   HandlePremadeAnswerChange(idx, type, NewValue) {
@@ -286,6 +306,7 @@ class FormApp extends React.Component {
           />
           <QuestionList
             items={formitems}
+            ReorderQuestion={this.ReorderQuestion}
             removeOption={this.removeOption}
             ToogleRequireStateChange={this.ToogleRequireStateChange}
             removeItem={this.removeItem}
