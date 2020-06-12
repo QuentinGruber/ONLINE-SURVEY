@@ -68,7 +68,7 @@ class form_result extends React.Component {
       });
       return (
         <Card className="stats-card">
-          <div className="placeholder-stats-div">{items}</div>
+          <div className="stats-div">{items}</div>
         </Card>
       );
     } else {

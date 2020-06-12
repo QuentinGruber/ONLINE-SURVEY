@@ -333,11 +333,19 @@ export const GlobalStyle = createGlobalStyle`
     font-size: 18px;
     position: absolute;
     width: 42.5%;
-    min-height: 80%;
+    height: 80%;
     right: 5%;
     top: 10%;
     margin-bottom: 5%;
   }
+
+  .stats-div {
+    position: absolute;
+    width: 90%;
+    margin: 5%;
+    
+  }
+
 
   .placeholder-stats-div{
     font-size: 24px;
