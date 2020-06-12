@@ -26,7 +26,7 @@ class FormApp extends React.Component {
     this.saveItem = this.saveItem.bind(this);
     this.ItemsToDelete = [];
     this.OptionsToDelete = [];
-    this.state = { formitems: formitems, mode: "all", FormName: "" };
+    this.state = { formitems: formitems, FormName: "" };
   }
 
   async saveItem() {
