@@ -11,7 +11,6 @@ import {
   Input,
   InputGroup,
   Row,
-  Col,
 } from "reactstrap";
 import GoogleLogin from "./sub_components/Google_login";
 import FacebookLogin from "./sub_components/Facebook_login";
