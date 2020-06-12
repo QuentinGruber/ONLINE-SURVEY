@@ -151,7 +151,7 @@ class FormReader extends React.Component {
           element.matches('[isrequired="1"]')
         ) {
           // there maybe a validity error so
-          let input_family = document.getElementsByName(element.name);
+          var input_family = document.getElementsByName(element.name);
           Validity_error = true;
           // check if any of the checkboxes of the same family has been checked
           for (let index = 0; index < input_family.length; index++) {
@@ -164,6 +164,11 @@ class FormReader extends React.Component {
         }
         if (Validity_error) {
           can_send_answers = false;
+          for (var i = 0; i < input_family.length; i++) {
+            var currentinput = input_family[i];
+            currentinput.classList.toggle("red-border", true);
+          }
+
           // validity error on checkboxes
           // custom validity here
         }

@@ -203,6 +203,10 @@ export const GlobalStyle = createGlobalStyle`
       --s: .5;
     }
   }
+
+  .red-border {
+    border: 2px #BB0B0B solid !important; 
+  }
   
   input[type=number]::-webkit-inner-spin-button {
     -webkit-appearance: none;
