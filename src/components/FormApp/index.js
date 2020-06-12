@@ -140,10 +140,35 @@ class FormApp extends React.Component {
     };
 
     const items = reorder(
-      this.state.formitems,
+      formitems,
       result.source.index,
       result.destination.index
     );
+    formitems = [];
+    for (let i = 0; i < items.length; i++) {
+      // if the current item isn't done
+      let p_answer = [];
+      for (let y = 0; y < items[i].p_answer.length; y++) {
+        p_answer.push(items[i].p_answer[y]);
+      }
+      if (p_answer.length === 1) {
+        p_answer = p_answer[0].text;
+      }
+      let item = {
+        index: i,
+        id: items[i].id,
+        title: items[i].title,
+        required: items[i].required,
+        type: items[i].type,
+        p_answer: p_answer,
+      };
+      formitems.push(item); // add it to the formitems array (state)
+    }
+
+    // update question_list title & question_list content
+    this.setState({
+      formitems: formitems,
+    });
 
     this.setState({ formitems: items });
   }
@@ -266,7 +291,6 @@ class FormApp extends React.Component {
       // setup vars
       var form_data = question_list.data.content; // shortcut for easier reading
 
-      // check for any not done question
       for (let i = 0; i < form_data.length; i++) {
         // if the current item isn't done
         let p_answer = [];
