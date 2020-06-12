@@ -20,7 +20,7 @@ class QuestionStats extends React.Component {
   render() {
     return (
       <>
-        <h2>{this.props.name}</h2>
+        <div className="stats-question-title">{this.props.name}</div>
         {this.props.questionTypes.length > 1 ? (
           <Select
             placeholder={this.state.selectedOption}

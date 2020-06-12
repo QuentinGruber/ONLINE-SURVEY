@@ -346,6 +346,18 @@ export const GlobalStyle = createGlobalStyle`
     
   }
 
+  .stats-question-title {
+    margin-top: 50px;
+    margin-bottom: 10px;
+    font-size: 24px;
+  }
+
+  .stats-question-title:first-of-type {
+    margin-top: 10px;
+  }
+
+
+
 
   .placeholder-stats-div{
     font-size: 24px;
