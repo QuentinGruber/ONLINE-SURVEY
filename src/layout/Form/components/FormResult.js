@@ -12,9 +12,9 @@ class form_result extends React.Component {
               <QuestionStats
                 key={Math.random() * 10000}
                 questionTypes={[
-                  { value: "LineChart", label: "LineChart" },
-                  { value: "Polar", label: "Polar Graph" },
-                  { value: "BarChart", label: "BarChart" },
+                  { value: "LineChart", label: "Ligne" },
+                  { value: "Polar", label: "Polaire" },
+                  { value: "BarChart", label: "Barres" },
                 ]}
                 data={question.answers}
                 name={question.name}
@@ -25,7 +25,7 @@ class form_result extends React.Component {
             items.push(
               <QuestionStats
                 key={Math.random() * 10000}
-                questionTypes={[{ value: "List", label: "List" }]}
+                questionTypes={[{ value: "List", label: "Liste" }]}
                 data={question.answers}
                 name={question.name}
               />
@@ -36,9 +36,9 @@ class form_result extends React.Component {
               <QuestionStats
                 key={Math.random() * 10000}
                 questionTypes={[
-                  { value: "PieChart", label: "PieChart" },
-                  { value: "Polar", label: "Polar Graph" },
-                  { value: "BarChart", label: "BarChart" },
+                  { value: "PieChart", label: "Circulaire" },
+                  { value: "Polar", label: "Polaire" },
+                  { value: "BarChart", label: "Barres" },
                   { value: "Doughnut", label: "Doughnut" },
                 ]}
                 data={question.answers}
@@ -51,9 +51,9 @@ class form_result extends React.Component {
               <QuestionStats
                 key={Math.random() * 10000}
                 questionTypes={[
-                  { value: "PieChart", label: "PieChart" },
-                  { value: "Polar", label: "Polar Graph" },
-                  { value: "BarChart", label: "BarChart" },
+                  { value: "PieChart", label: "Circulaire" },
+                  { value: "Polar", label: "Polaire" },
+                  { value: "BarChart", label: "Barres" },
                   { value: "Doughnut", label: "Doughnut" },
                 ]}
                 data={question.answers}
