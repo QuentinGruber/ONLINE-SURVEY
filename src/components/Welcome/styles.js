@@ -8,6 +8,8 @@ export const GlobalStyle = createGlobalStyle`
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+
+    overflow: scroll;
   }
 
   .whiteDiv {
@@ -103,7 +105,11 @@ export const GlobalStyle = createGlobalStyle`
 
 
   /* SCROLL */
-
+  ::-webkit-scrollbar { /* Hide Scrollbar */
+    width: 0px;
+    height: 0px;
+    background: transparent;
+  }
 
   .pave-scroll {
     position: absolute;
