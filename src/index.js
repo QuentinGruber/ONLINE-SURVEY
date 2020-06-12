@@ -10,6 +10,7 @@ import { LinkedInPopUp } from "react-linkedin-login-oauth2";
 import Legal from "./components/Legal";
 import Form from "./layout/Form";
 import CookiesNeeded from "./components/CookiesNeeded.js";
+import Welcome from "./components/Welcome";
 
 // import css
 import "./assets/css/argon-dashboard-react.css";
@@ -49,7 +50,8 @@ if (localStorage.AcceptCookies === "true") {
             <Route path="/auth" render={(props) => <AuthLayout {...props} />} />
             <Route path="/form" render={(props) => <Form {...props} />} />
             <Route path="/legal" render={(props) => <Legal {...props} />} />
-            <Redirect from="/" to="/auth" />
+            <Route exact path="/" render={(props) => <Welcome {...props} />} />
+            <Redirect from="/" to="/" />
           </Switch>
         </BrowserRouter>,
         document.getElementById("root")
