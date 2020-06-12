@@ -46,7 +46,7 @@ class Welcome extends React.Component {
             e.preventDefault();
             $("html, body").animate(
               {
-                scrollTop: $(document).height(),
+                scrollTop: $(window).height(),
               },
               500
             );
@@ -63,6 +63,7 @@ class Welcome extends React.Component {
 
         <div
           className="div-scroll-up"
+          id="div-scroll-up"
           onClick={(e) => {
             e.preventDefault();
             $("html, body").animate(

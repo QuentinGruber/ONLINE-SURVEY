@@ -233,9 +233,6 @@ export const GlobalStyle = createGlobalStyle`
     .container-text {
       position: relative;
       width: 100%;
-      text-align: justify;
-      padding: 0 40px;
-      color: #ddd;
     }
 
     .slogan {
@@ -246,7 +243,41 @@ export const GlobalStyle = createGlobalStyle`
     p {
       font-size : 16px;
     }
-
   }
 
+  /* ON SMALL SCREENS */
+
+  @media screen and (max-width: 600px) {
+  
+  
+    .whiteDiv {
+      display: none;
+    }
+    
+    .boxText {
+      position: absolute;
+      width : 100%;
+      top : 100px;
+      height: 75px;
+      left: 0;
+      color: white;
+      text-align: center;
+      font-size: 20px;
+    }
+  
+    .boxTextTitre {
+      font-size: 40px;
+    }
+
+    .div-buttons {
+      margin-top: 100px;
+    }
+
+    .container-text {
+      margin-top: 50px;
+    }
+
+    .container-logo {
+      margin-top: 50px;
+    }
 `;
