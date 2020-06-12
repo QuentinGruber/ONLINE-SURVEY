@@ -305,14 +305,12 @@ class Register extends React.Component {
                 </Button>
               </div>
             </Form>
-            <Row>
-              <Col className="text-right">
-                <NavLink to="/auth/login" tag={Link}>
-                  <small className="text-light">
-                    Se connecter à un compte existant
-                  </small>
-                </NavLink>
-              </Col>
+            <Row className="mt-3">
+              <NavLink className="to-login" to="/auth/login" tag={Link}>
+                <small className="text-light">
+                  Se connecter à un compte existant
+                </small>
+              </NavLink>
             </Row>
           </CardBody>
         </Card>
