@@ -10,7 +10,6 @@ import { faEdit } from "@fortawesome/free-solid-svg-icons";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import ClipboardJS from "clipboard";
 import Axios from "axios";
-
 library.add(faShareAlt, faEdit, faChevronRight);
 
 class FormTitle extends React.Component {
@@ -105,7 +104,9 @@ class FormTitle extends React.Component {
             className="div-share-form"
             data-clipboard-text={this.props.FormLink}
             onClick={() => {
-              let popup = document.getElementsByClassName("popup-share")[0];
+              let popup = document.getElementsByClassName("popup-share")[
+                this.props.reverse_idx
+              ];
               popup.classList.toggle("visible", true);
               setTimeout(() => {
                 popup.classList.toggle("visible", false);
