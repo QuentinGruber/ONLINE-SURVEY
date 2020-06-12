@@ -16,7 +16,7 @@ export default class List extends Component {
 
     data.forEach((element) => {
       color_array.push(randomHexColor());
-      label_array.push("Nombre d'entrées " + element.value);
+      label_array.push(element.value);
       data_array.push(element.count);
 
       list_item.push(<li>{element.value}</li>);

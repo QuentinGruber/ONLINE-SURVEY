@@ -14,7 +14,7 @@ export default class LineChart extends Component {
     let data = count(this.props.data);
     data.forEach((element) => {
       color_array.push(randomHexColor());
-      label_array.push("Nombre d'entrées " + element.value);
+      label_array.push(element.value);
       data_array.push(element.count);
     });
 
