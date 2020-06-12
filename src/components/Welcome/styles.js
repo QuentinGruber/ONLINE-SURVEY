@@ -176,9 +176,15 @@ export const GlobalStyle = createGlobalStyle`
     position: absolute;
     top: 120%;
     height: 60%;
-
     border: 2px red solid;
   }
+
+  .container-logo {
+    position: absolute;
+    width: 512px;
+  }
+
+  
 
 
 `;

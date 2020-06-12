@@ -10,7 +10,7 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import { faAngleDoubleDown } from "@fortawesome/free-solid-svg-icons";
 import { faAngleDoubleUp } from "@fortawesome/free-solid-svg-icons";
 
-import logo from "./../../assets/img/icons/common/logo512.png";
+import logo from "./../../assets/img/logos/Online-survey_white.png";
 
 library.add(faAngleDoubleDown, faAngleDoubleUp);
 
@@ -88,31 +88,35 @@ class Welcome extends React.Component {
               src={logo}
               title="Online Survey"
               alt="Logo de Online Survey"
+              width="512px"
+              height="512px"
             ></img>
           </div>
-
-          <div className="slogan">Your forms, made simple</div>
-          <p>
-            On sait, on sait : recevoir du feedback, c’est une des choses les
-            plus importantes pour votre entreprise. Formulaires de satisfaction
-            client, sondages auprès de vos collaborateurs, questionnaires
-            d’évaluations, fiches de renseignements… On pourrait étendre cette
-            liste à l’infini. Le temps passé à construire ces formulaires, en
-            extraire les données, les compiler sous formes de graphiques ou de
-            statistiques pourrait bien constituer la majeure partie de votre
-            emploi du temps.
-          </p>
-          <p>Et c’est là qu’on a quelque chose à vous proposer :</p>
-          <p>
-            Online Survey, c’est tout d’abord une solution conçue pour vous
-            faire gagner du temps. Toutes les étapes pour recevoir du Feedback
-            en une seule application Web d’une simplicité déconcertante.
-          </p>
-          <p>
-            Connectez-vous, créez votre formulaire, recevez vos réponses,
-            visualisez vos résultats. Nous pensons que cela ne devrait pas être
-            plus compliqué que ça. Et avec Online Survey, ça ne l’est pas.
-          </p>
+          <div className="container-text">
+            <div className="slogan">Your forms, made simple</div>
+            <p>
+              On sait, on sait : recevoir du feedback, c’est une des choses les
+              plus importantes pour votre entreprise. Formulaires de
+              satisfaction client, sondages auprès de vos collaborateurs,
+              questionnaires d’évaluations, fiches de renseignements… On
+              pourrait étendre cette liste à l’infini. Le temps passé à
+              construire ces formulaires, en extraire les données, les compiler
+              sous formes de graphiques ou de statistiques pourrait bien
+              constituer la majeure partie de votre emploi du temps.
+            </p>
+            <p>Et c’est là qu’on a quelque chose à vous proposer :</p>
+            <p>
+              Online Survey, c’est tout d’abord une solution conçue pour vous
+              faire gagner du temps. Toutes les étapes pour recevoir du Feedback
+              en une seule application Web d’une simplicité déconcertante.
+            </p>
+            <p>
+              Connectez-vous, créez votre formulaire, recevez vos réponses,
+              visualisez vos résultats. Nous pensons que cela ne devrait pas
+              être plus compliqué que ça. Et avec Online Survey, ça ne l’est
+              pas.
+            </p>
+          </div>
         </div>
         {/* footer*/}
         <div></div>
