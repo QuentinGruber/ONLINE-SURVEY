@@ -15,18 +15,23 @@ class Welcome extends React.Component {
         <div className="boxText">
           <div className="boxTextTitre">Online Survey</div>
           <div className="boxTextSlogan">Your forms, made simple</div>
+
+          <div className="div-buttons">
+            <Link to="/auth/register">
+              <Button className="btn-outline-default btn-inscription">
+                Inscription
+              </Button>
+            </Link>
+            <Link to="/auth/login">
+              <Button className="btn-outline-default btn-connexion">
+                Connexion
+              </Button>
+            </Link>
+          </div>
         </div>
 
-        <div>
-          <Link to="/auth/login">
-            <Button>Connexion</Button>
-          </Link>
-          <Link to="/auth/register">
-            <Button>Inscription</Button>
-          </Link>
+        <Button>fleche bas</Button>
 
-          <Button>fleche bas</Button>
-        </div>
         {/* la div de la page du blabla*/}
         <div className="pave-scroll">
           <div className="slogan">Your forms, made simple</div>
@@ -38,10 +43,15 @@ class Welcome extends React.Component {
             liste à l’infini. Le temps passé à construire ces formulaires, en
             extraire les données, les compiler sous formes de graphiques ou de
             statistiques pourrait bien constituer la majeure partie de votre
-            emploi du temps. Et c’est là qu’on a quelque chose à vous proposer :
+            emploi du temps.
+          </p>
+          <p>Et c’est là qu’on a quelque chose à vous proposer :</p>
+          <p>
             Online Survey, c’est tout d’abord une solution conçue pour vous
             faire gagner du temps. Toutes les étapes pour recevoir du Feedback
             en une seule application Web d’une simplicité déconcertante.
+          </p>
+          <p>
             Connectez-vous, créez votre formulaire, recevez vos réponses,
             visualisez vos résultats. Nous pensons que cela ne devrait pas être
             plus compliqué que ça. Et avec Online Survey, ça ne l’est pas.

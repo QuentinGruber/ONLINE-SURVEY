@@ -4,11 +4,11 @@ import backgroundImage from "../../assets/img/backgrounds/background-stars.jpg";
 export const GlobalStyle = createGlobalStyle`
 html, body{ height: 100%;}
 body{
-
   background-image:url(${backgroundImage});
   background-repeat: no-repeat;
   background-size: 100% 100%;
   }
+
   .whiteDiv {
     position: absolute;
     width: 100%;
@@ -35,7 +35,7 @@ body{
   
   .boxText {
     position: absolute;
-    width : 20%;
+    width : 40%;
     right: 3%;
     top : 50%;
     transform: translateY(-50%);
@@ -45,7 +45,7 @@ body{
   }
   
   .boxTextTitre {
-    font-size: 40px;
+    font-size:64px;
   }
 
   .boxTextFormList {
@@ -56,13 +56,50 @@ body{
     left: 0;
     color: white;
     text-align: center;
-    font-size: 16px;
-
+    font-size: 32px;
   }
   
   .boxTextTitreFormList {
     font-size: 32px;
   }
+
+  .div-buttons {
+    position: relative;
+    margin-top: 25px;
+    bottom: 0;
+    display: flex;
+    justify-content: space-evenly;
+    transform: translateY(0.5px);
+  }
+
+
+
+  .btn {
+    font-size: 1.25rem;
+    padding: 0.8rem 1.5rem;
+    border-color: white;
+    color: white;
+  }
+  .btn:hover {
+    background-color: rgba(0,0,0,0);
+    border-color: white;
+    color: white;
+  }
+  .btn:active {
+    background-color: rgba(0,0,0,0) !important;
+    border-color: white !important;
+    color: white !important;
+  }  
+
+  .btn-inscription {
+  }
+
+
+
+
+
+
+
 
   /* SCROLL */
 
