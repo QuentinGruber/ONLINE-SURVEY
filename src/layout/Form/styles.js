@@ -75,6 +75,52 @@ export const GlobalStyle = createGlobalStyle`
 
   /* ANSWERS SAVED */
 
+  .btn-disconnect {
+    position: absolute;
+    z-index: 5;
+    border-color: white;
+    color: white;
+    top: 5px;
+    right: 0;
+    visibility: visible;
+  }
+  .btn-disconnect:hover {
+    background-color: rgba(0,0,0,0);
+    border-color: white;
+    color: white;
+  }
+  .btn-disconnect:active {
+    background-color: rgba(0,0,0,0) !important;
+    border-color: white !important;
+    color: white !important;
+  }
+
+  .btn-disconnect-mobile {
+    position: absolute;
+    z-index: 5;
+    border-color: white;
+    color: white;
+    top: 5px;
+    right: 0;
+    visibility: hidden;
+  }
+
+  .btn-disconnect-mobile:hover {
+    background-color: rgba(0,0,0,0);
+    border-color: white;
+    color: white;
+  }
+  .btn-disconnect-mobile:active {
+    background-color: rgba(0,0,0,0) !important;
+    border-color: white !important;
+    color: white !important;
+  }
+
+  .disconnect-icon {
+    font-size: 16px;
+    margin: -2px;
+  }
+
   .card-form-saved {
     min-width: 500px;
     min-height: 80%;
@@ -378,6 +424,8 @@ export const GlobalStyle = createGlobalStyle`
   @media screen and (max-width: 600px) {
 
 
+
+    
     /* ANSWERS SAVED */
 
     .card-form-saved {
@@ -397,6 +445,13 @@ export const GlobalStyle = createGlobalStyle`
 
     /* FORM LIST */
 
+    .btn-disconnect {
+      visibility: hidden;
+    }
+  
+    .btn-disconnect-mobile {
+      visibility: visible;
+    }
 
     .form-list-card {
       width: 85%;

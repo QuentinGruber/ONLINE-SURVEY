@@ -1,5 +1,10 @@
 import React from "react";
+import { Button } from "reactstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 
+library.add(faSignOutAlt);
 class Disconnect extends React.Component {
   render() {
     function Disconnect() {
@@ -9,7 +14,7 @@ class Disconnect extends React.Component {
         // handle request response
         if (this.readyState === 4 && this.status === 200) {
           if (this.responseText !== "false") {
-            window.location.reload();
+            document.location.href = "/auth";
           } else {
             alert("Erreur lors de la déconnexion.");
           }
@@ -20,7 +25,22 @@ class Disconnect extends React.Component {
       xhttp.withCredentials = true;
       xhttp.send();
     }
-    return <button onClick={Disconnect}>Disconnect</button>;
+    return (
+      <>
+        <Button
+          onClick={Disconnect}
+          className="btn btn-outline-default btn-disconnect"
+        >
+          Déconnexion
+        </Button>
+        <Button
+          onClick={Disconnect}
+          className="btn btn-outline-default btn-disconnect-mobile"
+        >
+          <FontAwesomeIcon icon="sign-out-alt" className="disconnect-icon" />
+        </Button>
+      </>
+    );
   }
 }
 export default Disconnect;
