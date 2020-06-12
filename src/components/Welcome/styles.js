@@ -176,7 +176,7 @@ export const GlobalStyle = createGlobalStyle`
     position: absolute;
     top: 120%;
     height: 60%;
-    border: 2px red solid;
+    width: 100%;
   }
 
   .container-logo {
@@ -184,7 +184,22 @@ export const GlobalStyle = createGlobalStyle`
     width: 512px;
   }
 
-  
+  .container-text {
+    position: absolute;
+    width: calc(100vw - 532px);
+    text-align: justify;
+    padding: 0 40px;
+    right: 0;
+    color: #ddd;
+  }
 
+  .slogan {
+    font-size: 32px;
+    margin-bottom: 20px;
+  }
+
+  p {
+    font-size : 18px;
+  }
 
 `;
