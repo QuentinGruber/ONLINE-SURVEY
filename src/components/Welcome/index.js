@@ -4,6 +4,13 @@ import { Button } from "reactstrap";
 
 import { GlobalStyle } from "./styles";
 
+import $ from "jquery";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faAngleDoubleDown } from "@fortawesome/free-solid-svg-icons";
+
+library.add(faAngleDoubleDown);
+
 class Welcome extends React.Component {
   render() {
     return (
@@ -30,7 +37,24 @@ class Welcome extends React.Component {
           </div>
         </div>
 
-        <Button>fleche bas</Button>
+        <div
+          className="div-scroll-down"
+          onClick={(e) => {
+            e.preventDefault(); //Prevent default action of anchor
+            $("html, body").animate(
+              {
+                scrollTop: $(document).height(), //Get the document height
+              },
+              "slow"
+            ); //Animates the scroll
+            /* Can also use 3000, 4000 i.e 3 seconds, 4 seconds to animate the scroll */
+          }}
+        >
+          <div className="div-savoir-plus">En savoir plus</div>
+          <div className="div-scroll-icon">
+            <FontAwesomeIcon icon="angle-double-down" className="scroll-icon" />
+          </div>
+        </div>
 
         {/* la div de la page du blabla*/}
         <div className="pave-scroll">

@@ -3,15 +3,13 @@ import backgroundImage from "../../assets/img/backgrounds/background-stars.jpg";
 
 export const GlobalStyle = createGlobalStyle`
   body{
+    height: 200vh;
     background: url(${backgroundImage}) no-repeat center center fixed; 
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-
     overflow: scroll;
-
-
   }
 
   .whiteDiv {
@@ -96,8 +94,6 @@ export const GlobalStyle = createGlobalStyle`
     color: white !important;
   }  
 
-  .btn-inscription {
-  }
 
 
 
@@ -118,6 +114,38 @@ export const GlobalStyle = createGlobalStyle`
     -ms-overflow-style: none;  /* IE 10+ */
   }
 
+  .div-scroll-down {
+    position: absolute;
+    cursor: pointer;
+    font-size: 1.125rem;
+    color: white;
+    padding: 15px 5px 25px 5px;
+    bottom: 0;
+    left: 50%;  
+    transform: translateX(-50%);
+    border-top: 3px solid white;
+    transition: 0.2s;
+  }
+  .div-scroll:hover {
+    transform: translate(-50%,15%);
+  }
+
+  .div-scroll-icon{
+    margin:auto;
+    margin-top: 10px;
+    text-align: center;
+  }
+  .scroll-icon {
+    font-size: 1.5rem;
+  }
+
+
+
+
+
+
+
+  
   .pave-scroll {
     position: absolute;
     top: 120%;
