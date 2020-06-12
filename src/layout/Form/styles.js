@@ -356,8 +356,10 @@ export const GlobalStyle = createGlobalStyle`
     margin-top: 10px;
   }
 
-  li {
+  ul {
+    list-style-type: disc;
   }
+
 
 
 
