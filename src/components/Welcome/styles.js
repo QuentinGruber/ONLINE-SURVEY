@@ -146,8 +146,7 @@ export const GlobalStyle = createGlobalStyle`
     cursor: pointer;
     font-size: 1.125rem;
     color: white;
-    padding: 25px 5px 15px 5px;
-    margin-bottom: 25px;
+    padding: 25px 5px 15px 5px; 
     top: 100%;
     left: 50%;  
     transform: translateX(-50%);
@@ -176,6 +175,9 @@ export const GlobalStyle = createGlobalStyle`
   .pave-scroll {
     position: absolute;
     top: 120%;
+    height: 60%;
+
+    border: 2px red solid;
   }
 
 

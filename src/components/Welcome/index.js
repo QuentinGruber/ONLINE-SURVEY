@@ -10,6 +10,8 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import { faAngleDoubleDown } from "@fortawesome/free-solid-svg-icons";
 import { faAngleDoubleUp } from "@fortawesome/free-solid-svg-icons";
 
+import logo from "./../../assets/img/icons/common/logo512.png";
+
 library.add(faAngleDoubleDown, faAngleDoubleUp);
 
 class Welcome extends React.Component {
@@ -41,14 +43,13 @@ class Welcome extends React.Component {
         <div
           className="div-scroll-down"
           onClick={(e) => {
-            e.preventDefault(); //Prevent default action of anchor
+            e.preventDefault();
             $("html, body").animate(
               {
-                scrollTop: $(document).height(), //Get the document height
+                scrollTop: $(document).height(),
               },
               500
-            ); //Animates the scroll
-            /* Can also use 3000, 4000 i.e 3 seconds, 4 seconds to animate the scroll */
+            );
           }}
         >
           <div className="div-savoir-plus">En savoir plus</div>
@@ -63,14 +64,13 @@ class Welcome extends React.Component {
         <div
           className="div-scroll-up"
           onClick={(e) => {
-            e.preventDefault(); //Prevent default action of anchor
+            e.preventDefault();
             $("html, body").animate(
               {
-                scrollTop: 0, //Get the document height
+                scrollTop: 0,
               },
-              500
-            ); //Animates the scroll
-            /* Can also use 3000, 4000 i.e 3 seconds, 4 seconds to animate the scroll */
+              350
+            );
           }}
         >
           <div className="div-scroll-up-icon">
@@ -82,8 +82,15 @@ class Welcome extends React.Component {
           <div className="div-retour-haut">Retourner en haut</div>
         </div>
 
-        {/* la div de la page du blabla*/}
         <div className="pave-scroll">
+          <div className="container-logo">
+            <img
+              src={logo}
+              title="Online Survey"
+              alt="Logo de Online Survey"
+            ></img>
+          </div>
+
           <div className="slogan">Your forms, made simple</div>
           <p>
             On sait, on sait : recevoir du feedback, c’est une des choses les
