@@ -15,7 +15,6 @@ class QuestionList extends React.Component {
     this.props.ReorderQuestion(result);
   }
 
-  }
   render() {
     // display all items
     var items = this.props.items.map((item, index) => {
