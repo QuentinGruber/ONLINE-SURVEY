@@ -4,8 +4,14 @@ import App from "./App";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import FormResult from "./layout/Form/components/FormResult";
+import Welcome from "./components/Welcome";
 
 var routes = [
+  {
+    path: "*",
+    component: Welcome,
+    layout: "",
+  },
   {
     path: "/all_component",
     component: App,
