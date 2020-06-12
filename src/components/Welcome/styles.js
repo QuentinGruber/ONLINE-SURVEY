@@ -125,17 +125,46 @@ export const GlobalStyle = createGlobalStyle`
     transform: translateX(-50%);
     border-top: 3px solid white;
     transition: 0.2s;
+    visibility: visible;
   }
-  .div-scroll:hover {
+  .div-scroll-down:hover {
     transform: translate(-50%,15%);
   }
 
-  .div-scroll-icon{
+  .div-scroll-down-icon{
     margin:auto;
     margin-top: 10px;
     text-align: center;
   }
-  .scroll-icon {
+  .scroll-down-icon {
+    font-size: 1.5rem;
+  }
+
+
+  .div-scroll-up {
+    position: absolute;
+    cursor: pointer;
+    font-size: 1.125rem;
+    color: white;
+    padding: 25px 5px 15px 5px;
+    margin-bottom: 25px;
+    top: 100%;
+    left: 50%;  
+    transform: translateX(-50%);
+    border-bottom: 3px solid white;
+    transition: 0.2s;
+    visibility: visible;
+  }
+  .div-scroll-up:hover {
+    transform: translate(-50%,-15%);
+  }
+
+  .div-scroll-up-icon{
+    margin:auto;
+    margin-top: 10px;
+    text-align: center;
+  }
+  .scroll-up-icon {
     font-size: 1.5rem;
   }
 
@@ -144,8 +173,6 @@ export const GlobalStyle = createGlobalStyle`
 
 
 
-
-  
   .pave-scroll {
     position: absolute;
     top: 120%;

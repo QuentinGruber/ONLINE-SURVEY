@@ -8,8 +8,9 @@ import $ from "jquery";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faAngleDoubleDown } from "@fortawesome/free-solid-svg-icons";
+import { faAngleDoubleUp } from "@fortawesome/free-solid-svg-icons";
 
-library.add(faAngleDoubleDown);
+library.add(faAngleDoubleDown, faAngleDoubleUp);
 
 class Welcome extends React.Component {
   render() {
@@ -45,15 +46,40 @@ class Welcome extends React.Component {
               {
                 scrollTop: $(document).height(), //Get the document height
               },
-              "slow"
+              500
             ); //Animates the scroll
             /* Can also use 3000, 4000 i.e 3 seconds, 4 seconds to animate the scroll */
           }}
         >
           <div className="div-savoir-plus">En savoir plus</div>
-          <div className="div-scroll-icon">
-            <FontAwesomeIcon icon="angle-double-down" className="scroll-icon" />
+          <div className="div-scroll-down-icon">
+            <FontAwesomeIcon
+              icon="angle-double-down"
+              className="scroll-down-icon"
+            />
           </div>
+        </div>
+
+        <div
+          className="div-scroll-up"
+          onClick={(e) => {
+            e.preventDefault(); //Prevent default action of anchor
+            $("html, body").animate(
+              {
+                scrollTop: 0, //Get the document height
+              },
+              500
+            ); //Animates the scroll
+            /* Can also use 3000, 4000 i.e 3 seconds, 4 seconds to animate the scroll */
+          }}
+        >
+          <div className="div-scroll-up-icon">
+            <FontAwesomeIcon
+              icon="angle-double-up"
+              className="scroll-up-icon"
+            />
+          </div>
+          <div className="div-retour-haut">Retourner en haut</div>
         </div>
 
         {/* la div de la page du blabla*/}
