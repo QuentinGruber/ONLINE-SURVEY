@@ -8,6 +8,15 @@ class Welcome extends React.Component {
   render() {
     return (
       <>
+        <GlobalStyle />
+
+        <div className="whiteDiv"></div>
+
+        <div className="boxText">
+          <div className="boxTextTitre">Online Survey</div>
+          <div className="boxTextSlogan">Your forms, made simple</div>
+        </div>
+
         <div>
           <Link to="/auth/login">
             <Button>Connexion</Button>
@@ -19,14 +28,8 @@ class Welcome extends React.Component {
           <Button>fleche bas</Button>
         </div>
         {/* la div de la page du blabla*/}
-        <div>
-          <Link to="/auth/login">
-            <Button>Connexion</Button>
-          </Link>
-          <Link to="/auth/register">
-            <Button>Inscription</Button>
-          </Link>
-          <h2>Your forms, made simple</h2>
+        <div className="pave-scroll">
+          <div className="slogan">Your forms, made simple</div>
           <p>
             On sait, on sait : recevoir du feedback, c’est une des choses les
             plus importantes pour votre entreprise. Formulaires de satisfaction
