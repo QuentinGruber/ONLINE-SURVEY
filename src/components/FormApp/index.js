@@ -43,13 +43,19 @@ class FormApp extends React.Component {
         // register it
         try {
           // create an entry in our db
+          let formName = this.state.FormName.replace("'", "''");
+          let FormItems_fixed = [];
+          this.state.formitems.forEach((element) => {
+            console.log(element);
+            FormItems_fixed.push(element);
+          });
           let createList_promise = await Axios({
             method: "post",
             url: process.env.REACT_APP_API_URL + "/new_form",
             withCredentials: true,
             data: {
-              title: this.state.FormName,
-              content: this.state.formitems,
+              title: formName,
+              content: FormItems_fixed,
             },
           });
           if (createList_promise.data === true) {
