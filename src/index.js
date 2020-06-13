@@ -70,7 +70,12 @@ if (localStorage.AcceptCookies === "true") {
     }
   });
 } else {
-  ReactDOM.render(<CookiesNeeded />, document.getElementById("root"));
+  ReactDOM.render(
+    <Suspense fallback={<div>Chargement...</div>}>
+      <CookiesNeeded />
+    </Suspense>,
+    document.getElementById("root")
+  );
 }
 
 // If you want your app to work offline and load faster, you can change
