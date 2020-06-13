@@ -122,14 +122,18 @@ exports.create_new_form = async function (req, res, connection) {
           if (!res.headersSent) {
             res.send("false");
           }
-          connection.release();
+          if (connection._pool._freeConnections.indexOf(connection) === -1) {
+            connection.release();
+          }
         }
       }
     );
     if (!res.headersSent) {
       res.send("true");
     }
-    connection.release();
+    if (connection._pool._freeConnections.indexOf(connection) === -1) {
+      connection.release();
+    }
   });
 };
 
@@ -151,19 +155,25 @@ exports.get_number_of_answers = function (req, res, connection) {
             if (!res.headersSent) {
               res.send(JSON.stringify(results.length));
             }
-            connection.release();
+            if (connection._pool._freeConnections.indexOf(connection) === -1) {
+              connection.release();
+            }
           } catch (e) {
             if (!res.headersSent) {
               res.send("false");
             }
-            connection.release();
+            if (connection._pool._freeConnections.indexOf(connection) === -1) {
+              connection.release();
+            }
             log(JSON.stringify(e), "crash.log");
           }
         }
       );
     } else {
       res.sendStatus(401); // Unauthorized
-      connection.release();
+      if (connection._pool._freeConnections.indexOf(connection) === -1) {
+        connection.release();
+      }
     }
   });
 };
@@ -184,19 +194,25 @@ exports.get_question_list = function (req, res, connection) {
             if (!res.headersSent) {
               res.send(results);
             }
-            connection.release();
+            if (connection._pool._freeConnections.indexOf(connection) === -1) {
+              connection.release();
+            }
           } catch (e) {
             if (!res.headersSent) {
               res.send("false");
             }
-            connection.release();
+            if (connection._pool._freeConnections.indexOf(connection) === -1) {
+              connection.release();
+            }
             log(JSON.stringify(e), "crash.log");
           }
         }
       );
     } else {
       res.sendStatus(401); // Unauthorized
-      connection.release();
+      if (connection._pool._freeConnections.indexOf(connection) === -1) {
+        connection.release();
+      }
     }
   });
 };
@@ -215,12 +231,16 @@ exports.get_question_info = function (req, res, connection) {
           if (!res.headersSent) {
             res.send(results[0]);
           }
-          connection.release();
+          if (connection._pool._freeConnections.indexOf(connection) === -1) {
+            connection.release();
+          }
         } catch (e) {
           if (!res.headersSent) {
             res.send("false");
           }
-          connection.release();
+          if (connection._pool._freeConnections.indexOf(connection) === -1) {
+            connection.release();
+          }
           log(JSON.stringify(e), "crash.log");
         }
       }
@@ -244,12 +264,16 @@ exports.get_question_answers = function (req, res, connection) {
           if (!res.headersSent) {
             res.send(results);
           }
-          connection.release();
+          if (connection._pool._freeConnections.indexOf(connection) === -1) {
+            connection.release();
+          }
         } catch (e) {
           if (!res.headersSent) {
             res.send("false");
           }
-          connection.release();
+          if (connection._pool._freeConnections.indexOf(connection) === -1) {
+            connection.release();
+          }
           log(JSON.stringify(e), "crash.log");
         }
       }
@@ -539,7 +563,9 @@ exports.modify_form = async function (req, res, connection) {
             if (!res.headersSent) {
               res.send("false");
             }
-            connection.release();
+            if (connection._pool._freeConnections.indexOf(connection) === -1) {
+              connection.release();
+            }
             log(JSON.stringify(e), "crash.log");
           }
         }
@@ -547,12 +573,16 @@ exports.modify_form = async function (req, res, connection) {
       if (!res.headersSent) {
         res.send("true");
       }
-      connection.release();
+      if (connection._pool._freeConnections.indexOf(connection) === -1) {
+        connection.release();
+      }
     } else {
       if (!res.headersSent) {
         res.send(401);
       } // Unauthorized
-      connection.release();
+      if (connection._pool._freeConnections.indexOf(connection) === -1) {
+        connection.release();
+      }
     }
   });
 };
@@ -573,19 +603,25 @@ exports.delete_form = function (req, res, connection) {
             if (!res.headersSent) {
               res.send("true");
             }
-            connection.release();
+            if (connection._pool._freeConnections.indexOf(connection) === -1) {
+              connection.release();
+            }
           } catch (e) {
             if (!res.headersSent) {
               res.send("false");
             }
-            connection.release();
+            if (connection._pool._freeConnections.indexOf(connection) === -1) {
+              connection.release();
+            }
             log(JSON.stringify(e), "crash.log");
           }
         }
       );
     } else {
       res.sendStatus(401); // Unauthorized
-      connection.release();
+      if (connection._pool._freeConnections.indexOf(connection) === -1) {
+        connection.release();
+      }
     }
   });
 };
@@ -606,19 +642,25 @@ exports.delete_item = function (req, res, connection) {
             if (!res.headersSent) {
               res.send("true");
             }
-            connection.release();
+            if (connection._pool._freeConnections.indexOf(connection) === -1) {
+              connection.release();
+            }
           } catch (e) {
             if (!res.headersSent) {
               res.send("false");
             }
-            connection.release();
+            if (connection._pool._freeConnections.indexOf(connection) === -1) {
+              connection.release();
+            }
             log(JSON.stringify(e), "crash.log");
           }
         }
       );
     } else {
       res.sendStatus(401); // Unauthorized
-      connection.release();
+      if (connection._pool._freeConnections.indexOf(connection) === -1) {
+        connection.release();
+      }
     }
   });
 };
@@ -639,19 +681,25 @@ exports.delete_option = function (req, res, connection) {
             if (!res.headersSent) {
               res.send("true");
             }
-            connection.release();
+            if (connection._pool._freeConnections.indexOf(connection) === -1) {
+              connection.release();
+            }
           } catch (e) {
             if (!res.headersSent) {
               res.send("false");
             }
-            connection.release();
+            if (connection._pool._freeConnections.indexOf(connection) === -1) {
+              connection.release();
+            }
             log(JSON.stringify(e), "crash.log");
           }
         }
       );
     } else {
       res.sendStatus(401); // Unauthorized
-      connection.release();
+      if (connection._pool._freeConnections.indexOf(connection) === -1) {
+        connection.release();
+      }
     }
   });
 };
@@ -674,7 +722,9 @@ exports.get_form_content = async function (req, res, connection) {
             if (!res.headersSent) {
               res.send("false");
             }
-            connection.release();
+            if (connection._pool._freeConnections.indexOf(connection) === -1) {
+              connection.release();
+            }
             return;
           }
           Formcontent.title = results[0].name;
@@ -723,7 +773,13 @@ exports.get_form_content = async function (req, res, connection) {
                       if (!res.headersSent) {
                         res.send(Formcontent);
                       }
-                      connection.release();
+                      if (
+                        connection._pool._freeConnections.indexOf(
+                          connection
+                        ) === -1
+                      ) {
+                        connection.release();
+                      }
                     }
                   }
                 );
@@ -734,7 +790,9 @@ exports.get_form_content = async function (req, res, connection) {
           if (!res.headersSent) {
             res.send("false");
           }
-          connection.release();
+          if (connection._pool._freeConnections.indexOf(connection) === -1) {
+            connection.release();
+          }
           log(JSON.stringify(e), "crash.log");
         }
       }
@@ -749,7 +807,9 @@ exports.HasAnswered = async function (req, res, connection) {
       if (!res.headersSent) {
         res.send(false);
       }
-      connection.release();
+      if (connection._pool._freeConnections.indexOf(connection) === -1) {
+        connection.release();
+      }
       return;
     }
     connection.query(
@@ -772,7 +832,11 @@ exports.HasAnswered = async function (req, res, connection) {
               if (!res.headersSent) {
                 res.send(true);
               }
-              connection.release();
+              if (
+                connection._pool._freeConnections.indexOf(connection) === -1
+              ) {
+                connection.release();
+              }
             }
           });
           if (!HasAnswered) {
@@ -780,13 +844,17 @@ exports.HasAnswered = async function (req, res, connection) {
             if (!res.headersSent) {
               res.send(false);
             }
-            connection.release();
+            if (connection._pool._freeConnections.indexOf(connection) === -1) {
+              connection.release();
+            }
           }
         } catch (e) {
           if (!res.headersSent) {
             res.send("false");
           }
-          connection.release();
+          if (connection._pool._freeConnections.indexOf(connection) === -1) {
+            connection.release();
+          }
           log(JSON.stringify(e), "crash.log");
         }
       }
@@ -801,7 +869,9 @@ exports.register_answer = async function (req, res, connection) {
       if (!res.headersSent) {
         res.send(false);
       }
-      connection.release();
+      if (connection._pool._freeConnections.indexOf(connection) === -1) {
+        connection.release();
+      }
       return;
     }
     // Create form
@@ -829,7 +899,9 @@ exports.register_answer = async function (req, res, connection) {
             if (!res.headersSent) {
               res.send("false");
             }
-            connection.release();
+            if (connection._pool._freeConnections.indexOf(connection) === -1) {
+              connection.release();
+            }
             log(JSON.stringify(e), "crash.log");
           }
         }
@@ -838,7 +910,9 @@ exports.register_answer = async function (req, res, connection) {
     if (!res.headersSent) {
       res.send(true);
     }
-    connection.release();
+    if (connection._pool._freeConnections.indexOf(connection) === -1) {
+      connection.release();
+    }
   });
 };
 
@@ -856,12 +930,16 @@ exports.get_user_form_content = async function (req, res, connection) {
             if (!res.headersSent) {
               res.send(results);
             }
-            connection.release();
+            if (connection._pool._freeConnections.indexOf(connection) === -1) {
+              connection.release();
+            }
           } catch (e) {
             if (!res.headersSent) {
               res.send("false");
             }
-            connection.release();
+            if (connection._pool._freeConnections.indexOf(connection) === -1) {
+              connection.release();
+            }
             log(JSON.stringify(e), "crash.log");
           }
         }
