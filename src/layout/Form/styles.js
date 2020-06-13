@@ -54,8 +54,8 @@ export const GlobalStyle = createGlobalStyle`
 
   .boxTextTitre {
     font-size:40px;
-    height: 46px;
-    width: 233px;
+    height: 66px;
+    width: 333px;
     margin: auto;
   }
 
@@ -68,12 +68,6 @@ export const GlobalStyle = createGlobalStyle`
     margin-top: 10px;
   }
   
-
-
-
-
-
-
 
   .boxTextFormList {
     position: absolute;
@@ -174,7 +168,7 @@ export const GlobalStyle = createGlobalStyle`
 
   .div-form-saved {
     position: absolute;
-    width: 100%;
+    width: 90%;
     text-align: center;
     left: 50%;
     transform: translateX(-50%);
@@ -390,6 +384,16 @@ export const GlobalStyle = createGlobalStyle`
     transform: translate(-50%,calc(-50% + 40px));
   }
 
+ 
+
+  @media screen and (max-width: 1600px) {
+
+    .boxTextTitre {
+      height: 44px;
+      width: 222px;
+    }
+
+  }
 
 
 
@@ -397,6 +401,19 @@ export const GlobalStyle = createGlobalStyle`
   
   @media screen and (max-width: 1200px) {
   
+    /* ANSWERS SAVED */
+
+    .check-aswered {
+      height: default;
+      width: 70%;
+      top: 10px;
+    }
+
+    .div-form-saved {
+      top: 55%;
+    }
+
+    
     /* BACKGROUND */
 
     .whiteDiv {
@@ -467,15 +484,7 @@ export const GlobalStyle = createGlobalStyle`
       padding: 10px;
     }
 
-    .check-aswered {
-      height: default;
-      width: 70%;
-      top: 10px;
-    }
 
-    .div-form-saved {
-      top: 55%;
-    }
     /* FORM LIST */
 
     .btn-disconnect {
