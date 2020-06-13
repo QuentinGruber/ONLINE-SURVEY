@@ -49,7 +49,6 @@ export const GlobalStyle = createGlobalStyle`
     padding: 5px 15px;
     left: 0;
     width: 50px;
-    
   }
 
   .btn-retour-icone:hover {

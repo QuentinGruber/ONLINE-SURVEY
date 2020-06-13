@@ -288,7 +288,12 @@ class FormApp extends React.Component {
         <GlobalStyle />
         <div id="main" className="fullCard bg-secondary shadow border-0">
           <div className="card-top">
-            <Link to="/form">
+            <Link
+              to="/form"
+              onDragStart={(e) => {
+                e.preventDefault();
+              }}
+            >
               <Button className="btn-outline-default btn-retour-icone">
                 <FontAwesomeIcon
                   icon="arrow-alt-circle-left"
