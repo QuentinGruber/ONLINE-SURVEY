@@ -43,20 +43,32 @@ class FormApp extends React.Component {
         // register it
         try {
           // create an entry in our db
+          let formName = this.state.FormName.replace(/'/g, "''");
+          let FormItems_fixed = [];
+          this.state.formitems.forEach((element) => {
+            const Element = element;
+            Element.title = Element.title.replace(/'/g, "''");
+            if (Element.p_answer !== "") {
+              for (let index = 0; index < Element.p_answer.length; index++) {
+                const p_answer = Element.p_answer[index];
+                p_answer.text = p_answer.text.replace(/'/g, "''");
+                Element.p_answer[index] = p_answer;
+              }
+            }
+            FormItems_fixed.push(Element);
+          });
           let createList_promise = await Axios({
             method: "post",
             url: process.env.REACT_APP_API_URL + "/new_form",
             withCredentials: true,
             data: {
-              title: this.state.FormName,
-              content: this.state.formitems,
+              title: formName,
+              content: FormItems_fixed,
             },
           });
           if (createList_promise.data === true) {
             window.location.href = "/form";
           }
-          // if succeed redirect user to the question_list page
-          // document.location.href = "/question_list/" + createList_promise.data.id;
         } catch (e) {
           console.error("Error while saving a new form ! " + e);
         }
@@ -89,14 +101,28 @@ class FormApp extends React.Component {
               },
             });
           }
+          let formName = this.state.FormName.replace(/'/g, "''");
+          let FormItems_fixed = [];
+          this.state.formitems.forEach((element) => {
+            const Element = element;
+            Element.title = Element.title.replace(/'/g, "''");
+            if (Element.p_answer !== "") {
+              for (let index = 0; index < Element.p_answer.length; index++) {
+                const p_answer = Element.p_answer[index];
+                p_answer.text = p_answer.text.replace(/'/g, "''");
+                Element.p_answer[index] = p_answer;
+              }
+            }
+            FormItems_fixed.push(Element);
+          });
           let createList_promise = await Axios({
             method: "put",
             url: process.env.REACT_APP_API_URL + "/editform/",
             withCredentials: true,
             data: {
               FormID: this.FormID,
-              title: this.state.FormName,
-              content: this.state.formitems,
+              title: formName,
+              content: FormItems_fixed,
             },
           });
           if (createList_promise.data === true) {
