@@ -15,8 +15,6 @@ const Welcome = lazy(() => import("./components/Welcome"));
 // import css
 import "./assets/css/argon-dashboard-react.css";
 
-import "bootstrap/dist/js/bootstrap.js";
-
 // init Google Analytics
 import ReactGA from "react-ga";
 
