@@ -72,11 +72,11 @@ export const GlobalStyle = createGlobalStyle`
 
   .checkbox-type-checkbox,
   .radio-type-radio {
-    --active: #32325d;
+    --active: #172b4d;
     --active-inner: #fff;
     --focus: 2px rgba(50, 50, 93, .3);
-    --border: #32325d;
-    --border-hover: #32325d;
+    --border: #172b4d;
+    --border-hover: #172b4d;
     --background: #fff;
     --disabled: #fff;
     --disabled-inner: #fff;

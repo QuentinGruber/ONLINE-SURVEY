@@ -54,7 +54,7 @@ export const GlobalStyle = createGlobalStyle`
     background: transparent;
   }
   .question:focus {
-    border-color: #32325d;
+    border-color: #172b4d;
     color: black;
     background: transparent;
   }
@@ -70,12 +70,12 @@ export const GlobalStyle = createGlobalStyle`
 
   .text-answer-input {
     width:100%;
-    border-color: #32325d;
+    border-color: #172b4d;
     margin-top: 5px;
   }
 
   .text-answer-input:focus {
-    border-color: #32325d;
+    border-color: #172b4d;
   }
 
   .radio-answer-input {
@@ -98,7 +98,7 @@ export const GlobalStyle = createGlobalStyle`
   }
   
   .radio-answer-input:focus {
-    border-color: #32325d;
+    border-color: #172b4d;
   }
 
 
@@ -123,7 +123,7 @@ export const GlobalStyle = createGlobalStyle`
     width: 2px;
     left: 13px;
     top: 5px;
-    background-color: #32325d;
+    background-color: #172b4d;
   }
   .remove-option:before {
     transform: rotate(45deg);
@@ -139,7 +139,7 @@ export const GlobalStyle = createGlobalStyle`
     --active: #275EFE;
     --active-inner: #fff;
     --focus: 2px rgba(39, 94, 254, .3);
-    --border: #32325d;
+    --border: #172b4d;
     --border-hover: #275EFE;
     --background: #fff;
     --disabled: #fff;
@@ -294,7 +294,7 @@ export const GlobalStyle = createGlobalStyle`
   right: 175px;
   width: 10px;
   bottom: 35px;
-  color: #32325d !important;
+  color: #172b4d !important;
 }
 
 .box-required {
@@ -314,6 +314,10 @@ export const GlobalStyle = createGlobalStyle`
 .custom-toggle {
   display: inline-block;
   top: 6px;
+}
+
+.custom-toggle-slider {
+  transition: .2s;
 }
 
 .button-add {
@@ -360,13 +364,13 @@ export const GlobalStyle = createGlobalStyle`
 
 
 .css-1pahdxg-control {
-  border: 1px #32325d solid !important;
+  border: 1px #172b4d solid !important;
   border-radius: 4px;
-  box-shadow: 0 0 0 1px #32325d !important;
+  box-shadow: 0 0 0 1px #172b4d !important;
 }
 
 .css-1pahdxg-control:hover {
-  border-color: #32325d !important;
+  border-color: #172b4d !important;
 }
 
 
