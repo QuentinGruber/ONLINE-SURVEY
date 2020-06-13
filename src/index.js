@@ -55,7 +55,6 @@ if (localStorage.AcceptCookies === "true") {
                 path="/auth"
                 render={(props) => <AuthLayout {...props} />}
               />
-              <Route path="/form" component={Form} />
               <Route path="/legal" render={(props) => <Legal {...props} />} />
               <Route
                 exact
