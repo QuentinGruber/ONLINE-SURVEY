@@ -14,7 +14,7 @@ class Disconnect extends React.Component {
         // handle request response
         if (this.readyState === 4 && this.status === 200) {
           if (this.responseText !== "false") {
-            document.location.href = "/auth";
+            document.location.href = "/";
           } else {
             alert("Erreur lors de la déconnexion.");
           }
