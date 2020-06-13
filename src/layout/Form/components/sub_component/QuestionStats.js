@@ -18,7 +18,12 @@ class QuestionStats extends React.Component {
   }
 
   handleChange = (selectedOption) => {
-    this.setState({ selectedOption });
+    let temp_selectedOption = this.state.selectedOption;
+    temp_selectedOption.value = selectedOption;
+    temp_selectedOption.label = this.props.questionTypes[
+      this.props.questionTypes.findIndex((x) => x.value === selectedOption)
+    ].label;
+    this.setState({ selectedOption: temp_selectedOption });
   };
 
   render() {
