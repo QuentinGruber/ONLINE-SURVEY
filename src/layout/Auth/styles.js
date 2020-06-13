@@ -110,7 +110,7 @@ body{
       width : 50%;
       left: 50%;
       transform: translateX(-50%) !important;
-      top : 50px;
+      top : 25px;
     }
 
 
