@@ -49,6 +49,18 @@ export const GlobalStyle = createGlobalStyle`
   
   .boxTextTitre {
     font-size:64px;
+    height: 66px;
+    width: 333px;
+    margin: auto;
+  }
+
+  .title-logo {
+    max-width:100%;
+    height:auto;
+  }
+
+  .boxTextSlogan {
+    margin-top: 30px;
   }
 
   .boxTextFormList {
@@ -249,7 +261,27 @@ export const GlobalStyle = createGlobalStyle`
 
   @media screen and (max-width: 600px) {
   
+    .boxTextTitre {
+      font-size:64px;
+      height: 55px;
+      width: 277px;
+      margin: auto;
+    }
   
+    .title-logo {
+      max-width:100%;
+      height:auto;
+    }
+  
+    .boxTextSlogan {
+      margin-top: 10px;
+    }
+
+
+
+
+
+
     .whiteDiv {
       display: none;
     }
