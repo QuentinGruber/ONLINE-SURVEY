@@ -481,6 +481,7 @@ export const GlobalStyle = createGlobalStyle`
       left: 50%;
       top: 95%;
       transform: translateX(-50%);
+      margin-bottom: 50px;
     }
 
 
@@ -578,6 +579,7 @@ export const GlobalStyle = createGlobalStyle`
       left: 50%;
       top: 95%;
       transform: translateX(-50%);
+      
     }
 
     }

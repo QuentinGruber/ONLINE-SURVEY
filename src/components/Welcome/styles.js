@@ -192,6 +192,7 @@ export const GlobalStyle = createGlobalStyle`
     top: 120%;
     height: 60%;
     width: 100%;
+    padding: 0 100px;
   }
 
   .container-logo {
@@ -209,7 +210,7 @@ export const GlobalStyle = createGlobalStyle`
     position: absolute;
     width: calc(100vw - 532px);
     text-align: justify;
-    padding: 0 40px;
+    padding: 0 160px 0 160px;
     right: 0;
     color: #ddd;
   }
@@ -251,6 +252,16 @@ export const GlobalStyle = createGlobalStyle`
 
 
 
+  @media screen and (max-width: 1300px) {
+    .pave-scroll {
+      padding: 0 50px;
+    }    
+    .container-text {
+      padding: 0 40px 0 80px;
+    }
+  }
+
+
 
   /* ON SMALL SCREENS */
 
@@ -262,6 +273,7 @@ export const GlobalStyle = createGlobalStyle`
       top: 115%;
       height: 60%;
       width: 100%;
+      padding: 0 50px;
     }
 
     .container-logo {
@@ -275,6 +287,7 @@ export const GlobalStyle = createGlobalStyle`
     .container-text {
       position: relative;
       width: 100%;
+      padding: 0 80px 0 80px;
     }
 
     .slogan {
@@ -287,7 +300,15 @@ export const GlobalStyle = createGlobalStyle`
     }
   }
 
-  /* ON SMALL SCREENS */
+  @media screen and (max-width: 900px) {
+    .footer-2 {
+      display: none;
+    }
+  }
+
+
+
+  /* ON MOBILE */
 
   @media screen and (max-width: 600px) {
   
@@ -308,9 +329,13 @@ export const GlobalStyle = createGlobalStyle`
     }
 
 
+    .pave-scroll {
+      padding: 0;
+    }
 
-
-
+    .container-logo {
+      margin-top: 0;
+    }
 
     .whiteDiv {
       display: none;
@@ -337,9 +362,7 @@ export const GlobalStyle = createGlobalStyle`
 
     .container-text {
       margin-top: 50px;
+      padding: 25px;
     }
 
-    .container-logo {
-      margin-top: 50px;
-    }
 `;
