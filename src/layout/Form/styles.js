@@ -267,7 +267,7 @@ export const GlobalStyle = createGlobalStyle`
   }
   
   .div-share-form:hover {
-    color: #32325d;
+    color: #172b4d;
     text-decoration: underline;
   }
 
@@ -328,7 +328,7 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   .div-edit-form:hover {
-    color: #32325d;
+    color: #172b4d;
     text-decoration: underline;
   }
 
@@ -344,7 +344,7 @@ export const GlobalStyle = createGlobalStyle`
   }
   
   .div-stats-form:hover {
-    color: #32325d;
+    color: #172b4d;
     text-decoration: underline;
   }
 
