@@ -9,8 +9,8 @@ const AuthLayout = lazy(() => import("./layout/Auth/"));
 const Form = lazy(() => import("./layout/Form"));
 const Legal = lazy(() => import("./components/Legal"));
 import { LinkedInPopUp } from "react-linkedin-login-oauth2";
-import CookiesNeeded from "./components/CookiesNeeded.js";
-import Welcome from "./components/Welcome";
+const CookiesNeeded = lazy(() => import("./components/CookiesNeeded.js"));
+const Welcome = lazy(() => import("./components/Welcome"));
 
 // import css
 import "./assets/css/argon-dashboard-react.css";
