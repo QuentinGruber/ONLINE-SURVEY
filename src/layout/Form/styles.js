@@ -179,7 +179,6 @@ export const GlobalStyle = createGlobalStyle`
     top: 10%;
     border-bottom-right-radius: 0;
     border-bottom-left-radius: 0;
-    margin-bottom: 5%;
   }
 
   .add-form-card {
@@ -336,7 +335,6 @@ export const GlobalStyle = createGlobalStyle`
     height: 80%;
     right: 5%;
     top: 10%;
-    margin-bottom: 5%;
   }
 
   .stats-div {
