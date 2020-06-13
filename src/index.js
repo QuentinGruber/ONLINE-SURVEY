@@ -1,14 +1,15 @@
-import React from "react";
+/* eslint-disable import/first */
+import React, { Suspense, lazy } from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import * as serviceWorker from "./serviceWorker";
 import IsLogin from "./utils/islogin";
 // import Layout / Route
-import DevLayout from "./layout/Dev.js";
-import AuthLayout from "./layout/Auth/";
+const DevLayout = lazy(() => import("./layout/Dev.js"));
+const AuthLayout = lazy(() => import("./layout/Auth/"));
+const Form = lazy(() => import("./layout/Form"));
+const Legal = lazy(() => import("./components/Legal"));
 import { LinkedInPopUp } from "react-linkedin-login-oauth2";
-import Legal from "./components/Legal";
-import Form from "./layout/Form";
 import CookiesNeeded from "./components/CookiesNeeded.js";
 import Welcome from "./components/Welcome";
 
@@ -29,14 +30,19 @@ if (localStorage.AcceptCookies === "true") {
     if (result === true) {
       ReactDOM.render(
         <BrowserRouter>
-          <Switch>
-            <Route exact path="/linkedin" component={LinkedInPopUp} />
-            <Route path="/dev" render={(props) => <DevLayout {...props} />} />
-            <Route path="/auth" render={(props) => <AuthLayout {...props} />} />
-            <Route path="/form" render={(props) => <Form {...props} />} />
-            <Route path="/legal" render={(props) => <Legal {...props} />} />
-            <Redirect from="/" to="/form" />
-          </Switch>
+          <Suspense fallback={<div>Chargement...</div>}>
+            <Switch>
+              <Route exact path="/linkedin" component={LinkedInPopUp} />
+              <Route path="/dev" render={(props) => <DevLayout {...props} />} />
+              <Route
+                path="/auth"
+                render={(props) => <AuthLayout {...props} />}
+              />
+              <Route path="/form" render={(props) => <Form {...props} />} />
+              <Route path="/legal" render={(props) => <Legal {...props} />} />
+              <Redirect from="/" to="/form" />
+            </Switch>
+          </Suspense>
         </BrowserRouter>,
         document.getElementById("root")
       );
@@ -44,15 +50,24 @@ if (localStorage.AcceptCookies === "true") {
       // Public route
       ReactDOM.render(
         <BrowserRouter>
-          <Switch>
-            <Route exact path="/linkedin" component={LinkedInPopUp} />
-            <Route path="/dev" render={(props) => <DevLayout {...props} />} />
-            <Route path="/auth" render={(props) => <AuthLayout {...props} />} />
-            <Route path="/form" render={(props) => <Form {...props} />} />
-            <Route path="/legal" render={(props) => <Legal {...props} />} />
-            <Route exact path="/" render={(props) => <Welcome {...props} />} />
-            <Redirect from="/" to="/" />
-          </Switch>
+          <Suspense fallback={<div>Chargement...</div>}>
+            <Switch>
+              <Route exact path="/linkedin" component={LinkedInPopUp} />
+              <Route path="/dev" render={(props) => <DevLayout {...props} />} />
+              <Route
+                path="/auth"
+                render={(props) => <AuthLayout {...props} />}
+              />
+              <Route path="/form" component={Form} />
+              <Route path="/legal" render={(props) => <Legal {...props} />} />
+              <Route
+                exact
+                path="/"
+                render={(props) => <Welcome {...props} />}
+              />
+              <Redirect from="/" to="/" />
+            </Switch>
+          </Suspense>
         </BrowserRouter>,
         document.getElementById("root")
       );
