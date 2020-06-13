@@ -130,6 +130,13 @@ class FormTitle extends React.Component {
           className="div-stats-form"
           onClick={() => {
             this.send_stats();
+
+            window.scrollBy({
+              top: 10000,
+              left: 0,
+              behavior: "smooth"
+            })
+
           }}
         >
           Résultats et statistiques
