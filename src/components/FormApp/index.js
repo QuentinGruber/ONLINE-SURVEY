@@ -4,8 +4,15 @@ import QuestionList from "./sub_components/QuestionList";
 import NewQuestion from "./sub_components/NewQuestion";
 import SaveForm from "./sub_components/SaveForm";
 import Axios from "axios";
-
 import { GlobalStyle } from "./styles";
+
+import { Link } from "react-router-dom";
+import { Button } from "reactstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faArrowAltCircleLeft } from "@fortawesome/free-solid-svg-icons";
+
+library.add(faArrowAltCircleLeft);
 
 var formitems = [];
 
@@ -280,10 +287,20 @@ class FormApp extends React.Component {
       <>
         <GlobalStyle />
         <div id="main" className="fullCard bg-secondary shadow border-0">
-          <FormTitle
-            handleChangeTitle={this.handleChangeTitle}
-            title={this.state.FormName}
-          />
+          <div className="card-top">
+            <Link to="/form">
+              <Button className="btn-outline-default btn-retour-icone">
+                <FontAwesomeIcon
+                  icon="arrow-alt-circle-left"
+                  className="retour-icon"
+                />
+              </Button>
+            </Link>
+            <FormTitle
+              handleChangeTitle={this.handleChangeTitle}
+              title={this.state.FormName}
+            />
+          </div>
           <QuestionList
             items={formitems}
             removeOption={this.removeOption}
