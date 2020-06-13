@@ -5,7 +5,6 @@ import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import * as serviceWorker from "./serviceWorker";
 import IsLogin from "./utils/islogin";
 // import Layout / Route
-const DevLayout = lazy(() => import("./layout/Dev.js"));
 const AuthLayout = lazy(() => import("./layout/Auth/"));
 const Form = lazy(() => import("./layout/Form"));
 const Legal = lazy(() => import("./components/Legal"));
@@ -33,7 +32,6 @@ if (localStorage.AcceptCookies === "true") {
           <Suspense fallback={<div>Chargement...</div>}>
             <Switch>
               <Route exact path="/linkedin" component={LinkedInPopUp} />
-              <Route path="/dev" render={(props) => <DevLayout {...props} />} />
               <Route
                 path="/auth"
                 render={(props) => <AuthLayout {...props} />}
@@ -53,7 +51,6 @@ if (localStorage.AcceptCookies === "true") {
           <Suspense fallback={<div>Chargement...</div>}>
             <Switch>
               <Route exact path="/linkedin" component={LinkedInPopUp} />
-              <Route path="/dev" render={(props) => <DevLayout {...props} />} />
               <Route
                 path="/auth"
                 render={(props) => <AuthLayout {...props} />}
