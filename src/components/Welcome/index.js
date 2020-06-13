@@ -9,11 +9,20 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faAngleDoubleDown } from "@fortawesome/free-solid-svg-icons";
 import { faAngleDoubleUp } from "@fortawesome/free-solid-svg-icons";
+import { faTwitter } from "@fortawesome/free-brands-svg-icons";
+import { faFacebookF } from "@fortawesome/free-brands-svg-icons";
+import { faLinkedinIn } from "@fortawesome/free-brands-svg-icons";
 
 import TitleLogo from "./../../assets/img/logos/OS_white.png";
 import biglogo from "./../../assets/img/logos/Online-survey_white.png";
 
-library.add(faAngleDoubleDown, faAngleDoubleUp);
+library.add(
+  faAngleDoubleDown,
+  faAngleDoubleUp,
+  faTwitter,
+  faFacebookF,
+  faLinkedinIn
+);
 
 class Welcome extends React.Component {
   render() {
@@ -131,7 +140,32 @@ class Welcome extends React.Component {
           </div>
         </div>
         {/* footer*/}
-        <div></div>
+        <div className="footer-2">
+          <div className="space">
+            <Link to="https://www.online-survey.app/legal">
+              Mentions légales
+            </Link>
+            <Link to="https://facebook.com/" className="icon-facebook">
+              <FontAwesomeIcon
+                icon={faFacebookF}
+                className="scroll-down-icon"
+              />
+            </Link>
+            <Link to="https://twitter.com/" className="icon-twitter">
+              <FontAwesomeIcon icon={faTwitter} className="scroll-down-icon" />
+            </Link>
+            <Link
+              to="https://www.linkedin.com/company/bigbrotherproject/about/"
+              className="icon-linkedin"
+            >
+              <FontAwesomeIcon
+                icon={faLinkedinIn}
+                className="scroll-down-icon"
+              />
+            </Link>
+            © Online Survey
+          </div>
+        </div>
       </>
     );
   }
