@@ -122,6 +122,9 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   body {
+    overflow-x: hidden;/* Firefox */
+    overflow-y: auto;/* Firefox */
+    scrollbar-color: transparent transparent;/* Firefox */
     scrollbar-width: none; /* Firefox */
     -ms-overflow-style: none;  /* IE 10+ */
   }
@@ -219,6 +222,33 @@ export const GlobalStyle = createGlobalStyle`
   p {
     font-size : 18px;
   }
+
+  .footer-2{
+    position: absolute;
+    bottom: calc(-100% - 50px);
+    height: 50px;
+    width: 100%;
+    text-align: center;
+    padding: 50px;
+    background-color: none;
+    color: white;
+  }
+
+  .space{
+   width: 50%; 
+   display: flex;
+   justify-content: space-between;
+   margin: auto;
+   margin-bottom: 30px;
+  }
+
+  a{
+    color: white;
+  }
+  a:hover{
+    color: #3C9C8D;
+  }
+
 
 
 
