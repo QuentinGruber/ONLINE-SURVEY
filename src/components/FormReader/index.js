@@ -27,7 +27,7 @@ class FormReader extends React.Component {
             inputs_data.push({
               answerid: inputs[i].id,
               questionid: inputs[i].attributes[1].nodeValue,
-              value: inputs[i].value,
+              value: inputs[i].value.replace(/'/g, "''"),
             });
           }
           break;
