@@ -61,14 +61,12 @@ class Welcome extends React.Component {
 
         <div
           className="div-scroll-down"
-          onClick={(e) => {
-            e.preventDefault();
-            $("html, body").animate(
-              {
-                scrollTop: $(window).height(),
-              },
-              500
-            );
+          onClick={() => {
+            window.scrollBy({
+              top: window.innerHeight,
+              left: 0,
+              behavior: "smooth"
+            })
           }}
         >
           <div className="div-savoir-plus">En savoir plus</div>
@@ -83,14 +81,12 @@ class Welcome extends React.Component {
         <div
           className="div-scroll-up"
           id="div-scroll-up"
-          onClick={(e) => {
-            e.preventDefault();
-            $("html, body").animate(
-              {
-                scrollTop: 0,
-              },
-              350
-            );
+          onClick={() => {
+            window.scrollBy({
+              top: -window.innerHeight,
+              left: 0,
+              behavior: "smooth"
+            })
           }}
         >
           <div className="div-scroll-up-icon">
