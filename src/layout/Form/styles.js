@@ -51,15 +51,33 @@ export const GlobalStyle = createGlobalStyle`
     text-align: center;
     font-size: 20px;
   }
-  
+
   .boxTextTitre {
-    font-size: 40px;
+    font-size:40px;
+    height: 46px;
+    width: 233px;
+    margin: auto;
   }
+
+  .title-logo {
+    max-width:100%;
+    height:auto;
+  }
+
+  .boxTextSlogan  {
+    margin-top: 10px;
+  }
+  
+
+
+
+
+
+
 
   .boxTextFormList {
     position: absolute;
     width : 100%;
-    top : 10px;
     height: 75px;
     left: 0;
     color: white;
@@ -67,11 +85,22 @@ export const GlobalStyle = createGlobalStyle`
     font-size: 16px;
 
   }
-  
+
   .boxTextTitreFormList {
-    font-size: 32px;
+    font-size:40px;
+    height: 46px;
+    width: 233px;
+    margin: auto;
   }
 
+  .title-logoFormList {
+    max-width:100%;
+    height:auto;
+  }
+
+  .boxTextSloganFormList  {
+    margin-top: 10px;
+  }
 
   /* ANSWERS SAVED */
 
