@@ -575,6 +575,7 @@ export const GlobalStyle = createGlobalStyle`
     /* STATS */
 
     .stats-card {
+      margin-top: 50px;
       width: 85%;
       left: 50%;
       top: 95%;
