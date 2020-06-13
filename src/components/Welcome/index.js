@@ -142,28 +142,26 @@ class Welcome extends React.Component {
         {/* footer*/}
         <div className="footer-2">
           <div className="space">
-            <Link to="https://www.online-survey.app/legal">
-              Mentions légales
-            </Link>
-            <Link to="https://facebook.com/" className="icon-facebook">
+            <Link to="/legal">Mentions légales</Link>
+            <a href="https://facebook.com/" className="icon-facebook">
               <FontAwesomeIcon
                 icon={faFacebookF}
                 className="scroll-down-icon"
               />
-            </Link>
-            <Link to="https://twitter.com/" className="icon-twitter">
+            </a>
+            <a href="https://twitter.com/" className="icon-twitter">
               <FontAwesomeIcon icon={faTwitter} className="scroll-down-icon" />
-            </Link>
-            <Link
-              to="https://www.linkedin.com/company/bigbrotherproject/about/"
+            </a>
+            <a
+              href="https://www.linkedin.com/company/bigbrotherproject/about/"
               className="icon-linkedin"
             >
               <FontAwesomeIcon
                 icon={faLinkedinIn}
                 className="scroll-down-icon"
               />
-            </Link>
-            © Online Survey
+            </a>
+            © Online Survey - 2020
           </div>
         </div>
       </>
