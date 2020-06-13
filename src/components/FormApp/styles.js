@@ -17,7 +17,7 @@ export const GlobalStyle = createGlobalStyle`
   .card-top {
     position: relative;
     width: 100%;
-    display: flex;    
+    display: flex;
   }
 
   .form-title {
@@ -44,13 +44,24 @@ export const GlobalStyle = createGlobalStyle`
     position: relative;
     display: inline;
     font-size: 20px;
+    border-color: #172b4d;
+    color: #172b4d;
     padding: 5px 15px;
     left: 0;
     width: 50px;
     
-    visibility: visible;
   }
 
+  .btn-retour-icone:hover {
+    background-color: rgba(0,0,0,0);
+    border-color: #172b4d;
+    color: #172b4d;
+  }
+  .btn-disconnect:active {
+    background-color: rgba(0,0,0,0) !important;
+    border-color: #172b4d !important;
+    color: #172b4d !important;
+  }
 
   .red-border {
     border: 2px #BB0B0B solid !important;
