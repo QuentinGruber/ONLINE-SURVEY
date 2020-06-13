@@ -4,7 +4,6 @@ import { Button } from "reactstrap";
 
 import { GlobalStyle } from "./styles";
 
-import $ from "jquery";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faAngleDoubleDown } from "@fortawesome/free-solid-svg-icons";
