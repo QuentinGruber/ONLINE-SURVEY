@@ -468,11 +468,14 @@ export const GlobalStyle = createGlobalStyle`
     }
 
     .check-aswered {
-      height: 70%;
+      height: default;
       width: 70%;
-      top: 0;
+      top: 10px;
     }
 
+    .div-form-saved {
+      top: 55%;
+    }
     /* FORM LIST */
 
     .btn-disconnect {
