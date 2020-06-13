@@ -14,18 +14,52 @@ export const GlobalStyle = createGlobalStyle`
     border-radius: 5px;
   }
 
-  .form-title {
+  .card-top {
+    position: relative;
     width: 100%;
+    display: flex;
+  }
+
+  .form-title {
+    position: relative;
+    display: block;
+    width: calc(100% - 5px);
     text-align: center;
     font-size: 25px;
     color: black;
     border: none;
     background: transparent;
+    float: right;
+    margin-left: 15px;
+
+
   }
 
   .form-title:empty:before{
     color: #999;
     content:attr(data-placeholder);
+  }
+
+  .btn-retour-icone {
+    position: relative;
+    display: inline;
+    font-size: 20px;
+    border-color: #172b4d;
+    color: #172b4d;
+    padding: 5px 15px;
+    left: 0;
+    width: 50px;
+  }
+
+  .btn-retour-icone:hover {
+    background-color: rgba(0,0,0,0);
+    border-color: #172b4d;
+    color: #172b4d;
+  }
+  .btn-disconnect:active {
+    background-color: rgba(0,0,0,0) !important;
+    border-color: #172b4d !important;
+    color: #172b4d !important;
   }
 
   .red-border {
@@ -372,6 +406,10 @@ export const GlobalStyle = createGlobalStyle`
 .css-1pahdxg-control:hover {
   border-color: #172b4d !important;
 }
+
+
+
+
 
 
 /* ON SMALL SCREENS */
