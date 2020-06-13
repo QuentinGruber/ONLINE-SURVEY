@@ -316,6 +316,10 @@ export const GlobalStyle = createGlobalStyle`
   top: 6px;
 }
 
+.custom-toggle-slider {
+  transition: .2s;
+}
+
 .button-add {
   margin-bottom: 60px;
 }
