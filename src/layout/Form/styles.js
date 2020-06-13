@@ -202,7 +202,6 @@ export const GlobalStyle = createGlobalStyle`
     top: 10%;
     border-bottom-right-radius: 0;
     border-bottom-left-radius: 0;
-    margin-bottom: 5%;
   }
 
   .add-form-card {
@@ -356,11 +355,34 @@ export const GlobalStyle = createGlobalStyle`
     font-size: 18px;
     position: absolute;
     width: 42.5%;
-    min-height: 80%;
+    height: 80%;
     right: 5%;
     top: 10%;
-    margin-bottom: 5%;
   }
+
+  .stats-div {
+    position: absolute;
+    width: 90%;
+    margin: 5%;
+    
+  }
+
+  .stats-question-title {
+    margin-top: 50px;
+    margin-bottom: 10px;
+    font-size: 24px;
+  }
+
+  .stats-question-title:first-of-type {
+    margin-top: 10px;
+  }
+
+  ul {
+    list-style-type: disc;
+  }
+
+
+
 
   .placeholder-stats-div{
     font-size: 24px;

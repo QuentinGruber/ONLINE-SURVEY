@@ -12,9 +12,9 @@ class form_result extends React.Component {
               <QuestionStats
                 key={Math.random() * 10000}
                 questionTypes={[
-                  { value: "Polar", label: "Polar Graph" },
-                  { value: "LineChart", label: "LineChart" },
-                  { value: "BarChart", label: "BarChart" },
+                  { value: "LineChart", label: "Ligne" },
+                  { value: "Polar", label: "Polaire" },
+                  { value: "BarChart", label: "Barres" },
                 ]}
                 data={question.answers}
                 name={question.name}
@@ -25,7 +25,7 @@ class form_result extends React.Component {
             items.push(
               <QuestionStats
                 key={Math.random() * 10000}
-                questionTypes={[{ value: "List", label: "List" }]}
+                questionTypes={[{ value: "List", label: "Liste" }]}
                 data={question.answers}
                 name={question.name}
               />
@@ -36,10 +36,9 @@ class form_result extends React.Component {
               <QuestionStats
                 key={Math.random() * 10000}
                 questionTypes={[
-                  { value: "Polar", label: "Polar Graph" },
-                  { value: "PieChart", label: "PieChart" },
-                  { value: "BarChart", label: "BarChart" },
-                  { value: "Doughnut", label: "Doughnut" },
+                  { value: "PieChart", label: "Circulaire" },
+                  { value: "Polar", label: "Polaire" },
+                  { value: "BarChart", label: "Barres" },
                 ]}
                 data={question.answers}
                 name={question.name}
@@ -51,10 +50,9 @@ class form_result extends React.Component {
               <QuestionStats
                 key={Math.random() * 10000}
                 questionTypes={[
-                  { value: "Polar", label: "Polar Graph" },
-                  { value: "PieChart", label: "PieChart" },
-                  { value: "BarChart", label: "BarChart" },
-                  { value: "Doughnut", label: "Doughnut" },
+                  { value: "PieChart", label: "Circulaire" },
+                  { value: "Polar", label: "Polaire" },
+                  { value: "BarChart", label: "Barres" },
                 ]}
                 data={question.answers}
                 name={question.name}
@@ -68,7 +66,7 @@ class form_result extends React.Component {
       });
       return (
         <Card className="stats-card">
-          <div className="placeholder-stats-div">{items}</div>
+          <div className="stats-div">{items}</div>
         </Card>
       );
     } else {

@@ -98,7 +98,7 @@ class FormTitle extends React.Component {
         </div>
         <div className="div-answers-share">
           <div className="div-answers-form">
-            {this.state.nb_answer} Réponses -{" "}
+            {this.state.nb_answer} Réponse(s) -{" "}
           </div>
           <div
             className="div-share-form"

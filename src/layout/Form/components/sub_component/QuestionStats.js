@@ -2,7 +2,6 @@ import React from "react";
 import Select from "react-select";
 import PieChart from "../../../../components/ChartComponents/PieChart";
 import Polar from "../../../../components/ChartComponents/Polar";
-import Doughnut from "../../../../components/ChartComponents/Doughnut";
 import BarChart from "../../../../components/ChartComponents/BarChart";
 import List from "../../../../components/ChartComponents/List";
 import LineChart from "../../../../components/ChartComponents/LineChart";
@@ -10,7 +9,12 @@ import LineChart from "../../../../components/ChartComponents/LineChart";
 class QuestionStats extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { selectedOption: this.props.questionTypes[0].value };
+    this.state = {
+      selectedOption: {
+        value: this.props.questionTypes[0].value,
+        label: this.props.questionTypes[0].label,
+      },
+    };
   }
 
   handleChange = (selectedOption) => {
@@ -20,15 +24,15 @@ class QuestionStats extends React.Component {
   render() {
     return (
       <>
-        <h2>{this.props.name}</h2>
+        <div className="stats-question-title">{this.props.name}</div>
         {this.props.questionTypes.length > 1 ? (
           <Select
-            placeholder={this.state.selectedOption}
+            placeholder={this.state.selectedOption.label}
             options={this.props.questionTypes}
             name="QuestionType"
             className="type-select"
             id="sel1"
-            value={this.state.selectedOption}
+            value={this.state.selectedOption.value}
             onChange={(e) => {
               this.handleChange(e.value);
             }}
@@ -37,13 +41,11 @@ class QuestionStats extends React.Component {
 
         {(() => {
           if (this.props.questionTypes.length > 1) {
-            switch (this.state.selectedOption) {
+            switch (this.state.selectedOption.value) {
               case "Polar":
                 return <Polar data={this.props.data} />;
               case "PieChart":
                 return <PieChart data={this.props.data} />;
-              case "Doughnut":
-                return <Doughnut data={this.props.data} />;
               case "BarChart":
                 return <BarChart data={this.props.data} />;
               case "List":

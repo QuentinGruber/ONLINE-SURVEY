@@ -16,13 +16,12 @@ export default class List extends Component {
 
     data.forEach((element) => {
       color_array.push(randomHexColor());
-      label_array.push("Nombre d'entrées " + element.value);
+      label_array.push(element.value);
       data_array.push(element.count);
 
       list_item.push(
         <div key={Math.random() * 10000}>
-          <dt>{element.value} : </dt> <dd>{element.count} réponse(s).</dd>{" "}
-          <br />
+          <li>{element.value}</li>
         </div>
       );
     });
@@ -31,7 +30,11 @@ export default class List extends Component {
   }
   render() {
     if (this.state.list_item !== undefined) {
-      return <>{this.state.list_item}</>;
+      return (
+        <>
+          <ul>{this.state.list_item}</ul>
+        </>
+      );
     } else {
       return null;
     }
