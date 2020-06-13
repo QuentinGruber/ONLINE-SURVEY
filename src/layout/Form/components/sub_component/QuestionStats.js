@@ -41,7 +41,7 @@ class QuestionStats extends React.Component {
 
         {(() => {
           if (this.props.questionTypes.length > 1) {
-            switch (this.state.selectedOption) {
+            switch (this.state.selectedOption.value) {
               case "Polar":
                 return <Polar data={this.props.data} />;
               case "PieChart":
