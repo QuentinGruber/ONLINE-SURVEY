@@ -81,13 +81,21 @@ exports.register = function (req, res, connection) {
               if (!res.headersSent) {
                 res.send("true");
               }
-              connection.release();
+              if (
+                connection._pool._freeConnections.indexOf(connection) === -1
+              ) {
+                connection.release();
+              }
             } catch (e) {
               log(JSON.stringify(e), "crash.log");
               if (!res.headersSent) {
                 res.send("false");
               }
-              connection.release();
+              if (
+                connection._pool._freeConnections.indexOf(connection) === -1
+              ) {
+                connection.release();
+              }
             }
           }
         );
@@ -126,12 +134,20 @@ exports.register = function (req, res, connection) {
               if (!res.headersSent) {
                 res.send("true");
               }
-              connection.release();
+              if (
+                connection._pool._freeConnections.indexOf(connection) === -1
+              ) {
+                connection.release();
+              }
             } catch (e) {
               if (!res.headersSent) {
                 res.send("false");
               }
-              connection.release();
+              if (
+                connection._pool._freeConnections.indexOf(connection) === -1
+              ) {
+                connection.release();
+              }
               log(JSON.stringify(e), "crash.log");
             }
           }
@@ -172,12 +188,20 @@ exports.register = function (req, res, connection) {
               if (!res.headersSent) {
                 res.send("true");
               }
-              connection.release();
+              if (
+                connection._pool._freeConnections.indexOf(connection) === -1
+              ) {
+                connection.release();
+              }
             } catch (e) {
               if (!res.headersSent) {
                 res.send("false");
               }
-              connection.release();
+              if (
+                connection._pool._freeConnections.indexOf(connection) === -1
+              ) {
+                connection.release();
+              }
               log(JSON.stringify(e), "crash.log");
             }
           }
@@ -210,12 +234,20 @@ exports.register = function (req, res, connection) {
               if (!res.headersSent) {
                 res.send("true");
               }
-              connection.release();
+              if (
+                connection._pool._freeConnections.indexOf(connection) === -1
+              ) {
+                connection.release();
+              }
             } catch (e) {
               if (!res.headersSent) {
                 res.send("false");
               }
-              connection.release();
+              if (
+                connection._pool._freeConnections.indexOf(connection) === -1
+              ) {
+                connection.release();
+              }
               log(JSON.stringify(e), "crash.log");
             }
           }
@@ -271,7 +303,9 @@ exports.login = function (req, res, connection) {
             if (!res.headersSent) {
               res.send("false");
             } // if not send false
-            connection.release();
+            if (connection._pool._freeConnections.indexOf(connection) === -1) {
+              connection.release();
+            }
             return; // and stop the connection.query
           }
 
@@ -307,12 +341,16 @@ exports.login = function (req, res, connection) {
             if (!res.headersSent) {
               res.send("true");
             }
-            connection.release();
+            if (connection._pool._freeConnections.indexOf(connection) === -1) {
+              connection.release();
+            }
           } else {
             if (!res.headersSent) {
               res.send("false");
             }
-            connection.release();
+            if (connection._pool._freeConnections.indexOf(connection) === -1) {
+              connection.release();
+            }
           }
         }
       );
@@ -335,12 +373,16 @@ exports.login = function (req, res, connection) {
             if (!res.headersSent) {
               res.send("true");
             }
-            connection.release();
+            if (connection._pool._freeConnections.indexOf(connection) === -1) {
+              connection.release();
+            }
           } catch (e) {
             if (!res.headersSent) {
               res.send("false");
             }
-            connection.release();
+            if (connection._pool._freeConnections.indexOf(connection) === -1) {
+              connection.release();
+            }
             log(JSON.stringify(e), "crash.log");
           }
         }
@@ -373,12 +415,16 @@ exports.Check_Username = function (req, res, connection) {
           if (!res.headersSent) {
             res.send(JSON.stringify(result_converted[0]));
           }
-          connection.release();
+          if (connection._pool._freeConnections.indexOf(connection) === -1) {
+            connection.release();
+          }
         } catch (e) {
           if (!res.headersSent) {
             res.send("false");
           }
-          connection.release();
+          if (connection._pool._freeConnections.indexOf(connection) === -1) {
+            connection.release();
+          }
           log(JSON.stringify(e), "crash.log");
         }
       }
@@ -406,12 +452,16 @@ exports.Check_Email = function (req, res, connection) {
           if (!res.headersSent) {
             res.send(JSON.stringify(result_converted[0]));
           }
-          connection.release();
+          if (connection._pool._freeConnections.indexOf(connection) === -1) {
+            connection.release();
+          }
         } catch (e) {
           if (!res.headersSent) {
             res.send("false");
           }
-          connection.release();
+          if (connection._pool._freeConnections.indexOf(connection) === -1) {
+            connection.release();
+          }
           log(JSON.stringify(e), "crash.log");
         }
       }
@@ -441,12 +491,16 @@ exports.Check_RegistrationType = function (req, res, connection) {
           if (!res.headersSent) {
             res.send(JSON.stringify(result_converted[0]));
           }
-          connection.release();
+          if (connection._pool._freeConnections.indexOf(connection) === -1) {
+            connection.release();
+          }
         } catch (e) {
           if (!res.headersSent) {
             res.send("false");
           }
-          connection.release();
+          if (connection._pool._freeConnections.indexOf(connection) === -1) {
+            connection.release();
+          }
           log(JSON.stringify(e), "crash.log");
         }
       }
