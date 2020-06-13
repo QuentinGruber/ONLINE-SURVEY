@@ -69,7 +69,7 @@ body{
   
   .boxText {
     position: absolute;
-    width : 20%;
+    width : 25%;
     right: 6%;
     top : 50%;
     transform: translateY(-50%);
@@ -79,7 +79,15 @@ body{
   }
   
   .boxTextTitre {
-    font-size: 40px;
+    font-size:40px;
+    height: 66px;
+    width: 333px;
+    margin: auto;
+  }
+
+  .title-logo {
+    max-width:100%;
+    height:auto;
   }
 
   .red-border {
@@ -87,12 +95,64 @@ body{
     border-radius: 5px !important;
   }
   
+
+
+
+  /* ON SMALL SCREENS */
+  
+  @media screen and (max-width: 1200px) {
+
+    .whiteDiv {
+      display: none;
+    }
+
+    .boxText {
+      width : 50%;
+      left: 50%;
+      transform: translateX(-50%) !important;
+      top : 25px;
+    }
+
+
+  }
+
+
+
+
+
   /* ON MOBILE */
   
   @media screen and (max-width: 600px) {
+
+
+    .boxText {
+      position: absolute;
+      width : 90%;
+      left: 50%;
+      transform: translateX(-50%) !important;
+      top : 5px;
+    }
+    
+    .boxTextTitre {
+      font-size:40px;
+      height: 55px;
+      width: 277px;
+      margin: auto;
+    }
+
+    .title-logo {
+      max-width:100%;
+      height:auto;
+    }
+
+    .boxTextSlogan {
+      margin-top: 10px;
+      width: 100%;
+    }
+
     .fullCard {
-      top: 90px !important;
-      transform: translate(-50%, 0) !important;
+      top: 115px !important;
+      transform: translateX(-50%) !important;
       margin-bottom: 15px;
     }
   
@@ -100,25 +160,7 @@ body{
       width: 30%;
     }
   
-    .whiteDiv {
-      display: none;
-    }
-    
-    .boxText {
-      position: absolute;
-      width : 100%;
-      top : 40px;
-      height: 75px;
-      left: 0;
-      color: white;
-      text-align: center;
-      font-size: 16px;
-    }
-  
-    .boxTextTitre {
-      font-size: 32px;
-    }
-  }
+
   
   
 `;

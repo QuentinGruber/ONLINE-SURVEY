@@ -51,15 +51,27 @@ export const GlobalStyle = createGlobalStyle`
     text-align: center;
     font-size: 20px;
   }
-  
+
   .boxTextTitre {
-    font-size: 40px;
+    font-size:40px;
+    height: 66px;
+    width: 333px;
+    margin: auto;
   }
+
+  .title-logo {
+    max-width:100%;
+    height:auto;
+  }
+
+  .boxTextSlogan  {
+    margin-top: 10px;
+  }
+  
 
   .boxTextFormList {
     position: absolute;
     width : 100%;
-    top : 10px;
     height: 75px;
     left: 0;
     color: white;
@@ -67,11 +79,22 @@ export const GlobalStyle = createGlobalStyle`
     font-size: 16px;
 
   }
-  
+
   .boxTextTitreFormList {
-    font-size: 32px;
+    font-size:40px;
+    height: 46px;
+    width: 233px;
+    margin: auto;
   }
 
+  .title-logoFormList {
+    max-width:100%;
+    height:auto;
+  }
+
+  .boxTextSloganFormList  {
+    margin-top: 10px;
+  }
 
   /* ANSWERS SAVED */
 
@@ -145,7 +168,7 @@ export const GlobalStyle = createGlobalStyle`
 
   .div-form-saved {
     position: absolute;
-    width: 100%;
+    width: 90%;
     text-align: center;
     left: 50%;
     transform: translateX(-50%);
@@ -361,6 +384,16 @@ export const GlobalStyle = createGlobalStyle`
     transform: translate(-50%,calc(-50% + 40px));
   }
 
+ 
+
+  @media screen and (max-width: 1600px) {
+
+    .boxTextTitre {
+      height: 44px;
+      width: 222px;
+    }
+
+  }
 
 
 
@@ -368,6 +401,19 @@ export const GlobalStyle = createGlobalStyle`
   
   @media screen and (max-width: 1200px) {
   
+    /* ANSWERS SAVED */
+
+    .check-aswered {
+      height: default;
+      width: 70%;
+      top: 10px;
+    }
+
+    .div-form-saved {
+      top: 55%;
+    }
+
+    
     /* BACKGROUND */
 
     .whiteDiv {
@@ -438,11 +484,6 @@ export const GlobalStyle = createGlobalStyle`
       padding: 10px;
     }
 
-    .check-aswered {
-      height: 70%;
-      width: 70%;
-      top: 0;
-    }
 
     /* FORM LIST */
 

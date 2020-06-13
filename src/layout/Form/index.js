@@ -11,6 +11,7 @@ import MyFormItem from "./components/Myform_item";
 import { Card, Button } from "reactstrap";
 import FormResult from "./components/FormResult.js";
 import Disconnect from "./../../components/Disconnect";
+import TitleLogo from "./../../assets/img/logos/OS_white.png";
 
 class Form extends React.Component {
   constructor(props) {
@@ -111,7 +112,16 @@ class Form extends React.Component {
             <Disconnect />
 
             <div className="boxTextFormList">
-              <div className="boxTextTitreFormList">Online Survey</div>
+              <div className="boxTextTitreFormList">
+                <img
+                  src={TitleLogo}
+                  title="Online Survey"
+                  alt="Logo de Online Survey"
+                  className="title-logoFormList"
+                  width="333px"
+                  height="66px"
+                ></img>
+              </div>
               <div className="boxTextSloganFormList">
                 Your forms, made simple
               </div>
@@ -155,7 +165,16 @@ class Form extends React.Component {
             <div className="whiteDiv"></div>
 
             <div className="boxText">
-              <div className="boxTextTitre">Online Survey</div>
+              <div className="boxTextTitre">
+                <img
+                  src={TitleLogo}
+                  title="Online Survey"
+                  alt="Logo de Online Survey"
+                  className="title-logo"
+                  width="333px"
+                  height="66px"
+                ></img>
+              </div>
               <div className="boxTextSlogan">Your forms, made simple</div>
             </div>
           </>
