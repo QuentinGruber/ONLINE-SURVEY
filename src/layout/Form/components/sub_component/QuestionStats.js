@@ -9,7 +9,12 @@ import LineChart from "../../../../components/ChartComponents/LineChart";
 class QuestionStats extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { selectedOption: this.props.questionTypes[0].value };
+    this.state = {
+      selectedOption: {
+        value: this.props.questionTypes[0].value,
+        label: this.props.questionTypes[0].label,
+      },
+    };
   }
 
   handleChange = (selectedOption) => {
@@ -22,12 +27,12 @@ class QuestionStats extends React.Component {
         <div className="stats-question-title">{this.props.name}</div>
         {this.props.questionTypes.length > 1 ? (
           <Select
-            placeholder={this.state.selectedOption}
+            placeholder={this.state.selectedOption.label}
             options={this.props.questionTypes}
             name="QuestionType"
             className="type-select"
             id="sel1"
-            value={this.state.selectedOption}
+            value={this.state.selectedOption.value}
             onChange={(e) => {
               this.handleChange(e.value);
             }}
