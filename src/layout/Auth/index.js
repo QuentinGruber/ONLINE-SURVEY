@@ -5,6 +5,8 @@ import routes from "../../routes.js";
 
 import { GlobalStyle } from "./styles";
 
+import TitleLogo from "./../../assets/img/logos/OS_white.png";
+
 class Auth extends React.Component {
   // Get layout's routes
   getRoutes = (routes) => {
@@ -41,7 +43,16 @@ class Auth extends React.Component {
         <div className="whiteDiv"></div>
 
         <div className="boxText">
-          <div className="boxTextTitre">Online Survey</div>
+          <div className="boxTextTitre">
+            <img
+              src={TitleLogo}
+              title="Online Survey"
+              alt="Logo de Online Survey"
+              className="title-logo"
+              width="333px"
+              height="66px"
+            ></img>
+          </div>
           <div className="boxTextSlogan">Your forms, made simple</div>
         </div>
 
