@@ -138,7 +138,7 @@ class Welcome extends React.Component {
         <div className="footer-2">
           <div className="space">
             <Link to="/legal">Mentions légales</Link>
-            <a href="https://facebook.com/" className="icon-facebook">
+            <a href="https://www.facebook.com/OnlineSurveyHe1/" className="icon-facebook">
               <FontAwesomeIcon
                 icon={faFacebookF}
                 className="scroll-down-icon"
