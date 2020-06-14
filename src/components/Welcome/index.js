@@ -144,7 +144,10 @@ class Welcome extends React.Component {
                 className="scroll-down-icon"
               />
             </a>
-            <a href="https://twitter.com/" className="icon-twitter">
+            <a
+              href="https://twitter.com/OnlineSurveyHe1"
+              className="icon-twitter"
+            >
               <FontAwesomeIcon icon={faTwitter} className="scroll-down-icon" />
             </a>
             <a
