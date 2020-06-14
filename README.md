@@ -1,5 +1,11 @@
 # Online-Survey
 
+## Needed
+
+* [Nodejs v12.18.0 (LTS)](https://nodejs.org/en/download/)
+
+* A MariaDB installation see [MariaDB](https://mariadb.org/) / [Wamp](https://www.wampserver.com/)
+
 ## Setup .env
 
 Choose as a template: .env development or .env production.
