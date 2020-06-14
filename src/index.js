@@ -30,10 +30,6 @@ if (localStorage.AcceptCookies === "true") {
           <Suspense fallback={<div>Chargement...</div>}>
             <Switch>
               <Route exact path="/linkedin" component={LinkedInPopUp} />
-              <Route
-                path="/auth"
-                render={(props) => <AuthLayout {...props} />}
-              />
               <Route path="/form" render={(props) => <Form {...props} />} />
               <Route path="/legal" render={(props) => <Legal {...props} />} />
               <Redirect from="/" to="/form" />
