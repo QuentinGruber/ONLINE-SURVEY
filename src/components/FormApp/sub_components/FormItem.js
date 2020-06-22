@@ -38,6 +38,7 @@ class FormItem extends React.Component {
   };
 
   render() {
+    var item_title = this.props.item.title.replace(/[&]nbsp[;]/gi, " ")
     return (
       <>
         <li className="list-group-item card-question">
@@ -46,7 +47,7 @@ class FormItem extends React.Component {
             className="question"
             type="text"
             placeholder="Titre de la question"
-            value={this.props.item.title.replace(/[<]br[^>]*[>]/gi, "")}
+            value={item_title.replace(/[<]br[^>]*[>]/gi, "")}
             onChange={(e) =>
               this.props.handleChangeQuestionTitle(
                 e.target.value,
@@ -146,14 +147,14 @@ class FormItem extends React.Component {
                       defaultChecked
                     />
                   ) : (
-                    <input
-                      type="checkbox"
-                      id={"Require_" + this.props.index}
-                      onChange={() => {
-                        this.props.ToogleRequireStateChange(this.props.index);
-                      }}
-                    />
-                  )}
+                      <input
+                        type="checkbox"
+                        id={"Require_" + this.props.index}
+                        onChange={() => {
+                          this.props.ToogleRequireStateChange(this.props.index);
+                        }}
+                      />
+                    )}
 
                   <span className="custom-toggle-slider rounded-circle" />
                 </span>
