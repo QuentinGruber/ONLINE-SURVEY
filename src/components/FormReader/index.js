@@ -188,8 +188,7 @@ class FormReader extends React.Component {
             <>
               <Form id="Form" className="fullCard bg-secondary shadow border-0">
                 <div className="form-title">
-                  {" "}
-                  {this.state.FormContent.title}{" "}
+                  {this.state.FormContent.title.replace(/[&]nbsp[;]/gi, " ")}
                 </div>
                 {this.state.items}
                 <div className="card-bottom">
