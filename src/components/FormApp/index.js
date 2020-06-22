@@ -106,7 +106,11 @@ class FormApp extends React.Component {
           this.state.formitems.forEach((element) => {
             const Element = element;
             Element.title = Element.title.replace(/'/g, "''");
-            if (Element.p_answer !== "") {
+            if (
+              Element.p_answer !== "" &&
+              Element.type !== "text" &&
+              Element.type !== "number"
+            ) {
               for (let index = 0; index < Element.p_answer.length; index++) {
                 const p_answer = Element.p_answer[index];
                 p_answer.text = p_answer.text.replace(/'/g, "''");
