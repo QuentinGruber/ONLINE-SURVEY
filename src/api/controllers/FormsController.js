@@ -5,14 +5,14 @@ exports.create_new_form = async function (req, res, connection) {
     // Create form
     connection.query(
       "INSERT INTO forms (users_id,name) VALUES (" +
-      "'" +
-      req.session.user_id +
-      "'" +
-      "," +
-      "'" +
-      req.body.title +
-      "'" +
-      ");",
+        "'" +
+        req.session.user_id +
+        "'" +
+        "," +
+        "'" +
+        req.body.title +
+        "'" +
+        ");",
       function (sql_error, results, fields) {
         // If some error occurs, we throw an error.
         try {
@@ -30,7 +30,7 @@ exports.create_new_form = async function (req, res, connection) {
               req.body.content[i].type +
               "', '" +
               +req.body.content[i].required + // use "+" to change type from boolean to int
-              "');",
+                "');",
               function (sql_error, results, fields) {
                 // If some error occurs, we throw an error.
                 if (sql_error) {
@@ -42,10 +42,10 @@ exports.create_new_form = async function (req, res, connection) {
                 if (req.body.content[i].type === "text") {
                   connection.query(
                     "INSERT INTO answers ( question_id, text) VALUES ( '" +
-                    results.insertId +
-                    "', '" +
-                    req.body.content[i].p_answer +
-                    "');",
+                      results.insertId +
+                      "', '" +
+                      req.body.content[i].p_answer +
+                      "');",
                     function (sql_error, results, fields) {
                       // If some error occurs, we throw an error.
                       if (sql_error) {
@@ -58,10 +58,10 @@ exports.create_new_form = async function (req, res, connection) {
                 if (req.body.content[i].type === "number") {
                   connection.query(
                     "INSERT INTO answers ( question_id, text ) VALUES ( '" +
-                    results.insertId +
-                    "', '" +
-                    req.body.content[i].p_answer +
-                    "');",
+                      results.insertId +
+                      "', '" +
+                      req.body.content[i].p_answer +
+                      "');",
                     function (sql_error, results, fields) {
                       // If some error occurs, we throw an error.
                       if (sql_error) {
@@ -79,10 +79,10 @@ exports.create_new_form = async function (req, res, connection) {
                   ) {
                     connection.query(
                       "INSERT INTO answers ( question_id, text) VALUES ( '" +
-                      results.insertId +
-                      "', '" +
-                      req.body.content[i].p_answer[j].text +
-                      "');",
+                        results.insertId +
+                        "', '" +
+                        req.body.content[i].p_answer[j].text +
+                        "');",
                       function (sql_error, results, fields) {
                         // If some error occurs, we throw an error.
                         if (sql_error) {
@@ -101,10 +101,10 @@ exports.create_new_form = async function (req, res, connection) {
                   ) {
                     connection.query(
                       "INSERT INTO answers ( question_id, text) VALUES ( '" +
-                      results.insertId +
-                      "', '" +
-                      req.body.content[i].p_answer[j].text +
-                      "');",
+                        results.insertId +
+                        "', '" +
+                        req.body.content[i].p_answer[j].text +
+                        "');",
                       function (sql_error, results, fields) {
                         // If some error occurs, we throw an error.
                         if (sql_error) {
@@ -145,8 +145,8 @@ exports.get_number_of_answers = function (req, res, connection) {
     if (auth_check) {
       connection.query(
         "SELECT distinct(answers_users.user_id) FROM `answers_users` JOIN `questions` ON answers_users.question_id=questions.id WHERE questions.forms_id = " +
-        FormID +
-        "",
+          FormID +
+          "",
         function (sql_error, results, fields) {
           try {
             if (sql_error) {
@@ -254,8 +254,8 @@ exports.get_question_answers = function (req, res, connection) {
 
     connection.query(
       "SELECT answers_users.text FROM `answers_users` JOIN `questions` ON answers_users.question_id=questions.id WHERE answers_users.question_id = " +
-      QuestionID +
-      " ;",
+        QuestionID +
+        " ;",
       function (sql_error, results, fields) {
         try {
           if (sql_error) {
@@ -321,10 +321,10 @@ exports.modify_form = async function (req, res, connection) {
       // updt form name
       connection.query(
         "UPDATE forms SET name='" +
-        req.body.title +
-        "' WHERE id=" +
-        req.body.FormID +
-        ";",
+          req.body.title +
+          "' WHERE id=" +
+          req.body.FormID +
+          ";",
         function (sql_error, results, fields) {
           try {
             // If some error occurs, we throw an error.
@@ -336,22 +336,22 @@ exports.modify_form = async function (req, res, connection) {
                 // Create question linked to form
                 connection.query(
                   "UPDATE questions SET " +
-                  "text=" +
-                  "'" +
-                  req.body.content[i].title +
-                  "'" +
-                  "type=" +
-                  "'" +
-                  req.body.content[i].type +
-                  "', " +
-                  "required=" +
-                  "'" +
-                  (req.body.content[i].required | 0) +
-                  "' WHERE id=" +
-                  "'" +
-                  req.body.content[i].id +
-                  "'" +
-                  ";",
+                    "text=" +
+                    "'" +
+                    req.body.content[i].title +
+                    "'," +
+                    "type=" +
+                    "'" +
+                    req.body.content[i].type +
+                    "', " +
+                    "required=" +
+                    "'" +
+                    (req.body.content[i].required | 0) +
+                    "' WHERE id=" +
+                    "'" +
+                    req.body.content[i].id +
+                    "'" +
+                    ";",
                   function (sql_error, results, fields) {
                     // If some error occurs, we throw an error.
                     if (sql_error) {
@@ -363,15 +363,15 @@ exports.modify_form = async function (req, res, connection) {
                     if (req.body.content[i].type === "text") {
                       connection.query(
                         "UPDATE answers SET " +
-                        "text=" +
-                        "'" +
-                        req.body.content[i].p_answer +
-                        "'" +
-                        "WHERE id=" +
-                        "'" +
-                        req.body.content[i].id +
-                        "'" +
-                        ";",
+                          "text=" +
+                          "'" +
+                          req.body.content[i].p_answer +
+                          "'" +
+                          "WHERE id=" +
+                          "'" +
+                          req.body.content[i].id +
+                          "'" +
+                          ";",
                         function (sql_error, results, fields) {
                           // If some error occurs, we throw an error.
                           if (sql_error) {
@@ -384,15 +384,15 @@ exports.modify_form = async function (req, res, connection) {
                     if (req.body.content[i].type === "number") {
                       connection.query(
                         "UPDATE answers SET " +
-                        "text=" +
-                        "'" +
-                        req.body.content[i].p_answer +
-                        "'" +
-                        "WHERE id=" +
-                        "'" +
-                        req.body.content[i].id +
-                        "'" +
-                        ";",
+                          "text=" +
+                          "'" +
+                          req.body.content[i].p_answer +
+                          "'" +
+                          "WHERE id=" +
+                          "'" +
+                          req.body.content[i].id +
+                          "'" +
+                          ";",
                         function (sql_error, results, fields) {
                           // If some error occurs, we throw an error.
                           if (sql_error) {
@@ -411,15 +411,15 @@ exports.modify_form = async function (req, res, connection) {
                         if (req.body.content[i].p_answer[j].id != undefined) {
                           connection.query(
                             "UPDATE answers SET " +
-                            "text=" +
-                            "'" +
-                            req.body.content[i].p_answer[j].text +
-                            "'" +
-                            "WHERE id=" +
-                            "'" +
-                            req.body.content[i].id +
-                            "'" +
-                            ";",
+                              "text=" +
+                              "'" +
+                              req.body.content[i].p_answer[j].text +
+                              "'" +
+                              "WHERE id=" +
+                              "'" +
+                              req.body.content[i].id +
+                              "'" +
+                              ";",
                             function (sql_error, results, fields) {
                               // If some error occurs, we throw an error.
                               if (sql_error) {
@@ -432,10 +432,10 @@ exports.modify_form = async function (req, res, connection) {
                         else {
                           connection.query(
                             "INSERT INTO answers ( question_id, text) VALUES ( '" +
-                            req.body.content[i].id +
-                            "', '" +
-                            req.body.content[i].p_answer[j].text +
-                            "');",
+                              req.body.content[i].id +
+                              "', '" +
+                              req.body.content[i].p_answer[j].text +
+                              "');",
                             function (sql_error, results, fields) {
                               // If some error occurs, we throw an error.
                               if (sql_error) {
@@ -456,15 +456,15 @@ exports.modify_form = async function (req, res, connection) {
                         if (req.body.content[i].p_answer[j].id != undefined) {
                           connection.query(
                             "UPDATE answers SET " +
-                            "text=" +
-                            "'" +
-                            req.body.content[i].p_answer[j].text +
-                            "'" +
-                            "WHERE id=" +
-                            "'" +
-                            req.body.content[i].p_answer[j].id +
-                            "'" +
-                            ";",
+                              "text=" +
+                              "'" +
+                              req.body.content[i].p_answer[j].text +
+                              "'" +
+                              "WHERE id=" +
+                              "'" +
+                              req.body.content[i].p_answer[j].id +
+                              "'" +
+                              ";",
                             function (sql_error, results, fields) {
                               // If some error occurs, we throw an error.
                               if (sql_error) {
@@ -477,10 +477,10 @@ exports.modify_form = async function (req, res, connection) {
                         else {
                           connection.query(
                             "INSERT INTO answers ( question_id, text) VALUES ( '" +
-                            req.body.content[i].id +
-                            "', '" +
-                            req.body.content[i].p_answer[j].text +
-                            "');",
+                              req.body.content[i].id +
+                              "', '" +
+                              req.body.content[i].p_answer[j].text +
+                              "');",
                             function (sql_error, results, fields) {
                               // If some error occurs, we throw an error.
                               if (sql_error) {
@@ -498,22 +498,22 @@ exports.modify_form = async function (req, res, connection) {
               else {
                 connection.query(
                   "INSERT INTO questions (forms_id,text,type,required) VALUES (" +
-                  "'" +
-                  req.body.FormID +
-                  "'" +
-                  "," +
-                  "'" +
-                  req.body.content[i].title +
-                  "'" +
-                  "," +
-                  "'" +
-                  req.body.content[i].type +
-                  "'" +
-                  "," +
-                  "'" +
-                  (req.body.content[i].required | 0) +
-                  "'" +
-                  ");",
+                    "'" +
+                    req.body.FormID +
+                    "'" +
+                    "," +
+                    "'" +
+                    req.body.content[i].title +
+                    "'" +
+                    "," +
+                    "'" +
+                    req.body.content[i].type +
+                    "'" +
+                    "," +
+                    "'" +
+                    (req.body.content[i].required | 0) +
+                    "'" +
+                    ");",
                   function (sql_error, results, fields) {
                     // If some error occurs, we throw an error.
                     if (sql_error) {
@@ -528,10 +528,10 @@ exports.modify_form = async function (req, res, connection) {
                       ) {
                         connection.query(
                           "INSERT INTO answers ( question_id, text) VALUES ( '" +
-                          results.insertId +
-                          "', '" +
-                          req.body.content[i].p_answer[j].text +
-                          "');",
+                            results.insertId +
+                            "', '" +
+                            req.body.content[i].p_answer[j].text +
+                            "');",
                           function (sql_error, results, fields) {
                             // If some error occurs, we throw an error.
                             if (sql_error) {
@@ -543,10 +543,10 @@ exports.modify_form = async function (req, res, connection) {
                     } else {
                       connection.query(
                         "INSERT INTO answers ( question_id, text) VALUES ( '" +
-                        results.insertId +
-                        "', '" +
-                        req.body.content[i].p_answer +
-                        "');",
+                          results.insertId +
+                          "', '" +
+                          req.body.content[i].p_answer +
+                          "');",
                         function (sql_error, results, fields) {
                           // If some error occurs, we throw an error.
                           if (sql_error) {
@@ -730,10 +730,10 @@ exports.get_form_content = async function (req, res, connection) {
           Formcontent.title = results[0].name;
           connection.query(
             "SELECT * FROM `questions` WHERE forms_id= " +
-            "'" +
-            FormID +
-            "'" +
-            ";",
+              "'" +
+              FormID +
+              "'" +
+              ";",
             function (sql_error, results, fields) {
               // If some error occurs, we throw an error.
               if (sql_error) {
@@ -753,10 +753,10 @@ exports.get_form_content = async function (req, res, connection) {
               for (let i = 0; i < nb_questions; i++) {
                 connection.query(
                   "SELECT * FROM `answers` WHERE `question_id`= " +
-                  "'" +
-                  results[i].id +
-                  "'" +
-                  ";",
+                    "'" +
+                    results[i].id +
+                    "'" +
+                    ";",
                   function (sql_error, results, fields) {
                     // If some error occurs, we throw an error.
                     if (sql_error) {
@@ -814,8 +814,8 @@ exports.HasAnswered = async function (req, res, connection) {
     }
     connection.query(
       "SELECT distinct(questions.forms_id) FROM answers_users JOIN questions ON answers_users.question_id=questions.id WHERE answers_users.user_id = " +
-      req.session.user_id +
-      "",
+        req.session.user_id +
+        "",
       function (sql_error, results, fields) {
         // If some error occurs, we throw an error.
         try {
@@ -878,17 +878,17 @@ exports.register_answer = async function (req, res, connection) {
     for (let i = 0; i < req.body.length; i++) {
       connection.query(
         "INSERT INTO `answers_users` (`answers_id`, `question_id`, `text`, `user_id`) VALUES ('" +
-        req.body[i].answerid +
-        "'" +
-        ", '" +
-        req.body[i].questionid +
-        "', '" +
-        "" +
-        req.body[i].value +
-        "" +
-        "', '" +
-        req.session.user_id +
-        "');",
+          req.body[i].answerid +
+          "'" +
+          ", '" +
+          req.body[i].questionid +
+          "', '" +
+          "" +
+          req.body[i].value +
+          "" +
+          "', '" +
+          req.session.user_id +
+          "');",
         function (sql_error, results, fields) {
           // If some error occurs, we throw an error.
           try {
