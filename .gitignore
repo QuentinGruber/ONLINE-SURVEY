@@ -123,5 +123,3 @@ sketch
 # End of https://www.gitignore.io/api/node,react
 
 build/
-
-package-lock.json
