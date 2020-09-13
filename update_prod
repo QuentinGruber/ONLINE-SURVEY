@@ -1,6 +1,6 @@
 git pull
 wait
-npm i
+npm ci
 wait
 npm run-script build
 wait
