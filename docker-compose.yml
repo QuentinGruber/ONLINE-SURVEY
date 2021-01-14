@@ -1,0 +1,31 @@
+version: "3"
+services:
+  osy-client:
+    build:
+      context: .
+      dockerfile: osy-client.dockerfile
+    depends_on:
+      - osy-server
+    ports:
+      - "3000:5000"
+    networks:
+      - osy-network
+  osy-server:
+    build:
+      context: .
+      dockerfile: osy-server.dockerfile
+    restart: always
+    depends_on:
+      - osy-db
+    ports:
+      - "3001:3001"
+    networks:
+      - osy-network
+  osy-db:
+    build:
+      context: .
+      dockerfile: osy-db.dockerfile
+    restart: always
+networks:
+  osy-network:
+    driver: bridge

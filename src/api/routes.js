@@ -19,6 +19,7 @@ const connection = mysql.createPool({
   connectionLimit: process.env.REACT_APP_CLIMIT,
 });
 
+if (!connection) process.exit();
 const app = express();
 
 app.use(
