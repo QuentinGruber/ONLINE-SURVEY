@@ -1,4 +1,4 @@
-version: "3"
+version: "3.9"
 services:
   osy-client:
     build:
@@ -17,15 +17,20 @@ services:
     restart: always
     depends_on:
       - osy-db
+    network_mode: service:osy-db
+
+  osy-db:
+    image: mariadb:latest
+    restart: always
     ports:
       - "3001:3001"
+    env_file: ./.env
+    environment:
+      MYSQL_ROOT_PASSWORD: $REACT_APP_PASS
+      MYSQL_DATABASE: $REACT_APP_DB
+      MYSQL_ROOT_HOST: "%"
     networks:
       - osy-network
-  osy-db:
-    build:
-      context: .
-      dockerfile: osy-db.dockerfile
-    restart: always
 networks:
   osy-network:
     driver: bridge

@@ -1,1 +1,1 @@
-npm run api
+npm run startContainer

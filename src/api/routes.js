@@ -17,6 +17,7 @@ const connection = mysql.createPool({
   password: process.env.REACT_APP_PASS, // Your database's password.
   database: process.env.REACT_APP_DB,
   connectionLimit: process.env.REACT_APP_CLIMIT,
+  insecureAuth: true,
 });
 
 if (!connection) process.exit();

@@ -39,6 +39,7 @@
     "styled-components": "^5.1.0"
   },
   "scripts": {
+    "startContainer": "npm run db-set && npm run api",
     "start": "react-scripts start",
     "api": "node src/api/routes.js",
     "build": "react-scripts build",
